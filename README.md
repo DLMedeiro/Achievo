@@ -2,6 +2,11 @@
 create-react-app . --template typescript
 Learned about React Hook Form
 Start with a basic to-do list with additional fields
+Expand list component - delete feature
+    incorporate UUID
+    restructure components and movement of props between components
+    Change item into a class to incorporate methods for each added item -> not needed for add end delete
+    complete delete function
 
 # Getting Started with Create React App
 

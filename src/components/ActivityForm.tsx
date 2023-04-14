@@ -20,15 +20,12 @@ export default function ActivityForm({ onAddItem }: ListFormProps): JSX.Element{
     });
   const { register, formState: { errors }, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = data => {
-    setFormData(data);
     onAddItem(data.activityName, data.timeTarget)
     setFormData({
         activityName: "",
         timeTarget: 1
       })
   }
-
-
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
