@@ -1,6 +1,7 @@
 # Notes
 create-react-app . --template typescript
-
+Learned about React Hook Form
+Start with a basic to-do list with additional fields
 
 # Getting Started with Create React App
 

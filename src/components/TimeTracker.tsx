@@ -13,10 +13,11 @@ export default function timeTracker(props: ItemListProps): JSX.Element {
 
     return (
         <div>
-            <h1>Activity Tracker</h1>
+            <h2>Activities</h2>
             <ul>
+
                 {props.listItems.map((item) => (
-                    <li key = {item.id}>{item.activity} - {item.target}</li>
+                    <li >Activity: {item.activityName} | Target Time: {item.timeTarget} Hours</li>
                 ))}
             </ul>
         </div>

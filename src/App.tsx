@@ -10,7 +10,11 @@ function App() {
 
 
   const [listItems, setListItems] = useState<Item[]>([])
-
+  const addItem = (activityName: string,
+    timeTarget: number) => {
+    console.log("MADE TO THE APP COMPONENT!");
+    setListItems([...listItems, { activityName, timeTarget }]);
+  };
 
 //   const listItems = [
 //     {id: 1, activity: "Walk the Dog", target: 3, completed: 0},
@@ -22,7 +26,7 @@ function App() {
     <div>
    <Greeter person = "Maggie"/>
    <TimeTracker listItems = {listItems}/>
-   <ActivityForm/>
+   <ActivityForm onAddItem={addItem}/>
     </div>
   );
 }
