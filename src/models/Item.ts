@@ -2,14 +2,16 @@ export default   class Item {
     id: string;
     activityName: string;
     timeTarget: number;
+    progress: number;
 
     constructor (
     id: string,
     activityName: string,
-    timeTarget: number){
+    timeTarget: number, progress: number){
         this.id = id;
         this.activityName = activityName;
-        this.timeTarget = timeTarget
+        this.timeTarget = timeTarget;
+        this.progress = progress
     }
 
     // editItem
@@ -29,36 +31,18 @@ export default   class Item {
         this.timeTarget = newTime
     }
 
-    // can't use set on multiple inputs
-    // get editFields(): object {
-    //     return (
-    //         {
-    //            "activityName": this.activityName,
-    //             "timeTarget": this.timeTarget
-    //         })
-    // }
-    // set editFields( activityName: string,
-    //     timeTarget: number){
-    //         // Add check if inputs are empty
-    //         this.activityName = activityName
-    //         this.timeTarget = timeTarget
-    //     }
-
-    // edit(
-    //     activityName: string,
-    //     timeTarget: number,
-    //   ): void {
-    //     this.activityName = activityName;
-    //     this.timeTarget = timeTarget
-    // }
-
-
-
+    getProgress(): number {
+        return this.progress
+    }
 
     // Add to progress
-
+    addProgress(){
+        this.progress += 1
+    }
     // Subtract from progress
-
+    removeProgress(){
+        this.progress -= 1
+    }
     // *** COME BACK TO ***
     // 1. Additions to make code more robust
 }

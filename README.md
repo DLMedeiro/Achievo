@@ -17,10 +17,12 @@ Create an edit form
             edit function showing correctly in console
             Learn: can't use set on multiple inputs when building functions in classes
             complete
-        NO => AddSubtractForm: Add or subtract from progress (+ / -)
-            YES => Stand Alone Buttons
+    AddSubtract
+        went pretty fast
 
-Update variable names after getting to a stopping point with the edit form
+refactor notes:
+Update variable names
+group re-used components
 
 Constant Reference: https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/function_components/
 

@@ -35,10 +35,7 @@ export default function ActivityEditForm(props: DefaultProps): JSX.Element{
    props.updateActivity(props.item.getActivity())
    props.updateTime(props.item.getTimeTarget())
    props.toggle()
-   console.log(props.item.getTimeTarget())
-   console.log(props.item.timeTarget)
 
- 
   }
 
   return (

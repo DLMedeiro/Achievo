@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 interface ListFormProps {
     onAddItem: (activityName: string,
-        timeTarget: number) => void;
+        timeTarget: number,progress:number) => void;
   }
 
 interface IFormInput {
@@ -13,14 +13,14 @@ interface IFormInput {
   timeTarget: number;
 }
 
-export default function ActivityForm({ onAddItem }: ListFormProps): JSX.Element{
+export default function ActivityInputForm({ onAddItem }: ListFormProps): JSX.Element{
     const [formData, setFormData] = useState({
       activityName: "",
       timeTarget: 1
     });
   const { register, formState: { errors }, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = data => {
-    onAddItem(data.activityName, data.timeTarget)
+    onAddItem(data.activityName, data.timeTarget, 0)
     setFormData({
         activityName: "",
         timeTarget: 1
