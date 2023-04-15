@@ -32,7 +32,7 @@ export default function ActivityTracker(): JSX.Element {
 
     return (
         <div>
-            <h2>Activities</h2>
+            <h2>Weekly Activities</h2>
             <ActivityInputForm onAddItem={addItem} />
             <ul>
                 {listItems.map((item) => (

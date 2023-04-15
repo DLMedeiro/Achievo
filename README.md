@@ -19,6 +19,11 @@ Create an edit form
             complete
     AddSubtract
         went pretty fast
+    Keep adding time after task is completed and keep running total
+        Easy
+    Regroup on strategy for App
+        Save weekly update
+        
 
 refactor notes:
 Update variable names

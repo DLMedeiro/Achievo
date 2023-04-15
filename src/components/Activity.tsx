@@ -47,6 +47,8 @@ export default function Activity(props: Props): JSX.Element {
       useEffect(() => {
         if (progress >= timeTarget){
             setCompleted(true)
+        } else {
+            setCompleted(false)
         }
       }, [progress])
 
@@ -64,8 +66,9 @@ export default function Activity(props: Props): JSX.Element {
 
                 <div>
                 {completed ? 
-                    (<h4>Goal Achieved!</h4>) 
-                    : ( <>
+                    (<h4>Goal Achieved!</h4>
+                    ) 
+                    : ("")} <>
                         <button onClick={add} >ADD 1 Hour</button>
                         <button onClick={subtract}>SUBTRACT 1 Hour</button>
                         <h4>Time Completed: {progress > 1 ? `${progress} Hours` : `${progress} Hour`} 
@@ -73,8 +76,6 @@ export default function Activity(props: Props): JSX.Element {
                         <h4>Progress: {progress === 0 ? ("0") : ((progress / timeTarget) * 100)}%
                             </h4>
                         </>
-                    )
-                }
                
 
                 </div>
