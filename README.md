@@ -21,8 +21,11 @@ Create an edit form
         went pretty fast
     Keep adding time after task is completed and keep running total
         Easy
+    Play with Google Charts (npm install --save react-google-charts)
+        https://www.react-google-charts.com/examples/pie-chart
     Regroup on strategy for App
         Save weekly update
+        T
         
 
 refactor notes:

@@ -1,8 +1,7 @@
-import React , {useState} from 'react';
+import React from 'react';
 import Greeter from './components/Greeter';
 import ActivityTracker from './components/ActivityTracker';
-import Item from './models/Item';
-
+import WeeklyChart from "./components/WeeklyChart"
 import './App.css';
 
 function App() {
@@ -14,6 +13,7 @@ function App() {
     <div>
       <Greeter person = "Maggie"/>
       <ActivityTracker/>
+      <WeeklyChart/>
     </div>
   );
 }
