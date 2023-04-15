@@ -7,6 +7,22 @@ Expand list component - delete feature
     restructure components and movement of props between components
     Change item into a class to incorporate methods for each added item -> not needed for add end delete
     complete delete function
+Create an edit form
+    Create a form to edit Activity name and target, and additional form to edit the progress
+    Form Layout
+        ActivityInputForm: Add activityName and targetTime (Submit)
+        ActivityEditForm: Update activityName or targetTime (Save)
+            How is it going to edit? find and edit the line item? => no - use class function to edit / update
+            toggle function works for setting edit state on and off to show form
+            edit function showing correctly in console
+            Learn: can't use set on multiple inputs when building functions in classes
+            complete
+        NO => AddSubtractForm: Add or subtract from progress (+ / -)
+            YES => Stand Alone Buttons
+
+Update variable names after getting to a stopping point with the edit form
+
+Constant Reference: https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/function_components/
 
 # Getting Started with Create React App
 

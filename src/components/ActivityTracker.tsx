@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Item from "../models/Item";
 import Activity from "./Activity";
-import ActivityForm from './ActivityForm';
+import ActivityForm from './ActivityInputForm';
 import {v4 as uuidv4} from 'uuid';
 
 
@@ -19,14 +19,16 @@ export default function ActivityTracker(): JSX.Element {
         const newAdd = new Item(uuidv4(), activityName, timeTarget)
       setListItems([...listItems, newAdd]);
     };
-  
-    // const removeItem = (id) => {
-    //   setListItems(listItems.filter((i) => i.id !== id));
-    // };
     
     const removeItem = (id: string):void => {
         setListItems(listItems.filter((i) => i.id !== id));
       };
+
+    // const editItem = (item:Item): void => {
+    //     item.edit(item)
+    // }
+    // Change names..
+    
 
     return (
         <div>
@@ -34,7 +36,7 @@ export default function ActivityTracker(): JSX.Element {
             <ActivityForm onAddItem={addItem} />
             <ul>
                 {listItems.map((item) => (
-                    <Activity key = {item.id} items = {item} onRemoveItem = {removeItem} />
+                    <Activity key = {item.id} items = {item} onRemoveItem = {removeItem}/>
                 ))}
             </ul>
         </div>
