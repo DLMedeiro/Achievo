@@ -1,4 +1,15 @@
 # Notes
+Day 2:
+going to use the boredAPI and create an app that will suggest activities to do when you can't decide.  You can chose a random event from the API, or add in your own ideas.
+- Start ids from the API and add them to your rotation of lists
+- Need a login account to hold data.  
+- Goal for today: Create log in page that matches Candidly, but for "Boredly" 
+- Second goal create a nav bar connecting the current page to the log in
+
+Why is there no way to access the candidly main site from the login screen?
+
+
+Day 1:
 create-react-app . --template typescript
 Learned about React Hook Form
 Start with a basic to-do list with additional fields
@@ -26,7 +37,6 @@ Create an edit form
     Regroup on strategy for App
         Save weekly update
         T
-        
 
 refactor notes:
 Update variable names
