@@ -15,7 +15,17 @@ import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Divider from '@mui/material/Divider'
 
-const theme = createTheme()
+// const theme = createTheme()
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#114ea1',
+      light: '#6189c2',
+      dark: '#00003c',
+    },
+  },
+})
 
 export default function SignUp() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -52,7 +62,16 @@ export default function SignUp() {
             onSubmit={handleSubmit}
             sx={{ mt: 3, marginBottom: '12px' }}
           >
-            <Grid container spacing={2} sx={{ marginBottom: '16px' }}>
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                marginBottom: '16px',
+                paddingLeft: 0,
+                paddingRight: 0,
+                minWidth: '250px',
+              }}
+            >
               <Grid item xs={12} sx={{ marginBottom: '26px' }}>
                 <TextField
                   required
@@ -77,6 +96,7 @@ export default function SignUp() {
               <Button
                 type="submit"
                 variant="contained"
+                color="primary"
                 sx={{
                   mt: 3,
                   mb: 2,

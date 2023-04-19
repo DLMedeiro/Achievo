@@ -1,16 +1,46 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
+import { Grid } from '@mui/material'
+import Button from '@mui/material/Button'
+
 import HeroImage from '../images/HeroImage.jpg'
 
 export default function Home() {
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ height: '100vh', paddingTop: ' 5rem' }}>
+    <Grid
+      container
+      spacing={2}
+      sx={{
+        padding: '78px 0',
+        height: '90vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Grid item xs={5} sx={{ fontSize: '2rem' }}>
         <h1>Welcome to Boredly</h1>
-        <h2>Your boredom ends here!</h2>
-        <img src={HeroImage} alt="bored dog"></img>
-      </Box>
-    </Container>
+        <p>Your boredom ends here!</p>
+
+        <Link to="login" style={{ textDecoration: 'none' }}>
+          <Button
+            variant="contained"
+            sx={{
+              mt: 3,
+              mb: 2,
+              borderRadius: '40px',
+              margin: '0 auto',
+            }}
+          >
+            Log In
+          </Button>
+        </Link>
+      </Grid>
+      <Grid item xs={7}>
+        <img src={HeroImage} alt="bored dog" style={{ width: '100%' }}></img>
+      </Grid>
+    </Grid>
   )
 }

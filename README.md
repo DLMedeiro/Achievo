@@ -1,12 +1,20 @@
 # Notes
+
+Day 3:
+- Playing with Material UI with the nav bar and log in trying to match somewhat to Candidly
+- Created a Finn Avatar
+- Working on creating the home page
+    - Add ReactRouter: https://www.freecodecamp.org/news/how-to-use-react-router-version-6/
+
 Day 2:
 going to use the boredAPI and create an app that will suggest activities to do when you can't decide.  You can chose a random event from the API, or add in your own ideas.
 - Start ids from the API and add them to your rotation of lists
 - Need a login account to hold data.  
 - Goal for today: Create log in page that matches Candidly, but for "Boredly" 
 - Second goal create a nav bar connecting the current page to the log in
+- I have the hardest time picking names for folders, components, etc.. -> do other people have this problem?
 
-Why is there no way to access the candidly main site from the login screen?
+Why is there no way to access the candidly main site from the login screen? -> Login opens in a new page...
 
 
 Day 1:

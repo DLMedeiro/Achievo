@@ -1,6 +1,8 @@
 import React from 'react'
+import { Routes, Route } from 'react-router-dom'
 import Greeter from './components/Greeter'
 import ActivityTracker from './components/ActivityTracker'
+import Container from '@mui/material/Container'
 import LoginForm from './components/LoginForm'
 import DrawerAppBar from './components/DrawerAppBar'
 import FinnModal from './components/FinnModal'
@@ -10,17 +12,32 @@ import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
+import CreateAccount from './components/CreateAccount'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#114ea1',
+      light: '#6189c2',
+      dark: '#00003c',
+    },
+  },
+})
 
 function App() {
   return (
-    <div>
-      <DrawerAppBar />
-      <Home />
-      {/* <LoginForm /> */}
-      {/* <Greeter person="Maggie" />
-      <ActivityTracker /> */}
-      <FinnModal />
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container maxWidth="xl" sx={{ paddingTop: '5vh' }}>
+        <DrawerAppBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/createAccount" element={<CreateAccount />} />
+        </Routes>
+        <FinnModal />
+      </Container>
+    </ThemeProvider>
   )
 }
 

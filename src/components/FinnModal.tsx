@@ -31,8 +31,8 @@ export default function FinnModal() {
           width: 75,
           height: 75,
           position: 'fixed',
-          bottom: '25px',
-          left: '90%',
+          bottom: '5vh',
+          left: '95vw',
           right: 0,
         }}
         onClick={handleOpen}
@@ -50,7 +50,7 @@ export default function FinnModal() {
       >
         <Box sx={modalStyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Hi! I'm Finn
+            Hi! I'm Finn.
           </Typography>
           <img
             id="modal-description"
