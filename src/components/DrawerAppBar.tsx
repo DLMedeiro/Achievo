@@ -81,6 +81,36 @@ export default function DrawerAppBar(props: Props) {
                 Log In
               </Link>
             </Typography>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            >
+              <Link
+                to="/tracker"
+                style={{
+                  textDecoration: 'none',
+                  color: 'inherit',
+                }}
+              >
+                Tracker
+              </Link>
+            </Typography>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            >
+              <Link
+                to="/activities"
+                style={{
+                  textDecoration: 'none',
+                  color: 'inherit',
+                }}
+              >
+                Activities
+              </Link>
+            </Typography>
           </Box>
         </Toolbar>
       </AppBar>

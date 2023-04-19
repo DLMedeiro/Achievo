@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
-import { Grid } from '@mui/material'
+import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 
 import HeroImage from '../images/HeroImage.jpg'
@@ -15,7 +15,7 @@ export default function Home() {
         padding: '78px 0',
         height: '90vh',
         display: 'flex',
-        flexDirection: 'column',
+        // flexDirection: 'column', -> not needed?
         alignItems: 'center',
         justifyContent: 'center',
       }}

@@ -1,34 +1,41 @@
 export default   class Item {
     id: string;
-    activityName: string;
-    timeTarget: number;
+    start: string;
+    end: string;
+    activity: string;
+    target: number;
     progress: number;
 
     constructor (
     id: string,
-    activityName: string,
-    timeTarget: number, progress: number){
+    start: string, 
+    end: string,          
+    activity: string,
+    target: number,
+    progress: number,){
         this.id = id;
-        this.activityName = activityName;
-        this.timeTarget = timeTarget;
+        this.start = start;
+        this.end = end;
+        this.activity = activity;
+        this.target = target;
         this.progress = progress
     }
 
     // editItem
     getActivity(): string {
-        return this.activityName
+        return this.activity
     }
 
    editActivity(newName:string){
-        this.activityName = newName
+        this.activity = newName
     }
     
     getTimeTarget(): number {
-        return this.timeTarget
+        return this.target
     }
     
     editTimeTarget(newTime:number) {
-        this.timeTarget = newTime
+        this.target = newTime
     }
 
     getProgress(): number {

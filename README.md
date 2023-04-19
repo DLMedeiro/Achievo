@@ -6,6 +6,22 @@ Day 3:
 - Working on creating the home page
     - Add ReactRouter: https://www.freecodecamp.org/news/how-to-use-react-router-version-6/
 
+    - complete initial styling for home and sign up pages.  created basic nav that needs to be updated as more pages and login functionality are created.
+- Create connection for activities page
+    - How do I set up the page so I can see it again? -> Create route to page, add to nav bar
+    - Come back to: update nav to change based on login status and update style
+    - Building to minimum viable product, noting the improvements, and coming back to when they are needed to for a feature I come to.
+    - Things from candidly site to incorporate
+        - transition up on scrole
+        - How it works page 
+- Request Demo: activity Input -> now adding material ui to existing code (previous creating code using Material UI)
+    - load date pickers: https://mui.com/x/react-date-pickers/getting-started/
+
+
+- add new tasks to local storage as a temp solution to keep things moving forward
+- Create activities page
+- stuck on updating progress with add and subtract -> removed functionality from Item for now.  using local storage to manage progress
+
 Day 2:
 going to use the boredAPI and create an app that will suggest activities to do when you can't decide.  You can chose a random event from the API, or add in your own ideas.
 - Start ids from the API and add them to your rotation of lists

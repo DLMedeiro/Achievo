@@ -48,14 +48,6 @@ export default function SignUp() {
             alignItems: 'center',
           }}
         >
-          {/* <Divider
-            variant="fullWidth"
-            sx={{
-              paddingBottom: '20px',
-              paddingTop: '20px',
-              borderColor: '#333',
-            }}
-          /> */}
           <Box
             component="form"
             noValidate
