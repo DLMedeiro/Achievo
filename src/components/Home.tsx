@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 
 import HeroImage from '../images/HeroImage.jpg'
+import axios from 'axios'
 
 export default function Home() {
   return (

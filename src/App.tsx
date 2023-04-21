@@ -34,35 +34,12 @@ const theme = createTheme({
 function App() {
   const [listItems, setListItems] = useState<Item[]>([])
 
-  // const addItem = (
-  //   start: string,
-  //   end: string,
-  //   activity: string,
-  //   target: number,
-  //   progress: number,
-  // ) => {
-  //   const newAdd = new Item(uuidv4(), start, end, activity, target, progress)
-  //   setListItems([...listItems, newAdd])
-  //   storeInLocalStorage(newAdd)
-  // }
-
-  // // Add to local storage
-  // const storeInLocalStorage = (task: object): void => {
-  //   let savedTasks
-  //   if (localStorage.getItem('savedTasks') === null) {
-  //     savedTasks = []
-  //   } else {
-  //     savedTasks = JSON.parse(localStorage.getItem('savedTasks') || '')
-  //   }
-  //   savedTasks.push(task)
-  //   localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
-  // }
-
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
         <Container maxWidth="xl" sx={{ paddingTop: '5vh' }}>
           <DrawerAppBar />
+
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />

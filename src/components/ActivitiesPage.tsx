@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { Grid } from '@mui/material'
 import { Link } from 'react-router-dom'
 import Button from '@mui/material/Button'
+import InspirationQuote from './InspirationQuote'
 
 export default function ActivitiesPage(): JSX.Element {
   const [listItems, setListItems] = useState<Item[]>([])
@@ -72,6 +73,8 @@ export default function ActivitiesPage(): JSX.Element {
         justifyContent: 'center',
       }}
     >
+      <InspirationQuote />
+
       {showForm ? (
         <ActivityInputForm onAddItem={addItem} />
       ) : (

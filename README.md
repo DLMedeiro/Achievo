@@ -3,6 +3,11 @@ Day 4:
 - Add link to demo account and create initial functionality here prior to working on registration
 - Update Activity naming and file structure and add some styling so all components are visible
 - update functionality and connections between activity list and input form
+- Incorporate API
+    Idea: pull inspirational quotes - add a link to wikipidea directing to the author
+    - Learned something new to implement later: Use the standard [quotes] API call and store the results as a variable in your project. This will keep a cache of quotes that you can loop locally rather than calling the server each time you want to display a new quote. After a set interval (an hour or so), call the ZenQuotes API again to refresh your local app cache. Using this method will keep load times down and free up resources for others as your user base increases. In the event the API service is unavailable, you will still have an available data set in your app to pull from.
+    Using https://forum.freecodecamp.org/t/free-api-inspirational-quotes-json-with-code-examples/311373 for now
+    
 - style activity components
 
 Day 3:

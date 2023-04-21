@@ -68,7 +68,7 @@ export default function Activity(props: Props): JSX.Element {
   return (
     <li key={props.items.id}>
       Activity: {activity} | Target Time: {timeTarget} Hours
-      <button onClick={setEditFunction}>Edit</button>
+      <button onClick={setEditFunction}>Edit - inactive</button>
       <button onClick={() => handleRemove(props.items.id)}>Delete</button>
       {/* {edit ? (
         <ActivityEditForm
