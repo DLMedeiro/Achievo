@@ -22,8 +22,8 @@ export default function Home() {
       }}
     >
       <Grid item xs={5} sx={{ fontSize: '2rem' }}>
-        <h1>Welcome to Boredly</h1>
-        <p>Your boredom ends here!</p>
+        <h1>Looking for Motivation?</h1>
+        <p>Start tracking your progress and reaching your goals today!</p>
 
         <Link to="login" style={{ textDecoration: 'none', margin: '1rem' }}>
           <Button

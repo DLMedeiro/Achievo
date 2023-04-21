@@ -11,9 +11,23 @@ import InspirationQuote from './InspirationQuote'
 export default function ActivitiesPage(): JSX.Element {
   const [listItems, setListItems] = useState<Item[]>([])
   const [showForm, setShowForm] = React.useState<boolean>(false)
+  const [quote, setQuote] = React.useState([])
   // Load local storage when document is loaded
   useEffect(() => {
     setListItems(JSON.parse(localStorage.getItem('savedTasks') || ''))
+  }, [])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetch('https://type.fit/api/quotes')
+        .then(function (response) {
+          return response.json()
+        })
+        .then(function (data) {
+          setQuote(Object.values(data[Math.floor(Math.random() * data.length)]))
+        })
+    }
+    fetchData().catch(console.error)
   }, [])
 
   const removeItem = (id: string): void => {
@@ -33,10 +47,6 @@ export default function ActivitiesPage(): JSX.Element {
     storeInLocalStorage(newAdd)
     setShowForm(false)
   }
-
-  // useEffect(() => {
-  //   setShowForm(false)
-  // }, [listItems])
 
   // Add to local storage
   const storeInLocalStorage = (task: object): void => {
@@ -73,36 +83,57 @@ export default function ActivitiesPage(): JSX.Element {
         justifyContent: 'center',
       }}
     >
-      <InspirationQuote />
+      {quote.length > 0 ? (
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            padding: '78px 0',
+            height: '90vh',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <InspirationQuote text={quote[0]} author={quote[1]} />
 
-      {showForm ? (
-        <ActivityInputForm onAddItem={addItem} />
-      ) : (
-        <Grid item xs={12} sx={{ fontSize: '2rem' }}>
-          <Button
-            onClick={() => {
-              setShowForm(true)
-            }}
-            variant="contained"
-            sx={{
-              mt: 3,
-              mb: 2,
-              borderRadius: '40px',
-              margin: '0 auto',
-            }}
-          >
-            Add a new activity
-          </Button>
+          {showForm ? (
+            <ActivityInputForm onAddItem={addItem} />
+          ) : (
+            <Grid item xs={12} sx={{ fontSize: '2rem' }}>
+              <Button
+                onClick={() => {
+                  setShowForm(true)
+                }}
+                variant="contained"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  borderRadius: '40px',
+                  margin: '0 auto',
+                }}
+              >
+                Add a new activity
+              </Button>
+            </Grid>
+          )}
+
+          <Grid item xs={12}>
+            <ul>
+              {listItems.map((item) => (
+                <Activity
+                  key={item.id}
+                  items={item}
+                  onRemoveItem={removeItem}
+                />
+              ))}
+            </ul>
+          </Grid>
         </Grid>
+      ) : (
+        <h1>...Loading</h1>
       )}
-
-      <Grid item xs={12}>
-        <ul>
-          {listItems.map((item) => (
-            <Activity key={item.id} items={item} onRemoveItem={removeItem} />
-          ))}
-        </ul>
-      </Grid>
     </Grid>
   )
 }
