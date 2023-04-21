@@ -24,7 +24,7 @@ export default function Home() {
         <h1>Welcome to Boredly</h1>
         <p>Your boredom ends here!</p>
 
-        <Link to="login" style={{ textDecoration: 'none' }}>
+        <Link to="login" style={{ textDecoration: 'none', margin: '1rem' }}>
           <Button
             variant="contained"
             sx={{
@@ -35,6 +35,19 @@ export default function Home() {
             }}
           >
             Log In
+          </Button>
+        </Link>
+        <Link to="demo" style={{ textDecoration: 'none', margin: '1rem' }}>
+          <Button
+            variant="contained"
+            sx={{
+              mt: 3,
+              mb: 2,
+              borderRadius: '40px',
+              margin: '0 auto',
+            }}
+          >
+            Try out a demo
           </Button>
         </Link>
       </Grid>

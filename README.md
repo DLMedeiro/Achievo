@@ -1,4 +1,7 @@
 # Notes
+Day 4:
+- Add link to demo account and create initial functionality here prior to working on registration
+- Update Activity naming and file structure and add some styling so all components are visible
 
 Day 3:
 - Playing with Material UI with the nav bar and log in trying to match somewhat to Candidly

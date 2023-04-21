@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Greeter from './components/Greeter'
-import ActivityTracker from './components/ActivityTracker'
 import Container from '@mui/material/Container'
 import LoginForm from './components/LoginForm'
 import DrawerAppBar from './components/DrawerAppBar'
 import FinnModal from './components/FinnModal'
 import Home from './components/Home'
-import ActivitiesList from './components/ActivitiesList'
+import ActivitiesPage from './components/ActivitiesPage'
+import { v4 as uuidv4 } from 'uuid'
+import ActivityInputForm from './components/ActivityInputForm'
+import Item from './models/Item'
+
 import './App.css'
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
@@ -29,6 +32,32 @@ const theme = createTheme({
 })
 
 function App() {
+  const [listItems, setListItems] = useState<Item[]>([])
+
+  const addItem = (
+    start: string,
+    end: string,
+    activity: string,
+    target: number,
+    progress: number,
+  ) => {
+    const newAdd = new Item(uuidv4(), start, end, activity, target, progress)
+    setListItems([...listItems, newAdd])
+    storeInLocalStorage(newAdd)
+  }
+
+  // Add to local storage
+  const storeInLocalStorage = (task: object): void => {
+    let savedTasks
+    if (localStorage.getItem('savedTasks') === null) {
+      savedTasks = []
+    } else {
+      savedTasks = JSON.parse(localStorage.getItem('savedTasks') || '')
+    }
+    savedTasks.push(task)
+    localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
+  }
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
@@ -38,8 +67,12 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/createAccount" element={<CreateAccount />} />
-            <Route path="/tracker" element={<ActivityTracker />} />
-            <Route path="/activities" element={<ActivitiesList />} />
+            <Route path="/activities" element={<ActivitiesPage />} />
+            <Route
+              path="/activityInputForm"
+              element={<ActivityInputForm onAddItem={addItem} />}
+            />
+            <Route path="/demo" element={<ActivitiesPage />} />
           </Routes>
           <FinnModal />
         </Container>

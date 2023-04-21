@@ -18,6 +18,30 @@ export default function ActivitiesList(): JSX.Element {
     removeFromLocalStorage(id)
   }
 
+  const addItem = (
+    start: string,
+    end: string,
+    activity: string,
+    target: number,
+    progress: number,
+  ) => {
+    const newAdd = new Item(uuidv4(), start, end, activity, target, progress)
+    setListItems([...listItems, newAdd])
+    storeInLocalStorage(newAdd)
+  }
+
+  // Add to local storage
+  const storeInLocalStorage = (task: object): void => {
+    let savedTasks
+    if (localStorage.getItem('savedTasks') === null) {
+      savedTasks = []
+    } else {
+      savedTasks = JSON.parse(localStorage.getItem('savedTasks') || '')
+    }
+    savedTasks.push(task)
+    localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
+  }
+
   // Remove from local storage
   function removeFromLocalStorage(id: string): void {
     let savedTasks = JSON.parse(localStorage.getItem('savedTasks') || '')
@@ -29,10 +53,31 @@ export default function ActivitiesList(): JSX.Element {
     }
   }
   return (
-    <ul>
-      {listItems.map((item) => (
-        <Activity key={item.id} items={item} onRemoveItem={removeItem} />
-      ))}
-    </ul>
+    <>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          padding: '78px 0',
+          height: '90vh',
+          display: 'flex',
+          // flexDirection: 'column', -> not needed?
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Grid item xs={5} sx={{ fontSize: '2rem' }}>
+          <h2>Create an activity</h2>
+        </Grid>
+        <Grid item xs={7}>
+          <ActivityInputForm onAddItem={addItem} />
+        </Grid>
+      </Grid>
+      <ul>
+        {listItems.map((item) => (
+          <Activity key={item.id} items={item} onRemoveItem={removeItem} />
+        ))}
+      </ul>
+    </>
   )
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Item from '../models/Item'
-import AddSubtract from './AddSubtract'
-import ActivityEditForm from './ActivityEditForm'
+// import AddSubtract from './AddSubtract' -> Bring back after removing local state dependency
 
 interface Props {
   items: Item
@@ -71,14 +70,14 @@ export default function Activity(props: Props): JSX.Element {
       Activity: {activity} | Target Time: {timeTarget} Hours
       <button onClick={setEditFunction}>Edit</button>
       <button onClick={() => handleRemove(props.items.id)}>Delete</button>
-      {edit ? (
+      {/* {edit ? (
         <ActivityEditForm
           item={props.items}
           updateActivity={setActivity}
           updateTime={setTimeTarget}
           toggle={setEditFunction}
         />
-      ) : null}
+      ) : null} */}
       <div>
         {completed ? <h4>Goal Achieved!</h4> : ''}{' '}
         <>
