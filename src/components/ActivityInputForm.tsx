@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import dayjs, { Dayjs } from 'dayjs'
+import ActivitiesPage from './ActivitiesPage'
 
 const theme = createTheme({
   palette: {
@@ -41,12 +42,7 @@ interface IFormInput {
 export default function ActivityInputForm({
   onAddItem,
 }: ListFormProps): JSX.Element {
-  // const [formData, setFormData] = useState({
-  //   start: '',
-  //   end: '',
-  //   activity: '',
-  //   target: 0,
-  // })
+  // const [formSubmit, setFormSubmit] = React.useState<boolean>(false)
   const [startDate, setStartDate] = React.useState<Dayjs | null>(
     dayjs('2022-04-17'),
   )
@@ -55,12 +51,6 @@ export default function ActivityInputForm({
   )
   const [activity, setActivity] = React.useState<string>('')
   const [target, setTarget] = React.useState<number>(0)
-
-  // const {
-  //   register,
-  //   formState: { errors },
-  //   handleSubmit,
-  // } = useForm<IFormInput>()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -88,26 +78,9 @@ export default function ActivityInputForm({
       setEndDate(dayjs('2022-04-17'))
       setActivity('')
       setTarget(0)
+      // setFormSubmit(true)
     }
   }
-
-  // const onSubmit: SubmitHandler<IFormInput> = (data) => {
-  //   onAddItem(
-  //     data.start,
-  //     data.end,
-  //     data.activity,
-  //     data.target,
-  //     data.category,
-  //     0,
-  //   )
-  //   setFormData({
-  //     start: '',
-  //     end: '',
-  //     activity: '',
-  //     target: 0,
-  //     category: '',
-  //   })
-  // }
 
   return (
     <ThemeProvider theme={theme}>

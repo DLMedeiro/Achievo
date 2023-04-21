@@ -9,7 +9,7 @@ import Button from '@mui/material/Button'
 
 export default function ActivitiesPage(): JSX.Element {
   const [listItems, setListItems] = useState<Item[]>([])
-
+  const [showForm, setShowForm] = React.useState<boolean>(false)
   // Load local storage when document is loaded
   useEffect(() => {
     setListItems(JSON.parse(localStorage.getItem('savedTasks') || ''))
@@ -20,29 +20,34 @@ export default function ActivitiesPage(): JSX.Element {
     removeFromLocalStorage(id)
   }
 
-  // const addItem = (
-  //   start: string,
-  //   end: string,
-  //   activity: string,
-  //   target: number,
-  //   progress: number,
-  // ) => {
-  //   const newAdd = new Item(uuidv4(), start, end, activity, target, progress)
-  //   setListItems([...listItems, newAdd])
-  //   storeInLocalStorage(newAdd)
-  // }
+  const addItem = (
+    start: string,
+    end: string,
+    activity: string,
+    target: number,
+    progress: number,
+  ) => {
+    const newAdd = new Item(uuidv4(), start, end, activity, target, progress)
+    setListItems([...listItems, newAdd])
+    storeInLocalStorage(newAdd)
+    setShowForm(false)
+  }
 
-  // // Add to local storage
-  // const storeInLocalStorage = (task: object): void => {
-  //   let savedTasks
-  //   if (localStorage.getItem('savedTasks') === null) {
-  //     savedTasks = []
-  //   } else {
-  //     savedTasks = JSON.parse(localStorage.getItem('savedTasks') || '')
-  //   }
-  //   savedTasks.push(task)
-  //   localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
-  // }
+  // useEffect(() => {
+  //   setShowForm(false)
+  // }, [listItems])
+
+  // Add to local storage
+  const storeInLocalStorage = (task: object): void => {
+    let savedTasks
+    if (localStorage.getItem('savedTasks') === null) {
+      savedTasks = []
+    } else {
+      savedTasks = JSON.parse(localStorage.getItem('savedTasks') || '')
+    }
+    savedTasks.push(task)
+    localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
+  }
 
   // Remove from local storage
   function removeFromLocalStorage(id: string): void {
@@ -67,12 +72,14 @@ export default function ActivitiesPage(): JSX.Element {
         justifyContent: 'center',
       }}
     >
-      <Grid item xs={12} sx={{ fontSize: '2rem' }}>
-        <Link
-          to="activityInputForm"
-          style={{ textDecoration: 'none', margin: '1rem' }}
-        >
+      {showForm ? (
+        <ActivityInputForm onAddItem={addItem} />
+      ) : (
+        <Grid item xs={12} sx={{ fontSize: '2rem' }}>
           <Button
+            onClick={() => {
+              setShowForm(true)
+            }}
             variant="contained"
             sx={{
               mt: 3,
@@ -83,9 +90,9 @@ export default function ActivitiesPage(): JSX.Element {
           >
             Add a new activity
           </Button>
-        </Link>
-      </Grid>
-      {/* <ActivityInputForm onAddItem={addItem} /> */}
+        </Grid>
+      )}
+
       <Grid item xs={12}>
         <ul>
           {listItems.map((item) => (

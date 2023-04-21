@@ -8,7 +8,7 @@ import FinnModal from './components/FinnModal'
 import Home from './components/Home'
 import ActivitiesPage from './components/ActivitiesPage'
 import { v4 as uuidv4 } from 'uuid'
-import ActivityInputForm from './components/ActivityInputForm'
+import AddActivity from './components/ActivityInputForm'
 import Item from './models/Item'
 
 import './App.css'
@@ -34,29 +34,29 @@ const theme = createTheme({
 function App() {
   const [listItems, setListItems] = useState<Item[]>([])
 
-  const addItem = (
-    start: string,
-    end: string,
-    activity: string,
-    target: number,
-    progress: number,
-  ) => {
-    const newAdd = new Item(uuidv4(), start, end, activity, target, progress)
-    setListItems([...listItems, newAdd])
-    storeInLocalStorage(newAdd)
-  }
+  // const addItem = (
+  //   start: string,
+  //   end: string,
+  //   activity: string,
+  //   target: number,
+  //   progress: number,
+  // ) => {
+  //   const newAdd = new Item(uuidv4(), start, end, activity, target, progress)
+  //   setListItems([...listItems, newAdd])
+  //   storeInLocalStorage(newAdd)
+  // }
 
-  // Add to local storage
-  const storeInLocalStorage = (task: object): void => {
-    let savedTasks
-    if (localStorage.getItem('savedTasks') === null) {
-      savedTasks = []
-    } else {
-      savedTasks = JSON.parse(localStorage.getItem('savedTasks') || '')
-    }
-    savedTasks.push(task)
-    localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
-  }
+  // // Add to local storage
+  // const storeInLocalStorage = (task: object): void => {
+  //   let savedTasks
+  //   if (localStorage.getItem('savedTasks') === null) {
+  //     savedTasks = []
+  //   } else {
+  //     savedTasks = JSON.parse(localStorage.getItem('savedTasks') || '')
+  //   }
+  //   savedTasks.push(task)
+  //   localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
+  // }
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -68,10 +68,10 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/createAccount" element={<CreateAccount />} />
             <Route path="/activities" element={<ActivitiesPage />} />
-            <Route
-              path="/activityInputForm"
-              element={<ActivityInputForm onAddItem={addItem} />}
-            />
+            {/* <Route
+              path="/addActivity"
+              element={<AddActivity onAddItem={addItem} />}
+            /> */}
             <Route path="/demo" element={<ActivitiesPage />} />
           </Routes>
           <FinnModal />

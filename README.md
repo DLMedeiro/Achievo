@@ -2,6 +2,8 @@
 Day 4:
 - Add link to demo account and create initial functionality here prior to working on registration
 - Update Activity naming and file structure and add some styling so all components are visible
+- update functionality and connections between activity list and input form
+- style activity components
 
 Day 3:
 - Playing with Material UI with the nav bar and log in trying to match somewhat to Candidly
@@ -15,7 +17,7 @@ Day 3:
     - Come back to: update nav to change based on login status and update style
     - Building to minimum viable product, noting the improvements, and coming back to when they are needed to for a feature I come to.
     - Things from candidly site to incorporate
-        - transition up on scrole
+        - transition up on scroll
         - How it works page 
 - Request Demo: activity Input -> now adding material ui to existing code (previous creating code using Material UI)
     - load date pickers: https://mui.com/x/react-date-pickers/getting-started/
