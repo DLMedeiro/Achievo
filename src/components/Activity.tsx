@@ -3,6 +3,7 @@ import Item from '../models/Item'
 import { Grid } from '@mui/material'
 import dayjs, { Dayjs } from 'dayjs'
 import Paper from '@mui/material/Paper'
+import '../App.css'
 // import AddSubtract from './AddSubtract' -> Bring back after removing local state dependency
 
 interface Props {
@@ -125,6 +126,12 @@ export default function Activity(props: Props): JSX.Element {
             Time Completed:{' '}
             {progress > 1 ? `${progress} Hours` : `${progress} Hour`}
           </h4>
+          <div
+            className="progress"
+            data-done={progress === 0 ? '0' : (progress / timeTarget) * 100}
+          >
+            {progress === 0 ? '0' : (progress / timeTarget) * 100}%
+          </div>
           <h4>
             Progress: {progress === 0 ? '0' : (progress / timeTarget) * 100}%
           </h4>
