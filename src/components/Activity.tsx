@@ -79,7 +79,11 @@ export default function Activity(props: Props): JSX.Element {
   }, [progress])
 
   return (
-    <Paper elevation={3}>
+    <Paper
+      elevation={14}
+      sx={{ padding: ' 2em', borderRadius: '30px', margin: '1rem' }}
+      key={props.items.id}
+    >
       <Grid
         container
         spacing={2}
@@ -91,7 +95,6 @@ export default function Activity(props: Props): JSX.Element {
           alignItems: 'center',
           justifyContent: 'center',
         }}
-        key={props.items.id}
       >
         <Grid item xs={12} sx={{ fontSize: '2rem' }}>
           {activity} | Target: {timeTarget} Hours
@@ -99,10 +102,7 @@ export default function Activity(props: Props): JSX.Element {
         <Grid item xs={12} sx={{ fontSize: '2rem' }}>
           Days Remaining: {duration}
         </Grid>
-        <Grid item xs={12} sx={{ fontSize: '2rem' }}>
-          <button onClick={setEditFunction}>Edit - inactive</button>
-          <button onClick={() => handleRemove(props.items.id)}>Delete</button>
-        </Grid>
+
         {/* {edit ? (
         <ActivityEditForm
           item={props.items}
@@ -111,24 +111,28 @@ export default function Activity(props: Props): JSX.Element {
           toggle={setEditFunction}
         />
       ) : null} */}
-        <div>
-          <Grid item xs={12} sx={{ fontSize: '2rem' }}>
-            {completed ? <h4>Goal Achieved!</h4> : ''}{' '}
-          </Grid>
-          <>
-            <button onClick={() => add(props.items.id)}>ADD 1 Hour</button>
-            <button onClick={() => subtract(props.items.id)}>
-              SUBTRACT 1 Hour
-            </button>
-            <h4>
-              Time Completed:{' '}
-              {progress > 1 ? `${progress} Hours` : `${progress} Hour`}
-            </h4>
-            <h4>
-              Progress: {progress === 0 ? '0' : (progress / timeTarget) * 100}%
-            </h4>
-          </>
-        </div>
+        <Grid item xs={12} sx={{ fontSize: '2rem' }}>
+          {completed ? <h4>Goal Achieved!</h4> : ''}{' '}
+        </Grid>
+        <Grid item xs={12} sx={{ fontSize: '2rem' }}>
+          <button onClick={() => add(props.items.id)}>ADD 1 Hour</button>
+          <button onClick={() => subtract(props.items.id)}>
+            SUBTRACT 1 Hour
+          </button>
+        </Grid>
+        <Grid item xs={12} sx={{ fontSize: '2rem' }}>
+          <h4>
+            Time Completed:{' '}
+            {progress > 1 ? `${progress} Hours` : `${progress} Hour`}
+          </h4>
+          <h4>
+            Progress: {progress === 0 ? '0' : (progress / timeTarget) * 100}%
+          </h4>
+        </Grid>
+        <Grid item xs={12} sx={{ fontSize: '2rem' }}>
+          <button onClick={setEditFunction}>Edit - inactive</button>
+          <button onClick={() => handleRemove(props.items.id)}>Delete</button>
+        </Grid>
       </Grid>
     </Paper>
   )
