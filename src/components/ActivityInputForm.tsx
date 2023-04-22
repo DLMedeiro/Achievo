@@ -43,12 +43,8 @@ export default function ActivityInputForm({
   onAddItem,
 }: ListFormProps): JSX.Element {
   // const [formSubmit, setFormSubmit] = React.useState<boolean>(false)
-  const [startDate, setStartDate] = React.useState<Dayjs | null>(
-    dayjs('2022-04-17'),
-  )
-  const [endDate, setEndDate] = React.useState<Dayjs | null>(
-    dayjs('2022-04-17'),
-  )
+  const [startDate, setStartDate] = React.useState<Dayjs | null>(dayjs())
+  const [endDate, setEndDate] = React.useState<Dayjs | null>(dayjs())
   const [activity, setActivity] = React.useState<string>('')
   const [target, setTarget] = React.useState<number>(0)
 

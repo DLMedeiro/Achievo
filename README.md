@@ -9,6 +9,7 @@ Day 4:
     Using https://forum.freecodecamp.org/t/free-api-inspirational-quotes-json-with-code-examples/311373 for now
     
 - style activity components
+    time duration
 
 Day 3:
 - Playing with Material UI with the nav bar and log in trying to match somewhat to Candidly

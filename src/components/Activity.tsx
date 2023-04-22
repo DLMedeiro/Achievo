@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Item from '../models/Item'
+import { Grid } from '@mui/material'
+import dayjs, { Dayjs } from 'dayjs'
+import Paper from '@mui/material/Paper'
 // import AddSubtract from './AddSubtract' -> Bring back after removing local state dependency
 
 interface Props {
@@ -14,6 +17,9 @@ export default function Activity(props: Props): JSX.Element {
   const [activity, setActivity] = useState(props.items.activity)
   const [timeTarget, setTimeTarget] = useState(props.items.target)
   const [progress, setProgress] = useState(props.items.progress)
+  const [start, setStart] = useState(props.items.start)
+  const [end, setEnd] = useState(props.items.end)
+  const [duration, setDuration] = React.useState<number>()
 
   const handleRemove = (id: string): void => {
     props.onRemoveItem(id)
@@ -26,6 +32,13 @@ export default function Activity(props: Props): JSX.Element {
       setEdit(true)
     }
   }
+
+  useEffect(() => {
+    let today = dayjs().format('LL')
+    let hours = dayjs(end).diff(today, 'hours')
+    const days = Math.floor(hours / 24)
+    setDuration(days)
+  }, [])
 
   // Edit local storage
   const editLocalStorage = (id: string, action: string): void => {
@@ -66,11 +79,31 @@ export default function Activity(props: Props): JSX.Element {
   }, [progress])
 
   return (
-    <li key={props.items.id}>
-      Activity: {activity} | Target Time: {timeTarget} Hours
-      <button onClick={setEditFunction}>Edit - inactive</button>
-      <button onClick={() => handleRemove(props.items.id)}>Delete</button>
-      {/* {edit ? (
+    <Paper elevation={3}>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          // padding: '78px 0',
+          // height: '90vh',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        key={props.items.id}
+      >
+        <Grid item xs={12} sx={{ fontSize: '2rem' }}>
+          {activity} | Target: {timeTarget} Hours
+        </Grid>
+        <Grid item xs={12} sx={{ fontSize: '2rem' }}>
+          Days Remaining: {duration}
+        </Grid>
+        <Grid item xs={12} sx={{ fontSize: '2rem' }}>
+          <button onClick={setEditFunction}>Edit - inactive</button>
+          <button onClick={() => handleRemove(props.items.id)}>Delete</button>
+        </Grid>
+        {/* {edit ? (
         <ActivityEditForm
           item={props.items}
           updateActivity={setActivity}
@@ -78,22 +111,25 @@ export default function Activity(props: Props): JSX.Element {
           toggle={setEditFunction}
         />
       ) : null} */}
-      <div>
-        {completed ? <h4>Goal Achieved!</h4> : ''}{' '}
-        <>
-          <button onClick={() => add(props.items.id)}>ADD 1 Hour</button>
-          <button onClick={() => subtract(props.items.id)}>
-            SUBTRACT 1 Hour
-          </button>
-          <h4>
-            Time Completed:{' '}
-            {progress > 1 ? `${progress} Hours` : `${progress} Hour`}
-          </h4>
-          <h4>
-            Progress: {progress === 0 ? '0' : (progress / timeTarget) * 100}%
-          </h4>
-        </>
-      </div>
-    </li>
+        <div>
+          <Grid item xs={12} sx={{ fontSize: '2rem' }}>
+            {completed ? <h4>Goal Achieved!</h4> : ''}{' '}
+          </Grid>
+          <>
+            <button onClick={() => add(props.items.id)}>ADD 1 Hour</button>
+            <button onClick={() => subtract(props.items.id)}>
+              SUBTRACT 1 Hour
+            </button>
+            <h4>
+              Time Completed:{' '}
+              {progress > 1 ? `${progress} Hours` : `${progress} Hour`}
+            </h4>
+            <h4>
+              Progress: {progress === 0 ? '0' : (progress / timeTarget) * 100}%
+            </h4>
+          </>
+        </div>
+      </Grid>
+    </Paper>
   )
 }

@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { Grid } from '@mui/material'
 import { Link } from 'react-router-dom'
 import Button from '@mui/material/Button'
+
 import InspirationQuote from './InspirationQuote'
 
 export default function ActivitiesPage(): JSX.Element {
@@ -120,15 +121,9 @@ export default function ActivitiesPage(): JSX.Element {
           )}
 
           <Grid item xs={12}>
-            <ul>
-              {listItems.map((item) => (
-                <Activity
-                  key={item.id}
-                  items={item}
-                  onRemoveItem={removeItem}
-                />
-              ))}
-            </ul>
+            {listItems.map((item) => (
+              <Activity key={item.id} items={item} onRemoveItem={removeItem} />
+            ))}
           </Grid>
         </Grid>
       ) : (
