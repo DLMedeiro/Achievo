@@ -21,6 +21,7 @@ export default function Activity(props: Props): JSX.Element {
   const [start, setStart] = useState(props.items.start)
   const [end, setEnd] = useState(props.items.end)
   const [duration, setDuration] = React.useState<number>()
+  const [percentComplete, setPercentComplete] = React.useState<number>()
 
   const handleRemove = (id: string): void => {
     props.onRemoveItem(id)
@@ -40,6 +41,14 @@ export default function Activity(props: Props): JSX.Element {
     const days = Math.floor(hours / 24)
     setDuration(days)
   }, [])
+
+  useEffect(() => {
+    {
+      progress === 0
+        ? setPercentComplete(0)
+        : setPercentComplete((progress / timeTarget) * 100)
+    }
+  }, [progress, timeTarget])
 
   // Edit local storage
   const editLocalStorage = (id: string, action: string): void => {
@@ -126,11 +135,13 @@ export default function Activity(props: Props): JSX.Element {
             Time Completed:{' '}
             {progress > 1 ? `${progress} Hours` : `${progress} Hour`}
           </h4>
-          <div
-            className="progress"
-            data-done={progress === 0 ? '0' : (progress / timeTarget) * 100}
-          >
-            {progress === 0 ? '0' : (progress / timeTarget) * 100}%
+          <div className="progress">
+            <div
+              className="progress-done"
+              style={{ width: `${percentComplete}%` }}
+            >
+              {percentComplete}%
+            </div>
           </div>
           <h4>
             Progress: {progress === 0 ? '0' : (progress / timeTarget) * 100}%

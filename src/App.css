@@ -37,9 +37,19 @@
   }
 }
 
+/* https://www.youtube.com/watch?v=U-4tg5snUuw&t=0s */
 .progress {
-  background-color: blue;
-  border-radius: 70px;
+  background-color: #aaa;
+  border-radius: 30px;
   height: 30px;
-  width: 300px;
+  width: 100%;
+}
+.progress-done {
+  background: linear-gradient(to left,#6189c2, #114ea1); 
+  border-radius: 30px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  transition:width 2s
 }
