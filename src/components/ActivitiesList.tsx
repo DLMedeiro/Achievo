@@ -56,7 +56,7 @@ export default function ActivitiesList(): JSX.Element {
     <>
       <Grid
         container
-        spacing={2}
+        spacing={0}
         sx={{
           padding: '78px 0',
           height: '90vh',

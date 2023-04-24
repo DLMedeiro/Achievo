@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { Grid } from '@mui/material'
 import { Link } from 'react-router-dom'
 import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
 
 import InspirationQuote from './InspirationQuote'
 
@@ -71,10 +72,16 @@ export default function ActivitiesPage(): JSX.Element {
       localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
     }
   }
+
+  // View Transition: https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API
+  // const viewTransition = (state: () => void): void => {
+  //   document.startViewTransition(state)
+  // }
+
   return (
     <Grid
       container
-      spacing={2}
+      spacing={0}
       sx={{
         padding: '78px 0',
         height: '90vh',
@@ -87,7 +94,7 @@ export default function ActivitiesPage(): JSX.Element {
       {quote.length > 0 ? (
         <Grid
           container
-          spacing={2}
+          spacing={0}
           sx={{
             padding: '78px 0',
             height: '90vh',
@@ -97,27 +104,40 @@ export default function ActivitiesPage(): JSX.Element {
             justifyContent: 'center',
           }}
         >
-          <InspirationQuote text={quote[0]} author={quote[1]} />
-
           {showForm ? (
             <ActivityInputForm onAddItem={addItem} />
           ) : (
-            <Grid item xs={12} sx={{ fontSize: '2rem' }}>
-              <Button
-                onClick={() => {
-                  setShowForm(true)
-                }}
-                variant="contained"
-                sx={{
-                  mt: 3,
-                  mb: 2,
-                  borderRadius: '40px',
-                  margin: '0 auto',
-                }}
-              >
-                Add a new activity
-              </Button>
-            </Grid>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '2rem',
+                align: 'center',
+              }}
+            >
+              <Grid item xs={12} sx={{ fontSize: '2rem' }}>
+                <InspirationQuote text={quote[0]} author={quote[1]} />
+              </Grid>
+              <Grid item xs={12} sx={{ fontSize: '2rem', width: '100%' }}>
+                <Button
+                  onClick={() => {
+                    setShowForm(true)
+                  }}
+                  variant="contained"
+                  sx={{
+                    mt: 3,
+                    mb: 2,
+                    borderRadius: '40px',
+                    margin: '0 auto',
+                    width: '100%',
+                  }}
+                >
+                  Add a new activity
+                </Button>
+              </Grid>
+            </Box>
           )}
 
           <Grid item xs={12}>

@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <Grid
       container
-      spacing={2}
+      spacing={0}
       sx={{
         padding: '78px 0',
         height: '90vh',

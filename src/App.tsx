@@ -28,6 +28,16 @@ const theme = createTheme({
       light: '#6189c2',
       dark: '#00003c',
     },
+    secondary: {
+      dark: '#e8b29e',
+      light: '#e1def1',
+      main: '#cb99d5',
+    },
+    info: {
+      main: '#e8b29e',
+      light: '#e1def1',
+      dark: '#cb99d5',
+    },
   },
 })
 
@@ -37,7 +47,12 @@ function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
-        <Container maxWidth="xl" sx={{ paddingTop: '5vh' }}>
+        <Container
+          maxWidth="lg"
+          sx={{
+            paddingTop: '5vh',
+          }}
+        >
           <DrawerAppBar />
 
           <Routes>

@@ -11,21 +11,19 @@ type Props = { text: string; author: string }
 
 export default function InspirationQuote({ text, author }: Props) {
   return (
-    <>
-      <Grid item xs={12} sx={{ fontSize: '2rem' }}>
-        <h4>"{text}"</h4>
-        <h6>
-          <Link
-            href={`https://en.wikipedia.org/wiki/${author}`}
-            underline="hover"
-            target="_blank"
-            rel="noopener"
-          >
-            {author}
-          </Link>
-        </h6>
-        {/* rel="noopener" prevents the new page from being able to access the window.opener property and ensures it runs in a separate process. Without this, the target page can potentially redirect your page to a malicious URL. */}
-      </Grid>
-    </>
+    <Grid item xs={12} style={{ fontSize: '1.5rem' }}>
+      <q>{text}</q>
+      <p>
+        <Link
+          href={`https://en.wikipedia.org/wiki/${author}`}
+          underline="hover"
+          target="_blank"
+          rel="noopener"
+        >
+          {author}
+        </Link>
+      </p>
+      {/* rel="noopener" prevents the new page from being able to access the window.opener property and ensures it runs in a separate process. Without this, the target page can potentially redirect your page to a malicious URL. */}
+    </Grid>
   )
 }

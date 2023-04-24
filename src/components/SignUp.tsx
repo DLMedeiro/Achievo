@@ -56,7 +56,7 @@ export default function SignUp() {
           >
             <Grid
               container
-              spacing={2}
+              spacing={0}
               sx={{
                 marginBottom: '16px',
                 paddingLeft: 0,

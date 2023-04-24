@@ -1,4 +1,9 @@
 # Notes
+Day 5:
+- Continuing progress bar
+- Style buttons
+- Stop progress bar from going over 100%
+- Incorporate view transitions: https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API
 Day 4:
 - Add link to demo account and create initial functionality here prior to working on registration
 - Update Activity naming and file structure and add some styling so all components are visible
