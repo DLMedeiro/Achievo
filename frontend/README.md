@@ -1,6 +1,4 @@
 # Notes
-Day 6:
-- Review Planet scale for database hosting: https://www.youtube.com/watch?v=Q29l7P3E1hw&list=PLQiYtJSQdSEAfeFxYbW4YkZs31GrdE7u6
 Day 5:
 - Continuing progress bar
 - Style buttons
