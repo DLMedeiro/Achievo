@@ -1,4 +1,14 @@
 # Notes
+Day 6
+- Start working on creating a back end with PlanetScale : 
+    - https://www.youtube.com/watch?v=Q29l7P3E1hw
+    - https://planetscale.com/docs/tutorials/connect-nodejs-app
+
+    Start server by running node app.js
+
+    wondering if it is worth diving into this, or keeping it simple and focusing more on API integration and user features?
+
+    Clean up nav bar
 Day 5:
 - Continuing progress bar
 - Style buttons
