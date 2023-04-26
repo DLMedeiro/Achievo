@@ -83,7 +83,6 @@ export default function ActivitiesPage(): JSX.Element {
       container
       spacing={0}
       sx={{
-        padding: '78px 0',
         height: '90vh',
         display: 'flex',
         flexDirection: 'row',

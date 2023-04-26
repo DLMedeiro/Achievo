@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Greeter from './components/Greeter'
 import Container from '@mui/material/Container'
 import LoginForm from './components/LoginForm'
-import DrawerAppBar from './components/DrawerAppBar'
+import NavBar from './components/NavBar'
 import FinnModal from './components/FinnModal'
 import Home from './components/Home'
 import ActivitiesPage from './components/ActivitiesPage'
@@ -47,14 +47,8 @@ function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
-        <Container
-          maxWidth="lg"
-          sx={{
-            paddingTop: '5vh',
-          }}
-        >
-          <DrawerAppBar />
-
+        <NavBar />
+        <Container maxWidth="lg">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />

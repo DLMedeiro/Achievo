@@ -47,7 +47,8 @@ export default function Activity(props: Props): JSX.Element {
     {
       progress === 0 && progress < timeTarget
         ? setPercentComplete(0)
-        : setPercentComplete((progress / timeTarget) * 100)
+        : setPercentComplete(Math.round((progress / timeTarget) * 100))
+      // Rounding not exact but works for current need
     }
   }, [progress, timeTarget])
 
@@ -179,13 +180,7 @@ export default function Activity(props: Props): JSX.Element {
               className="progress-done"
               style={{ width: `${percentComplete}%` }}
             >
-              {percentComplete < 2 ? (
-                <span style={{ marginLeft: '5rem' }}>{percentComplete}%</span>
-              ) : (
-                <span style={{ marginLeft: percentComplete }}>
-                  {percentComplete}%
-                </span>
-              )}
+              <p style={{ marginLeft: '150px' }}>{percentComplete}%</p>
             </div>
           </div>
         </Grid>
