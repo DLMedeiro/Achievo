@@ -9,8 +9,7 @@ import {
 
 import { useNavigate } from 'react-router-dom'
 
-import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty'
-
+import MoodBadIcon from '@mui/icons-material/MoodBad'
 export default function NavBar() {
   const navigate = useNavigate()
 
@@ -24,10 +23,10 @@ export default function NavBar() {
           color="inherit"
           aria-label="logo"
         >
-          <HourglassEmptyIcon />
+          <MoodBadIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Motivate
+          Boredly
         </Typography>
         <Stack direction="row" spacing={3}>
           <Button onClick={() => navigate('/login')} color="inherit">
@@ -35,6 +34,9 @@ export default function NavBar() {
           </Button>
           <Button onClick={() => navigate('/activities')} color="inherit">
             Activities
+          </Button>
+          <Button onClick={() => navigate('/news')} color="inherit">
+            News
           </Button>
         </Stack>
       </Toolbar>

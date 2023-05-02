@@ -7,6 +7,7 @@ import NavBar from './components/NavBar'
 import FinnModal from './components/FinnModal'
 import Home from './components/Home'
 import ActivitiesPage from './components/ActivitiesPage'
+import NewsPage from './components/NewsPage'
 import { v4 as uuidv4 } from 'uuid'
 import AddActivity from './components/ActivityInputForm'
 import Item from './models/Item'
@@ -54,10 +55,7 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/createAccount" element={<CreateAccount />} />
             <Route path="/activities" element={<ActivitiesPage />} />
-            {/* <Route
-              path="/addActivity"
-              element={<AddActivity onAddItem={addItem} />}
-            /> */}
+            <Route path="/news" element={<NewsPage />} />
             <Route path="/demo" element={<ActivitiesPage />} />
           </Routes>
           <FinnModal />

@@ -1,4 +1,12 @@
 # Notes
+Day 7 / 8:
+- Working with PlanetScale for database. Able to get basic calls
+Plan:
+- Create basic database calls and connect to frontend
+- Deploy
+- Review existing code and refactor
+
+
 Day 6
 - Start working on creating a back end with PlanetScale : 
     - https://www.youtube.com/watch?v=Q29l7P3E1hw
@@ -9,6 +17,8 @@ Day 6
     wondering if it is worth diving into this, or keeping it simple and focusing more on API integration and user features?
 
     Clean up nav bar
+
+    Started incorporating a news api to develop more styling with the data
 Day 5:
 - Continuing progress bar
 - Style buttons
