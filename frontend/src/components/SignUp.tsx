@@ -1,5 +1,6 @@
 // Modified from Material UI Docs: https://github.com/mui/material-ui/blob/v5.12.1/docs/data/material/getting-started/templates/sign-up/SignUp.tsx
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -28,15 +29,41 @@ const theme = createTheme({
 })
 
 export default function SignUp() {
+  const [values, setValues] = useState({
+    username: '',
+    email: '',
+    password: '',
+  })
+
+  useEffect(() => {
+    if (
+      values.username.length > 0 &&
+      values.email.length > 0 &&
+      values.password.length > 0
+    )
+      axios
+        .post('http://localhost:3001/createAccount', values)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
+  }, [values])
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    })
-  }
+    let username = data.get('username')
+    let email = data.get('email')
+    let password = data.get('password')
+    console.log(username, email, password)
 
+    if (username !== null && email !== null && password !== null) {
+      setValues({
+        username: username.toString(),
+        email: email.toString(),
+        password: password.toString(),
+      })
+    }
+  }
+  // Add error handling within the signup form
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -64,6 +91,16 @@ export default function SignUp() {
                 minWidth: '250px',
               }}
             >
+              <Grid item xs={12} sx={{ marginBottom: '26px' }}>
+                <TextField
+                  required
+                  fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
+                  autoComplete="Username"
+                />
+              </Grid>
               <Grid item xs={12} sx={{ marginBottom: '26px' }}>
                 <TextField
                   required

@@ -3,6 +3,9 @@ Day 7 / 8:
 - Working with PlanetScale for database. Able to get basic calls
 Plan:
 - Create basic database calls and connect to frontend
+    - https://www.youtube.com/watch?v=F53MPHqOmYI
+    - starting with create account
+    - reading to database but values are empty when added to database
 - Deploy
 - Review existing code and refactor
 
