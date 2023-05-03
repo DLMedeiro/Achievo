@@ -1,4 +1,6 @@
 # Notes
+Day 9: You are working on functionality after users are created, and users are logged in
+- login function accepts any data
 Day 7 / 8:
 - Working with PlanetScale for database. Able to get basic calls
 Plan:
@@ -6,6 +8,8 @@ Plan:
     - https://www.youtube.com/watch?v=F53MPHqOmYI
     - starting with create account
     - reading to database but values are empty when added to database - added useEffect to account for the rerender when values are added to state
+    - took out useEffect and added a clearForm()
+
 - Create log in
     - not calling out wring password, form not reseting after submission
 *future improvement add Bcrypt to password
