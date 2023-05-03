@@ -28,39 +28,50 @@ const theme = createTheme({
   },
 })
 
-export default function SignUp() {
+export default function Login() {
   const [values, setValues] = useState({
-    username: '',
     email: '',
     password: '',
   })
 
-  useEffect(() => {
-    if (
-      values.username.length > 0 &&
-      values.email.length > 0 &&
-      values.password.length > 0
-    )
+  const clearForm = () => {
+    setValues({
+      email: '',
+      password: '',
+    })
+  }
+  console.log(values)
+  const runDatabase = () => {
+    if (values.email.length > 0 && values.password.length > 0) {
       axios
-        .post('http://localhost:3001/createAccount', values)
-        .then((res) => console.log(res))
+        .get('http://localhost:3001/login', {
+          params: values,
+        })
+        .then((res) => {
+          if (res.data.length > 0) {
+            console.log(res.data)
+          } else {
+            console.log('wrong user')
+          }
+        })
         .catch((err) => console.log(err))
-  }, [values])
+    }
+    clearForm()
+  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    let username = data.get('username')
     let email = data.get('email')
     let password = data.get('password')
-    console.log(username, email, password)
+    console.log(email, password)
 
-    if (username !== null && email !== null && password !== null) {
+    if (email !== null && password !== null) {
       setValues({
-        username: username.toString(),
         email: email.toString(),
         password: password.toString(),
       })
+      runDatabase()
     }
   }
   // Add error handling within the signup form
@@ -95,16 +106,6 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="username"
-                  label="Username"
-                  name="username"
-                  autoComplete="Username"
-                />
-              </Grid>
-              <Grid item xs={12} sx={{ marginBottom: '26px' }}>
-                <TextField
-                  required
-                  fullWidth
                   id="email"
                   label="Email Address"
                   name="email"
@@ -134,7 +135,7 @@ export default function SignUp() {
                   display: 'flex',
                 }}
               >
-                Create Account
+                Login
               </Button>
             </Grid>
           </Box>

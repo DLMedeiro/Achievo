@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 
-import SignUp from './SignUp'
+import Login from './Login'
 import { Grid, Paper } from '@mui/material'
 // import MUILink from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
@@ -42,7 +42,7 @@ export default function LoginForm(): JSX.Element {
               Create Account
             </Button>
           </Link>
-          <SignUp />
+          <Login />
           <Grid container justifyContent="center" sx={{ marginBottom: '12px' }}>
             {/* <MUILink href="#" variant="body2">
               Forgot your password?

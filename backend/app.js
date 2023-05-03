@@ -37,12 +37,24 @@ app.get("/:user", (req, res) => {
 
 app.post("/createAccount", (req, res) => {
   const sqlRequest = "INSERT INTO users (email, password, username) VALUES (?)";
-  const values = [req.body.username, req.body.email, req.body.password];
+  const values = [req.body.email, req.body.password, req.body.username];
   connection.query(sqlRequest, [values], (err, data) => {
     if (err) {
       return res.json(err);
     }
     return res.json(data);
+  });
+});
+app.get("/login", (req, res) => {
+  const sqlRequest = "SELECT * FROM users WHERE email = ? AND password = ?";
+  console.log(req.params);
+  const email = req.params.email;
+  const password = req.params.password;
+  connection.query(sqlRequest, [email, password], (err, data) => {
+    if (err) {
+      return res.json(err);
+    }
+    return res.json(sqlRequest);
   });
 });
 

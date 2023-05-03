@@ -5,7 +5,10 @@ Plan:
 - Create basic database calls and connect to frontend
     - https://www.youtube.com/watch?v=F53MPHqOmYI
     - starting with create account
-    - reading to database but values are empty when added to database
+    - reading to database but values are empty when added to database - added useEffect to account for the rerender when values are added to state
+- Create log in
+    - not calling out wring password, form not reseting after submission
+*future improvement add Bcrypt to password
 - Deploy
 - Review existing code and refactor
 
