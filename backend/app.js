@@ -13,8 +13,6 @@ const connection = mysql.createConnection(process.env.DATABASE_URL);
 connection.connect();
 app.use(cors());
 app.use(express.json());
-const userRoutes = require("./routes/users");
-app.use("/users", userRoutes);
 
 app.get("/", (req, res) => {
   connection.query(

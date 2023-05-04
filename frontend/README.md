@@ -1,8 +1,16 @@
 # Notes
+Day 10:
+- update nav for log in and log out
+    - Add log out functionality
+    - Add state management through redux
+- complete Create user functionality
+
+
 Day 9: You are working on functionality after users are created, and users are logged in
 - login function accepts any data
     - https://www.youtube.com/watch?v=Lb9Basl0StM
     - https://github.com/Eazy2Code/react-mysql-connection/tree/master/server
+- login complete - now work on what to do with it
 
 Day 7 / 8:
 - Working with PlanetScale for database. Able to get basic calls
