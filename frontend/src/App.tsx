@@ -21,6 +21,7 @@ import CreateAccount from './components/CreateAccount'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import HomeLoggedIn from './components/HomeLoggedIn'
 
 const theme = createTheme({
   palette: {
@@ -53,6 +54,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
+            <Route path="/homepage" element={<HomeLoggedIn />} />
             <Route path="/createAccount" element={<CreateAccount />} />
             <Route path="/activities" element={<ActivitiesPage />} />
             <Route path="/news" element={<NewsPage />} />

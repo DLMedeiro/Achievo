@@ -13,10 +13,12 @@ const connection = mysql.createConnection(process.env.DATABASE_URL);
 connection.connect();
 app.use(cors());
 app.use(express.json());
+const userRoutes = require("./routes/users");
+app.use("/users", userRoutes);
 
 app.get("/", (req, res) => {
   connection.query(
-    "SELECT username FROM users WHERE username = 'HarryPotter'",
+    "SELECT * FROM users WHERE password = 'FinnFinn'",
     function (err, rows, fields) {
       if (err) throw err;
 
@@ -36,25 +38,31 @@ app.get("/:user", (req, res) => {
 });
 
 app.post("/createAccount", (req, res) => {
-  const sqlRequest = "INSERT INTO users (email, password, username) VALUES (?)";
+  const sqlRequest =
+    "INSERT INTO users (email, password, username) VALUES (?, ?, ?)";
   const values = [req.body.email, req.body.password, req.body.username];
-  connection.query(sqlRequest, [values], (err, data) => {
-    if (err) {
-      return res.json(err);
+  connection.query(sqlRequest, values, (err, result) => {
+    if (result) {
+      res.send(result);
+    } else {
+      res.send({ message: "Please complete all fields" });
     }
-    return res.json(data);
   });
 });
-app.get("/login", (req, res) => {
+
+app.post("/login", (req, res) => {
   const sqlRequest = "SELECT * FROM users WHERE email = ? AND password = ?";
-  console.log(req.params);
-  const email = req.params.email;
-  const password = req.params.password;
-  connection.query(sqlRequest, [email, password], (err, data) => {
+  const values = [req.body.email, req.body.password];
+  connection.query(sqlRequest, values, (err, result) => {
     if (err) {
-      return res.json(err);
+      req.setEncoding({ err: err });
+    } else {
+      if (result.length > 0) {
+        res.send(result);
+      } else {
+        res.send({ message: "Incorrect credentials entered" });
+      }
     }
-    return res.json(sqlRequest);
   });
 });
 

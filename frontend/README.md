@@ -1,6 +1,9 @@
 # Notes
 Day 9: You are working on functionality after users are created, and users are logged in
 - login function accepts any data
+    - https://www.youtube.com/watch?v=Lb9Basl0StM
+    - https://github.com/Eazy2Code/react-mysql-connection/tree/master/server
+
 Day 7 / 8:
 - Working with PlanetScale for database. Able to get basic calls
 Plan:

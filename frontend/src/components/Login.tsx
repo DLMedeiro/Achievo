@@ -1,6 +1,7 @@
 // Modified from Material UI Docs: https://github.com/mui/material-ui/blob/v5.12.1/docs/data/material/getting-started/templates/sign-up/SignUp.tsx
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import Axios from 'axios'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -29,51 +30,40 @@ const theme = createTheme({
 })
 
 export default function Login() {
-  const [values, setValues] = useState({
-    email: '',
-    password: '',
-  })
+  const navigate = useNavigate()
+  const [loginStatus, setLoginStatus] = React.useState<boolean>(false)
 
-  const clearForm = () => {
-    setValues({
-      email: '',
-      password: '',
-    })
-  }
-  console.log(values)
-  const runDatabase = () => {
-    if (values.email.length > 0 && values.password.length > 0) {
-      axios
-        .get('http://localhost:3001/login', {
-          params: values,
-        })
-        .then((res) => {
-          if (res.data.length > 0) {
-            console.log(res.data)
-          } else {
-            console.log('wrong user')
-          }
-        })
-        .catch((err) => console.log(err))
+  useEffect(() => {
+    {
+      if (loginStatus) {
+        return navigate('/homepage')
+      }
     }
-    clearForm()
-  }
+  }, [loginStatus])
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    let email = data.get('email')
-    let password = data.get('password')
-    console.log(email, password)
-
-    if (email !== null && password !== null) {
-      setValues({
-        email: email.toString(),
-        password: password.toString(),
-      })
-      runDatabase()
+    let email = data.get('email')!.toString()
+    let password = data.get('password')!.toString()
+    // setValues({ email: email, password: password })
+    let values = {
+      email: email,
+      password: password,
     }
+
+    Axios.post('http://localhost:3001/login', values).then((response) => {
+      if (response.data.message) {
+        setLoginStatus(false)
+        // setLoginStatus(response.data.message)
+      } else {
+        setLoginStatus(true)
+        // setLoginStatus(response.data[0])
+      }
+    })
   }
+  console.log(loginStatus)
+
   // Add error handling within the signup form
   return (
     <ThemeProvider theme={theme}>
@@ -137,6 +127,7 @@ export default function Login() {
               >
                 Login
               </Button>
+              {/* <p>{loginStatus}</p> */}
             </Grid>
           </Box>
         </Box>
