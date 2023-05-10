@@ -15,12 +15,22 @@ const port = process.env.PORT || 5000;
 // initialize express
 const app = express();
 
+// Bring in error handler
+import errorHandler from "./middleware/errorMiddleware";
+// changed to export default on middleware to eliminate errors when bringing the function to this file
+
+// add this middleware so req.body within the controller will not show as undefined
+// body parser for raw json
+app.use(express.json())
+// parses urlencoded
+app.use(express.urlencoded({extended: false}))
 
 // when api/goals is hit on the front end, goalRoutes will respond
 app.use("/api/goals", require('./routes/goalRoutes'));
 
 
-
+app.use(errorHandler)
+// This will overwrite the express default handler
 
 
 // call listen on app object
