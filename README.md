@@ -1,4 +1,5 @@
 # Notes
+Day 12: Implement tutorial learnings to create backend database and API
 Day 11:
 - Going to take a tutorial to build and connect to a custom API
 https://www.youtube.com/playlist?list=PLillGF-RfqbbQeVSccR9PGKHzPJSWqcsm
