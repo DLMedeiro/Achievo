@@ -9,6 +9,9 @@ import express from 'express'
 const dotenv = require("dotenv").config();
 // make sure this is called before items requiring this file are used.  ConnectDB will have an error if this requirement is after it.
 
+const connectDB = require('./config/db')
+connectDB()
+
 // Port for server to run on, 5000 if the .env port is not found
 const port = process.env.PORT || 5000;
 
