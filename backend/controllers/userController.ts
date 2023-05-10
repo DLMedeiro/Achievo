@@ -9,13 +9,23 @@ import asyncHandler from 'express-async-handler'
 const User = require('../models/userModel')
 const SECRET_KEY = process.env.JWT_SECRET;
 
+// Generate JWT -> create a JWT_Secret in .env
+const generateToken = (id: string) => {
+    // For typescript verify token is present
+    if (SECRET_KEY){
+        return jwt.sign({ id }, SECRET_KEY, {expiresIn: '30d'})
+    }
+}
+
 
 // Description: Register a new user
 // Route: POST api/users
 // Access: Public
 // Have to wrap the async functions with asyncHandler to handle exceptions
 const registerUser = asyncHandler(async(req:any, res:any) => {
-    const {name, email, password} = req.body
+    const {name, password} = req.body
+    const email = req.body.email.toLowerCase()
+    // Since email is required for logging in, I Chose to change to lowercase to prevent accidental errors when user inputs data.
 
     if(!name || !email || !password){
         res.status(400)
@@ -23,7 +33,6 @@ const registerUser = asyncHandler(async(req:any, res:any) => {
     }
 
     
-    // Since email is required for logging in, I Chose to change to lowercase to prevent accidental errors when user inputs data.
 
     // check if user exists and send error if they do
     const userExists = await User.findOne({email})
@@ -47,6 +56,7 @@ const registerUser = asyncHandler(async(req:any, res:any) => {
             _id: user.id,
             name: user.name,
             email: user.email,
+            token: generateToken(user._id)
         })
     } else {
         res.status(400)
@@ -59,8 +69,25 @@ const registerUser = asyncHandler(async(req:any, res:any) => {
 // Route: POST api/users/login
 // Access: Public
 const loginUser = asyncHandler(async(req:any, res:any) => {
-  res.json({message: 'Login user'})
 
+    const email = req.body.email.toLowerCase()
+    const password = req.body.password
+
+        // Check for user email
+        const user = await User.findOne({email})
+
+            // Check the password using bcrypt method to compare password input with hashed password
+    if (user && (await bcrypt.compare(password, user.password))){
+        res.json({
+            _id: user.id,
+            name: user.name,
+            email: user.email,
+            token: generateToken(user._id)
+        })
+    } else {
+        res.status(400)
+        throw new Error('Invalid credentials')
+    }
 })
 
 // Description: Get user data
