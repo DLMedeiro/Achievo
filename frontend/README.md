@@ -1,8 +1,16 @@
 # Notes
+Day 11:
+- Going to take a tutorial to build and connect to a custom API
+https://www.youtube.com/playlist?list=PLillGF-RfqbbQeVSccR9PGKHzPJSWqcsm
+
 Day 10:
 - update nav for log in and log out
     - Add log out functionality
     - Add state management through redux
+        - https://www.youtube.com/watch?v=9jULHSe41ls
+        - https://www.youtube.com/watch?v=udr2rx_B99w
+    - Update backed to have an API to reference.  Breaking out code from individual functions and bringing further up in process.
+
 - complete Create user functionality
 
 

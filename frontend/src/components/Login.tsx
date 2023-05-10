@@ -1,7 +1,7 @@
 // Modified from Material UI Docs: https://github.com/mui/material-ui/blob/v5.12.1/docs/data/material/getting-started/templates/sign-up/SignUp.tsx
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Axios from 'axios'
+
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -52,15 +52,15 @@ export default function Login() {
       password: password,
     }
 
-    Axios.post('http://localhost:3001/login', values).then((response) => {
-      if (response.data.message) {
-        setLoginStatus(false)
-        // setLoginStatus(response.data.message)
-      } else {
-        setLoginStatus(true)
-        // setLoginStatus(response.data[0])
-      }
-    })
+    //   Axios.post('http://localhost:3001/login', values).then((response) => {
+    //     if (response.data.message) {
+    //       setLoginStatus(false)
+    //       // setLoginStatus(response.data.message)
+    //     } else {
+    //       setLoginStatus(true)
+    //       // setLoginStatus(response.data[0])
+    //     }
+    //   })
   }
   console.log(loginStatus)
 
