@@ -7,14 +7,15 @@ import asyncHandler from 'express-async-handler'
 
 const Goal = require('../models/goalModel')
 // Has the mongoose methods to use in the database
+const User = require('../models/userModel')
 
 // Desc: Get goals
 // Route: GET /api/goals
 // Access: Private
 const getGoals = asyncHandler(async(req:any, res:any) => {
 
-    const goals = await Goal.find()
-    // Getting all of them, find is a built in mongoose method
+    const goals = await Goal.find({user: res.locals.user.id})
+    // Getting all goals for user, find is a built in mongoose method
 
     // console.log(req.body) 
     // shows in terminal when sending a postman request
@@ -37,6 +38,7 @@ const setGoal = asyncHandler(async(req:any, res:any) => {
     }
 
     const goal = await Goal.create({
+        user:  res.locals.user.id,
         name:req.body.name,
         start:req.body.start,
         end:req.body.end,
@@ -58,6 +60,24 @@ const updateGoal = asyncHandler(async(req:any, res:any) => {
         throw new Error("Goal not found")
     }
 
+    // get user before searching for goal
+    const user = await User.findById(res.locals.user.id)
+
+    // Check for user
+    if(!user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    // Prevent updating other id's goals
+    // user.id comes from the findById using locals
+    // goal.user = user attached to goal
+    // goal.user = objectID -> must change into a string
+    if(goal.user.toString() !== user.id){
+        res.status(401)
+        throw new Error('User Not Authorized')
+    }
+
     const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {new: true})
 
     // not able to find alternative types for req and res, other option found was Express.Request / Response, but that wasn't closing out the error
@@ -70,6 +90,23 @@ const updateGoal = asyncHandler(async(req:any, res:any) => {
 const deleteGoal = asyncHandler(async(req:any, res:any) => {
 
     const goal = await Goal.findById(req.params.id)
+
+    // get user before searching for goal
+    const user = await User.findById(res.locals.user.id)
+
+    // Check for user
+    if(!user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    // Prevent updating other id's goals
+    // user.id comes from the findById using locals
+    // goal.user = user attached to goal
+    if(goal.user.toString() !== user.id){
+        res.status(401)
+        throw new Error('User Not Authorized')
+    }
 
     if(!goal){
         res.status(400)

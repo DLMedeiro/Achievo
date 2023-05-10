@@ -94,7 +94,13 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
 // Route: GET api/users/me
 // Access: Private -> use middleware to accomplish -> during the request response cycle middleware will check the token
 const getMe =  asyncHandler(async(req:any, res:any) => {
-    res.json({message: 'User Data'})
+    const {_id, name, email} = await User.findById(res.locals.user.id)
+    // Using res.locals because req.user.id shown in tutorial was not working
+
+    res.status(200).json({
+        id:_id,
+        name, email
+    })
 })
 
 module.exports = { registerUser, loginUser, getMe}
