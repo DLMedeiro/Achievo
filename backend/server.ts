@@ -30,6 +30,7 @@ app.use(express.urlencoded({extended: false}))
 
 // when api/goals is hit on the front end, goalRoutes will respond
 app.use("/api/goals", require('./routes/goalRoutes'));
+app.use("/api/users", require('./routes/userRoutes'));
 
 
 app.use(errorHandler)
