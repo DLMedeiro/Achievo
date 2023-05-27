@@ -3,7 +3,7 @@ import Item from '../models/Item'
 import { Grid } from '@mui/material'
 import dayjs, { Dayjs } from 'dayjs'
 import Paper from '@mui/material/Paper'
-import '../App.css'
+import '../styles/App.css'
 import Button from '@mui/material/Button'
 // import AddSubtract from './AddSubtract' -> Bring back after removing local state dependency
 

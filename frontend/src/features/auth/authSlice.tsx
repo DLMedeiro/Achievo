@@ -2,8 +2,8 @@
 
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../app/store'
-import authService from './authService'
-import { boolean } from 'zod'
+import authService from './authServce'
+// import { boolean } from 'zod'
 
 // Get user from local storage
 const user = JSON.parse(localStorage.getItem('user')!)

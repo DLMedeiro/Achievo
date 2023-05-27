@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from 'uuid'
 import AddActivity from './components/ActivityInputForm'
 import Item from './models/Item'
 
-import './App.css'
+import './styles/App.css'
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
