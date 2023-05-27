@@ -86,7 +86,6 @@ export default function SignUp() {
     resolver: zodResolver(schema),
   })
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data)
     if (data.password !== data.password2) {
       toast.error('Passwords do not match')
     } else {
@@ -103,35 +102,6 @@ export default function SignUp() {
     return <Spinner />
   }
 
-  // useEffect(() => {
-  //   if (
-  //     values.username.length > 0 &&
-  //     values.email.length > 0 &&
-  //     values.password.length > 0
-  //   )
-  //     axios
-  //       .post('http://localhost:3001/createAccount', values)
-  //       .then((res) => console.log(res))
-  //       .catch((err) => console.log(err))
-  // }, [values])
-
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault()
-  //   const data = new FormData(event.currentTarget)
-  //   let username = data.get('username')
-  //   let email = data.get('email')
-  //   let password = data.get('password')
-  //   console.log(username, email, password)
-
-  //   if (username !== null && email !== null && password !== null) {
-  //     setValues({
-  //       username: username.toString(),
-  //       email: email.toString(),
-  //       password: password.toString(),
-  //     })
-  //   }
-  // }
-  // Add error handling within the signup form
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">

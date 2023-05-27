@@ -16,6 +16,16 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Divider from '@mui/material/Divider'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { useAppSelector, useAppDispatch } from '../app/hooks'
+// useAppSelector: Select from the state
+// useAppDispatch: Dispatch a function like register, or reset
+import { toast } from 'react-toastify'
+import { login, reset } from '../features/auth/authSlice'
+import { RootState } from '../app/store'
+import Spinner from '../components/Spinner'
 
 // const theme = createTheme()
 
@@ -30,39 +40,63 @@ const theme = createTheme({
 })
 
 export default function Login() {
+  type Inputs = {
+    email: string
+    password: string
+  }
+  const InitialFormValues = {
+    email: '',
+    password: '',
+  }
+  const schema = z.object({
+    email: z.string().min(7, { message: 'Email is required' }),
+    password: z.string().min(4, { message: 'Please Enter a password' }),
+  })
+
   const navigate = useNavigate()
-  const [loginStatus, setLoginStatus] = React.useState<boolean>(false)
+  const dispatch = useAppDispatch()
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
+    (state: RootState) => state.auth,
+  )
 
   useEffect(() => {
-    {
-      if (loginStatus) {
-        return navigate('/homepage')
-      }
+    if (isError) {
+      toast.error(message)
     }
-  }, [loginStatus])
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    let email = data.get('email')!.toString()
-    let password = data.get('password')!.toString()
-    // setValues({ email: email, password: password })
-    let values = {
-      email: email,
-      password: password,
+    if (isSuccess || user) {
+      navigate('/')
     }
 
-    //   Axios.post('http://localhost:3001/login', values).then((response) => {
-    //     if (response.data.message) {
-    //       setLoginStatus(false)
-    //       // setLoginStatus(response.data.message)
-    //     } else {
-    //       setLoginStatus(true)
-    //       // setLoginStatus(response.data[0])
-    //     }
-    //   })
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({
+    defaultValues: InitialFormValues,
+    resolver: zodResolver(schema),
+  })
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const userData = {
+      email: data.email,
+      password: data.password,
+    }
+    dispatch(login(userData))
   }
-  console.log(loginStatus)
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
+  // useEffect(() => {
+  //   {
+  //     if (loginStatus) {
+  //       return navigate('/homepage')
+  //     }
+  //   }
+  // }, [loginStatus])
 
   // Add error handling within the signup form
   return (
@@ -79,7 +113,7 @@ export default function Login() {
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             sx={{ mt: 3, marginBottom: '12px' }}
           >
             <Grid
@@ -98,20 +132,22 @@ export default function Login() {
                   fullWidth
                   id="email"
                   label="Email Address"
-                  name="email"
                   autoComplete="email"
+                  {...register('email')}
                 />
+                <div style={{ color: 'red' }}>{errors.email?.message}</div>
               </Grid>
               <Grid item xs={12} sx={{ marginBottom: '26px' }}>
                 <TextField
                   required
                   fullWidth
-                  name="password"
                   label="Password"
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  {...register('password')}
                 />
+                <div style={{ color: 'red' }}>{errors.password?.message}</div>
               </Grid>
               <Button
                 type="submit"
