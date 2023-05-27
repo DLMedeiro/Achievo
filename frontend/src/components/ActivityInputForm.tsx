@@ -10,7 +10,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import dayjs, { Dayjs } from 'dayjs'
-import ActivitiesPage from './ActivitiesPage'
+import ActivitiesPage from '../pages/ActivitiesPage'
 
 const theme = createTheme({
   palette: {

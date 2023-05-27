@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
-import SignUp from './SignUp'
+import SignUp from '../components/SignUp'
 import { Grid, Paper } from '@mui/material'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
