@@ -99,7 +99,8 @@ const getMe =  asyncHandler(async(req:any, res:any) => {
 
     res.status(200).json({
         id:_id,
-        name, email
+        name:name, 
+        email: email
     })
 })
 

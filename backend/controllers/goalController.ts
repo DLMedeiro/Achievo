@@ -60,11 +60,8 @@ const updateGoal = asyncHandler(async(req:any, res:any) => {
         throw new Error("Goal not found")
     }
 
-    // get user before searching for goal
-    const user = await User.findById(res.locals.user.id)
-
     // Check for user
-    if(!user) {
+    if(!res.locals.user.id) {
         res.status(401)
         throw new Error('User not found')
     }
@@ -73,7 +70,7 @@ const updateGoal = asyncHandler(async(req:any, res:any) => {
     // user.id comes from the findById using locals
     // goal.user = user attached to goal
     // goal.user = objectID -> must change into a string
-    if(goal.user.toString() !== user.id){
+    if(goal.user.toString() !== res.locals.user.id){
         res.status(401)
         throw new Error('User Not Authorized')
     }
@@ -91,11 +88,9 @@ const deleteGoal = asyncHandler(async(req:any, res:any) => {
 
     const goal = await Goal.findById(req.params.id)
 
-    // get user before searching for goal
-    const user = await User.findById(res.locals.user.id)
 
     // Check for user
-    if(!user) {
+    if(!res.locals.user.id) {
         res.status(401)
         throw new Error('User not found')
     }
@@ -103,7 +98,7 @@ const deleteGoal = asyncHandler(async(req:any, res:any) => {
     // Prevent updating other id's goals
     // user.id comes from the findById using locals
     // goal.user = user attached to goal
-    if(goal.user.toString() !== user.id){
+    if(goal.user.toString() !== res.locals.user.id){
         res.status(401)
         throw new Error('User Not Authorized')
     }
