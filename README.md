@@ -1,4 +1,8 @@
 # Notes
+used Insomnia to test out and debug API connections and responses
+used Mongo DB compass to test out database connection and available values 
+
+
 Day 12: Implement tutorial learnings to create backend database and API
 Day 11:
 - Going to take a tutorial to build and connect to a custom API

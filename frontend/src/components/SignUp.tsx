@@ -41,20 +41,20 @@ const theme = createTheme({
 
 export default function SignUp() {
   type Inputs = {
-    username: string
+    name: string
     email: string
     password: string
     password2: string
   }
   const InitialFormValues = {
-    username: '',
+    name: '',
     email: '',
     password: '',
     password2: '',
   }
 
   const schema = z.object({
-    username: z.string().min(1, { message: 'Userame is required' }),
+    name: z.string().min(1, { message: 'Name is required' }),
     email: z.string().min(7, { message: 'Email is required' }),
     password: z.string().min(4, { message: 'Please Enter a password' }),
     password2: z.string().min(4, { message: 'Please re-enter password' }),
@@ -91,7 +91,7 @@ export default function SignUp() {
       toast.error('Passwords do not match')
     } else {
       const userData = {
-        username: data.username,
+        name: data.name,
         email: data.email,
         password: data.password,
       }
@@ -163,12 +163,12 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="username"
-                  label="Username"
-                  autoComplete="Username"
-                  {...register('username')}
+                  id="name"
+                  label="Name"
+                  autoComplete="name"
+                  {...register('name')}
                 />
-                <div style={{ color: 'red' }}>{errors.username?.message}</div>
+                <div style={{ color: 'red' }}>{errors.name?.message}</div>
               </Grid>
               <Grid item xs={12} sx={{ marginBottom: '26px' }}>
                 <TextField
