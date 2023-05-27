@@ -17,6 +17,7 @@ const port = process.env.PORT || 5000;
 
 // initialize express
 const app = express();
+const cors = require("cors");
 
 // Bring in error handler
 import errorHandler from "./middleware/errorMiddleware";
@@ -27,7 +28,7 @@ import errorHandler from "./middleware/errorMiddleware";
 app.use(express.json())
 // parses urlencoded
 app.use(express.urlencoded({extended: false}))
-
+app.use(cors());
 // when api/goals is hit on the front end, goalRoutes will respond
 app.use("/api/goals", require('./routes/goalRoutes'));
 app.use("/api/users", require('./routes/userRoutes'));
