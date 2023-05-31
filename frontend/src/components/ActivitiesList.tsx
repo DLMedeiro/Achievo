@@ -70,7 +70,7 @@ export default function ActivitiesList(): JSX.Element {
           <h2>Create an activity</h2>
         </Grid>
         <Grid item xs={7}>
-          <ActivityInputForm onAddItem={addItem} />
+          {/* <ActivityInputForm onAddItem={addItem} /> */}
         </Grid>
       </Grid>
       <ul>

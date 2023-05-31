@@ -7,20 +7,21 @@ const goalSchema = new Schema({
         ref: "User"
         // ref the User model to identify which model the ObjectID pertains to 
     },
-    name: {
+    activity: {
         type: String,
         required: [true, 'please add a text value']
     },
     start: {
-        type: Date,
+        type: String,
         required: [true, 'please add a text value']
     },
     end: {
-        type: Date,
+        type: String,
         required: [true, 'please add a text value']
     },
-    timeAllotment: {
-        type: Number,
+    target: {
+        type: String,
+        required: [true, 'please add a text value']
     },
     progress: {
         type: Number,

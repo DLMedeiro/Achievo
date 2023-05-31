@@ -28,8 +28,10 @@ const getGoals = asyncHandler(async(req:any, res:any) => {
 // Route: POST /api/goals
 // Access: Private
 const setGoal = asyncHandler(async(req:any, res:any) => {
+    console.log(req.body)
+    console.log(res.locals.user.id)
 
-    if(!req.body.name || !req.body.start || !req.body.end){
+    if(!req.body.activity || !req.body.start || !req.body.end || !req.body.target){
         // res.status(400).json({message: "Please add a text value"}) => remove and add express handler
         res.status(400)
         throw new Error("Please add a text value")
@@ -39,9 +41,10 @@ const setGoal = asyncHandler(async(req:any, res:any) => {
 
     const goal = await Goal.create({
         user:  res.locals.user.id,
-        name:req.body.name,
+        activity:req.body.activity,
         start:req.body.start,
         end:req.body.end,
+        target: req.body.target
 
     })
 

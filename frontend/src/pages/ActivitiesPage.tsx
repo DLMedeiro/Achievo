@@ -8,47 +8,47 @@ import { Link } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 
-import InspirationQuote from '../components/InspirationQuote'
+// import InspirationQuote from '../components/InspirationQuote'
 
 export default function ActivitiesPage(): JSX.Element {
   const [listItems, setListItems] = useState<Item[]>([])
   const [showForm, setShowForm] = React.useState<boolean>(false)
   const [quote, setQuote] = React.useState([])
   // Load local storage when document is loaded
-  useEffect(() => {
-    setListItems(JSON.parse(localStorage.getItem('savedTasks') || ''))
-  }, [])
+  // useEffect(() => {
+  //   setListItems(JSON.parse(localStorage.getItem('savedTasks') || ''))
+  // }, [])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await fetch('https://type.fit/api/quotes')
-        .then(function (response) {
-          return response.json()
-        })
-        .then(function (data) {
-          setQuote(Object.values(data[Math.floor(Math.random() * data.length)]))
-        })
-    }
-    fetchData().catch(console.error)
-  }, [])
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await fetch('https://type.fit/api/quotes')
+  //       .then(function (response) {
+  //         return response.json()
+  //       })
+  //       .then(function (data) {
+  //         setQuote(Object.values(data[Math.floor(Math.random() * data.length)]))
+  //       })
+  //   }
+  //   fetchData().catch(console.error)
+  // }, [])
 
   const removeItem = (id: string): void => {
     setListItems(listItems.filter((i) => i.id !== id))
     removeFromLocalStorage(id)
   }
 
-  const addItem = (
-    start: string,
-    end: string,
-    activity: string,
-    target: number,
-    progress: number,
-  ) => {
-    const newAdd = new Item(uuidv4(), start, end, activity, target, progress)
-    setListItems([...listItems, newAdd])
-    storeInLocalStorage(newAdd)
-    setShowForm(false)
-  }
+  // const addItem = (
+  //   start: string,
+  //   end: string,
+  //   activity: string,
+  //   target: number,
+  //   progress: number,
+  // ) => {
+  //   const newAdd = new Item(uuidv4(), start, end, activity, target, progress)
+  //   setListItems([...listItems, newAdd])
+  //   storeInLocalStorage(newAdd)
+  //   setShowForm(false)
+  // }
 
   // Add to local storage
   const storeInLocalStorage = (task: object): void => {
@@ -104,8 +104,9 @@ export default function ActivitiesPage(): JSX.Element {
           }}
         >
           {showForm ? (
-            <ActivityInputForm onAddItem={addItem} />
+            <h1>Activity</h1>
           ) : (
+            // <ActivityInputForm onAddItem={addItem} />
             <Box
               sx={{
                 display: 'flex',
@@ -117,7 +118,7 @@ export default function ActivitiesPage(): JSX.Element {
               }}
             >
               <Grid item xs={12} sx={{ fontSize: '2rem' }}>
-                <InspirationQuote text={quote[0]} author={quote[1]} />
+                {/* <InspirationQuote text={quote[0]} author={quote[1]} /> */}
               </Grid>
               <Grid item xs={12} sx={{ fontSize: '2rem', width: '100%' }}>
                 <Button

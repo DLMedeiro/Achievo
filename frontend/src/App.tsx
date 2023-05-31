@@ -7,6 +7,7 @@ import NavBar from './components/NavBar'
 import FinnModal from './components/FinnModal'
 import Home from './pages/Home'
 import ActivitiesPage from './pages/ActivitiesPage'
+import Dashboard from './pages/Dashboard'
 import NewsPage from './pages/NewsPage'
 import { v4 as uuidv4 } from 'uuid'
 import AddActivity from './components/ActivityInputForm'
@@ -56,7 +57,7 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/homepage" element={<HomeLoggedIn />} />
             <Route path="/createAccount" element={<CreateAccount />} />
-            <Route path="/activities" element={<ActivitiesPage />} />
+            <Route path="/activities" element={<Dashboard />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/demo" element={<ActivitiesPage />} />
           </Routes>

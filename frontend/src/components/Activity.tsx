@@ -5,6 +5,8 @@ import dayjs, { Dayjs } from 'dayjs'
 import Paper from '@mui/material/Paper'
 import '../styles/App.css'
 import Button from '@mui/material/Button'
+import { useAppDispatch } from '../app/hooks'
+import { deleteGoal } from '../features/goals/goalSlice'
 // import AddSubtract from './AddSubtract' -> Bring back after removing local state dependency
 
 interface Props {
