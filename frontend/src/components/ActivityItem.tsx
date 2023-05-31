@@ -6,8 +6,9 @@ function GoalItem({ goal }: any) {
   return (
     <div className="goal">
       {/* {goal.createdAt} */}
-      <div>{new Date(goal.createdAt).toLocaleString('en-US')}</div>
-      <h2>{goal.text}</h2>
+      <div>Start: {new Date(goal.start).toLocaleString('en-US')}</div>
+      <div>End: {new Date(goal.end).toLocaleString('en-US')}</div>
+      <h2>{goal.activity}</h2>
       {/* <button onClick={() => console.log(goal._id)} className="close">
         X
       </button> */}

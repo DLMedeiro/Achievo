@@ -15,20 +15,20 @@ interface Props {
 }
 // Refactor
 
-export default function Activity(props: Props): JSX.Element {
+export default function Activity({ goal }: any) {
   const [edit, setEdit] = useState(false)
   const [completed, setCompleted] = useState(false)
-  const [activity, setActivity] = useState(props.items.activity)
-  const [timeTarget, setTimeTarget] = useState(props.items.target)
-  const [progress, setProgress] = useState(props.items.progress)
-  const [start, setStart] = useState(props.items.start)
-  const [end, setEnd] = useState(props.items.end)
+  // const [activity, setActivity] = useState(props.items.activity)
+  // const [timeTarget, setTimeTarget] = useState(props.items.target)
+  const [progress, setProgress] = useState(0)
+  // const [start, setStart] = useState(props.items.start)
+  // const [end, setEnd] = useState(props.items.end)
   const [duration, setDuration] = React.useState<number>()
   const [percentComplete, setPercentComplete] = React.useState<number>(0)
 
-  const handleRemove = (id: string): void => {
-    props.onRemoveItem(id)
-  }
+  // const handleRemove = (id: string): void => {
+  //   props.onRemoveItem(id)
+  // }
 
   const setEditFunction = (): void => {
     if (edit === true) {
@@ -40,19 +40,19 @@ export default function Activity(props: Props): JSX.Element {
 
   useEffect(() => {
     let today = dayjs().format('LL')
-    let hours = dayjs(end).diff(today, 'hours')
+    let hours = dayjs(goal.end).diff(today, 'hours')
     const days = Math.floor(hours / 24)
     setDuration(days)
   }, [])
 
   useEffect(() => {
     {
-      progress === 0 && progress < timeTarget
+      progress === 0 && progress < goal.target
         ? setPercentComplete(0)
-        : setPercentComplete(Math.round((progress / timeTarget) * 100))
+        : setPercentComplete(Math.round((progress / goal.target) * 100))
       // Rounding not exact but works for current need
     }
-  }, [progress, timeTarget])
+  }, [progress, goal.target])
 
   // Edit local storage
   const editLocalStorage = (id: string, action: string): void => {
@@ -72,7 +72,7 @@ export default function Activity(props: Props): JSX.Element {
   }
 
   const add = (id: string) => {
-    if (progress < timeTarget) {
+    if (progress < goal.target) {
       editLocalStorage(id, 'add')
       setProgress(progress + 1)
     }
@@ -87,7 +87,7 @@ export default function Activity(props: Props): JSX.Element {
   }
 
   useEffect(() => {
-    if (progress >= timeTarget) {
+    if (progress >= goal.target) {
       setCompleted(true)
     } else {
       setCompleted(false)
@@ -98,7 +98,7 @@ export default function Activity(props: Props): JSX.Element {
     <Paper
       elevation={14}
       sx={{ padding: ' 2em', borderRadius: '30px', margin: '1rem' }}
-      key={props.items.id}
+      key={goal.id}
     >
       <Grid
         container
@@ -119,10 +119,10 @@ export default function Activity(props: Props): JSX.Element {
             fontSize: '2rem',
           }}
         >
-          {activity}
+          {goal.activity}
         </Grid>
         <Grid item xs={2.5} sx={{ fontSize: '1rem' }}>
-          Target: {timeTarget} Hours
+          Target: {goal.target} Hours
         </Grid>
         <Grid item xs={2.5} sx={{ fontSize: '1rem' }}>
           Days Remaining: {duration}
@@ -144,7 +144,7 @@ export default function Activity(props: Props): JSX.Element {
         </Grid>
         <Grid item xs={6} sx={{ fontSize: '2rem' }}>
           <Button
-            onClick={() => add(props.items.id)}
+            onClick={() => add(goal.id)}
             variant="contained"
             color="secondary"
             sx={{
@@ -160,7 +160,7 @@ export default function Activity(props: Props): JSX.Element {
         </Grid>
         <Grid item xs={6} sx={{ fontSize: '2rem' }}>
           <Button
-            onClick={() => subtract(props.items.id)}
+            onClick={() => subtract(goal.id)}
             variant="contained"
             color="secondary"
             sx={{
@@ -203,8 +203,8 @@ export default function Activity(props: Props): JSX.Element {
           </Button>
         </Grid>
         <Grid item xs={6} sx={{ fontSize: '2rem' }}>
-          <Button
-            onClick={() => handleRemove(props.items.id)}
+          {/* <Button
+            onClick={() => handleRemove(goal.id)}
             variant="outlined"
             color="secondary"
             sx={{
@@ -216,7 +216,7 @@ export default function Activity(props: Props): JSX.Element {
             }}
           >
             Delete
-          </Button>
+          </Button> */}
         </Grid>
       </Grid>
     </Paper>

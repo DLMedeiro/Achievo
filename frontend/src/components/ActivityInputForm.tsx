@@ -99,7 +99,7 @@ export default function ActivityInputForm() {
       target: data.target,
     }
     dispatch(createGoal(goalData))
-    // navigate('/activities')
+    navigate('/activities')
   }
 
   // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

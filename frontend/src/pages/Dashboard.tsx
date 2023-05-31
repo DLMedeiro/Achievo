@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { RootState } from '../app/store'
 import Spinner from '../components/Spinner'
 import { getGoals, reset } from '../features/goals/goalSlice'
-import ActivityItem from '../components/ActivityItem'
+import Activity from '../components/Activity'
 import ActivityInputForm from '../components/ActivityInputForm'
 
 function Dashboard() {
@@ -77,9 +77,9 @@ function Dashboard() {
       <section className="content">
         {goals && goals.length > 0 ? (
           <div className="goals">
-            {/* {goals.map((goal) => (
-              <ActivityItem key={goal._id} goal={goal} />
-            ))} */}
+            {goals.map((goal) => (
+              <Activity key={goal._id} goal={goal} />
+            ))}
           </div>
         ) : (
           <h3>You have not set any goals</h3>
