@@ -7,8 +7,19 @@ import { Grid, Paper } from '@mui/material'
 // import MUILink from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+import Spinner from '../components/Spinner'
+import { useAppSelector, useAppDispatch } from '../app/hooks'
+import { RootState } from '../app/store'
 
 export default function LoginForm(): JSX.Element {
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
+    (state: RootState) => state.auth,
+  )
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
   return (
     <Grid container spacing={3} sx={{ padding: '78px 0' }}>
       <Grid item xs={4}></Grid>

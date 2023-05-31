@@ -25,7 +25,6 @@ import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { toast } from 'react-toastify'
 import { login, reset } from '../features/auth/authSlice'
 import { RootState } from '../app/store'
-import Spinner from '../components/Spinner'
 
 // const theme = createTheme()
 
@@ -85,18 +84,6 @@ export default function Login() {
     }
     dispatch(login(userData))
   }
-
-  if (isLoading) {
-    return <Spinner />
-  }
-
-  // useEffect(() => {
-  //   {
-  //     if (loginStatus) {
-  //       return navigate('/homepage')
-  //     }
-  //   }
-  // }, [loginStatus])
 
   // Add error handling within the signup form
   return (

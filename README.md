@@ -1,4 +1,6 @@
 # Notes
+confirm and fix login and log out functionality
+
 used Insomnia to test out and debug API connections and responses
 used Mongo DB compass to test out database connection and available values 
 
