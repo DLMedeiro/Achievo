@@ -5,7 +5,7 @@ import dayjs, { Dayjs } from 'dayjs'
 import Paper from '@mui/material/Paper'
 import '../styles/App.css'
 import Button from '@mui/material/Button'
-import { useAppDispatch } from '../app/hooks'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { deleteGoal, updateProgress } from '../features/goals/goalSlice'
 // import AddSubtract from './AddSubtract' -> Bring back after removing local state dependency
 
@@ -20,7 +20,7 @@ export default function Activity({ goal }: any) {
   const [completed, setCompleted] = useState(false)
   // const [activity, setActivity] = useState(props.items.activity)
   // const [timeTarget, setTimeTarget] = useState(props.items.target)
-  const [progress, setProgress] = useState(0)
+  const [progress, setProgress] = useState(goal.progress)
   // const [start, setStart] = useState(props.items.start)
   // const [end, setEnd] = useState(props.items.end)
   const [duration, setDuration] = React.useState<number>()
@@ -57,44 +57,38 @@ export default function Activity({ goal }: any) {
   }, [progress, goal.target])
 
   // Edit local storage
-  const editLocalStorage = (id: string, action: string): void => {
-    let savedTasks = JSON.parse(localStorage.getItem('savedTasks') || '')
-    for (let i = 0; i < savedTasks.length; i++) {
-      if (savedTasks[i].id == id) {
-        // retrieve the task and convert to JS
-        // modify the object, convert it to a string and replace the existing item
-        if (action == 'add') {
-          savedTasks[i].progress += 1
-        } else {
-          savedTasks[i].progress -= 1
-        }
-      }
-      localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
-    }
-  }
-
-  const add = (id: string) => {
-    if (progress < goal.target) {
-      editLocalStorage(id, 'add')
-      setProgress(progress + 1)
-    }
-  }
-
-  const subtract = (id: string) => {
-    if (progress > 0) {
-      editLocalStorage(id, 'subtract')
-      setProgress(progress - 1)
-    }
-    // Add alert when time can no longer be removed
-  }
+  // const editLocalStorage = (id: string, action: string): void => {
+  //   let savedTasks = JSON.parse(localStorage.getItem('savedTasks') || '')
+  //   for (let i = 0; i < savedTasks.length; i++) {
+  //     if (savedTasks[i].id == id) {
+  //       // retrieve the task and convert to JS
+  //       // modify the object, convert it to a string and replace the existing item
+  //       if (action == 'add') {
+  //         savedTasks[i].progress += 1
+  //       } else {
+  //         savedTasks[i].progress -= 1
+  //       }
+  //     }
+  //     localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
+  //   }
+  // }
 
   useEffect(() => {
-    if (progress >= goal.target) {
+    if (goal.progress >= goal.target) {
       setCompleted(true)
     } else {
       setCompleted(false)
     }
-  }, [progress])
+  }, [goal.progress])
+
+  const addProgress = () => {
+    dispatch(updateProgress({ id: goal._id, change: 'add' }))
+    setProgress(progress + 1)
+  }
+  const subtractProgress = () => {
+    dispatch(updateProgress({ id: goal._id, change: 'subtract' }))
+    setProgress(progress - 1)
+  }
 
   return (
     <Paper
@@ -134,7 +128,7 @@ export default function Activity({ goal }: any) {
           Days Remaining: {duration}
         </Grid>
         <Grid item xs={2.5} sx={{ fontSize: '1rem' }}>
-          Time Completed:{' '}
+          Time Completed:
           {progress > 1 ? `${progress} Hours` : `${progress} Hour`}
         </Grid>
         {/* {edit ? (
@@ -150,9 +144,7 @@ export default function Activity({ goal }: any) {
         </Grid>
         <Grid item xs={6} sx={{ fontSize: '2rem' }}>
           <Button
-            onClick={() =>
-              dispatch(updateProgress({ id: goal._id, change: 'add' }))
-            }
+            onClick={addProgress}
             variant="contained"
             color="secondary"
             sx={{
@@ -168,9 +160,7 @@ export default function Activity({ goal }: any) {
         </Grid>
         <Grid item xs={6} sx={{ fontSize: '2rem' }}>
           <Button
-            onClick={() =>
-              dispatch(updateProgress({ id: goal._id, change: 'subtract' }))
-            }
+            onClick={subtractProgress}
             variant="contained"
             color="secondary"
             sx={{

@@ -1,10 +1,16 @@
 # Notes
+
+was able to add all the connecting pieces to allow for progress to be updated.  Screen is not showing changes without a hard reload.  Common problem I've had before.
+manage progress in local state along with global state. use local state to manipulate the ui and instigate re renders when needed
+
 confirm and fix login and log out functionality
 
 used Insomnia to test out and debug API connections and responses
 used Mongo DB compass to test out database connection and available values 
 
 Learning to use React-hook-form with Material UI's Date picker -> trying out import DatePicker from "react-multi-date-picker";
+
+
 
 
 Day 12: Implement tutorial learnings to create backend database and API
