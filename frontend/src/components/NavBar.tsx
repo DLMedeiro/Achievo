@@ -12,7 +12,7 @@ import { RootState } from '../app/store'
 
 import { useNavigate } from 'react-router-dom'
 
-import MoodBadIcon from '@mui/icons-material/MoodBad'
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt'
 export default function NavBar() {
   const { user, isLoading, isError, isSuccess, message } = useAppSelector(
     (state: RootState) => state.auth,
@@ -35,10 +35,10 @@ export default function NavBar() {
           color="inherit"
           aria-label="logo"
         >
-          <MoodBadIcon />
+          <ThumbUpOffAltIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Boredly
+          Achievo
         </Typography>
         {user ? (
           <Stack direction="row" spacing={3}>
@@ -47,9 +47,6 @@ export default function NavBar() {
             </Button>
             <Button onClick={() => navigate('/activities')} color="inherit">
               Activities
-            </Button>
-            <Button onClick={() => navigate('/news')} color="inherit">
-              News
             </Button>
           </Stack>
         ) : (

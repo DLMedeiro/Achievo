@@ -1,0 +1,22 @@
+.construction{
+    color: #e8b29e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* text-align: center;
+    margin: auto; */
+    /* align-content: center; */
+}
+
+/* .construction-text{
+    position: absolute;
+    font-size: 5rem;
+    top: 35%;
+    left: 50%;
+    color: #e8b29e;
+} */
+#construction-logo{
+    font-size: 300px;
+    align-self: center;
+}

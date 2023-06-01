@@ -44,7 +44,8 @@ const setGoal = asyncHandler(async(req:any, res:any) => {
         activity:req.body.activity,
         start:req.body.start,
         end:req.body.end,
-        target: req.body.target
+        target: req.body.target,
+        progress: 0
 
     })
 
@@ -116,4 +117,51 @@ const deleteGoal = asyncHandler(async(req:any, res:any) => {
     res.status(200).json({id: req.params.id})
 })
 
-module.exports = {getGoals, setGoal, updateGoal, deleteGoal}
+// Desc: Add / Subtract from progress
+// Route: PUT /api/goals/progress/:id
+// Access: Private
+const updateProgress = asyncHandler(async(req:any, res:any) => {
+
+    const goal = await Goal.findById(req.params.id)
+
+    if(!goal){
+        res.status(400)
+        throw new Error("Goal not found")
+    }
+
+    // Check for user
+    if(!res.locals.user.id) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    // Prevent updating other id's goals
+    // user.id comes from the findById using locals
+    // goal.user = user attached to goal
+    // goal.user = objectID -> must change into a string
+    if(goal.user.toString() !== res.locals.user.id){
+        res.status(401)
+        throw new Error('User Not Authorized')
+    }
+
+    // req.body = "add" or "subtract"
+
+    if(req.body.change == "add" && goal.progress < goal.target){
+        let progressChange = {progress: goal.progress + 1}
+        const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, progressChange, {new: true})
+        res.status(200).json(updatedGoal)
+    } else if (req.body.change == "subtract" && goal.progress > 0){
+        let progressChange = {progress: goal.progress - 1}
+        const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, progressChange, {new: true})
+        res.status(200).json(updatedGoal)
+    }
+    
+
+
+    // not able to find alternative types for req and res, other option found was Express.Request / Response, but that wasn't closing out the error
+
+})
+
+
+
+module.exports = {getGoals, setGoal, updateGoal, deleteGoal, updateProgress}

@@ -90,6 +90,31 @@ export const getGoals = createAsyncThunk<
 })
 // "Use "_" if not passing in anything, but want the thinkAPI access
 
+// update progress
+// Incoming object = {id: #, change: "add" or "subtract"}
+export const updateProgress = createAsyncThunk<
+  { success: boolean },
+  object,
+  { state: RootState }
+>('goals/progress', async (changeData, thunkAPI) => {
+  // thunkAPI object has a getState method, used to get any thing from any part of state.  Using here to get auth state
+  try {
+    const state = thunkAPI.getState()
+    if (state.auth.user) {
+      const user = state.auth.user
+      // const token = user.token
+      // console.log(changeData)
+      return await goalService.updateProgress(changeData, user)
+      // getting token from user within goalService
+    }
+  } catch (error) {
+    let message
+    if (error) {
+      message = error.toString()
+    }
+  }
+})
+
 // Delete Goal
 export const deleteGoal = createAsyncThunk<
   { success: boolean },

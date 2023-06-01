@@ -8,10 +8,10 @@ import FinnModal from './components/FinnModal'
 import Home from './pages/Home'
 import ActivitiesPage from './pages/ActivitiesPage'
 import Dashboard from './pages/Dashboard'
-import NewsPage from './pages/NewsPage'
 import { v4 as uuidv4 } from 'uuid'
 import AddActivity from './components/ActivityInputForm'
 import Item from './models/Item'
+import './styles/Utilities.css'
 
 import './styles/App.css'
 import '@fontsource/roboto/300.css'
@@ -58,7 +58,6 @@ function App() {
             <Route path="/homepage" element={<HomeLoggedIn />} />
             <Route path="/createAccount" element={<CreateAccount />} />
             <Route path="/activities" element={<Dashboard />} />
-            <Route path="/news" element={<NewsPage />} />
             <Route path="/demo" element={<ActivitiesPage />} />
           </Routes>
           <FinnModal />

@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper'
 import '../styles/App.css'
 import Button from '@mui/material/Button'
 import { useAppDispatch } from '../app/hooks'
-import { deleteGoal } from '../features/goals/goalSlice'
+import { deleteGoal, updateProgress } from '../features/goals/goalSlice'
 // import AddSubtract from './AddSubtract' -> Bring back after removing local state dependency
 
 interface Props {
@@ -29,6 +29,8 @@ export default function Activity({ goal }: any) {
   // const handleRemove = (id: string): void => {
   //   props.onRemoveItem(id)
   // }
+
+  const dispatch = useAppDispatch()
 
   const setEditFunction = (): void => {
     if (edit === true) {
@@ -122,6 +124,10 @@ export default function Activity({ goal }: any) {
           {goal.activity}
         </Grid>
         <Grid item xs={2.5} sx={{ fontSize: '1rem' }}>
+          <div>Start: {new Date(goal.start).toLocaleString('en-US')}</div>
+          <div>End: {new Date(goal.end).toLocaleString('en-US')}</div>
+        </Grid>
+        <Grid item xs={2.5} sx={{ fontSize: '1rem' }}>
           Target: {goal.target} Hours
         </Grid>
         <Grid item xs={2.5} sx={{ fontSize: '1rem' }}>
@@ -144,7 +150,9 @@ export default function Activity({ goal }: any) {
         </Grid>
         <Grid item xs={6} sx={{ fontSize: '2rem' }}>
           <Button
-            onClick={() => add(goal.id)}
+            onClick={() =>
+              dispatch(updateProgress({ id: goal._id, change: 'add' }))
+            }
             variant="contained"
             color="secondary"
             sx={{
@@ -160,7 +168,9 @@ export default function Activity({ goal }: any) {
         </Grid>
         <Grid item xs={6} sx={{ fontSize: '2rem' }}>
           <Button
-            onClick={() => subtract(goal.id)}
+            onClick={() =>
+              dispatch(updateProgress({ id: goal._id, change: 'subtract' }))
+            }
             variant="contained"
             color="secondary"
             sx={{
@@ -203,8 +213,8 @@ export default function Activity({ goal }: any) {
           </Button>
         </Grid>
         <Grid item xs={6} sx={{ fontSize: '2rem' }}>
-          {/* <Button
-            onClick={() => handleRemove(goal.id)}
+          <Button
+            onClick={() => dispatch(deleteGoal(goal._id))}
             variant="outlined"
             color="secondary"
             sx={{
@@ -216,7 +226,7 @@ export default function Activity({ goal }: any) {
             }}
           >
             Delete
-          </Button> */}
+          </Button>
         </Grid>
       </Grid>
     </Paper>

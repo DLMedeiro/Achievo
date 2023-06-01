@@ -23,7 +23,7 @@ export default function Home() {
     >
       <Grid item xs={5} sx={{ fontSize: '2rem' }}>
         <h1>Looking for Motivation?</h1>
-        <p>Start tracking your progress and reaching your goals today!</p>
+        <p>Achieve your goals and tart tracking your progress today!</p>
 
         <Link to="login" style={{ textDecoration: 'none', margin: '1rem' }}>
           <Button

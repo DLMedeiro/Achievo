@@ -6,6 +6,8 @@ import Spinner from '../components/Spinner'
 import { getGoals, reset } from '../features/goals/goalSlice'
 import Activity from '../components/Activity'
 import ActivityInputForm from '../components/ActivityInputForm'
+import EngineeringIcon from '@mui/icons-material/Engineering'
+import '../styles/Utilities.css'
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -68,11 +70,15 @@ function Dashboard() {
 
   return (
     <>
+      {/* ----------------UNDER CONSTRUCTION ---------------- */}
+      <div className="construction">
+        <h1 className="construction-text">Under Construction</h1>
+        <EngineeringIcon id="construction-logo" />
+      </div>
       <section className="heading">
         <h1>Welcome {user && user.name}</h1>
       </section>
       <ActivityInputForm />
-
       {/* goals */}
       <section className="content">
         {goals && goals.length > 0 ? (

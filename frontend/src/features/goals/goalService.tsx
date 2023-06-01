@@ -31,6 +31,24 @@ const getGoals = async (user: any) => {
   return response.data
 }
 
+// Update Progress
+const updateProgress = async (changeData: any, user: any) => {
+  // token that is stored is only the token, and need to change to a Bearer token
+  //   * Not able to access token without setting user to any
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  }
+  console.log(changeData.change)
+  const response = await axios.put(
+    API_url + 'progress/' + changeData.id,
+    changeData,
+    config,
+  )
+  return response.data
+}
+
 // Delete goal
 
 const deleteGoal = async (id: string, user: any) => {
@@ -49,5 +67,6 @@ const goalService = {
   createGoal,
   getGoals,
   deleteGoal,
+  updateProgress,
 }
 export default goalService
