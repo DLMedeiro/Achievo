@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 
-import Login from './Login'
+import Login from '../components/forms/Login'
 import { Grid, Paper } from '@mui/material'
 // import MUILink from '@mui/material/Link'
 import Typography from '@mui/material/Typography'

@@ -18,14 +18,14 @@ import Divider from '@mui/material/Divider'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { useAppSelector, useAppDispatch } from '../app/hooks'
+import { useAppSelector, useAppDispatch } from '../../app/hooks'
 // useAppSelector: Select from the state
 // useAppDispatch: Dispatch a function like register, or reset
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { registerUser, reset } from '../features/auth/authSlice'
-import { RootState } from '../app/store'
-import Spinner from '../components/Spinner'
+import { registerUser, reset } from '../../features/auth/authSlice'
+import { RootState } from '../../app/store'
+import Spinner from '../Spinner'
 
 // const theme = createTheme()
 

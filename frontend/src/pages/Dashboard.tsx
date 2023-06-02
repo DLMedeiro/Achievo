@@ -5,7 +5,7 @@ import { RootState } from '../app/store'
 import Spinner from '../components/Spinner'
 import { getGoals, reset } from '../features/goals/goalSlice'
 import Activity from '../components/Activity'
-import ActivityInputForm from '../components/ActivityInputForm'
+import ActivityInputForm from '../components/forms/ActivityInputForm'
 import EngineeringIcon from '@mui/icons-material/Engineering'
 import '../styles/Utilities.css'
 

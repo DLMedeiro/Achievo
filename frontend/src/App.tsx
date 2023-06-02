@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Greeter from './components/Greeter'
 import Container from '@mui/material/Container'
-import LoginForm from './components/LoginForm'
+import LoginForm from './pages/LoginPage'
 import NavBar from './components/NavBar'
 import FinnModal from './components/FinnModal'
 import Home from './pages/Home'
-import ActivitiesPage from './pages/ActivitiesPage'
 import Dashboard from './pages/Dashboard'
 import { v4 as uuidv4 } from 'uuid'
-import AddActivity from './components/ActivityInputForm'
+import AddActivity from './components/forms/ActivityInputForm'
 import Item from './models/Item'
 import './styles/Utilities.css'
 
@@ -22,7 +21,6 @@ import CreateAccount from './pages/CreateAccount'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import HomeLoggedIn from './pages/HomeLoggedIn'
 
 const theme = createTheme({
   palette: {
@@ -55,10 +53,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/homepage" element={<HomeLoggedIn />} />
             <Route path="/createAccount" element={<CreateAccount />} />
             <Route path="/activities" element={<Dashboard />} />
-            <Route path="/demo" element={<ActivitiesPage />} />
           </Routes>
           <FinnModal />
         </Container>
