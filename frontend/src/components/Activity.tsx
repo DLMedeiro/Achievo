@@ -8,6 +8,7 @@ import Button from '@mui/material/Button'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { deleteGoal, updateProgress } from '../features/goals/goalSlice'
 // import AddSubtract from './AddSubtract' -> Bring back after removing local state dependency
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   items: Item
@@ -29,7 +30,7 @@ export default function Activity({ goal }: any) {
   // const handleRemove = (id: string): void => {
   //   props.onRemoveItem(id)
   // }
-
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   const setEditFunction = (): void => {
@@ -88,6 +89,10 @@ export default function Activity({ goal }: any) {
   const subtractProgress = () => {
     dispatch(updateProgress({ id: goal._id, change: 'subtract' }))
     setProgress(progress - 1)
+  }
+  const editActivity = () => {
+    localStorage.setItem('goal', JSON.stringify(goal))
+    navigate('/ActivityEditForm')
   }
 
   return (
@@ -188,7 +193,7 @@ export default function Activity({ goal }: any) {
         </Grid>
         <Grid item xs={6} sx={{ fontSize: '2rem' }}>
           <Button
-            onClick={setEditFunction}
+            onClick={editActivity}
             variant="outlined"
             color="secondary"
             sx={{
@@ -199,7 +204,7 @@ export default function Activity({ goal }: any) {
               width: '75%',
             }}
           >
-            Edit - inactive
+            Edit
           </Button>
         </Grid>
         <Grid item xs={6} sx={{ fontSize: '2rem' }}>

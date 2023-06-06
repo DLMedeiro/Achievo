@@ -3,11 +3,16 @@ import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
-
+import { useAppSelector } from '../app/hooks'
+import { RootState } from '../app/store'
 import HeroImage from '../images/HeroImage.jpg'
 import axios from 'axios'
 
 export default function Home() {
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
+    (state: RootState) => state.auth,
+  )
+
   return (
     <Grid
       container
@@ -25,32 +30,53 @@ export default function Home() {
         <h1>Looking for Motivation?</h1>
         <p>Achieve your goals and tart tracking your progress today!</p>
 
-        <Link to="login" style={{ textDecoration: 'none', margin: '1rem' }}>
-          <Button
-            variant="contained"
-            sx={{
-              mt: 3,
-              mb: 2,
-              borderRadius: '40px',
-              margin: '0 auto',
-            }}
+        {user ? (
+          <Link
+            to="activities"
+            style={{ textDecoration: 'none', margin: '1rem' }}
           >
-            Log In
-          </Button>
-        </Link>
-        <Link to="demo" style={{ textDecoration: 'none', margin: '1rem' }}>
-          <Button
-            variant="contained"
-            sx={{
-              mt: 3,
-              mb: 2,
-              borderRadius: '40px',
-              margin: '0 auto',
-            }}
-          >
-            Try out a demo
-          </Button>
-        </Link>
+            <Button
+              variant="contained"
+              sx={{
+                mt: 3,
+                mb: 2,
+                borderRadius: '40px',
+                margin: '0 auto',
+              }}
+            >
+              Activities
+            </Button>
+          </Link>
+        ) : (
+          <>
+            <Link to="login" style={{ textDecoration: 'none', margin: '1rem' }}>
+              <Button
+                variant="contained"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  borderRadius: '40px',
+                  margin: '0 auto',
+                }}
+              >
+                Log In
+              </Button>
+            </Link>
+            <Link to="demo" style={{ textDecoration: 'none', margin: '1rem' }}>
+              <Button
+                variant="contained"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  borderRadius: '40px',
+                  margin: '0 auto',
+                }}
+              >
+                Try out a demo
+              </Button>
+            </Link>
+          </>
+        )}
       </Grid>
       <Grid item xs={7}>
         <img src={HeroImage} alt="bored dog" style={{ width: '100%' }}></img>
