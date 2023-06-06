@@ -71,13 +71,8 @@ function Dashboard() {
 
   return (
     <>
-      {/* ----------------UNDER CONSTRUCTION ---------------- */}
-      <div className="construction">
-        <h1 className="construction-text">Under Construction</h1>
-        <EngineeringIcon id="construction-logo" />
-      </div>
       <section className="heading">
-        <h1>Welcome {user && user.name}</h1>
+        <h1>Hi {user && user.name}</h1>
       </section>
       <ActivityInputForm />
       {/* goals */}

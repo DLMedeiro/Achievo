@@ -9,9 +9,10 @@ import HeroImage from '../images/HeroImage.jpg'
 import axios from 'axios'
 import { login } from '../features/auth/authSlice'
 export default function Home() {
-  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
-    (state: RootState) => state.auth,
-  )
+  interface userState {
+    user: any
+  }
+  const { user }: userState = useAppSelector((state: RootState) => state.auth)
 
   const dispatch = useAppDispatch()
 
@@ -38,8 +39,9 @@ export default function Home() {
       }}
     >
       <Grid item xs={5} sx={{ fontSize: '2rem' }}>
-        <h1>Looking for Motivation?</h1>
-        <p>Achieve your goals and tart tracking your progress today!</p>
+        {user ? <h1>Hi {user.name}</h1> : <h1>Looking for Motivation?</h1>}
+
+        <p>Achieve your goals and start tracking your progress today!</p>
 
         {user ? (
           <Link
@@ -55,7 +57,7 @@ export default function Home() {
                 margin: '0 auto',
               }}
             >
-              Activities
+              Go to my dashboard
             </Button>
           </Link>
         ) : (
