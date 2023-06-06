@@ -9,6 +9,7 @@ import ActivityInputForm from '../components/forms/ActivityInputForm'
 import EngineeringIcon from '@mui/icons-material/Engineering'
 import '../styles/Utilities.css'
 import FinnModal from '../components/FinnModal'
+
 function Dashboard() {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -91,12 +92,12 @@ function Dashboard() {
           <h3>You have not set any goals</h3>
         )}
       </section>
-      {user.token ==
+      {/* {user.token ==
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NzI4Yjk2ZDM4ZTEyNTFmY2M1Y2M4MiIsImlhdCI6MTY4NjA4MDAyOCwiZXhwIjoxNjg4NjcyMDI4fQ.GZaTRsWj2VhesIzuDUPJSIl6kh1LIWvzwzxcRLCn4iE' ? (
         <FinnModal />
       ) : (
         ''
-      )}
+      )} */}
     </>
   )
 }

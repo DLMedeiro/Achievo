@@ -4,14 +4,15 @@ import Greeter from './components/Greeter'
 import Container from '@mui/material/Container'
 import LoginForm from './pages/LoginPage'
 import NavBar from './components/NavBar'
-
+import FinnModal from './components/FinnModal'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import { v4 as uuidv4 } from 'uuid'
 import AddActivity from './components/forms/ActivityInputForm'
 import Item from './models/Item'
 import './styles/Utilities.css'
-
+import { useAppSelector } from './app/hooks'
+import { RootState } from './app/store'
 import './styles/App.css'
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
@@ -44,8 +45,11 @@ const theme = createTheme({
 })
 
 function App() {
+  interface userState {
+    user: any
+  }
   const [listItems, setListItems] = useState<Item[]>([])
-
+  const { user }: userState = useAppSelector((state: RootState) => state.auth)
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
@@ -58,6 +62,8 @@ function App() {
             <Route path="/activities" element={<Dashboard />} />
             <Route path="/activityEditForm" element={<ActivityEditForm />} />
           </Routes>
+          {user && user._id == '64728b96d38e1251fcc5cc82' ? <FinnModal /> : ''}
+          {/* <FinnModal /> */}
         </Container>
       </ThemeProvider>
     </LocalizationProvider>

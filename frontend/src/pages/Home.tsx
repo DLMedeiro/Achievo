@@ -3,15 +3,26 @@ import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
-import { useAppSelector } from '../app/hooks'
+import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { RootState } from '../app/store'
 import HeroImage from '../images/HeroImage.jpg'
 import axios from 'axios'
-
+import { login } from '../features/auth/authSlice'
 export default function Home() {
   const { user, isLoading, isError, isSuccess, message } = useAppSelector(
     (state: RootState) => state.auth,
   )
+
+  const dispatch = useAppDispatch()
+
+  const loginDemo = () => {
+    dispatch(
+      login({
+        email: 'finn@imadog.com',
+        password: 'FinnFinn',
+      }),
+    )
+  }
 
   return (
     <Grid
@@ -62,19 +73,19 @@ export default function Home() {
                 Log In
               </Button>
             </Link>
-            <Link to="demo" style={{ textDecoration: 'none', margin: '1rem' }}>
-              <Button
-                variant="contained"
-                sx={{
-                  mt: 3,
-                  mb: 2,
-                  borderRadius: '40px',
-                  margin: '0 auto',
-                }}
-              >
-                Try out a demo
-              </Button>
-            </Link>
+
+            <Button
+              onClick={loginDemo}
+              variant="contained"
+              sx={{
+                mt: 3,
+                mb: 2,
+                borderRadius: '40px',
+                margin: '0 auto',
+              }}
+            >
+              Try out a demo
+            </Button>
           </>
         )}
       </Grid>
