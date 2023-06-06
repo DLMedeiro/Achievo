@@ -4,7 +4,7 @@ import Greeter from './components/Greeter'
 import Container from '@mui/material/Container'
 import LoginForm from './pages/LoginPage'
 import NavBar from './components/NavBar'
-import FinnModal from './components/FinnModal'
+
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import { v4 as uuidv4 } from 'uuid'
@@ -58,7 +58,6 @@ function App() {
             <Route path="/activities" element={<Dashboard />} />
             <Route path="/activityEditForm" element={<ActivityEditForm />} />
           </Routes>
-          <FinnModal />
         </Container>
       </ThemeProvider>
     </LocalizationProvider>

@@ -7,8 +7,8 @@ import {
   Button,
 } from '@mui/material'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
-import { logout } from '../features/auth/authSlice'
 import { RootState } from '../app/store'
+import { logout } from '../features/auth/authSlice'
 
 import { useNavigate } from 'react-router-dom'
 
