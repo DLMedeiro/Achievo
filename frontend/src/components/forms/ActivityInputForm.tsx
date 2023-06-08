@@ -135,24 +135,25 @@ export default function ActivityInputForm() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main">
         <CssBaseline />
         <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            width: ' 100%',
           }}
         >
           <Box
             component="form"
             noValidate
             onSubmit={handleSubmit(onSubmit)}
-            sx={{ mt: 3, marginBottom: '12px' }}
+            sx={{ mt: 2, marginBottom: '12px' }}
           >
             <Grid
               container
-              spacing={0}
+              spacing={2}
               sx={{
                 marginBottom: '16px',
                 paddingLeft: 0,
@@ -160,7 +161,7 @@ export default function ActivityInputForm() {
                 minWidth: '250px',
               }}
             >
-              <Grid item xs={12} sx={{ marginBottom: '26px' }}>
+              <Grid item xs={6}>
                 <TextField
                   required
                   fullWidth
@@ -170,7 +171,7 @@ export default function ActivityInputForm() {
                 />
                 <div style={{ color: 'red' }}>{errors.start?.message}</div>
               </Grid>
-              <Grid item xs={12} sx={{ marginBottom: '26px' }}>
+              <Grid item xs={6}>
                 <TextField
                   required
                   fullWidth
@@ -182,7 +183,7 @@ export default function ActivityInputForm() {
 
                 <div style={{ color: 'red' }}>{errors.end?.message}</div>
               </Grid>
-              <Grid item xs={12} sx={{ marginBottom: '26px' }}>
+              <Grid item xs={6}>
                 <TextField
                   required
                   fullWidth
@@ -192,7 +193,7 @@ export default function ActivityInputForm() {
                 />
                 <div style={{ color: 'red' }}>{errors.activity?.message}</div>
               </Grid>
-              <Grid item xs={12} sx={{ marginBottom: '26px' }}>
+              <Grid item xs={6}>
                 <TextField
                   required
                   fullWidth
@@ -210,8 +211,8 @@ export default function ActivityInputForm() {
                 sx={{
                   mt: 3,
                   mb: 2,
+                  mx: 'auto',
                   borderRadius: '40px',
-                  margin: '0 auto',
                   display: 'flex',
                 }}
               >
