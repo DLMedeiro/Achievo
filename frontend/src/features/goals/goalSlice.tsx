@@ -90,6 +90,29 @@ export const getGoals = createAsyncThunk<
 })
 // "Use "_" if not passing in anything, but want the thinkAPI access
 
+// update goal
+export const changeGoal = createAsyncThunk<
+  { success: boolean },
+  object,
+  { state: RootState }
+>('goals', async (goalData, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState()
+    if (state.auth.user) {
+      const user = state.auth.user
+      // const token = user.token
+      // console.log(changeData)
+      return await goalService.updateGoal(goalData, user)
+      // getting token from user within goalService
+    }
+  } catch (error) {
+    let message
+    if (error) {
+      message = error.toString()
+    }
+  }
+})
+
 // update progress
 // Incoming object = {id: #, change: "add" or "subtract"}
 export const updateProgress = createAsyncThunk<
@@ -213,6 +236,27 @@ export const goalSlice = createSlice({
       )
       .addCase(
         deleteGoal.rejected,
+        (state, action: PayloadAction<string | any>) => {
+          state.isLoading = false
+          state.isError = true
+          state.message = action.payload
+        },
+      )
+      .addCase(changeGoal.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(
+        changeGoal.fulfilled,
+        (state, action: PayloadAction<string | any>) => {
+          state.isLoading = false
+          state.isSuccess = true
+          if (state.goals) {
+            state.goals = action.payload
+          }
+        },
+      )
+      .addCase(
+        changeGoal.rejected,
         (state, action: PayloadAction<string | any>) => {
           state.isLoading = false
           state.isError = true

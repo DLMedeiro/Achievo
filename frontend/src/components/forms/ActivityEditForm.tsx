@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { RootState } from '../../app/store'
 import { useNavigate } from 'react-router-dom'
 import { createGoal } from '../../features/goals/goalSlice'
+import ReactDOM from 'react-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Container from '@mui/material/Container'
@@ -11,10 +12,19 @@ import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-
-import { Dayjs } from 'dayjs'
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import dayjs, { Dayjs } from 'dayjs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+// import DatePicker, { DateObject } from 'react-multi-date-picker'
+import type { Value } from 'react-multi-date-picker'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import { DateField } from '@mui/x-date-pickers/DateField'
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo'
+import { changeGoal } from '../../features/goals/goalSlice'
 
 const theme = createTheme({
   palette: {
@@ -26,49 +36,46 @@ const theme = createTheme({
   },
 })
 
-export default function ActivityEditForm() {
-  const [activity, setActivity] = useState<string>('')
-  const [end, setEnd] = useState<string>('')
-  const [start, setStart] = useState<string>('')
-  const [target, setTarget] = useState<string>('')
-  const [progress, setProgress] = useState<number>(0)
+// interface ListFormProps {
+//   onAddItem: (
+//     start: string,
+//     end: string,
+//     activity: string,
+//     target: number,
+//     progress: number,
+//   ) => void
+// }
 
-  useEffect(() => {
-    let changingGoal = JSON.parse(localStorage.getItem('goal') || '')
-    if (changingGoal.activity) {
-      setActivity(changingGoal.activity)
-      setEnd(changingGoal.end)
-      setStart(changingGoal.start)
-      setTarget(changingGoal.target)
-      setProgress(changingGoal.progress)
-    }
-  }, [])
+export default function ActivityInputForm() {
+  const goal = JSON.parse(localStorage.getItem('goal') || '')
 
-  console.log(activity)
-  console.log(end)
-  console.log(start)
-  console.log(target)
-  console.log(progress)
-
+  const [startValue, setStartValue] = React.useState<Dayjs | null>(
+    dayjs(goal.start),
+  )
+  const [endValue, setEndValue] = React.useState<Dayjs | null>(dayjs(goal.end))
+  // const [value, setValue] = React.useState<Dayjs | null>(null)
   interface Inputs {
-    start: string
-    end: string
+    start: Dayjs
+    end: Dayjs
     activity: string
     target: string
     progress: number
   }
 
   const InitialFormValues = {
-    start: start,
-    end: end,
-    activity: activity,
-    target: target,
-    progress: progress,
+    start: dayjs(goal.start),
+    end: dayjs(goal.end),
+    // start: dayjs(),
+    // end: dayjs(),
+    activity: goal.activity,
+    target: goal.target,
+    progress: goal.progress,
   }
 
   const schema = z.object({
-    start: z.string(),
-    end: z.string(),
+    start: z.any(),
+    end: z.any(),
+    // refactor to use only portion of date needed, so this can be more specific on the type
     activity: z.string().min(3, { message: 'Please enter your activity' }),
     target: z
       .string()
@@ -78,7 +85,6 @@ export default function ActivityEditForm() {
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const { goals } = useAppSelector((state: RootState) => state.goals)
 
   const {
     register,
@@ -89,39 +95,48 @@ export default function ActivityEditForm() {
     resolver: zodResolver(schema),
   })
 
+  // const changeEndDate = () => {
+  //   return { ...register('end') }
+  // }
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data)
     const goalData = {
-      start: data.start,
-      end: data.end,
+      id: goal._id,
+      start: startValue,
+      end: endValue,
       activity: data.activity,
       target: data.target,
       progress: data.progress,
     }
-    // dispatch(editGoal(goalData))
+    console.log(startValue)
+    dispatch(changeGoal(goalData))
     navigate('/activities')
+    localStorage.removeItem('goal')
   }
+
+  // useEffect(() => {}, [startValue])
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main">
         <CssBaseline />
         <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            width: ' 100%',
           }}
         >
           <Box
             component="form"
             noValidate
             onSubmit={handleSubmit(onSubmit)}
-            sx={{ mt: 3, marginBottom: '12px' }}
+            sx={{ mt: 2, marginBottom: '12px' }}
           >
             <Grid
               container
-              spacing={0}
+              spacing={2}
               sx={{
                 marginBottom: '16px',
                 paddingLeft: 0,
@@ -129,50 +144,38 @@ export default function ActivityEditForm() {
                 minWidth: '250px',
               }}
             >
-              <Grid item xs={12} sx={{ marginBottom: '26px' }}>
-                <p>Start Date</p>
-                <TextField
-                  defaultValue={start}
-                  required
-                  fullWidth
-                  id="start"
-                  label="Start Date"
-                  {...register('start')}
-                />
+              <Grid item xs={6}>
+                <DemoItem label="Start Date">
+                  <DatePicker
+                    value={dayjs(startValue)}
+                    onChange={(newValue) => setStartValue(newValue)}
+                  />
+                </DemoItem>
                 <div style={{ color: 'red' }}>{errors.start?.message}</div>
               </Grid>
-              <Grid item xs={12} sx={{ marginBottom: '26px' }}>
-                <p>End Date</p>
-                <TextField
-                  required
-                  fullWidth
-                  defaultValue={end}
-                  label="end"
-                  type="end"
-                  id="end"
-                  {...register('end')}
-                ></TextField>
-
+              <Grid item xs={6}>
+                <DemoItem label="Completion Date">
+                  <DatePicker
+                    value={dayjs(endValue)}
+                    onChange={(newValue) => setEndValue(newValue)}
+                  />
+                </DemoItem>
                 <div style={{ color: 'red' }}>{errors.end?.message}</div>
               </Grid>
-              <Grid item xs={12} sx={{ marginBottom: '26px' }}>
-                <p>Activity</p>
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  defaultValue={activity}
                   id="activity"
                   label="Activity"
                   {...register('activity')}
                 />
                 <div style={{ color: 'red' }}>{errors.activity?.message}</div>
               </Grid>
-              <Grid item xs={12} sx={{ marginBottom: '26px' }}>
-                <p>Target</p>
+              <Grid item xs={6}>
                 <TextField
                   required
                   fullWidth
-                  defaultValue={target}
                   label="target"
                   type="text"
                   id="target"
@@ -180,13 +183,11 @@ export default function ActivityEditForm() {
                 />
                 <div style={{ color: 'red' }}>{errors.target?.message}</div>
               </Grid>
-              <Grid item xs={12} sx={{ marginBottom: '26px' }}>
-                <p>Progress</p>
+              <Grid item xs={6}>
                 <TextField
                   required
                   fullWidth
-                  defaultValue={progress}
-                  label="Progress"
+                  label="progress"
                   type="text"
                   id="progress"
                   {...register('progress')}
@@ -200,13 +201,14 @@ export default function ActivityEditForm() {
                 sx={{
                   mt: 3,
                   mb: 2,
+                  mx: 'auto',
                   borderRadius: '40px',
-                  margin: '0 auto',
                   display: 'flex',
                 }}
               >
-                Create Goal
+                Edit Goal
               </Button>
+              {/* <p>{loginStatus}</p> */}
             </Grid>
           </Box>
         </Box>
