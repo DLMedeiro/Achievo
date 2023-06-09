@@ -55,10 +55,25 @@ function Dashboard() {
     dispatch(getGoals(user))
 
     // clear goals when the component unmounts
-    return () => {
-      dispatch(reset())
-    }
-  }, [user, navigate, isError, message, dispatch])
+    // return () => {
+    //   dispatch(reset())
+    // }
+  }, [])
+  // useEffect(() => {
+  //   if (isError) {
+  //     console.log(message)
+  //   }
+  //   if (!user) {
+  //     navigate('/login')
+  //   }
+
+  //   dispatch(getGoals(user))
+
+  //   // clear goals when the component unmounts
+  //   return () => {
+  //     dispatch(reset())
+  //   }
+  // }, [user, navigate, isError, message, dispatch])
 
   if (isLoading) {
     return <Spinner />

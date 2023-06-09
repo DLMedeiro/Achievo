@@ -46,7 +46,7 @@ export default function Activity({ goal }: any) {
 
   useEffect(() => {
     let today = dayjs().format('LL')
-    console.log(today)
+
     let hours = dayjs(goal.end).diff(today, 'hours')
     const days = Math.floor(hours / 24)
     setDuration(days)
@@ -98,7 +98,11 @@ export default function Activity({ goal }: any) {
     localStorage.setItem('goal', JSON.stringify(goal))
     navigate('/ActivityEditForm')
   }
-
+  const deleteItem = () => {
+    dispatch(deleteGoal(goal._id))
+    window.location.reload()
+    // Refactor / solve issue of component no reloading when item is deleted or addedd
+  }
   return (
     <Paper
       elevation={14}
@@ -149,7 +153,7 @@ export default function Activity({ goal }: any) {
               marginLeft: 'auto',
               width: '100%',
             }}
-            onClick={() => dispatch(deleteGoal(goal._id))}
+            onClick={deleteItem}
           />
         </Grid>
       </Grid>

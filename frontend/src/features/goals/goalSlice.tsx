@@ -181,6 +181,7 @@ export const goalSlice = createSlice({
           state.isSuccess = true
           if (state.goals) {
             state.goals.push(action.payload)
+            state.goals = state.goals
           }
         },
       )
@@ -224,7 +225,6 @@ export const goalSlice = createSlice({
           state.isLoading = false
           state.isSuccess = true
           if (state.goals) {
-            console.log(action)
             state.goals = state.goals.filter(
               (goal) => goal._id !== action.payload.id,
             )

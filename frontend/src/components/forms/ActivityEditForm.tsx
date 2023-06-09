@@ -108,8 +108,8 @@ export default function ActivityInputForm() {
       progress: data.progress,
     }
     dispatch(changeGoal(goalData))
-    navigate('/activities')
     localStorage.removeItem('goal')
+    navigate('/activities')
   }
 
   return (
