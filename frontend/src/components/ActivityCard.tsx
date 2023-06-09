@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom'
 import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline'
 
 interface Props {
   items: Item
@@ -22,6 +23,9 @@ interface Props {
 export default function Activity({ goal }: any) {
   const [edit, setEdit] = useState(false)
   const [completed, setCompleted] = useState(false)
+  const [boxShadow, setBoxShadow] = useState(
+    '0px 7px 9px -4px rgb(0 0 0 / 20%), 0px 14px 21px 2px rgb(0 0 0 / 14%), 0px 5px 26px 4px rgb(0 0 0 / 12%)',
+  )
   // const [activity, setActivity] = useState(props.items.activity)
   // const [timeTarget, setTimeTarget] = useState(props.items.target)
   const [progress, setProgress] = useState(goal.progress)
@@ -88,11 +92,25 @@ export default function Activity({ goal }: any) {
 
   const addProgress = () => {
     dispatch(updateProgress({ id: goal._id, change: 'add' }))
-    setProgress(progress + 1)
+    if (progress < goal.target) {
+      setProgress(progress + 1)
+    }
+    if (progress == goal.target - 1) {
+      setCompleted(true)
+    } else {
+      setCompleted(false)
+    }
   }
   const subtractProgress = () => {
     dispatch(updateProgress({ id: goal._id, change: 'subtract' }))
-    setProgress(progress - 1)
+    if (progress > 0) {
+      setProgress(progress - 1)
+    }
+    if (progress == goal.target) {
+      setCompleted(false)
+    } else {
+      setCompleted(false)
+    }
   }
   const editActivity = () => {
     localStorage.setItem('goal', JSON.stringify(goal))
@@ -103,10 +121,28 @@ export default function Activity({ goal }: any) {
     window.location.reload()
     // Refactor / solve issue of component no reloading when item is deleted or addedd
   }
+
+  useEffect(() => {
+    if (completed) {
+      setBoxShadow(
+        '0px 7px 9px -4px rgb(3 164 3 / 20%), 0px 14px 21px 2px rgb(3 164 3 / 14%), 0px 5px 26px 4px rgb(3 164 3 / 12%)',
+      )
+    } else {
+      setBoxShadow(
+        '0px 7px 9px -4px rgb(0 0 0 / 20%), 0px 14px 21px 2px rgb(0 0 0 / 14%), 0px 5px 26px 4px rgb(0 0 0 / 12%)',
+      )
+    }
+  }, [completed])
+
   return (
     <Paper
       elevation={14}
-      sx={{ padding: ' 2em', borderRadius: '30px', margin: '1rem' }}
+      sx={{
+        padding: ' 2em',
+        borderRadius: '30px',
+        margin: '1rem',
+        boxShadow: { boxShadow },
+      }}
       key={goal.id}
     >
       <Grid
@@ -136,7 +172,13 @@ export default function Activity({ goal }: any) {
           }}
           onClick={editActivity}
         >
-          {goal.activity}
+          {completed ? (
+            <>
+              {goal.activity} <DoneOutlineIcon />
+            </>
+          ) : (
+            <>{goal.activity}</>
+          )}
         </Grid>
         <Grid
           item
@@ -188,10 +230,6 @@ export default function Activity({ goal }: any) {
               day: 'numeric',
             })}
           </div>
-        </Grid>
-
-        <Grid item xs={12} sx={{ fontSize: '2rem' }}>
-          {completed ? <h4>Goal Achieved!</h4> : ''}{' '}
         </Grid>
       </Grid>
       <Grid
