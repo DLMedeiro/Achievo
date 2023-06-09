@@ -45,7 +45,7 @@ const setGoal = asyncHandler(async(req:any, res:any) => {
         start:req.body.start,
         end:req.body.end,
         target: req.body.target,
-        progress: 0
+        progress: "0"
 
     })
 

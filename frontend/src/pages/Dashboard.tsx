@@ -43,6 +43,9 @@ function Dashboard() {
   )
 
   // Figure out how to have the new change populate after completing the edit
+  // useEffect(() => {
+  //   window.location.reload()
+  // }, [navigate])
 
   useEffect(() => {
     if (isError) {

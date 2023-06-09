@@ -24,7 +24,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { DateField } from '@mui/x-date-pickers/DateField'
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo'
-import { changeGoal } from '../../features/goals/goalSlice'
+import { getGoals, changeGoal } from '../../features/goals/goalSlice'
 
 const theme = createTheme({
   palette: {
@@ -47,7 +47,11 @@ const theme = createTheme({
 // }
 
 export default function ActivityInputForm() {
+  interface userState {
+    user: any
+  }
   const goal = JSON.parse(localStorage.getItem('goal') || '')
+  const { user }: userState = useAppSelector((state: RootState) => state.auth)
 
   const [startValue, setStartValue] = React.useState<Dayjs | null>(
     dayjs(goal.start),
@@ -59,7 +63,7 @@ export default function ActivityInputForm() {
     end: Dayjs
     activity: string
     target: string
-    progress: number
+    progress: string
   }
 
   const InitialFormValues = {
@@ -80,7 +84,7 @@ export default function ActivityInputForm() {
     target: z
       .string()
       .min(1, { message: 'Please enter your target time commitment goal' }),
-    progress: z.number(),
+    progress: z.string(),
   })
 
   const navigate = useNavigate()
@@ -110,6 +114,7 @@ export default function ActivityInputForm() {
     dispatch(changeGoal(goalData))
     localStorage.removeItem('goal')
     navigate('/activities')
+    window.location.reload()
   }
 
   return (

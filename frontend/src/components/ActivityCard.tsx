@@ -81,6 +81,9 @@ export default function Activity({ goal }: any) {
   //     localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
   //   }
   // }
+  console.log(progress)
+  console.log(goal.target)
+  console.log(completed)
 
   useEffect(() => {
     if (goal.progress >= goal.target) {
@@ -88,7 +91,7 @@ export default function Activity({ goal }: any) {
     } else {
       setCompleted(false)
     }
-  }, [goal.progress])
+  }, [progress])
 
   const addProgress = () => {
     dispatch(updateProgress({ id: goal._id, change: 'add' }))

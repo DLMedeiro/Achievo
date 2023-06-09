@@ -251,7 +251,15 @@ export const goalSlice = createSlice({
           state.isLoading = false
           state.isSuccess = true
           if (state.goals) {
-            state.goals = state.goals
+            state.goals.map((goal) => {
+              if (goal._id === action.payload.id) {
+                return {
+                  ...goal,
+                  ...action.payload,
+                }
+              }
+              return goal
+            })
           }
         },
       )

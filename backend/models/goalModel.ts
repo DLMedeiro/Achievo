@@ -24,7 +24,7 @@ const goalSchema = new Schema({
         required: [true, 'please add a text value']
     },
     progress: {
-        type: Number,
+        type: String,
     }
 }, {
     timestamps: true
