@@ -62,8 +62,6 @@ function App() {
             <Route path="/activities" element={<Dashboard />} />
             <Route path="/activityEditForm" element={<ActivityEditForm />} />
           </Routes>
-          {user && user._id == '64728b96d38e1251fcc5cc82' ? <FinnModal /> : ''}
-          {/* <FinnModal /> */}
         </Container>
       </ThemeProvider>
     </LocalizationProvider>

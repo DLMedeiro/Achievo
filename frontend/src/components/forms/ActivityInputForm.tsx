@@ -57,8 +57,8 @@ export default function ActivityInputForm() {
   }
 
   const InitialFormValues = {
-    start: '',
-    end: '',
+    start: dayjs().format('LL'),
+    end: dayjs().format('LL'),
     // start: dayjs(),
     // end: dayjs(),
     activity: '',

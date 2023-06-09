@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { RootState } from '../app/store'
 import Spinner from '../components/Spinner'
 import { getGoals, reset } from '../features/goals/goalSlice'
-import Activity from '../components/Activity'
+import ActivityCard from '../components/ActivityCard'
 import ActivityInputForm from '../components/forms/ActivityInputForm'
 import EngineeringIcon from '@mui/icons-material/Engineering'
 import '../styles/Utilities.css'
@@ -81,19 +81,13 @@ function Dashboard() {
         {goals && goals.length > 0 ? (
           <div className="goals">
             {goals.map((goal) => (
-              <Activity key={goal._id} goal={goal} />
+              <ActivityCard key={goal._id} goal={goal} />
             ))}
           </div>
         ) : (
           <h3>You have not set any goals</h3>
         )}
       </section>
-      {/* {user.token ==
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NzI4Yjk2ZDM4ZTEyNTFmY2M1Y2M4MiIsImlhdCI6MTY4NjA4MDAyOCwiZXhwIjoxNjg4NjcyMDI4fQ.GZaTRsWj2VhesIzuDUPJSIl6kh1LIWvzwzxcRLCn4iE' ? (
-        <FinnModal />
-      ) : (
-        ''
-      )} */}
     </>
   )
 }

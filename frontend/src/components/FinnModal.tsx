@@ -28,12 +28,11 @@ export default function FinnModal() {
         alt="Finn"
         src={FinnImage}
         sx={{
-          width: 75,
-          height: 75,
-          position: 'fixed',
-          bottom: '5vh',
-          left: '95vw',
-          right: 0,
+          width: 60,
+          height: 60,
+          // position: 'fixed',
+          // bottom: '2%',
+          // left: '5%',
         }}
         onClick={handleOpen}
       />

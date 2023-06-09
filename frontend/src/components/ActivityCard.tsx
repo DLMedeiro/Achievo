@@ -9,6 +9,9 @@ import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { deleteGoal, updateProgress } from '../features/goals/goalSlice'
 // import AddSubtract from './AddSubtract' -> Bring back after removing local state dependency
 import { useNavigate } from 'react-router-dom'
+import RemoveIcon from '@mui/icons-material/Remove'
+import AddIcon from '@mui/icons-material/Add'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 interface Props {
   items: Item
@@ -43,6 +46,7 @@ export default function Activity({ goal }: any) {
 
   useEffect(() => {
     let today = dayjs().format('LL')
+    console.log(today)
     let hours = dayjs(goal.end).diff(today, 'hours')
     const days = Math.floor(hours / 24)
     setDuration(days)
@@ -115,113 +119,151 @@ export default function Activity({ goal }: any) {
       >
         <Grid
           item
-          xs={4.5}
+          xs={11}
           sx={{
             fontSize: '2rem',
+            borderBottom: '2px solid black',
+            marginBottom: '5px',
+            '&:hover': {
+              color: '#cb99d5',
+              borderBottom: '2px solid #cb99d5',
+              cursor: 'pointer',
+            },
           }}
+          onClick={editActivity}
         >
           {goal.activity}
         </Grid>
-        <Grid item xs={2.5} sx={{ fontSize: '1rem' }}>
-          <div>Start: {new Date(goal.start).toLocaleString('en-US')}</div>
-          <div>End: {new Date(goal.end).toLocaleString('en-US')}</div>
+        <Grid
+          item
+          xs={1}
+          sx={{
+            fontSize: '2rem',
+            justifyContent: 'flex-start',
+          }}
+        >
+          <DeleteForeverIcon
+            sx={{
+              fontSize: '2rem',
+              marginBottom: '5%',
+              marginLeft: 'auto',
+              width: '100%',
+            }}
+            onClick={() => dispatch(deleteGoal(goal._id))}
+          />
         </Grid>
-        <Grid item xs={2.5} sx={{ fontSize: '1rem' }}>
-          Target: {goal.target} Hours
+      </Grid>
+      <Grid
+        container
+        spacing={0}
+        direction="row"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Grid item xs={12} sx={{ fontSize: '1rem' }}>
+          <div>
+            {duration} {duration == 1 ? 'Day Remaining' : 'Days Remaining'}
+          </div>
         </Grid>
-        <Grid item xs={2.5} sx={{ fontSize: '1rem' }}>
-          Days Remaining: {duration}
+        <Grid item xs={6} sx={{ fontSize: '1rem' }}>
+          <div>
+            Start:{' '}
+            {new Date(goal.start).toLocaleString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })}
+          </div>
         </Grid>
-        <Grid item xs={2.5} sx={{ fontSize: '1rem' }}>
-          Time Completed:
-          {progress > 1 ? `${progress} Hours` : `${progress} Hour`}
+        <Grid item xs={6} sx={{ fontSize: '1rem' }}>
+          <div>
+            End:{' '}
+            {new Date(goal.end).toLocaleString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })}
+          </div>
         </Grid>
-        {/* {edit ? (
-        <ActivityEditForm
-          item={props.items}
-          updateActivity={setActivity}
-          updateTime={setTimeTarget}
-          toggle={setEditFunction}
-        />
-      ) : null} */}
+
         <Grid item xs={12} sx={{ fontSize: '2rem' }}>
           {completed ? <h4>Goal Achieved!</h4> : ''}{' '}
         </Grid>
-        <Grid item xs={6} sx={{ fontSize: '2rem' }}>
+      </Grid>
+      <Grid
+        container
+        spacing={0}
+        sx={{
+          // padding: '78px 0',
+          // height: '90vh',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Grid item xs={2} sx={{ fontSize: '2rem' }}>
           <Button
             onClick={addProgress}
             variant="contained"
             color="secondary"
             sx={{
-              mt: 3,
-              mb: 2,
+              my: 2,
               borderRadius: '40px',
-              margin: '1rem 2rem',
-              width: '75%',
+              width: '100%',
+              minWidth: '10px',
+              marginLeft: '5px',
+              maxWidth: '35px',
             }}
           >
-            ADD 1 Hour
+            <AddIcon />
           </Button>
         </Grid>
-        <Grid item xs={6} sx={{ fontSize: '2rem' }}>
+        <Grid item xs={2} sx={{ fontSize: '2rem' }}>
           <Button
             onClick={subtractProgress}
             variant="contained"
             color="secondary"
             sx={{
-              mt: 3,
-              mb: 2,
+              my: 2,
               borderRadius: '40px',
-              // border: '3px solid',
-              // borderColor: 'linear-gradient(to left,#e8b29e, #cb99d5)',
-              margin: '1rem 2rem',
-              width: '75%',
+              width: '100%',
+              minWidth: '10px',
+              maxWidth: '35px',
             }}
           >
-            SUBTRACT 1 Hour
+            <RemoveIcon />
           </Button>
         </Grid>
-        <Grid item xs={12} sx={{ fontSize: '2rem' }}>
+
+        <Grid item xs={8} sx={{ fontSize: '1rem' }}>
           <div className="progress">
             <div
               className="progress-done"
               style={{ width: `${percentComplete}%` }}
             >
-              <p style={{ marginLeft: '150px' }}>{percentComplete}%</p>
+              {percentComplete == 0 ? (
+                <p style={{ marginLeft: '50px' }}>{percentComplete}%</p>
+              ) : (
+                <p>{percentComplete}%</p>
+              )}
             </div>
           </div>
         </Grid>
-        <Grid item xs={6} sx={{ fontSize: '2rem' }}>
-          <Button
-            onClick={editActivity}
-            variant="outlined"
-            color="secondary"
-            sx={{
-              mt: 3,
-              mb: 2,
-              borderRadius: '40px',
-              margin: '1rem 2rem',
-              width: '75%',
-            }}
-          >
-            Edit
-          </Button>
+      </Grid>
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Grid item xs={12} sx={{ fontSize: '1rem' }}>
+          Time Completed:{' '}
+          {progress > 1 ? `${progress} Hours` : `${progress} Hour`}
         </Grid>
-        <Grid item xs={6} sx={{ fontSize: '2rem' }}>
-          <Button
-            onClick={() => dispatch(deleteGoal(goal._id))}
-            variant="outlined"
-            color="secondary"
-            sx={{
-              mt: 3,
-              mb: 2,
-              borderRadius: '40px',
-              margin: '1rem 2rem',
-              width: '75%',
-            }}
-          >
-            Delete
-          </Button>
+        <Grid item xs={12} sx={{ fontSize: '1rem' }}>
+          Target: {goal.target} Hours
         </Grid>
       </Grid>
     </Paper>

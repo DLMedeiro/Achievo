@@ -9,14 +9,19 @@ import {
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { RootState } from '../app/store'
 import { logout } from '../features/auth/authSlice'
+import FinnModal from '../components/FinnModal'
 
 import { useNavigate } from 'react-router-dom'
 
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt'
 export default function NavBar() {
-  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
+  interface userState {
+    user: any
+  }
+  const { isLoading, isError, isSuccess, message } = useAppSelector(
     (state: RootState) => state.auth,
   )
+  const { user }: userState = useAppSelector((state: RootState) => state.auth)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -48,6 +53,13 @@ export default function NavBar() {
             <Button onClick={() => navigate('/activities')} color="inherit">
               Activities
             </Button>
+            {user._id == '64728b96d38e1251fcc5cc82' ? (
+              <Button color="inherit">
+                <FinnModal />
+              </Button>
+            ) : (
+              ''
+            )}
           </Stack>
         ) : (
           <Stack direction="row" spacing={3}>
@@ -56,9 +68,6 @@ export default function NavBar() {
             </Button>
             <Button onClick={() => navigate('/activities')} color="inherit">
               Activities
-            </Button>
-            <Button onClick={() => navigate('/news')} color="inherit">
-              News
             </Button>
           </Stack>
         )}
