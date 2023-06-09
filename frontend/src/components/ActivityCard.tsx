@@ -174,7 +174,7 @@ export default function Activity({ goal }: any) {
         >
           {completed ? (
             <>
-              {goal.activity} <DoneOutlineIcon />
+              {goal.activity} <DoneOutlineIcon style={{ color: 'green' }} />
             </>
           ) : (
             <>{goal.activity}</>
@@ -211,19 +211,15 @@ export default function Activity({ goal }: any) {
             {duration} {duration == 1 ? 'Day Remaining' : 'Days Remaining'}
           </div>
         </Grid>
-        <Grid item xs={6} sx={{ fontSize: '1rem' }}>
+        <Grid item xs={12} sx={{ fontSize: '1rem' }}>
           <div>
             Start:{' '}
             {new Date(goal.start).toLocaleString('en-US', {
               year: 'numeric',
               month: 'short',
               day: 'numeric',
-            })}
-          </div>
-        </Grid>
-        <Grid item xs={6} sx={{ fontSize: '1rem' }}>
-          <div>
-            End:{' '}
+            })}{' '}
+            | End:{' '}
             {new Date(goal.end).toLocaleString('en-US', {
               year: 'numeric',
               month: 'short',
@@ -244,7 +240,7 @@ export default function Activity({ goal }: any) {
           justifyContent: 'center',
         }}
       >
-        <Grid item xs={2} sx={{ fontSize: '2rem' }}>
+        <Grid item xs={3} sx={{ fontSize: '2rem' }}>
           <Button
             onClick={addProgress}
             variant="contained"
@@ -254,14 +250,12 @@ export default function Activity({ goal }: any) {
               borderRadius: '40px',
               width: '100%',
               minWidth: '10px',
-              marginLeft: '5px',
+              marginRight: '5px',
               maxWidth: '35px',
             }}
           >
             <AddIcon />
           </Button>
-        </Grid>
-        <Grid item xs={2} sx={{ fontSize: '2rem' }}>
           <Button
             onClick={subtractProgress}
             variant="contained"
@@ -300,13 +294,30 @@ export default function Activity({ goal }: any) {
         alignItems="center"
         justifyContent="center"
       >
-        <Grid item xs={12} sx={{ fontSize: '1rem' }}>
-          Time Completed:{' '}
-          {progress > 1 ? `${progress} Hours` : `${progress} Hour`}
-        </Grid>
-        <Grid item xs={12} sx={{ fontSize: '1rem' }}>
-          Target: {goal.target} Hours
-        </Grid>
+        {completed ? (
+          <Grid
+            item
+            xs={12}
+            sx={{
+              fontSize: '1.2rem',
+              fontWeight: 'bold',
+              padding: '5px',
+              borderBottom: '2px solid green',
+            }}
+          >
+            {progress} of {goal.target} hour target completed!
+          </Grid>
+        ) : (
+          <Grid
+            item
+            xs={12}
+            sx={{
+              fontSize: '1rem',
+            }}
+          >
+            {progress} of {goal.target} hour target completed
+          </Grid>
+        )}
       </Grid>
     </Paper>
   )
