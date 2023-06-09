@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { RootState } from '../app/store'
@@ -36,12 +36,13 @@ function Dashboard() {
     isLoading: boolean
     message: string | undefined
   }
-  // Needed to add to allow for user.name to work -> Doesn't seem right
 
   const { user }: userState = useAppSelector((state: RootState) => state.auth)
   const { goals, isLoading, isError, message }: goalState = useAppSelector(
     (state: RootState) => state.goals,
   )
+
+  // Figure out how to have the new change populate after completing the edit
 
   useEffect(() => {
     if (isError) {

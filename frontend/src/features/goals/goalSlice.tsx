@@ -251,7 +251,7 @@ export const goalSlice = createSlice({
           state.isLoading = false
           state.isSuccess = true
           if (state.goals) {
-            state.goals = action.payload
+            state.goals = state.goals
           }
         },
       )

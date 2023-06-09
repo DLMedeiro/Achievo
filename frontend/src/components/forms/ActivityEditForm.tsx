@@ -99,7 +99,6 @@ export default function ActivityInputForm() {
   //   return { ...register('end') }
   // }
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data)
     const goalData = {
       id: goal._id,
       start: startValue,
@@ -108,13 +107,10 @@ export default function ActivityInputForm() {
       target: data.target,
       progress: data.progress,
     }
-    console.log(startValue)
     dispatch(changeGoal(goalData))
     navigate('/activities')
     localStorage.removeItem('goal')
   }
-
-  // useEffect(() => {}, [startValue])
 
   return (
     <ThemeProvider theme={theme}>
