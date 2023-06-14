@@ -3,7 +3,7 @@ import * as express from "express";
 
 const router = express.Router()
 
-const {getGoals, setGoal, updateGoal, deleteGoal, updateProgress} = require('../controllers/goalController')
+const {getSingleGoal, getGoals, setGoal, updateGoal, deleteGoal, updateProgress} = require('../controllers/goalController')
 
 const {protect} = require ("../middleware/authMiddleware")
 
@@ -12,7 +12,7 @@ router.route('/').get(protect, getGoals).post(protect, setGoal)
 // router.get('/', getGoals)
 // router.post('/', setGoal)
 
-router.route('/:id').delete(protect, deleteGoal).put( protect, updateGoal).put(protect, updateProgress)
+router.route('/:id').delete(protect, deleteGoal).put( protect, updateGoal).put(protect, updateProgress).get(protect, getSingleGoal)
 // Above code simplifies the code below
 // router.put('/:id', updateGoal)
 // router.delete('/:id', deleteGoal)

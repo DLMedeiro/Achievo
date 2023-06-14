@@ -10,6 +10,19 @@ const Goal = require('../models/goalModel')
 const User = require('../models/userModel')
 
 // Desc: Get goals
+// Route: GET /api/goals/:id
+// Access: Private
+const getSingleGoal = asyncHandler(async(req:any, res:any) => {
+    const goal = await Goal.findById(req.params.id)
+
+
+    // console.log(req.body) 
+    // shows in terminal when sending a postman request
+
+    // not able to find alternative types for req and res, other option found was Express.Request / Response, but that wasn't closing out the error
+    res.status(200).json(goal)
+})
+// Desc: Get goals
 // Route: GET /api/goals
 // Access: Private
 const getGoals = asyncHandler(async(req:any, res:any) => {
@@ -164,4 +177,4 @@ const updateProgress = asyncHandler(async(req:any, res:any) => {
 
 
 
-module.exports = {getGoals, setGoal, updateGoal, deleteGoal, updateProgress}
+module.exports = {getSingleGoal, getGoals, setGoal, updateGoal, deleteGoal, updateProgress}

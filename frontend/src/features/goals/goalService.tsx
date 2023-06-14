@@ -30,6 +30,20 @@ const updateGoal = async (goalData: any, user: any) => {
   return response.data
 }
 
+// Get goal
+const getGoal = async (id: string, user: any) => {
+  // token that is stored is only the token, and need to change to a Bearer token
+  //   * Not able to access token without setting user to any
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  }
+  const response = await axios.get(API_url + id, config)
+
+  return response.data
+}
+
 // Get goals
 const getGoals = async (user: any) => {
   // token that is stored is only the token, and need to change to a Bearer token
@@ -77,6 +91,7 @@ const deleteGoal = async (id: string, user: any) => {
 }
 const goalService = {
   createGoal,
+  getGoal,
   getGoals,
   deleteGoal,
   updateGoal,
