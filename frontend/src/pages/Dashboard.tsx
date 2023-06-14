@@ -4,8 +4,8 @@ import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { RootState } from '../app/store'
 import Spinner from '../components/Spinner'
 import { getGoals, reset } from '../features/goals/goalSlice'
-import ActivityCard from '../components/ActivityCard'
-import ActivityInputForm from '../components/forms/ActivityInputForm'
+import GoalCard from '../components/GoalCard'
+import GoalInputForm from '../components/forms/GoalInputForm'
 import EngineeringIcon from '@mui/icons-material/Engineering'
 import '../styles/Utilities.css'
 import FinnModal from '../components/FinnModal'
@@ -47,21 +47,6 @@ function Dashboard() {
   //   window.location.reload()
   // }, [navigate])
 
-  useEffect(() => {
-    if (isError) {
-      console.log(message)
-    }
-    if (!user) {
-      navigate('/login')
-    }
-
-    dispatch(getGoals(user))
-
-    // clear goals when the component unmounts
-    // return () => {
-    //   dispatch(reset())
-    // }
-  }, [])
   // useEffect(() => {
   //   if (isError) {
   //     console.log(message)
@@ -73,10 +58,25 @@ function Dashboard() {
   //   dispatch(getGoals(user))
 
   //   // clear goals when the component unmounts
-  //   return () => {
-  //     dispatch(reset())
-  //   }
-  // }, [user, navigate, isError, message, dispatch])
+  //   // return () => {
+  //   //   dispatch(reset())
+  //   // }
+  // }, [])
+  useEffect(() => {
+    if (isError) {
+      console.log(message)
+    }
+    if (!user) {
+      navigate('/login')
+    }
+
+    dispatch(getGoals(user))
+
+    // clear goals when the component unmounts
+    return () => {
+      dispatch(reset())
+    }
+  }, [user, navigate, isError, message, dispatch])
 
   if (isLoading) {
     return <Spinner />
@@ -91,15 +91,15 @@ function Dashboard() {
   return (
     <>
       <section className="heading">
-        <h1>Hi {user && user.name}</h1>
+        <h1>Welcome Back {user && user.name}!</h1>
       </section>
-      <ActivityInputForm />
+      <GoalInputForm />
       {/* goals */}
       <section className="content">
         {goals && goals.length > 0 ? (
           <div className="goals">
             {goals.map((goal) => (
-              <ActivityCard key={goal._id} goal={goal} />
+              <GoalCard key={goal._id} goal={goal} />
             ))}
           </div>
         ) : (

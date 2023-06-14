@@ -51,7 +51,7 @@ export default function NavBar() {
               Logout
             </Button>
             <Button onClick={() => navigate('/activities')} color="inherit">
-              Activities
+              Goals
             </Button>
             {user._id == '64728b96d38e1251fcc5cc82' ? (
               <Button color="inherit">
@@ -65,9 +65,6 @@ export default function NavBar() {
           <Stack direction="row" spacing={3}>
             <Button onClick={() => navigate('/login')} color="inherit">
               Login
-            </Button>
-            <Button onClick={() => navigate('/activities')} color="inherit">
-              Activities
             </Button>
           </Stack>
         )}

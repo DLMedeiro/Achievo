@@ -8,7 +8,6 @@ import FinnModal from './components/FinnModal'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import { v4 as uuidv4 } from 'uuid'
-import AddActivity from './components/forms/ActivityInputForm'
 import Item from './models/Item'
 import './styles/Utilities.css'
 import { useAppSelector } from './app/hooks'
@@ -22,7 +21,7 @@ import CreateAccount from './pages/CreateAccount'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import ActivityEditForm from './components/forms/ActivityEditForm'
+import GoalEditForm from './components/forms/GoalEditForm'
 
 const theme = createTheme({
   palette: {
@@ -60,7 +59,7 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/createAccount" element={<CreateAccount />} />
             <Route path="/activities" element={<Dashboard />} />
-            <Route path="/activityEditForm" element={<ActivityEditForm />} />
+            <Route path="/goalEditForm" element={<GoalEditForm />} />
           </Routes>
         </Container>
       </ThemeProvider>

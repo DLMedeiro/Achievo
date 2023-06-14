@@ -48,8 +48,14 @@ export default function FinnModal() {
         }}
       >
         <Box sx={modalStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h2" component="h2">
             Hi! I'm Finn.
+          </Typography>
+          <Typography id="modal-modal-title" variant="h6" component="h6">
+            Feel free to browse my Dashboard of goals.
+          </Typography>
+          <Typography id="modal-modal-title" variant="h6" component="h6">
+            You can add or edit them too!
           </Typography>
           <img
             id="modal-description"
