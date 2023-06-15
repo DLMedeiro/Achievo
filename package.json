@@ -44,7 +44,8 @@
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "renderStart": "npm install --prefix frontend && npm run build --prefix frontend"
   },
   "eslintConfig": {
     "extends": [
