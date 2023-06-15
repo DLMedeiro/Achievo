@@ -57,13 +57,19 @@ export default function ActivityInputForm() {
     dayjs(goal.start),
   )
   const [endValue, setEndValue] = React.useState<Dayjs | null>(dayjs(goal.end))
+  const [changingTarget, setChangingTarget] = React.useState<number>(
+    goal.target,
+  )
+  const [changingProgress, setChangingProgress] = React.useState<number>(
+    goal.target,
+  )
   // const [value, setValue] = React.useState<Dayjs | null>(null)
   interface Inputs {
     start: Dayjs
     end: Dayjs
     activity: string
-    target: string
-    progress: string
+    target: number
+    progress: number
   }
 
   const InitialFormValues = {
@@ -81,10 +87,15 @@ export default function ActivityInputForm() {
     end: z.any(),
     // refactor to use only portion of date needed, so this can be more specific on the type
     activity: z.string().min(3, { message: 'Please enter your activity' }),
-    target: z
-      .string()
-      .min(1, { message: 'Please enter your target time commitment goal' }),
-    progress: z.string(),
+    target: z.number().nonnegative().min(changingProgress, {
+      message: 'Value can not be less than your current progress',
+    }),
+    progress: z
+      .number()
+      .gte(0, { message: 'Value can not be less than 0' })
+      .lte(changingTarget, {
+        message: 'Value can not be larger than your target',
+      }),
   })
 
   const navigate = useNavigate()
@@ -178,9 +189,14 @@ export default function ActivityInputForm() {
                   required
                   fullWidth
                   label="target"
-                  type="text"
+                  type="number"
                   id="target"
-                  {...register('target')}
+                  {...register('target', {
+                    valueAsNumber: true,
+                    onChange: (e) => {
+                      setChangingTarget(e.target)
+                    },
+                  })}
                 />
                 <div style={{ color: 'red' }}>{errors.target?.message}</div>
               </Grid>
@@ -189,9 +205,14 @@ export default function ActivityInputForm() {
                   required
                   fullWidth
                   label="progress"
-                  type="text"
+                  type="number"
                   id="progress"
-                  {...register('progress')}
+                  {...register('progress', {
+                    valueAsNumber: true,
+                    onChange: (e) => {
+                      setChangingProgress(e.target)
+                    },
+                  })}
                 />
                 <div style={{ color: 'red' }}>{errors.progress?.message}</div>
               </Grid>
