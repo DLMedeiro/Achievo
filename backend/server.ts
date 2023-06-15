@@ -2,8 +2,8 @@
 // If changes are made to this file, the server needs to be reset
 
 // backend web framework
-// const express = require("express");
-import express from 'express'
+const express = require("express");
+// import express from 'express'
 const path = require('path')
 // Bring in environment variables
 const dotenv = require("dotenv").config();
