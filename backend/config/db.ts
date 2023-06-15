@@ -3,6 +3,8 @@
 
 import {  connect } from 'mongoose';
 
+// const mongoose = require ('mongoose')
+
 const connectDB = async() => {
     try {
         // Typescript adjustment to account for a chance process.env is undefined
@@ -20,4 +22,5 @@ const connectDB = async() => {
 }
 
 module.exports = connectDB
+// export default connectDB
 

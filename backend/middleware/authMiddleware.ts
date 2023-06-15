@@ -5,7 +5,7 @@ const asyncHandler = require('express-async-handler')
 
 const User = require('../models/userModel')
 
-const protect = asyncHandler(async(req, res, next) => {
+const protect = asyncHandler(async(req:any, res:any, next:any) => {
     let token;
 
     //  Check the http header if the authorization header is present and starts with "Bearer" (when the token is sent in the authorization header it is formatted as "Bearer token")
