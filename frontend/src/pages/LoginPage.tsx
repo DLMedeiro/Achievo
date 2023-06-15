@@ -63,7 +63,10 @@ export default function LoginForm(): JSX.Element {
             Don't feel like creating and account? Have fun with Finn's account.
           </Typography>
           <Typography variant="body2" color="text.secondary" align="center">
-            Email: finn@imadog.com Password: bark
+            Email: finn@imadog.com
+          </Typography>
+          <Typography variant="body2" color="text.secondary" align="center">
+            Password: FinnFinn
           </Typography>
         </Paper>
       </Grid>

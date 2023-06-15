@@ -4,7 +4,7 @@
 // backend web framework
 // const express = require("express");
 import express from 'express'
-
+const path = require('path')
 // Bring in environment variables
 const dotenv = require("dotenv").config();
 // make sure this is called before items requiring this file are used.  ConnectDB will have an error if this requirement is after it.
@@ -33,6 +33,17 @@ app.use(cors());
 app.use("/api/goals", require('./routes/goalRoutes'));
 app.use("/api/users", require('./routes/userRoutes'));
 
+// Serve frontend
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static(path.join(__dirname, '../frontend/build')))
+  // 
+
+  app.get('*', (req, res) =>  res.sendFile(path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')))
+  // * -> any route aside from API routes and point it towards the index.html file that is in the build folder
+
+} else {
+  app.get('/', (req, res) => res.send('Please set to production'))
+}
 
 app.use(errorHandler)
 // This will overwrite the express default handler
