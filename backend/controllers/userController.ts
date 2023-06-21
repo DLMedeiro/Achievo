@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 
 import asyncHandler from 'express-async-handler'
 
-import User from '../models/userModel'
+import User from '../models/userModel.ts'
 // const User = require('../models/userModel')
 const SECRET_KEY = process.env.JWT_SECRET;
 

@@ -6,10 +6,10 @@
 import asyncHandler from 'express-async-handler'
 
 // const Goal = require('../models/goalModel')
-import Goal from '../models/goalModel'
+import Goal from '../models/goalModel.ts'
 // Has the mongoose methods to use in the database
 // const User = require('../models/userModel')
-import User from '../models/userModel'
+import User from '../models/userModel.ts'
 
 // Desc: Get goals
 // Route: GET /api/goals/:id

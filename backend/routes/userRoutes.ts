@@ -3,9 +3,9 @@ import * as express from "express";
 
 const router = express.Router()
 // const {registerUser, loginUser, getMe} = require('../controllers/userController')
-import uC from '../controllers/userController'
+import uC from '../controllers/userController.ts'
 // const {protect} = require ("../middleware/authMiddleware")
-import aM from "../middleware/authMiddleware"
+import aM from "../middleware/authMiddleware.ts"
 
 router.post('/', uC.registerUser)
 router.post('/login', uC.loginUser)

@@ -9,11 +9,11 @@ import path from 'path'
 // const path = require('path')
 // Bring in environment variables
 // const dotenv = require('dotenv').config()
-import dotenv from'dotenv'
+import dotenv from 'dotenv'
 dotenv.config()
 // make sure this is called before items requiring this file are used.  ConnectDB will have an error if this requirement is after it.
 
-import connectDB from './config/db'
+import connectDB from './config/db.ts'
 // const connectDB = require('./config/db.ts')
 connectDB()
 
@@ -26,7 +26,7 @@ const app = express()
 import cors from 'cors'
 
 // Bring in error handler
-import errorHandler from './middleware/errorMiddleware'
+import errorHandler from './middleware/errorMiddleware.ts'
 // const errorHandler = require("./middleware/errorMiddleware");
 // changed to export default on middleware to eliminate errors when bringing the function to this file ?
 
@@ -37,8 +37,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 // when api/goals is hit on the front end, goalRoutes will respond
-app.use('/api/goals', require('./routes/goalRoutes'))
-app.use('/api/users', require('./routes/userRoutes'))
+import goalRoutes from './routes/goalRoutes.ts'
+import userRoutes from './routes/userRoutes.ts'
+app.use('/api/goals', goalRoutes)
+app.use('/api/users', userRoutes)
 
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {

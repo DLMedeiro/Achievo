@@ -4,10 +4,10 @@ import * as express from "express";
 const router = express.Router()
 
 // const {getSingleGoal, getGoals, setGoal, updateGoal, deleteGoal, updateProgress} = require('../controllers/goalController')
-import GC from '../controllers/goalController'
+import GC from '../controllers/goalController.ts'
 
 // const {protect} = require ("../middleware/authMiddleware")
-import aM from "../middleware/authMiddleware"
+import aM from "../middleware/authMiddleware.ts"
 
 router.route('/').get(aM.protect, GC.getGoals).post(aM.protect, GC.setGoal)
 // Above code simplifies the code below
