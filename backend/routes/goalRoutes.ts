@@ -21,4 +21,5 @@ router.route('/:id').delete(aM.protect, GC.deleteGoal).put( aM.protect, GC.updat
 
 router.route('/progress/:id').put(aM.protect, GC.updateProgress)
 
-module.exports = router
+// module.exports = router
+export default router

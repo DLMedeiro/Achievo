@@ -12,4 +12,5 @@ router.post('/login', uC.loginUser)
 router.get('/me', aM.protect, uC.getMe)
 
 
-module.exports = router
+// module.exports = router
+export default router
