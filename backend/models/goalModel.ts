@@ -1,5 +1,5 @@
-// import { Schema, model , Types} from 'mongoose';
-const {Schema, model , Types} = require("mongoose");
+import { Schema, model , Types} from 'mongoose';
+// const {Schema, model , Types} = require("mongoose");
 
 const goalSchema = new Schema({
     user: {
@@ -32,4 +32,5 @@ const goalSchema = new Schema({
     // Will create an updated at and created at field automatically
 })
 
-module.exports = model("Goal", goalSchema)
+// module.exports = model("Goal", goalSchema)
+export default model("Goal", goalSchema)

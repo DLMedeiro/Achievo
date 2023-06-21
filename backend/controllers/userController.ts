@@ -5,8 +5,8 @@ import bcrypt from 'bcrypt'
 
 import asyncHandler from 'express-async-handler'
 
-// import User from '../models/userModel'
-const User = require('../models/userModel')
+import User from '../models/userModel'
+// const User = require('../models/userModel')
 const SECRET_KEY = process.env.JWT_SECRET;
 
 // Generate JWT -> create a JWT_Secret in .env
@@ -77,6 +77,9 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
         const user = await User.findOne({email})
 
             // Check the password using bcrypt method to compare password input with hashed password
+        if(user && user.password){
+
+     
     if (user && (await bcrypt.compare(password, user.password))){
         res.json({
             _id: user.id,
@@ -88,20 +91,25 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
         res.status(400)
         throw new Error('Invalid credentials')
     }
+}
 })
 
 // Description: Get user data
 // Route: GET api/users/me
 // Access: Private -> use middleware to accomplish -> during the request response cycle middleware will check the token
 const getMe =  asyncHandler(async(req:any, res:any) => {
-    const {_id, name, email} = await User.findById(res.locals.user.id)
+    const user = await User.findById(res.locals.user.id)
     // Using res.locals because req.user.id shown in tutorial was not working
+if(user){
+
 
     res.status(200).json({
-        id:_id,
-        name:name, 
-        email: email
+        id:user._id,
+        name:user.name, 
+        email: user.email
     })
+}
 })
 
-module.exports = { registerUser, loginUser, getMe}
+export default { registerUser, loginUser, getMe}
+// module.exports = { registerUser, loginUser, getMe}

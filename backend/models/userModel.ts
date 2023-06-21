@@ -6,6 +6,9 @@ import { Schema, model} from 'mongoose';
 
 const userSchema = new Schema(
   {
+    _id:{
+      type: String,
+    },
     name: {
       type: String,
       required: [true, "Please add a name"],
@@ -26,4 +29,5 @@ const userSchema = new Schema(
   }
 );
 
-module.exports = model("User", userSchema)
+// module.exports = model("User", userSchema)
+export default model("User", userSchema)

@@ -1,8 +1,8 @@
 // Use this file to connect to mongoDB using mongoose
 // All mongoose methods return a promise to async is required for all functions
 
-// import {  connect } from 'mongoose';
-const {connect} = require("mongoose");
+import {  connect } from 'mongoose';
+// const {connect} = require("mongoose");
 
 // const mongoose = require ('mongoose')
 
@@ -22,6 +22,6 @@ const connectDB = async() => {
     }
 }
 
-module.exports = connectDB
-// export default connectDB
+// module.exports = connectDB
+export default connectDB
 

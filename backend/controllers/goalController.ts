@@ -5,9 +5,11 @@
 // const asyncHandler = require('express-async-handler')
 import asyncHandler from 'express-async-handler'
 
-const Goal = require('../models/goalModel')
+// const Goal = require('../models/goalModel')
+import Goal from '../models/goalModel'
 // Has the mongoose methods to use in the database
-const User = require('../models/userModel')
+// const User = require('../models/userModel')
+import User from '../models/userModel'
 
 // Desc: Get goals
 // Route: GET /api/goals/:id
@@ -75,27 +77,29 @@ const updateGoal = asyncHandler(async(req:any, res:any) => {
     if(!goal){
         res.status(400)
         throw new Error("Goal not found")
+    } else {
+ // Check for user
+ if(!res.locals.user.id) {
+    res.status(401)
+    throw new Error('User not found')
+}
+
+// Prevent updating other id's goals
+// user.id comes from the findById using locals
+// goal.user = user attached to goal
+// goal.user = objectID -> must change into a string
+if(goal.user.toString() !== res.locals.user.id){
+    res.status(401)
+    throw new Error('User Not Authorized')
+}
+
+const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {new: true})
+
+// not able to find alternative types for req and res, other option found was Express.Request / Response, but that wasn't closing out the error
+res.status(200).json(updatedGoal)
     }
 
-    // Check for user
-    if(!res.locals.user.id) {
-        res.status(401)
-        throw new Error('User not found')
-    }
-
-    // Prevent updating other id's goals
-    // user.id comes from the findById using locals
-    // goal.user = user attached to goal
-    // goal.user = objectID -> must change into a string
-    if(goal.user.toString() !== res.locals.user.id){
-        res.status(401)
-        throw new Error('User Not Authorized')
-    }
-
-    const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {new: true})
-
-    // not able to find alternative types for req and res, other option found was Express.Request / Response, but that wasn't closing out the error
-    res.status(200).json(updatedGoal)
+   
 })
 
 // Desc: Delete goals
@@ -105,7 +109,9 @@ const deleteGoal = asyncHandler(async(req:any, res:any) => {
 
     const goal = await Goal.findById(req.params.id)
 
+    if (goal){
 
+    
     // Check for user
     if(!res.locals.user.id) {
         res.status(401)
@@ -128,6 +134,7 @@ const deleteGoal = asyncHandler(async(req:any, res:any) => {
 
     // not able to find alternative types for req and res, other option found was Express.Request / Response, but that wasn't closing out the error
     res.status(200).json({id: req.params.id})
+}
 })
 
 // Desc: Add / Subtract from progress
@@ -140,7 +147,9 @@ const updateProgress = asyncHandler(async(req:any, res:any) => {
     if(!goal){
         res.status(400)
         throw new Error("Goal not found")
-    }
+    } 
+
+    if(goal && goal.progress && goal.target){
 
     // Check for user
     if(!res.locals.user.id) {
@@ -172,9 +181,10 @@ const updateProgress = asyncHandler(async(req:any, res:any) => {
 
 
     // not able to find alternative types for req and res, other option found was Express.Request / Response, but that wasn't closing out the error
-
+    }
 })
 
 
 
-module.exports = {getSingleGoal, getGoals, setGoal, updateGoal, deleteGoal, updateProgress}
+// module.exports = {getSingleGoal, getGoals, setGoal, updateGoal, deleteGoal, updateProgress}
+export default {getSingleGoal, getGoals, setGoal, updateGoal, deleteGoal, updateProgress}

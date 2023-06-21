@@ -3,20 +3,22 @@ import * as express from "express";
 
 const router = express.Router()
 
-const {getSingleGoal, getGoals, setGoal, updateGoal, deleteGoal, updateProgress} = require('../controllers/goalController')
+// const {getSingleGoal, getGoals, setGoal, updateGoal, deleteGoal, updateProgress} = require('../controllers/goalController')
+import GC from '../controllers/goalController'
 
-const {protect} = require ("../middleware/authMiddleware")
+// const {protect} = require ("../middleware/authMiddleware")
+import aM from "../middleware/authMiddleware"
 
-router.route('/').get(protect, getGoals).post(protect, setGoal)
+router.route('/').get(aM.protect, GC.getGoals).post(aM.protect, GC.setGoal)
 // Above code simplifies the code below
 // router.get('/', getGoals)
 // router.post('/', setGoal)
 
-router.route('/:id').delete(protect, deleteGoal).put( protect, updateGoal).put(protect, updateProgress).get(protect, getSingleGoal)
+router.route('/:id').delete(aM.protect, GC.deleteGoal).put( aM.protect, GC.updateGoal).put(aM.protect, GC.updateProgress).get(aM.protect, GC.getSingleGoal)
 // Above code simplifies the code below
 // router.put('/:id', updateGoal)
 // router.delete('/:id', deleteGoal)
 
-router.route('/progress/:id').put(protect, updateProgress)
+router.route('/progress/:id').put(aM.protect, GC.updateProgress)
 
 module.exports = router
