@@ -1,5 +1,7 @@
 # Notes
 
+cannot use import statement outside a module -> add "type":"module" to json
+
 update scheme with numbers and strings
 
 was able to add all the connecting pieces to allow for progress to be updated.  Screen is not showing changes without a hard reload.  Common problem I've had before.
