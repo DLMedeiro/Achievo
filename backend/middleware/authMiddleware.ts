@@ -1,4 +1,5 @@
-import jwt from 'jsonwebtoken'
+// import jwt from 'jsonwebtoken'
+const jwt = require("jsonwebtoken");
 
 const asyncHandler = require('express-async-handler') 
 // import asyncHandler from 'express-async-handler'
