@@ -66,6 +66,7 @@
     ]
   },
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/uuid": "^9.0.1",
     "concurrently": "^8.2.0",
     "nodemon": "^2.0.22"
