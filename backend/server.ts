@@ -21,8 +21,8 @@ const app = express()
 const cors = require('cors')
 
 // Bring in error handler
-import errorHandler from './middleware/errorMiddleware'
-// const errorHandler = require("./middleware/errorMiddleware");
+// import errorHandler from './middleware/errorMiddleware'
+const errorHandler = require("./middleware/errorMiddleware");
 // changed to export default on middleware to eliminate errors when bringing the function to this file ?
 
 // add this middleware so req.body within the controller will not show as undefined
