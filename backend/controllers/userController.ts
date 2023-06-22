@@ -13,7 +13,7 @@ const SECRET_KEY = process.env.JWT_SECRET;
 const generateToken = (id: string) => {
     // For typescript verify token is present
     if (SECRET_KEY){
-        return jwt.sign({ id }, SECRET_KEY, {expiresIn: '30d'})
+        return jwt.sign({id}, SECRET_KEY)
     }
 }
 
@@ -56,7 +56,7 @@ const registerUser = asyncHandler(async(req:any, res:any) => {
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: generateToken(user._id)
+            token: generateToken(user.id)
         })
     } else {
         res.status(400)
@@ -76,17 +76,22 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
         // Check for user email
         const user = await User.findOne({email})
 
+
             // Check the password using bcrypt method to compare password input with hashed password
         if(user && user.password){
 
+
+            
      
     if (user && (await bcrypt.compare(password, user.password))){
-        res.json({
+
+        return(res.json({
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: generateToken(user._id)
+            token: generateToken(user.id)
         })
+        )
     } else {
         res.status(400)
         throw new Error('Invalid credentials')

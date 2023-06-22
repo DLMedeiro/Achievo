@@ -6,9 +6,6 @@ import { Schema, model} from 'mongoose';
 
 const userSchema = new Schema(
   {
-    _id:{
-      type: String,
-    },
     name: {
       type: String,
       required: [true, "Please add a name"],
