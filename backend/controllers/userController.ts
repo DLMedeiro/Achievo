@@ -89,21 +89,18 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
 
             
      
-    if (SECRET_KEY && user && (await bcrypt.compare(password, user.password))){
+    if (user && (await bcrypt.compare(password, user.password))){
     // JWT malformed due to token input not being accurate
     // _id: new ObjectId("6494dd2cd06c0a6046e9662a"),
     // workaround temp solution
     // let startIndex = String(user._id).indexOf('"') + 1;
     // let endIndex = String(user._id).lastIndexOf('"');
     // let extractedString = String(user._id).slice(startIndex, endIndex);
-
-        let token = jwt.sign(user._id, SECRET_KEY)
-    
         return(res.json({
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: token
+            token: generateToken(user._id)
             // token: generateToken(user._id)
         })
         )
