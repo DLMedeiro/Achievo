@@ -80,7 +80,7 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
 
         // Check for user email
         const user = await User.findOne({email: email})
-        console.log(user)
+        // console.log(user)
         
         // Check the password using bcrypt method to compare password input with hashed password
         if(user && user.password){

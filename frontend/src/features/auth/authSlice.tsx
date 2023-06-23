@@ -64,6 +64,7 @@ export const registerUser = createAsyncThunk(
 )
 
 // Login user
+// returns email and password
 export const login = createAsyncThunk(
   'auth/login',
   async (user: object, thunkAPI) => {

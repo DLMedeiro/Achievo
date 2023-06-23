@@ -91,7 +91,7 @@ export default function ActivityInputForm() {
   //   return { ...register('end') }
   // }
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data)
+    // console.log(data)
     const goalData = {
       start: startValue,
       end: endValue,

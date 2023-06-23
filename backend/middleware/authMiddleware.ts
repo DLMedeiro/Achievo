@@ -23,7 +23,7 @@ const protect = asyncHandler(async(req:any, res:any, next:any) => {
             // Verify token and for typescript verify token is present
             // Returns payload
             let decoded;
-            console.log(token)
+            console.log(`token ${token}`)
             if (process.env.JWT_Secret){
                 decoded = jwt.verify(token, process.env.JWT_Secret)
                 console.log(decoded)
