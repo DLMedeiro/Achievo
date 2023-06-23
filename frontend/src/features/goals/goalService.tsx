@@ -56,6 +56,7 @@ const getGoals = async (user: any) => {
       Authorization: `Bearer ${user.token}`,
     },
   }
+  // console.log(user)
   const response = await axios.get(API_url, config)
 
   return response.data

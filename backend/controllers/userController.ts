@@ -7,15 +7,12 @@ import asyncHandler from 'express-async-handler'
 
 import User from '../models/userModel.ts'
 // const User = require('../models/userModel')
+
+// .env file was not being read prior to bringing this in
+import dotenv from 'dotenv'
+dotenv.config()
 const SECRET_KEY = process.env.JWT_SECRET;
 
-// Generate JWT -> create a JWT_Secret in .env
-const generateToken = (id: string) => {
-    // For typescript verify token is present
-    if (SECRET_KEY){
-        return jwt.sign({id}, SECRET_KEY)
-    }
-}
 
 
 // Description: Register a new user
@@ -35,7 +32,7 @@ const registerUser = asyncHandler(async(req:any, res:any) => {
     
 
     // check if user exists and send error if they do
-    const userExists = await User.findOne({email})
+    const userExists = await User.findOne({email: email})
     if (userExists) {
         res.status(400)
         throw new Error ('User already exists')
@@ -51,13 +48,20 @@ const registerUser = asyncHandler(async(req:any, res:any) => {
         name, email, password: hashedPassword
     })
 
+    // JWT malformed due to token input not being accurate
+    // _id: new ObjectId("6494dd2cd06c0a6046e9662a"),
+    // workaround temp solution
+    // let startIndex = String(user._id).indexOf('"') + 1;
+    // let endIndex = String(user._id).lastIndexOf('"');
+    // let extractedString = String(user._id).slice(startIndex, endIndex);
     if (user) {
         res.status(201).json({
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: generateToken(user.id)
+            token: generateToken(user._id)
         })
+
     } else {
         res.status(400)
         throw new Error('Invalid user data')
@@ -73,25 +77,33 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
     const email = req.body.email.toLowerCase()
     const password = req.body.password
 
+
         // Check for user email
-        const user = await User.findOne({email})
-
-
-            // Check the password using bcrypt method to compare password input with hashed password
+        const user = await User.findOne({email: email})
+        console.log(user)
+        
+        // Check the password using bcrypt method to compare password input with hashed password
         if(user && user.password){
+            
 
 
             
      
     if (user && (await bcrypt.compare(password, user.password))){
-
+    // JWT malformed due to token input not being accurate
+    // _id: new ObjectId("6494dd2cd06c0a6046e9662a"),
+    // workaround temp solution
+    // let startIndex = String(user._id).indexOf('"') + 1;
+    // let endIndex = String(user._id).lastIndexOf('"');
+    // let extractedString = String(user._id).slice(startIndex, endIndex);
         return(res.json({
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: generateToken(user.id)
+            token: generateToken(user._id)
         })
         )
+  
     } else {
         res.status(400)
         throw new Error('Invalid credentials')
@@ -115,6 +127,14 @@ if(user){
     })
 }
 })
+
+// Generate JWT -> create a JWT_Secret in .env
+const generateToken = (id: object) => {
+    // For typescript verify token is present
+    if (SECRET_KEY){
+        return jwt.sign({id}, SECRET_KEY)
+    }
+}
 
 export default { registerUser, loginUser, getMe}
 // module.exports = { registerUser, loginUser, getMe}

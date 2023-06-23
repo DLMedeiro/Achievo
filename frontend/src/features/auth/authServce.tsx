@@ -9,6 +9,7 @@ const API_url = 'http://localhost:5000/api/users'
 // Register user
 const register = async (userData: object) => {
   const response = await axios.post(API_url, userData)
+
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))
     // Includes token
@@ -18,6 +19,7 @@ const register = async (userData: object) => {
 // Login user
 const login = async (userData: object) => {
   const response = await axios.post(API_url + '/login', userData)
+  console.log(response.config.data)
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))
     // Includes token

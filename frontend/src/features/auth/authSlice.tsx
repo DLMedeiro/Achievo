@@ -6,7 +6,7 @@ import authService from './authServce'
 // import { boolean } from 'zod'
 
 // Get user from local storage
-// Why?
+
 const user = JSON.parse(localStorage.getItem('user')!)
 // const user = () => {
 //     if (JSON.parse(localStorage.getItem('user')) === null) {
