@@ -17,7 +17,12 @@ const user = JSON.parse(localStorage.getItem('user')!)
 // have to use parse, because localStorage only uses strings
 
 interface authState {
-  user: object | null
+  user: {
+    email: string
+    name: string
+    token: string
+    _id: string
+  } | null
   isError: boolean
   isSuccess: boolean
   isLoading: boolean

@@ -43,15 +43,21 @@ const getGoal = async (id: string, user: any) => {
     },
   }
   const response = await axios.get(API_url + id, config)
-  console.log(response.data)
+  // console.log(response.data)
 
   return response.data
 }
 
 // Get goals
-const getGoals = async (user: any) => {
+const getGoals = async (user: {
+  email: string
+  name: string
+  token: string
+  _id: string
+}) => {
   // token that is stored is only the token, and need to change to a Bearer token
   //   * Not able to access token without setting user to any
+  console.log(user.token)
   const config = {
     headers: {
       Authorization: `Bearer ${user.token}`,
