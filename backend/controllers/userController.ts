@@ -96,11 +96,14 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
     // let startIndex = String(user._id).indexOf('"') + 1;
     // let endIndex = String(user._id).lastIndexOf('"');
     // let extractedString = String(user._id).slice(startIndex, endIndex);
+
+    if (SECRET_KEY){
+        let token = jwt.sign(user._id, SECRET_KEY)
         return(res.json({
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: "test"
+            token: token
             // token: generateToken(user._id)
         })
         )
@@ -108,6 +111,7 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
     } else {
         res.status(400)
         throw new Error('Invalid credentials')
+    }
     }
 }
 })
