@@ -1,10 +1,11 @@
 // This file is for making http requests and sending the data back, and setting any data in local storage
 import axios from 'axios'
 
-const API_url = 'http://localhost:5000/api/goals/'
+// Refactor
+// const API_url = 'http://localhost:5000/api/goals/'
 // Had to include full address, otherwise the request was being called on port 3000
 // For Deployment
-// const API_url = 'https://achievo-backend.onrender.com/api/goals/'
+const API_url = 'https://achievo-backend.onrender.com/api/goals/'
 
 // Create new goal
 const createGoal = async (goalData: object, user: any) => {
