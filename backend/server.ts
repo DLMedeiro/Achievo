@@ -36,7 +36,9 @@ app.use(express.json())
 // parses urlencoded
 app.use(express.urlencoded({ extended: false }))
 app.use(cors({
-  origin: ['https://steppingstones.onrender.com','http://localhost:5000']
+  // origin: ['http://localhost:3000'],
+  origin: ['https://steppingstones.onrender.com'],
+  credentials:true,            
 }))
 // when api/goals is hit on the front end, goalRoutes will respond
 import goalRoutes from './routes/goalRoutes.ts'
