@@ -25,11 +25,11 @@ const protect = asyncHandler(async(req:any, res:any, next:any) => {
             if (process.env.JWT_Secret){
                 decoded = jwt.verify(token, process.env.JWT_Secret)
                 if (typeof decoded === "object"){  
-                   
                     // req.user = await User.findById(decoded.id).select('-password')
                     // ".select('-password') = remove password hash from the response, req.user.password will not be accessible"
                     // the token to a string to solve an issue within the userController, carrying through with the workaround, the removed portion needs to be re-added here `$new ObjectId(${decoded.id})`
                     res.locals.user =  await User.findById(decoded.id).select('-password')
+                    console.log(res.locals.user)
                     // Using res.locals because setting req.user as shown in tutorial was not working
                 }
             }

@@ -26,7 +26,7 @@ const getSingleGoal = asyncHandler(async(req:any, res:any) => {
 // Route: GET /api/goals
 // Access: Private
 const getGoals = asyncHandler(async(req:any, res:any) => {
-
+    console.log(res.locals.user.id)
     const goals = await Goal.find({user: res.locals.user.id})
     // Getting all goals for user, find is a built in mongoose method
     // shows in terminal when sending a postman request
