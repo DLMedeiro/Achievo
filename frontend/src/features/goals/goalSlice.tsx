@@ -99,8 +99,6 @@ export const getGoals = createAsyncThunk<
     const state = thunkAPI.getState()
     if (state.auth.user) {
       const user = state.auth.user
-      // console.log(`watch for this one: ${user}`)
-      // console.log(user)
       // const token = user.token
       return await goalService.getGoals(user)
     }
@@ -124,7 +122,6 @@ export const changeGoal = createAsyncThunk<
     if (state.auth.user) {
       const user = state.auth.user
       // const token = user.token
-      // console.log(changeData)
       return await goalService.updateGoal(goalData, user)
       // getting token from user within goalService
     }
@@ -149,7 +146,6 @@ export const updateProgress = createAsyncThunk<
     if (state.auth.user) {
       const user = state.auth.user
       // const token = user.token
-      // console.log(changeData)
       return await goalService.updateProgress(changeData, user)
       // getting token from user within goalService
     }

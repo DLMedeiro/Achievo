@@ -43,25 +43,7 @@ function Dashboard() {
   )
 
   // Figure out how to have the new change populate after completing the edit
-  // useEffect(() => {
-  //   window.location.reload()
-  // }, [navigate])
 
-  // useEffect(() => {
-  //   if (isError) {
-  //     console.log(message)
-  //   }
-  //   if (!user) {
-  //     navigate('/login')
-  //   }
-
-  //   dispatch(getGoals(user))
-
-  //   // clear goals when the component unmounts
-  //   // return () => {
-  //   //   dispatch(reset())
-  //   // }
-  // }, [])
   useEffect(() => {
     if (isError) {
       console.log(message)
@@ -81,12 +63,6 @@ function Dashboard() {
   if (isLoading) {
     return <Spinner />
   }
-
-  // if (goals && goals[0]) {
-  //   console.log(goals)
-  //   console.log(goals[0])
-  //   console.log(goals[0].text)
-  // }
 
   return (
     <>

@@ -115,9 +115,7 @@ export default function Activity({ goal }: any) {
   //     localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
   //   }
   // }
-  // console.log(progress)
-  // console.log(goal.target)
-  // console.log(completed)
+
 
   useEffect(() => {
     if (progress >= goal.target) {

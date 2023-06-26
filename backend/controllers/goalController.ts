@@ -17,8 +17,6 @@ import User from '../models/userModel.ts'
 const getSingleGoal = asyncHandler(async(req:any, res:any) => {
     const goal = await Goal.findById(req.params.id)
 
-
-    // console.log(req.body) 
     // shows in terminal when sending a postman request
 
     // not able to find alternative types for req and res, other option found was Express.Request / Response, but that wasn't closing out the error
@@ -31,8 +29,6 @@ const getGoals = asyncHandler(async(req:any, res:any) => {
 
     const goals = await Goal.find({user: res.locals.user.id})
     // Getting all goals for user, find is a built in mongoose method
-
-    // console.log(req.body) 
     // shows in terminal when sending a postman request
 
     // not able to find alternative types for req and res, other option found was Express.Request / Response, but that wasn't closing out the error
@@ -43,8 +39,6 @@ const getGoals = asyncHandler(async(req:any, res:any) => {
 // Route: POST /api/goals
 // Access: Private
 const setGoal = asyncHandler(async(req:any, res:any) => {
-    // console.log(req.body)
-    // console.log(res.locals.user.id)
 
     if(!req.body.activity || !req.body.start || !req.body.end || !req.body.target){
         // res.status(400).json({message: "Please add a text value"}) => remove and add express handler

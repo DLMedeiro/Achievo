@@ -35,11 +35,15 @@ import errorHandler from './middleware/errorMiddleware.ts'
 app.use(express.json())
 // parses urlencoded
 app.use(express.urlencoded({ extended: false }))
-app.use(cors({
-  // origin: ['http://localhost:3000'],
-  origin: ['https://steppingstones.onrender.com'],
-  credentials:true,            
-}))
+
+if(process.env.ORIGIN) {
+  console.log(process.env.ORIGIN)
+  app.use(cors({
+    origin: [process.env.ORIGIN],
+    credentials:true,            
+  }))
+
+}
 // when api/goals is hit on the front end, goalRoutes will respond
 import goalRoutes from './routes/goalRoutes.ts'
 import userRoutes from './routes/userRoutes.ts'

@@ -12,7 +12,6 @@ dotenv.config()
 
 const protect = asyncHandler(async(req:any, res:any, next:any) => {
     let token;
-    console.log(req.headers.authorization)
 
     //  Check the http header if the authorization header is present and starts with "Bearer" (when the token is sent in the authorization header it is formatted as "Bearer token")
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
@@ -23,10 +22,8 @@ const protect = asyncHandler(async(req:any, res:any, next:any) => {
             // Verify token and for typescript verify token is present
             // Returns payload
             let decoded;
-            console.log(`token ${token}`)
             if (process.env.JWT_Secret){
                 decoded = jwt.verify(token, process.env.JWT_Secret)
-                console.log(decoded)
                 if (typeof decoded === "object"){  
                    
                     // req.user = await User.findById(decoded.id).select('-password')

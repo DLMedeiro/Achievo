@@ -1,11 +1,7 @@
 // This file is for making http requests and sending the data back, and setting any data in local storage
 import axios from 'axios'
 
-// Refactor
-// const API_url = 'http://localhost:5000/api/goals/'
-// Had to include full address, otherwise the request was being called on port 3000
-// For Deployment
-const API_url = 'https://achievo-backend.onrender.com/api/goals/'
+const GOALS_URL = process.env.REACT_APP_URL_GOALS
 
 // Create new goal
 const createGoal = async (goalData: object, user: any) => {
@@ -16,9 +12,11 @@ const createGoal = async (goalData: object, user: any) => {
       Authorization: `Bearer ${user.token}`,
     },
   }
-  const response = await axios.post(API_url, goalData, config)
+  if (GOALS_URL) {
+    const response = await axios.post(GOALS_URL, goalData, config)
 
-  return response.data
+    return response.data
+  }
 }
 
 // update goal
@@ -28,7 +26,7 @@ const updateGoal = async (goalData: any, user: any) => {
       Authorization: `Bearer ${user.token}`,
     },
   }
-  const response = await axios.put(API_url + goalData.id, goalData, config)
+  const response = await axios.put(GOALS_URL + goalData.id, goalData, config)
 
   return response.data
 }
@@ -42,8 +40,7 @@ const getGoal = async (id: string, user: any) => {
       Authorization: `Bearer ${user.token}`,
     },
   }
-  const response = await axios.get(API_url + id, config)
-  // console.log(response.data)
+  const response = await axios.get(GOALS_URL + id, config)
 
   return response.data
 }
@@ -61,10 +58,11 @@ const getGoals = async (user: {
       Authorization: `Bearer ${user.token}`,
     },
   }
-  // console.log(user)
-  const response = await axios.get(API_url, config)
+  if (GOALS_URL) {
+    const response = await axios.get(GOALS_URL, config)
 
-  return response.data
+    return response.data
+  }
 }
 
 // Update Progress
@@ -77,7 +75,7 @@ const updateProgress = async (changeData: any, user: any) => {
     },
   }
   const response = await axios.put(
-    API_url + 'progress/' + changeData.id,
+    GOALS_URL + 'progress/' + changeData.id,
     changeData,
     config,
   )
@@ -94,7 +92,7 @@ const deleteGoal = async (id: string, user: any) => {
       Authorization: `Bearer ${user.token}`,
     },
   }
-  const response = await axios.delete(API_url + id, config)
+  const response = await axios.delete(GOALS_URL + id, config)
 
   return response.data
 }
