@@ -50,7 +50,7 @@ export default function NavBar() {
             <Button onClick={logoutUser} color="inherit">
               Logout
             </Button>
-            <Button onClick={() => navigate('/activities')} color="inherit">
+            <Button onClick={() => navigate('/goals')} color="inherit">
               Goals
             </Button>
             {user._id == '64728b96d38e1251fcc5cc82' ? (

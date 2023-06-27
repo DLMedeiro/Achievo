@@ -58,7 +58,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/createAccount" element={<CreateAccount />} />
-            <Route path="/activities" element={<Dashboard />} />
+            <Route path="/goals" element={<Dashboard />} />
             <Route path="/goalEditForm" element={<GoalEditForm />} />
           </Routes>
         </Container>
