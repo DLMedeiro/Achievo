@@ -63,7 +63,7 @@ export default function Login() {
       toast.error(message)
     }
     if (isSuccess || user) {
-      navigate('/activities')
+      navigate('/goals')
     }
 
     dispatch(reset())

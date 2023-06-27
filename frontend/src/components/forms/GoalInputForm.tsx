@@ -91,7 +91,6 @@ export default function ActivityInputForm() {
   //   return { ...register('end') }
   // }
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-
     const goalData = {
       start: startValue,
       end: endValue,
@@ -102,7 +101,7 @@ export default function ActivityInputForm() {
 
     window.location.reload()
     // Refactor / solve issue of component no reloading when item is deleted or addedd
-    navigate('/activities')
+    navigate('/goals')
   }
 
   useEffect(() => {}, [startValue])

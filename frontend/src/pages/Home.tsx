@@ -44,10 +44,7 @@ export default function Home() {
         <p>Achieve your goals and start tracking your progress today!</p>
 
         {user ? (
-          <Link
-            to="activities"
-            style={{ textDecoration: 'none', margin: '1rem' }}
-          >
+          <Link to="goals" style={{ textDecoration: 'none', margin: '1rem' }}>
             <Button
               variant="contained"
               sx={{

@@ -124,7 +124,7 @@ export default function ActivityInputForm() {
     }
     dispatch(changeGoal(goalData))
     localStorage.removeItem('goal')
-    navigate('/activities')
+    navigate('/goals')
     window.location.reload()
   }
 
