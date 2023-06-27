@@ -34,7 +34,7 @@ import errorHandler from './middleware/errorMiddleware.ts'
 // body parser for raw json
 app.use(express.json())
 // parses urlencoded
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 
 if(process.env.ORIGIN) {
   console.log(process.env.ORIGIN)

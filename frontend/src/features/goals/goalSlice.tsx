@@ -98,7 +98,6 @@ export const getGoals = createAsyncThunk<
 >('goals/getAll', async (_, thunkAPI) => {
   try {
     const state = thunkAPI.getState()
-    console.log(state.auth.user)
     if (state.auth.user) {
       const user = state.auth.user
       // const token = user.token
