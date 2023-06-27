@@ -54,6 +54,7 @@ export const createGoal = createAsyncThunk<
   // thunkAPI object has a getState method, used to get any thing from any part of state.  Using here to get auth state
   try {
     const state = thunkAPI.getState()
+
     if (state.auth.user) {
       const user = state.auth.user
       // const token = user.token
@@ -97,6 +98,7 @@ export const getGoals = createAsyncThunk<
 >('goals/getAll', async (_, thunkAPI) => {
   try {
     const state = thunkAPI.getState()
+    console.log(state.auth.user)
     if (state.auth.user) {
       const user = state.auth.user
       // const token = user.token
