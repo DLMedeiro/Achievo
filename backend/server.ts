@@ -4,7 +4,8 @@
 // backend web framework
 // const express = require("express");
 import express from 'express'
-
+import goalRoutes from './routes/goalRoutes.ts'
+import userRoutes from './routes/userRoutes.ts'
 import path from 'path'
 // const path = require('path')
 // Bring in environment variables
@@ -16,12 +17,18 @@ dotenv.config()
 import connectDB from './config/db.ts'
 // const connectDB = require('./config/db.ts')
 connectDB()
+// initialize express
+const app = express()
+
+// add this middleware so req.body within the controller will not show as undefined
+// body parser for raw json
+app.use(express.json())
+// parses urlencoded
+app.use(express.urlencoded({ extended: true }))
 
 // Port for server to run on, 5000 if the .env port is not found
 const port = process.env.PORT || 5000
 
-// initialize express
-const app = express()
 // const cors = require('cors')
 import cors from 'cors'
 
@@ -30,11 +37,7 @@ import errorHandler from './middleware/errorMiddleware.ts'
 // const errorHandler = require("./middleware/errorMiddleware");
 // changed to export default on middleware to eliminate errors when bringing the function to this file ?
 
-// add this middleware so req.body within the controller will not show as undefined
-// body parser for raw json
-app.use(express.json())
-// parses urlencoded
-app.use(express.urlencoded({ extended: true }))
+
 
 if(process.env.ORIGIN) {
   console.log(process.env.ORIGIN)
@@ -45,8 +48,7 @@ if(process.env.ORIGIN) {
 
 }
 // when api/goals is hit on the front end, goalRoutes will respond
-import goalRoutes from './routes/goalRoutes.ts'
-import userRoutes from './routes/userRoutes.ts'
+
 app.use('/api/goals', goalRoutes)
 app.use('/api/users', userRoutes)
 
