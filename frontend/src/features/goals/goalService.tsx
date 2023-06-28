@@ -59,7 +59,7 @@ const getGoals = async (user: {
     },
   }
   if (GOALS_URL) {
-    const response = await axios.get(GOALS_URL, config)
+    const response = await axios.get(GOALS_URL + 'user/' + user._id, config)
     console.log(response)
 
     return response.data
