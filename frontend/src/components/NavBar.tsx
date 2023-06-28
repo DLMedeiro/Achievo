@@ -28,6 +28,7 @@ export default function NavBar() {
   const logoutUser = () => {
     dispatch(logout())
     navigate('/')
+    window.location.reload()
   }
 
   return (
