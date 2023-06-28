@@ -25,6 +25,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { DateField } from '@mui/x-date-pickers/DateField'
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo'
 import { getGoals, changeGoal } from '../../features/goals/goalSlice'
+import { Link } from 'react-router-dom'
 
 const theme = createTheme({
   palette: {
@@ -35,16 +36,6 @@ const theme = createTheme({
     },
   },
 })
-
-// interface ListFormProps {
-//   onAddItem: (
-//     start: string,
-//     end: string,
-//     activity: string,
-//     target: number,
-//     progress: number,
-//   ) => void
-// }
 
 export default function ActivityInputForm() {
   interface userState {
@@ -63,6 +54,7 @@ export default function ActivityInputForm() {
   const [changingProgress, setChangingProgress] = React.useState<number>(
     goal.target,
   )
+  const [changeBtn, setChangeBtn] = useState(false)
   // const [value, setValue] = React.useState<Dayjs | null>(null)
   interface Inputs {
     start: Dayjs
@@ -124,9 +116,10 @@ export default function ActivityInputForm() {
     }
     dispatch(changeGoal(goalData))
     dispatch(getGoals(user))
-    localStorage.removeItem('goal')
-    navigate(`/goals/user/${user._id}`)
-    window.location.reload()
+    setChangeBtn(true)
+    // localStorage.removeItem('goal')
+    // navigate(`/goals/user/${user._id}`)
+    // window.location.reload()
   }
 
   return (
@@ -217,20 +210,40 @@ export default function ActivityInputForm() {
                 />
                 <div style={{ color: 'red' }}>{errors.progress?.message}</div>
               </Grid>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                sx={{
-                  mt: 3,
-                  mb: 2,
-                  mx: 'auto',
-                  borderRadius: '40px',
-                  display: 'flex',
-                }}
-              >
-                Edit Goal
-              </Button>
+              {changeBtn ? (
+                <Link
+                  to={`/goals/user/${user._id}`}
+                  style={{ textDecoration: 'none', margin: '1rem' }}
+                >
+                  <Button
+                    variant="contained"
+                    sx={{
+                      mt: 3,
+                      mb: 2,
+                      borderRadius: '40px',
+                      margin: '0 auto',
+                    }}
+                  >
+                    Return to Dashboard
+                  </Button>
+                </Link>
+              ) : (
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  sx={{
+                    mt: 3,
+                    mb: 2,
+                    mx: 'auto',
+                    borderRadius: '40px',
+                    display: 'flex',
+                  }}
+                >
+                  Save Changes
+                </Button>
+              )}
+
               {/* <p>{loginStatus}</p> */}
             </Grid>
           </Box>
