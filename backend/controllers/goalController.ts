@@ -28,7 +28,8 @@ const getSingleGoal = asyncHandler(async(req:any, res:any) => {
 const getGoals = asyncHandler(async(req:any, res:any) => {
     console.log(req.user.id)
 
-    const goals = await Goal.find({user: req.user.id})
+    const goals = await Goal.find({user: `new ObjectId(" ${req.user.id}`})
+    console.log(goals)
     // const goals = await Goal.find({user: res.locals.user.id})
     // Getting all goals for user, find is a built in mongoose method
     // shows in terminal when sending a postman request
