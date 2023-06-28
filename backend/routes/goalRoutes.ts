@@ -9,11 +9,11 @@ import GC from '../controllers/goalController.ts'
 // const {protect} = require ("../middleware/authMiddleware")
 import aM from "../middleware/authMiddleware.ts"
 
-router.route('/').post(aM.protect, GC.setGoal)
+// router.route('/').post(aM.protect, GC.setGoal)
 // Above code simplifies the code below
 // router.get('/', getGoals)
 // router.post('/', setGoal)
-router.route('/user/:id').get(aM.protect, GC.getGoals)
+router.route('/user/:id').get(aM.protect, GC.getGoals).post(aM.protect, GC.setGoal)
 
 router.route('/:id').delete(aM.protect, GC.deleteGoal).put( aM.protect, GC.updateGoal).put(aM.protect, GC.updateProgress).get(aM.protect, GC.getSingleGoal)
 // Above code simplifies the code below

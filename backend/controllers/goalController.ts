@@ -52,7 +52,7 @@ const setGoal = asyncHandler(async(req:any, res:any) => {
     }
 
     const goal = await Goal.create({
-        user:  res.locals.user.id,
+        user:  req.params.id,
         activity:req.body.activity,
         start:req.body.start,
         end:req.body.end,

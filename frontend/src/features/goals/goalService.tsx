@@ -13,7 +13,11 @@ const createGoal = async (goalData: object, user: any) => {
     },
   }
   if (GOALS_URL) {
-    const response = await axios.post(GOALS_URL, goalData, config)
+    const response = await axios.post(
+      GOALS_URL + 'user/' + user._id,
+      goalData,
+      config,
+    )
 
     return response.data
   }

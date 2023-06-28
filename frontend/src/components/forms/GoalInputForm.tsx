@@ -99,9 +99,8 @@ export default function ActivityInputForm() {
     }
     dispatch(createGoal(goalData))
 
-    window.location.reload()
     // Refactor / solve issue of component no reloading when item is deleted or addedd
-    navigate('/goals')
+    // navigate('/goals')
   }
 
   useEffect(() => {}, [startValue])
