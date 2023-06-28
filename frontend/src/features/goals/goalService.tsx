@@ -62,13 +62,12 @@ const getGoals = async (user: {
 }) => {
   // token that is stored is only the token, and need to change to a Bearer token
   const config = {
-    Authorization: `Bearer ${user.token}`,
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
   }
   if (GOALS_URL) {
-    const response = await axios.get(GOALS_URL, {
-      data: user,
-      headers: config,
-    })
+    const response = await axios.get(GOALS_URL + 'user/' + user._id, config)
 
     return response.data
   }
