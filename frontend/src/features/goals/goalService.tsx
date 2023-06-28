@@ -25,12 +25,17 @@ const createGoal = async (goalData: object, user: any) => {
 
 // update goal
 const updateGoal = async (goalData: any, user: any) => {
+  console.log(user)
   const config = {
     headers: {
       Authorization: `Bearer ${user.token}`,
     },
   }
-  const response = await axios.put(GOALS_URL + goalData.id, goalData, config)
+  const response = await axios.put(
+    GOALS_URL + goalData.id,
+    { goal: goalData, userId: user._id },
+    config,
+  )
 
   return response.data
 }

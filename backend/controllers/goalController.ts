@@ -26,10 +26,8 @@ const getSingleGoal = asyncHandler(async(req:any, res:any) => {
 // Route: GET /api/goals
 // Access: Private
 const getGoals = asyncHandler(async(req:any, res:any) => {
-    console.log(req.params)
 
     const goals = await Goal.find({user: req.params.id})
-    console.log(goals)
     // const goals = await Goal.find({user: res.locals.user.id})
     // Getting all goals for user, find is a built in mongoose method
     // shows in terminal when sending a postman request
@@ -70,27 +68,28 @@ const setGoal = asyncHandler(async(req:any, res:any) => {
 // Access: Private
 const updateGoal = asyncHandler(async(req:any, res:any) => {
     const goal = await Goal.findById(req.params.id)
-
     if(!goal){
         res.status(400)
         throw new Error("Goal not found")
     } else {
- // Check for user
- if(!res.locals.user.id) {
-    res.status(401)
-    throw new Error('User not found')
-}
-
+        // Check for user
+        if(!req.body.userId) {
+            res.status(401)
+            throw new Error('User not found')
+        }
+        
+        console.log(goal.user.toString())
+        console.log(req.body.userId)
 // Prevent updating other id's goals
 // user.id comes from the findById using locals
 // goal.user = user attached to goal
 // goal.user = objectID -> must change into a string
-if(goal.user.toString() !== res.locals.user.id){
+if(goal.user.toString() !== req.body.userId){
     res.status(401)
     throw new Error('User Not Authorized')
 }
 
-const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {new: true})
+const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body.goal, {new: true})
 
 // not able to find alternative types for req and res, other option found was Express.Request / Response, but that wasn't closing out the error
 res.status(200).json(updatedGoal)
