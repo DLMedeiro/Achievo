@@ -61,7 +61,7 @@ export default function ActivityInputForm() {
     goal.target,
   )
   const [changingProgress, setChangingProgress] = React.useState<number>(
-    goal.target,
+    goal.progress,
   )
   // const [value, setValue] = React.useState<Dayjs | null>(null)
   interface Inputs {
