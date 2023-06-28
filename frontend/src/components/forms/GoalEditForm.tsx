@@ -54,7 +54,8 @@ export default function ActivityInputForm() {
   const [changingProgress, setChangingProgress] = React.useState<number>(
     goal.target,
   )
-  const [changeBtn, setChangeBtn] = useState(false)
+  const [changeBtn, setChangeBtn] = useState(true)
+
   // const [value, setValue] = React.useState<Dayjs | null>(null)
   interface Inputs {
     start: Dayjs
@@ -116,7 +117,7 @@ export default function ActivityInputForm() {
     }
     dispatch(changeGoal(goalData))
     dispatch(getGoals(user))
-    setChangeBtn(true)
+    setChangeBtn(false)
     // localStorage.removeItem('goal')
     // navigate(`/goals/user/${user._id}`)
     // window.location.reload()
@@ -124,110 +125,93 @@ export default function ActivityInputForm() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main">
-        <CssBaseline />
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: ' 100%',
-          }}
-        >
+      {changeBtn ? (
+        <Container component="main">
+          <CssBaseline />
           <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit(onSubmit)}
-            sx={{ mt: 2, marginBottom: '12px' }}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: ' 100%',
+            }}
           >
-            <Grid
-              container
-              spacing={2}
-              sx={{
-                marginBottom: '16px',
-                paddingLeft: 0,
-                paddingRight: 0,
-                minWidth: '250px',
-              }}
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit(onSubmit)}
+              sx={{ mt: 2, marginBottom: '12px' }}
             >
-              <Grid item xs={6}>
-                <DemoItem label="Start Date">
-                  <DatePicker
-                    value={dayjs(startValue)}
-                    onChange={(newValue) => setStartValue(newValue)}
+              <Grid
+                container
+                spacing={2}
+                sx={{
+                  marginBottom: '16px',
+                  paddingLeft: 0,
+                  paddingRight: 0,
+                  minWidth: '250px',
+                }}
+              >
+                <Grid item xs={6}>
+                  <DemoItem label="Start Date">
+                    <DatePicker
+                      value={dayjs(startValue)}
+                      onChange={(newValue) => setStartValue(newValue)}
+                    />
+                  </DemoItem>
+                  <div style={{ color: 'red' }}>{errors.start?.message}</div>
+                </Grid>
+                <Grid item xs={6}>
+                  <DemoItem label="Completion Date">
+                    <DatePicker
+                      value={dayjs(endValue)}
+                      onChange={(newValue) => setEndValue(newValue)}
+                    />
+                  </DemoItem>
+                  <div style={{ color: 'red' }}>{errors.end?.message}</div>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="activity"
+                    label="Activity"
+                    {...register('activity')}
                   />
-                </DemoItem>
-                <div style={{ color: 'red' }}>{errors.start?.message}</div>
-              </Grid>
-              <Grid item xs={6}>
-                <DemoItem label="Completion Date">
-                  <DatePicker
-                    value={dayjs(endValue)}
-                    onChange={(newValue) => setEndValue(newValue)}
+                  <div style={{ color: 'red' }}>{errors.activity?.message}</div>
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    label="target"
+                    type="number"
+                    id="target"
+                    {...register('target', {
+                      valueAsNumber: true,
+                      onChange: (e) => {
+                        setChangingTarget(e.target)
+                      },
+                    })}
                   />
-                </DemoItem>
-                <div style={{ color: 'red' }}>{errors.end?.message}</div>
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="activity"
-                  label="Activity"
-                  {...register('activity')}
-                />
-                <div style={{ color: 'red' }}>{errors.activity?.message}</div>
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  required
-                  fullWidth
-                  label="target"
-                  type="number"
-                  id="target"
-                  {...register('target', {
-                    valueAsNumber: true,
-                    onChange: (e) => {
-                      setChangingTarget(e.target)
-                    },
-                  })}
-                />
-                <div style={{ color: 'red' }}>{errors.target?.message}</div>
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  required
-                  fullWidth
-                  label="progress"
-                  type="number"
-                  id="progress"
-                  {...register('progress', {
-                    valueAsNumber: true,
-                    onChange: (e) => {
-                      setChangingProgress(e.target)
-                    },
-                  })}
-                />
-                <div style={{ color: 'red' }}>{errors.progress?.message}</div>
-              </Grid>
-              {changeBtn ? (
-                <Link
-                  to={`/goals/user/${user._id}`}
-                  style={{ textDecoration: 'none', margin: '1rem' }}
-                >
-                  <Button
-                    variant="contained"
-                    sx={{
-                      mt: 3,
-                      mb: 2,
-                      borderRadius: '40px',
-                      margin: '0 auto',
-                    }}
-                  >
-                    Return to Dashboard
-                  </Button>
-                </Link>
-              ) : (
+                  <div style={{ color: 'red' }}>{errors.target?.message}</div>
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    label="progress"
+                    type="number"
+                    id="progress"
+                    {...register('progress', {
+                      valueAsNumber: true,
+                      onChange: (e) => {
+                        setChangingProgress(e.target)
+                      },
+                    })}
+                  />
+                  <div style={{ color: 'red' }}>{errors.progress?.message}</div>
+                </Grid>
                 <Button
                   type="submit"
                   variant="contained"
@@ -242,13 +226,43 @@ export default function ActivityInputForm() {
                 >
                   Save Changes
                 </Button>
-              )}
-
-              {/* <p>{loginStatus}</p> */}
-            </Grid>
+              </Grid>
+            </Box>
           </Box>
-        </Box>
-      </Container>
+        </Container>
+      ) : (
+        <Container component="main">
+          <CssBaseline />
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: ' 100%',
+            }}
+          >
+            <Link
+              to={`/goals/user/${user._id}`}
+              style={{ textDecoration: 'none', margin: '1rem' }}
+            >
+              <Button
+                onClick={() => {
+                  setChangeBtn(true)
+                }}
+                variant="contained"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  borderRadius: '40px',
+                  margin: '0 auto',
+                }}
+              >
+                Changes saved - Return to Dashboard
+              </Button>
+            </Link>
+          </Box>
+        </Container>
+      )}
     </ThemeProvider>
   )
 }
