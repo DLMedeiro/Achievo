@@ -116,7 +116,6 @@ export default function Activity({ goal }: any) {
   //   }
   // }
 
-
   useEffect(() => {
     if (progress >= goal.target) {
       setCompleted(true)
@@ -154,7 +153,7 @@ export default function Activity({ goal }: any) {
   }
   const deleteItem = () => {
     dispatch(deleteGoal(goal._id))
-    window.location.reload()
+    // window.location.reload()
     // Refactor / solve issue of component no reloading when item is deleted or addedd
   }
 

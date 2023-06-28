@@ -25,7 +25,6 @@ const createGoal = async (goalData: object, user: any) => {
 
 // update goal
 const updateGoal = async (goalData: any, user: any) => {
-  console.log(user)
   const config = {
     headers: {
       Authorization: `Bearer ${user.token}`,
@@ -69,7 +68,6 @@ const getGoals = async (user: {
   }
   if (GOALS_URL) {
     const response = await axios.get(GOALS_URL + 'user/' + user._id, config)
-    console.log(response)
 
     return response.data
   }
@@ -98,11 +96,12 @@ const deleteGoal = async (id: string, user: any) => {
   // token that is stored is only the token, and need to change to a Bearer token
   //   * Not able to access token without setting user to any
   const config = {
-    headers: {
-      Authorization: `Bearer ${user.token}`,
-    },
+    Authorization: `Bearer ${user.token}`,
   }
-  const response = await axios.delete(GOALS_URL + id, config)
+  const response = await axios.delete(GOALS_URL + id, {
+    data: user,
+    headers: config,
+  })
 
   return response.data
 }

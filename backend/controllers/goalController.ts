@@ -77,9 +77,7 @@ const updateGoal = asyncHandler(async(req:any, res:any) => {
             res.status(401)
             throw new Error('User not found')
         }
-        
-        console.log(goal.user.toString())
-        console.log(req.body.userId)
+    
 // Prevent updating other id's goals
 // user.id comes from the findById using locals
 // goal.user = user attached to goal
@@ -109,7 +107,7 @@ const deleteGoal = asyncHandler(async(req:any, res:any) => {
 
     
     // Check for user
-    if(!res.locals.user.id) {
+    if(!req.body._id) {
         res.status(401)
         throw new Error('User not found')
     }
@@ -117,7 +115,7 @@ const deleteGoal = asyncHandler(async(req:any, res:any) => {
     // Prevent updating other id's goals
     // user.id comes from the findById using locals
     // goal.user = user attached to goal
-    if(goal.user.toString() !== res.locals.user.id){
+    if(goal.user.toString() !== req.body._id){
         res.status(401)
         throw new Error('User Not Authorized')
     }
