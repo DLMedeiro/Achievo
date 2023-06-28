@@ -49,18 +49,27 @@ function App() {
   }
   const [listItems, setListItems] = useState<Item[]>([])
   const { user }: userState = useAppSelector((state: RootState) => state.auth)
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
         <NavBar />
         <Container maxWidth="lg">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/createAccount" element={<CreateAccount />} />
-            <Route path={`/goals/user/${user._id}`} element={<Dashboard />} />
-            <Route path="/goalEditForm" element={<GoalEditForm />} />
-          </Routes>
+          {user ? (
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/createAccount" element={<CreateAccount />} />
+              <Route path={`/goals/user/${user._id}`} element={<Dashboard />} />
+              <Route path="/goalEditForm" element={<GoalEditForm />} />
+            </Routes>
+          ) : (
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/createAccount" element={<CreateAccount />} />
+            </Routes>
+          )}
         </Container>
       </ThemeProvider>
     </LocalizationProvider>
