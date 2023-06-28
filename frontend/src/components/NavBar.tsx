@@ -43,7 +43,7 @@ export default function NavBar() {
           <ThumbUpOffAltIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Achievo
+          Start Somewhere
         </Typography>
         {user ? (
           <Stack direction="row" spacing={3}>

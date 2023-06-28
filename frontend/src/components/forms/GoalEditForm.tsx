@@ -61,7 +61,7 @@ export default function ActivityInputForm() {
     goal.target,
   )
   const [changingProgress, setChangingProgress] = React.useState<number>(
-    goal.progress,
+    goal.target,
   )
   // const [value, setValue] = React.useState<Dayjs | null>(null)
   interface Inputs {
@@ -123,6 +123,7 @@ export default function ActivityInputForm() {
       progress: data.progress,
     }
     dispatch(changeGoal(goalData))
+    dispatch(getGoals(user))
     localStorage.removeItem('goal')
     navigate('/goals')
     window.location.reload()
