@@ -137,39 +137,44 @@ const deleteGoal = asyncHandler(async(req:any, res:any) => {
 // Access: Private
 const updateProgress = asyncHandler(async(req:any, res:any) => {
 
-    const goal = await Goal.findById(req.params.id)
+    // Check for user
+    if(!req.body.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+const goal = await Goal.findById(req.params.id)
+
 
     if(!goal){
         res.status(400)
         throw new Error("Goal not found")
     } 
-
-    if(goal && goal.progress && goal.target){
-
-    // Check for user
-    if(!res.locals.user.id) {
-        res.status(401)
-        throw new Error('User not found')
-    }
-
-    // Prevent updating other id's goals
+        // Prevent updating other id's goals
     // user.id comes from the findById using locals
     // goal.user = user attached to goal
     // goal.user = objectID -> must change into a string
-    if(goal.user.toString() !== res.locals.user.id){
+    if(goal.user.toString() !== req.body.user){
         res.status(401)
         throw new Error('User Not Authorized')
     }
 
-    // req.body = "add" or "subtract"
+ 
+    if(goal && !goal.progress && goal.target){
+        if(req.body.change == "add" && 0 < goal.target){
+            let progressChange = {progress: 1}
+            const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, progressChange)
+            res.status(200).json(updatedGoal)
+        }
+    }
+    if(goal && goal.progress && goal.target){
 
     if(req.body.change == "add" && goal.progress < goal.target){
         let progressChange = {progress: goal.progress + 1}
-        const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, progressChange, {new: true})
+        const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, progressChange)
         res.status(200).json(updatedGoal)
     } else if (req.body.change == "subtract" && goal.progress > 0){
         let progressChange = {progress: goal.progress - 1}
-        const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, progressChange, {new: true})
+        const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, progressChange)
         res.status(200).json(updatedGoal)
     }
     

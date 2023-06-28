@@ -19,6 +19,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline'
 import { RootState } from '../app/store'
 
+interface userState {
+  user: any
+}
 interface Props {
   items: Item
   onRemoveItem: (id: string) => void
@@ -30,6 +33,7 @@ export default function Activity({ goal }: any) {
   const dispatch = useAppDispatch()
   let singleGoal
 
+  const { user }: userState = useAppSelector((state: RootState) => state.auth)
   // interface Goal {
   //   _id: string
   //   user: string
@@ -126,7 +130,7 @@ export default function Activity({ goal }: any) {
 
   const addProgress = () => {
     // updating the database
-    dispatch(updateProgress({ id: goal._id, change: 'add' }))
+    dispatch(updateProgress({ id: goal._id, change: 'add', user: user._id }))
 
     // Update the UI
 
@@ -139,7 +143,9 @@ export default function Activity({ goal }: any) {
   }
 
   const subtractProgress = () => {
-    dispatch(updateProgress({ id: goal._id, change: 'subtract' }))
+    dispatch(
+      updateProgress({ id: goal._id, change: 'subtract', user: user._id }),
+    )
     if (progress > 0) {
       setProgress(progress - 1)
     }
