@@ -58,7 +58,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/createAccount" element={<CreateAccount />} />
-            <Route path="/goals/user/:id" element={<Dashboard />} />
+            <Route path={`/goals/user/${user._id}`} element={<Dashboard />} />
             <Route path="/goalEditForm" element={<GoalEditForm />} />
           </Routes>
         </Container>
