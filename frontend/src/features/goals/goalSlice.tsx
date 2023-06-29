@@ -100,7 +100,6 @@ export const getGoals = createAsyncThunk<
     const state = thunkAPI.getState()
     if (state.auth.user) {
       const user = state.auth.user
-      console.log(user)
       // const token = user.token
       return await goalService.getGoals(user)
     }

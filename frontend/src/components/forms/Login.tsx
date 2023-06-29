@@ -31,9 +31,9 @@ import { RootState } from '../../app/store'
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#114ea1',
+      main: '#f6e4d9',
       light: '#6189c2',
-      dark: '#00003c',
+      dark: '#2f2d13',
     },
   },
 })
@@ -101,7 +101,10 @@ export default function Login() {
             component="form"
             noValidate
             onSubmit={handleSubmit(onSubmit)}
-            sx={{ mt: 3, marginBottom: '12px' }}
+            sx={{
+              mt: 3,
+              marginBottom: '12px',
+            }}
           >
             <Grid
               container
@@ -138,14 +141,21 @@ export default function Login() {
               </Grid>
               <Button
                 type="submit"
-                variant="contained"
-                color="primary"
                 sx={{
                   mt: 3,
                   mb: 2,
+                  width: '100%',
+                  border: '1px solid transparent',
                   borderRadius: '40px',
                   margin: '0 auto',
                   display: 'flex',
+                  color: '#f9f9f9',
+                  backgroundColor: '#2f2d13',
+                  '&:hover': {
+                    color: '#2f2d13',
+                    border: '1px solid #2f2d13',
+                    cursor: 'pointer',
+                  },
                 }}
               >
                 Login

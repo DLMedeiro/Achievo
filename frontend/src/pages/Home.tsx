@@ -38,10 +38,32 @@ export default function Home() {
         justifyContent: 'center',
       }}
     >
-      <Grid item xs={5} sx={{ fontSize: '2rem' }}>
-        {user ? <h1>Hi {user.name}</h1> : <h1>Looking for Motivation?</h1>}
-
-        <p>Achieve your goals and start tracking your progress today!</p>
+      <Grid
+        item
+        xs={8}
+        sx={{
+          backgroundColor: 'rgba(252, 252, 252, 0.5)',
+          padding: '1rem',
+          textAlign: 'center',
+          borderRadius: '10px',
+        }}
+      >
+        {user ? (
+          <>
+            <h1>Hi {user.name}</h1>
+            <h2>Welcome Back!</h2>
+          </>
+        ) : (
+          <>
+            <h1> Seeking an extra dose of motivation?</h1>
+            <h2>Look no further!</h2>
+            <h4>
+              Start Somewhere is the perfect companion, empowering you to
+              allocate your time effectively and track your progress towards
+              achieving success in your goals.
+            </h4>
+          </>
+        )}
 
         {user ? (
           <Link
@@ -90,9 +112,6 @@ export default function Home() {
             </Button>
           </>
         )}
-      </Grid>
-      <Grid item xs={7}>
-        <img src={HeroImage} alt="bored dog" style={{ width: '100%' }}></img>
       </Grid>
     </Grid>
   )

@@ -26,19 +26,9 @@ import GoalEditForm from './components/forms/GoalEditForm'
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#114ea1',
-      light: '#6189c2',
-      dark: '#00003c',
-    },
-    secondary: {
-      dark: '#e8b29e',
-      light: '#e1def1',
-      main: '#cb99d5',
-    },
-    info: {
-      main: '#e8b29e',
-      light: '#e1def1',
-      dark: '#cb99d5',
+      main: 'rgba(252, 252, 252, 0.7)',
+      light: '#f9f9f9',
+      dark: '#2f2d13',
     },
   },
 })

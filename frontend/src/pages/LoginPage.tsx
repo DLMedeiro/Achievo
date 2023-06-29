@@ -24,13 +24,20 @@ export default function LoginForm(): JSX.Element {
     <Grid container spacing={3} sx={{ padding: '78px 0' }}>
       <Grid item xs={4}></Grid>
       <Grid item xs={2.5} sx={{ minWidth: '350px' }}>
-        <Paper elevation={14} sx={{ padding: ' 2em', borderRadius: '30px' }}>
+        <Paper
+          elevation={14}
+          sx={{
+            padding: ' 2em',
+            borderRadius: '30px',
+            backgroundColor: 'rgba(252, 252, 252, 0.8)',
+          }}
+        >
           <Typography
-            component="p"
+            component="h2"
             align="center"
             sx={{ marginBottom: '20px' }}
           >
-            Log in to be amused for a couple minutes
+            Start Somewhere. Start Now.
           </Typography>
           <Link
             to="/createAccount"
@@ -42,12 +49,21 @@ export default function LoginForm(): JSX.Element {
             }}
           >
             <Button
-              variant="outlined"
               sx={{
                 mt: 3,
                 mb: 2,
+                width: '100%',
+                border: '1px solid #2f2d13',
                 borderRadius: '40px',
                 margin: '0 auto',
+                display: 'flex',
+                color: '#2f2d13',
+                '&:hover': {
+                  color: '#f9f9f9',
+                  backgroundColor: '#2f2d13',
+                  borderBottom: '1px solid transparent',
+                  cursor: 'pointer',
+                },
               }}
             >
               Create Account
