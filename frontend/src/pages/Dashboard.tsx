@@ -70,24 +70,17 @@ function Dashboard() {
       <section className="heading">
         <h1>Welcome Back {user && user.name}!</h1>
       </section>
-      <Paper
-        elevation={14}
-        sx={{
-          padding: ' 2em',
-          borderRadius: '30px',
-          backgroundColor: 'rgba(252, 252, 252, 0.8)',
-        }}
-      >
-        <GoalInputForm />
-      </Paper>
+
+      <GoalInputForm />
+
       {/* goals */}
       <section className="content">
         <Paper
           elevation={14}
           sx={{
             padding: ' 2em',
-            borderRadius: '30px',
             backgroundColor: 'rgba(252, 252, 252, 0.8)',
+            marginTop: '1rem',
           }}
         >
           {goals && goals.length > 0 ? (

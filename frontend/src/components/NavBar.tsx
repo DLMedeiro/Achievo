@@ -5,6 +5,7 @@ import {
   Typography,
   Stack,
   Button,
+  Box,
 } from '@mui/material'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { RootState } from '../app/store'
@@ -32,79 +33,81 @@ export default function NavBar() {
   }
 
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <IconButton
-          onClick={() => navigate('/')}
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="logo"
-        >
-          <ThumbUpOffAltIcon
-            sx={{
-              padding: '10px',
-              borderRadius: '50%',
-              '&:hover': {
-                backgroundColor: '#f6cdfe',
-              },
-            }}
-          />
-        </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Start Somewhere
-        </Typography>
-        {user ? (
-          <Stack direction="row" spacing={3}>
-            <Button
-              onClick={logoutUser}
-              color="inherit"
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            onClick={() => navigate('/')}
+            size="small"
+            edge="start"
+            color="inherit"
+            aria-label="logo"
+          >
+            <ThumbUpOffAltIcon
               sx={{
-                borderLeft: '5px solid transparent',
+                padding: '10px',
+                borderRadius: '50%',
                 '&:hover': {
-                  borderLeft: '5px solid #f6cdfe',
+                  backgroundColor: '#f6cdfe',
                 },
               }}
-            >
-              Logout
-            </Button>
-            <Button
-              onClick={() => navigate(`/goals/user/${user._id}`)}
-              color="inherit"
-              sx={{
-                borderLeft: '5px solid transparent',
-                '&:hover': {
-                  borderLeft: '5px solid #f6cdfe',
-                },
-              }}
-            >
-              Goals
-            </Button>
-            {user._id == '64728b96d38e1251fcc5cc82' ? (
-              <Button color="inherit">
-                <FinnModal />
+            />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Start Somewhere
+          </Typography>
+          {user ? (
+            <Stack direction="row" spacing={3}>
+              <Button
+                onClick={logoutUser}
+                color="inherit"
+                sx={{
+                  borderLeft: '5px solid transparent',
+                  '&:hover': {
+                    borderLeft: '5px solid #f6cdfe',
+                  },
+                }}
+              >
+                Logout
               </Button>
-            ) : (
-              ''
-            )}
-          </Stack>
-        ) : (
-          <Stack direction="row" spacing={3}>
-            <Button
-              onClick={() => navigate('/login')}
-              color="inherit"
-              sx={{
-                borderLeft: '5px solid transparent',
-                '&:hover': {
-                  borderLeft: '5px solid #f6cdfe',
-                },
-              }}
-            >
-              Login
-            </Button>
-          </Stack>
-        )}
-      </Toolbar>
-    </AppBar>
+              <Button
+                onClick={() => navigate(`/goals/user/${user._id}`)}
+                color="inherit"
+                sx={{
+                  borderLeft: '5px solid transparent',
+                  '&:hover': {
+                    borderLeft: '5px solid #f6cdfe',
+                  },
+                }}
+              >
+                Goals
+              </Button>
+              {user._id == '64728b96d38e1251fcc5cc82' ? (
+                <Button color="inherit">
+                  <FinnModal />
+                </Button>
+              ) : (
+                ''
+              )}
+            </Stack>
+          ) : (
+            <Stack direction="row" spacing={3}>
+              <Button
+                onClick={() => navigate('/login')}
+                color="inherit"
+                sx={{
+                  borderLeft: '5px solid transparent',
+                  '&:hover': {
+                    borderLeft: '5px solid #f6cdfe',
+                  },
+                }}
+              >
+                Login
+              </Button>
+            </Stack>
+          )}
+        </Toolbar>
+      </AppBar>
+    </Box>
   )
 }

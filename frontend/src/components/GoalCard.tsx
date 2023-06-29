@@ -183,7 +183,7 @@ export default function Activity({ goal }: any) {
         borderRadius: '30px',
         margin: '1rem',
         boxShadow: { boxShadow },
-        backgroundColor: 'transparent,',
+        backgroundColor: 'transparent',
       }}
       key={goal.id}
     >
