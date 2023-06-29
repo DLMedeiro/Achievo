@@ -32,13 +32,17 @@ export default function LoginForm(): JSX.Element {
             backgroundColor: 'rgba(252, 252, 252, 0.8)',
           }}
         >
+          <Typography component="h2" align="center">
+            Start Somewhere.
+          </Typography>
           <Typography
-            component="h2"
+            component="h3"
             align="center"
             sx={{ marginBottom: '20px' }}
           >
-            Start Somewhere. Start Now.
+            Start Now.
           </Typography>
+          <Login />
           <Link
             to="/createAccount"
             style={{
@@ -49,19 +53,18 @@ export default function LoginForm(): JSX.Element {
             }}
           >
             <Button
+              variant="contained"
               sx={{
                 mt: 3,
                 mb: 2,
                 width: '100%',
-                border: '1px solid #2f2d13',
                 borderRadius: '40px',
                 margin: '0 auto',
                 display: 'flex',
                 color: '#2f2d13',
                 '&:hover': {
-                  color: '#f9f9f9',
-                  backgroundColor: '#2f2d13',
-                  borderBottom: '1px solid transparent',
+                  color: '#2f2d13',
+                  backgroundColor: '#f6cdfe',
                   cursor: 'pointer',
                 },
               }}
@@ -69,7 +72,7 @@ export default function LoginForm(): JSX.Element {
               Create Account
             </Button>
           </Link>
-          <Login />
+
           <Grid container justifyContent="center" sx={{ marginBottom: '12px' }}>
             {/* <MUILink href="#" variant="body2">
               Forgot your password?

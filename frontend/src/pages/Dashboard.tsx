@@ -9,6 +9,7 @@ import GoalInputForm from '../components/forms/GoalInputForm'
 import EngineeringIcon from '@mui/icons-material/Engineering'
 import '../styles/Utilities.css'
 import FinnModal from '../components/FinnModal'
+import { Grid, Paper } from '@mui/material'
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -69,18 +70,36 @@ function Dashboard() {
       <section className="heading">
         <h1>Welcome Back {user && user.name}!</h1>
       </section>
-      <GoalInputForm />
+      <Paper
+        elevation={14}
+        sx={{
+          padding: ' 2em',
+          borderRadius: '30px',
+          backgroundColor: 'rgba(252, 252, 252, 0.8)',
+        }}
+      >
+        <GoalInputForm />
+      </Paper>
       {/* goals */}
       <section className="content">
-        {goals && goals.length > 0 ? (
-          <div className="goals">
-            {goals.map((goal) => (
-              <GoalCard key={goal._id} goal={goal} />
-            ))}
-          </div>
-        ) : (
-          <h3>You have not set any goals</h3>
-        )}
+        <Paper
+          elevation={14}
+          sx={{
+            padding: ' 2em',
+            borderRadius: '30px',
+            backgroundColor: 'rgba(252, 252, 252, 0.8)',
+          }}
+        >
+          {goals && goals.length > 0 ? (
+            <div className="goals">
+              {goals.map((goal) => (
+                <GoalCard key={goal._id} goal={goal} />
+              ))}
+            </div>
+          ) : (
+            <h3>You have not set any goals</h3>
+          )}
+        </Paper>
       </section>
     </>
   )

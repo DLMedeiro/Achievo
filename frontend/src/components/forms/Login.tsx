@@ -140,20 +140,20 @@ export default function Login() {
                 <div style={{ color: 'red' }}>{errors.password?.message}</div>
               </Grid>
               <Button
+                variant="contained"
                 type="submit"
                 sx={{
                   mt: 3,
                   mb: 2,
                   width: '100%',
-                  border: '1px solid transparent',
                   borderRadius: '40px',
                   margin: '0 auto',
                   display: 'flex',
-                  color: '#f9f9f9',
-                  backgroundColor: '#2f2d13',
+                  color: '#2f2d13',
+                  backgroundColor: '#f6cdfe',
                   '&:hover': {
+                    backgroundColor: '#f9f9f9',
                     color: '#2f2d13',
-                    border: '1px solid #2f2d13',
                     cursor: 'pointer',
                   },
                 }}

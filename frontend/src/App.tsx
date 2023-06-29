@@ -28,7 +28,8 @@ const theme = createTheme({
     primary: {
       main: 'rgba(252, 252, 252, 0.7)',
       light: '#f9f9f9',
-      dark: '#2f2d13',
+      dark: '#f6cdfe',
+      // dark: '#2f2d13',
     },
   },
 })
