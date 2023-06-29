@@ -62,8 +62,8 @@ export default function Login() {
     if (isError) {
       toast.error(message)
     }
-    if (isSuccess || user) {
-      navigate('/goals')
+    if (isSuccess && user) {
+      navigate(`/goals/user/${user._id}`)
     }
 
     dispatch(reset())

@@ -27,15 +27,6 @@ export default function CreateAccount(): JSX.Element {
             justifyContent="center"
             sx={{ marginBottom: '12px' }}
           ></Grid>
-          <Typography variant="body2" color="text.secondary" align="center">
-            Don't feel like creating and account? Have fun with Finn's account.
-          </Typography>
-          <Typography variant="body2" color="text.secondary" align="center">
-            Email: finn@imadog.com
-          </Typography>
-          <Typography variant="body2" color="text.secondary" align="center">
-            Password: FinnFinn
-          </Typography>
         </Paper>
       </Grid>
       <Grid item xs={4}></Grid>
