@@ -8,6 +8,7 @@ import { RootState } from '../app/store'
 import HeroImage from '../images/HeroImage.jpg'
 import axios from 'axios'
 import { login } from '../features/auth/authSlice'
+import FinnModal from '../components/FinnModal'
 export default function Home() {
   interface userState {
     user: any
@@ -37,8 +38,18 @@ export default function Home() {
     >
       {user ? (
         <>
-          <h1>Hi {user.name}</h1>
-          <h2>Welcome Back!</h2>
+          {user._id == '64728b96d38e1251fcc5cc82' ? (
+            <>
+              <h1>Hi {user.name}</h1>
+              <h2>Welcome Back!</h2>
+              <FinnModal />
+            </>
+          ) : (
+            <>
+              <h1>Hi {user.name}</h1>
+              <h2>Welcome Back!</h2>
+            </>
+          )}
         </>
       ) : (
         <>

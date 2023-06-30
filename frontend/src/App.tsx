@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Container from '@mui/material/Container'
 import LoginForm from './pages/LoginPage'
-import NavBar from './components/NavBar'
-import FinnModal from './components/FinnModal'
+import Appbar from './components/Appbar'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import { v4 as uuidv4 } from 'uuid'
@@ -43,7 +42,7 @@ function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       {/* <ThemeProvider theme={theme}> */}
-      <NavBar />
+      <Appbar />
       <Container maxWidth="md" className="top-container">
         {user ? (
           <Routes>

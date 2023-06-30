@@ -69,7 +69,7 @@ export default function SignUp() {
       toast.error(message)
     }
     if (isSuccess && user) {
-      navigate(`/goals/user/${user._id}`)
+      navigate(`/`)
     }
 
     dispatch(reset())

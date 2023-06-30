@@ -55,6 +55,7 @@ const registerUser = asyncHandler(async(req:any, res:any) => {
     // let endIndex = String(user._id).lastIndexOf('"');
     // let extractedString = String(user._id).slice(startIndex, endIndex);
     if (user) {
+
         res.status(201).json({
             _id: user.id,
             name: user.name,

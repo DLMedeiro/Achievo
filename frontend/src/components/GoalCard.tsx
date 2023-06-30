@@ -291,17 +291,13 @@ export default function Activity({ goal }: any) {
         </Grid>
 
         {completed ? (
-          <Grid item xs={12}>
-            {progress} of {goal.target} hour target completed!
+          <Grid item xs={12} id="center">
+            <b>
+              {progress} of {goal.target} hour target completed!
+            </b>
           </Grid>
         ) : (
-          <Grid
-            item
-            xs={12}
-            sx={{
-              fontSize: '1rem',
-            }}
-          >
+          <Grid item xs={12} id="center">
             {progress} of {goal.target} hour target completed
           </Grid>
         )}

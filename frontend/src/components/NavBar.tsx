@@ -33,7 +33,7 @@ export default function NavBar() {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -43,19 +43,11 @@ export default function NavBar() {
             color="inherit"
             aria-label="logo"
           >
-            <ThumbUpOffAltIcon
-            // sx={{
-            //   padding: '10px',
-            //   borderRadius: '50%',
-            //   '&:hover': {
-            //     backgroundColor: '#f6cdfe',
-            //   },
-            // }}
-            />
+            <ThumbUpOffAltIcon />
           </IconButton>
           <Typography
             variant="h6"
-            component="div"
+            component="h6"
             // sx={{ flexGrow: 1 }}
           >
             Start Somewhere

@@ -28,11 +28,11 @@ export default function FinnModal() {
         alt="Finn"
         src={FinnImage}
         sx={{
-          width: 60,
-          height: 60,
-          // position: 'fixed',
-          // bottom: '2%',
-          // left: '5%',
+          width: 80,
+          height: 80,
+          margin: 'auto',
+          border: '2px solid transparent',
+          '&:hover': { cursor: 'pointer', border: '2px solid rgba(0,0,0,.5)' },
         }}
         onClick={handleOpen}
       />
