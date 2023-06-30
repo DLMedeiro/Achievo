@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
+import { Grid, Paper } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { RootState } from '../app/store'
@@ -26,53 +26,61 @@ export default function Home() {
   }
 
   return (
-    <Grid
-      container
-      spacing={0}
+    <Paper
+      elevation={14}
+      className="form-container"
       // sx={{
-      //   padding: '78px 0',
-      //   height: '90vh',
-      //   display: 'flex',
-      //   // flexDirection: 'column', -> not needed?
-      //   alignItems: 'center',
-      //   justifyContent: 'center',
+      //   padding: ' 2em',
+      //   borderRadius: '30px',
+      //   backgroundColor: 'rgba(252, 252, 252, 0.8)',
       // }}
     >
-      <Grid
-        item
-        xs={8}
-        // sx={{
-        //   backgroundColor: 'rgba(252, 252, 252, 0.5)',
-        //   padding: '1rem',
-        //   textAlign: 'center',
-        //   borderRadius: '10px',
-        // }}
-      >
-        {user ? (
-          <>
-            <h1>Hi {user.name}</h1>
-            <h2>Welcome Back!</h2>
-          </>
-        ) : (
-          <>
-            <h1> Seeking an extra dose of motivation?</h1>
-            <h2>Look no further!</h2>
-            <h4>
-              Start Somewhere provides a unique approach to goal achievement and
-              is the perfect companion, empowering you to allocate your time
-              effectively and track progress towards achieving success in your
-              goals.
-            </h4>
-          </>
-        )}
+      {user ? (
+        <>
+          <h1>Hi {user.name}</h1>
+          <h2>Welcome Back!</h2>
+        </>
+      ) : (
+        <>
+          <h1> Seeking an extra dose of motivation?</h1>
+          <h2>Look no further!</h2>
+          <h4>
+            Start Somewhere provides a unique approach to goal achievement.
+          </h4>
+          <h4>
+            Empowering you to allocate your time effectively and track progress
+            towards achieving success in your goals.
+          </h4>
+        </>
+      )}
 
-        {user ? (
+      {user ? (
+        <Link
+          to={`/goals/user/${user._id}`}
+          // style={{ textDecoration: 'none', margin: '1rem' }}
+        >
+          <Button
+            variant="contained"
+            id="btn-pair"
+            // sx={{
+            //   mt: 3,
+            //   mb: 2,
+            //   borderRadius: '40px',
+            //   margin: '0 auto',
+            // }}
+          >
+            Go to my dashboard
+          </Button>
+        </Link>
+      ) : (
+        <>
           <Link
-            to={`/goals/user/${user._id}`}
+            to="login"
             // style={{ textDecoration: 'none', margin: '1rem' }}
           >
             <Button
               variant="contained"
+              id="btn-pair"
               // sx={{
               //   mt: 3,
               //   mb: 2,
@@ -80,43 +88,25 @@ export default function Home() {
               //   margin: '0 auto',
               // }}
             >
-              Go to my dashboard
+              Log In
             </Button>
           </Link>
-        ) : (
-          <>
-            <Link
-              to="login"
-              // style={{ textDecoration: 'none', margin: '1rem' }}
-            >
-              <Button
-                variant="contained"
-                // sx={{
-                //   mt: 3,
-                //   mb: 2,
-                //   borderRadius: '40px',
-                //   margin: '0 auto',
-                // }}
-              >
-                Log In
-              </Button>
-            </Link>
 
-            <Button
-              onClick={loginDemo}
-              variant="contained"
-              // sx={{
-              //   mt: 3,
-              //   mb: 2,
-              //   borderRadius: '40px',
-              //   margin: '0 auto',
-              // }}
-            >
-              Try out a demo
-            </Button>
-          </>
-        )}
-      </Grid>
-    </Grid>
+          <Button
+            onClick={loginDemo}
+            variant="contained"
+            id="btn-pair"
+            // sx={{
+            //   mt: 3,
+            //   mb: 2,
+            //   borderRadius: '40px',
+            //   margin: '0 auto',
+            // }}
+          >
+            Try out a demo
+          </Button>
+        </>
+      )}
+    </Paper>
   )
 }

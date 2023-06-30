@@ -67,33 +67,25 @@ function Dashboard() {
 
   return (
     <>
-      <section className="heading">
+      <section>
         <h1>Welcome Back {user && user.name}!</h1>
       </section>
 
       <GoalInputForm />
 
       {/* goals */}
-      <section className="content">
-        <Paper
-          elevation={14}
-          // sx={{
-          //   padding: ' 2em',
-          //   backgroundColor: 'rgba(252, 252, 252, 0.8)',
-          //   marginTop: '1rem',
-          // }}
-        >
-          {goals && goals.length > 0 ? (
-            <div className="goals">
-              {goals.map((goal) => (
-                <GoalCard key={goal._id} goal={goal} />
-              ))}
-            </div>
-          ) : (
-            <h3>You have not set any goals</h3>
-          )}
-        </Paper>
-      </section>
+
+      {goals && goals.length > 0 ? (
+        <>
+          {goals.map((goal) => (
+            <GoalCard key={goal._id} goal={goal} />
+          ))}
+        </>
+      ) : (
+        <>
+          <h3>You have not set any goals</h3>
+        </>
+      )}
     </>
   )
 }

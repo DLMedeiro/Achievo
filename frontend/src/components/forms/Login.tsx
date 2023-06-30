@@ -87,82 +87,88 @@ export default function Login() {
   // Add error handling within the signup form
   return (
     // <ThemeProvider theme={theme}>
-    <Container component="main" maxWidth="xs">
-      <Box
-        component="form"
-        noValidate
-        onSubmit={handleSubmit(onSubmit)}
+
+    <Box
+      component="form"
+      className="form"
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
+      // sx={{
+      //   mt: 3,
+      //   marginBottom: '12px',
+      // }}
+    >
+      <Grid
+        container
+        spacing={0}
         // sx={{
-        //   mt: 3,
-        //   marginBottom: '12px',
+        //   marginBottom: '16px',
+        //   paddingLeft: 0,
+        //   paddingRight: 0,
+        //   minWidth: '250px',
         // }}
       >
         <Grid
-          container
-          spacing={0}
+          item
+          xs={12}
+          // sx={{ marginBottom: '26px' }}
+        >
+          <TextField
+            required
+            fullWidth
+            variant="filled"
+            margin="normal"
+            id="email"
+            label="Email Address"
+            autoComplete="email"
+            {...register('email')}
+          />
+          <div style={{ color: 'red' }}>{errors.email?.message}</div>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          //  sx={{ marginBottom: '26px' }}
+        >
+          <TextField
+            required
+            fullWidth
+            variant="filled"
+            margin="normal"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="new-password"
+            {...register('password')}
+          />
+          <div style={{ color: 'red' }}>{errors.password?.message}</div>
+        </Grid>
+        <Button
+          variant="contained"
+          type="submit"
+          className="btn"
           // sx={{
-          //   marginBottom: '16px',
-          //   paddingLeft: 0,
-          //   paddingRight: 0,
-          //   minWidth: '250px',
+          //   mt: 3,
+          //   mb: 2,
+          //   width: '100%',
+          //   borderRadius: '40px',
+          //   margin: '0 auto',
+          //   display: 'flex',
+          //   color: '#2f2d13',
+          //   backgroundColor: '#f6cdfe',
+          //   '&:hover': {
+          //     backgroundColor: '#f9f9f9',
+          //     color: '#2f2d13',
+          //     cursor: 'pointer',
+          //   },
           // }}
         >
-          <Grid
-            item
-            xs={12}
-            // sx={{ marginBottom: '26px' }}
-          >
-            <TextField
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              autoComplete="email"
-              {...register('email')}
-            />
-            <div style={{ color: 'red' }}>{errors.email?.message}</div>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            //  sx={{ marginBottom: '26px' }}
-          >
-            <TextField
-              required
-              fullWidth
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="new-password"
-              {...register('password')}
-            />
-            <div style={{ color: 'red' }}>{errors.password?.message}</div>
-          </Grid>
-          <Button
-            variant="contained"
-            type="submit"
-            // sx={{
-            //   mt: 3,
-            //   mb: 2,
-            //   width: '100%',
-            //   borderRadius: '40px',
-            //   margin: '0 auto',
-            //   display: 'flex',
-            //   color: '#2f2d13',
-            //   backgroundColor: '#f6cdfe',
-            //   '&:hover': {
-            //     backgroundColor: '#f9f9f9',
-            //     color: '#2f2d13',
-            //     cursor: 'pointer',
-            //   },
-            // }}
-          >
-            Login
-          </Button>
-          {/* <p>{loginStatus}</p> */}
-        </Grid>
-      </Box>
-    </Container>
+          Login
+        </Button>
+        {/* <p>{loginStatus}</p> */}
+      </Grid>
+    </Box>
+
     // </ThemeProvider>
   )
 }

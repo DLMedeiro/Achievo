@@ -110,23 +110,9 @@ export default function ActivityInputForm() {
   useEffect(() => {}, [startValue])
 
   return (
-    <Accordion
-    // sx={{
-    //   backgroundColor: 'rgba(252, 252, 252, 0.8)',
-    //   marginBottom: '1rem',
-    //   borderRadius: '30px',
-    // }}
-    >
+    <Accordion>
       <AccordionSummary
-        expandIcon={
-          <ExpandMoreIcon
-          // sx={{
-          //   // backgroundColor: 'rgba(252, 252, 252, 0.8)',
-          //   marginBottom: '1rem',
-          //   borderRadius: '30px',
-          // }}
-          />
-        }
+        expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
         id="panel1a-header"
       >

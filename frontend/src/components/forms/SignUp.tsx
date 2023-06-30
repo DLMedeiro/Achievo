@@ -6,8 +6,7 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
-
-import Grid from '@mui/material/Grid'
+import { Grid, Paper } from '@mui/material'
 import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
@@ -102,111 +101,109 @@ export default function SignUp() {
   }
 
   return (
-    // <ThemeProvider theme={theme}>
-    <Container component="main" maxWidth="xs">
-      <Box
-      // sx={{
-      //   display: 'flex',
-      //   flexDirection: 'column',
-      //   alignItems: 'center',
-      // }}
+    <Box
+      component="form"
+      className="form"
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
+      // sx={{ mt: 3, marginBottom: '12px' }}
+    >
+      <Grid
+        container
+        spacing={0}
+        // sx={{
+        //   marginBottom: '16px',
+        //   paddingLeft: 0,
+        //   paddingRight: 0,
+        //   minWidth: '250px',
+        // }}
       >
-        <Box
-          component="form"
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-          // sx={{ mt: 3, marginBottom: '12px' }}
+        <Grid
+          item
+          xs={12}
+          // sx={{ marginBottom: '26px' }}
         >
-          <Grid
-            container
-            spacing={0}
-            // sx={{
-            //   marginBottom: '16px',
-            //   paddingLeft: 0,
-            //   paddingRight: 0,
-            //   minWidth: '250px',
-            // }}
-          >
-            <Grid
-              item
-              xs={12}
-              // sx={{ marginBottom: '26px' }}
-            >
-              <TextField
-                required
-                fullWidth
-                id="name"
-                label="Name"
-                autoComplete="name"
-                {...register('name')}
-              />
-              <div style={{ color: 'red' }}>{errors.name?.message}</div>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              // sx={{ marginBottom: '26px' }}
-            >
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                autoComplete="email"
-                {...register('email')}
-              />
-              <div style={{ color: 'red' }}>{errors.email?.message}</div>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              //  sx={{ marginBottom: '26px' }}
-            >
-              <TextField
-                required
-                fullWidth
-                label="Password"
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-                {...register('password')}
-              />
-              <div style={{ color: 'red' }}>{errors.password?.message}</div>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              // sx={{ marginBottom: '26px' }}
-            >
-              <TextField
-                required
-                fullWidth
-                label="Password"
-                type="password"
-                id="password2"
-                placeholder="Re-Enter your password"
-                {...register('password2')}
-              />
-              <div style={{ color: 'red' }}>{errors.password2?.message}</div>
-            </Grid>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              // sx={{
-              //   mt: 3,
-              //   mb: 2,
-              //   borderRadius: '40px',
-              //   margin: '0 auto',
-              //   display: 'flex',
-              // }}
-            >
-              Create Account
-            </Button>
-          </Grid>
-        </Box>
-      </Box>
-    </Container>
-    // </ThemeProvider>
+          <TextField
+            required
+            fullWidth
+            variant="filled"
+            margin="normal"
+            id="name"
+            label="Name"
+            autoComplete="name"
+            {...register('name')}
+          />
+          <div style={{ color: 'red' }}>{errors.name?.message}</div>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          // sx={{ marginBottom: '26px' }}
+        >
+          <TextField
+            required
+            fullWidth
+            variant="filled"
+            margin="normal"
+            id="email"
+            label="Email Address"
+            autoComplete="email"
+            {...register('email')}
+          />
+          <div style={{ color: 'red' }}>{errors.email?.message}</div>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          //  sx={{ marginBottom: '26px' }}
+        >
+          <TextField
+            required
+            fullWidth
+            variant="filled"
+            margin="normal"
+            label="Password"
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            {...register('password')}
+          />
+          <div style={{ color: 'red' }}>{errors.password?.message}</div>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          // sx={{ marginBottom: '26px' }}
+        >
+          <TextField
+            required
+            fullWidth
+            variant="filled"
+            margin="normal"
+            label="Password"
+            type="password"
+            id="password2"
+            placeholder="Re-Enter your password"
+            {...register('password2')}
+          />
+          <div style={{ color: 'red' }}>{errors.password2?.message}</div>
+        </Grid>
+        <Button
+          className="btn"
+          type="submit"
+          variant="contained"
+          color="primary"
+          // sx={{
+          //   mt: 3,
+          //   mb: 2,
+          //   borderRadius: '40px',
+          //   margin: '0 auto',
+          //   display: 'flex',
+          // }}
+        >
+          Create Account
+        </Button>
+      </Grid>
+    </Box>
   )
 }

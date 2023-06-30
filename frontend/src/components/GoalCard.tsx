@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Item from '../models/Item'
-import { Grid } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import dayjs, { Dayjs } from 'dayjs'
 import Paper from '@mui/material/Paper'
 import '../styles/App.css'
@@ -18,7 +18,11 @@ import AddIcon from '@mui/icons-material/Add'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline'
 import { RootState } from '../app/store'
-
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import { Types } from 'mongoose'
 interface userState {
   user: any
 }
@@ -63,6 +67,7 @@ export default function Activity({ goal }: any) {
   const [boxShadow, setBoxShadow] = useState(
     '0px 7px 9px -4px rgb(0 0 0 / 20%), 0px 14px 21px 2px rgb(0 0 0 / 14%), 0px 5px 26px 4px rgb(0 0 0 / 12%)',
   )
+  const [borderColor, setBorderColor] = useState('transparent')
   // const [activity, setActivity] = useState(props.items.activity)
   // const [timeTarget, setTimeTarget] = useState(props.items.target)
   const [progress, setProgress] = useState(goal.progress)
@@ -168,155 +173,112 @@ export default function Activity({ goal }: any) {
       setBoxShadow(
         '0px 7px 9px -4px rgb(3 164 3 / 20%), 0px 14px 21px 2px rgb(3 164 3 / 14%), 0px 5px 26px 4px rgb(3 164 3 / 12%)',
       )
+      setBorderColor('green')
     } else {
       setBoxShadow(
         '0px 7px 9px -4px rgb(0 0 0 / 20%), 0px 14px 21px 2px rgb(0 0 0 / 14%), 0px 5px 26px 4px rgb(0 0 0 / 12%)',
       )
+      setBorderColor('transparent')
     }
   }, [completed])
 
   return (
     <Paper
       elevation={14}
-      // sx={{
-      //   padding: ' 2em',
-      //   borderRadius: '30px',
-      //   margin: '1rem',
-      //   boxShadow: { boxShadow },
-      //   backgroundColor: 'transparent',
-      // }}
-      key={goal.id}
+      className="form group"
+      variant="outlined"
+      sx={{
+        boxShadow: { boxShadow },
+        borderColor: { borderColor },
+      }}
     >
-      <Grid
-        container
-        spacing={0}
-        // sx={{
-        //   // padding: '78px 0',
-        //   // height: '90vh',
-        //   display: 'flex',
-        //   flexDirection: 'row',
-        //   alignItems: 'center',
-        //   justifyContent: 'center',
-        // }}
-      >
-        <Grid
+      <Grid container spacing={0} key={goal.id}>
+        {/* <Grid
           item
           xs={11}
-          // sx={{
-          //   fontSize: '2rem',
-          //   borderBottom: '2px solid black',
-          //   marginBottom: '5px',
-          //   '&:hover': {
-          //     color: '#cb99d5',
-          //     borderBottom: '2px solid #cb99d5',
-          //     cursor: 'pointer',
-          //   },
-          // }}
           onClick={editActivity}
-        >
-          {completed ? (
-            <>
-              {goal.activity} <DoneOutlineIcon style={{ color: 'green' }} />
-            </>
-          ) : (
-            <>{goal.activity}</>
-          )}
-        </Grid>
-        <Grid
-          item
-          xs={1}
-          // sx={{
-          //   fontSize: '2rem',
-          //   justifyContent: 'flex-start',
-          // }}
-        >
-          <DeleteForeverIcon
-            // sx={{
-            //   fontSize: '2rem',
-            //   marginBottom: '5%',
-            //   marginLeft: 'auto',
-            //   width: '100%',
-            // }}
-            onClick={deleteItem}
-          />
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        spacing={0}
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Grid
-          item
-          xs={12}
-          // sx={{ fontSize: '1rem' }}
-        >
-          <div>
-            {duration} {duration == 1 ? 'Day Remaining' : 'Days Remaining'}
-          </div>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          // sx={{ fontSize: '1rem' }}
-        >
-          <div>
-            Start:{' '}
-            {new Date(goal.start).toLocaleString('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-            })}{' '}
-            | End:{' '}
-            {new Date(goal.end).toLocaleString('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-            })}
-          </div>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        spacing={0}
-        // sx={{
-        //   // padding: '78px 0',
-        //   // height: '90vh',
-        //   display: 'flex',
-        //   flexDirection: 'row',
-        //   alignItems: 'center',
-        //   justifyContent: 'center',
-        // }}
-      >
-        <Grid item xs={3} sx={{ fontSize: '2rem' }}>
-          <Button
-            onClick={addProgress}
-            variant="contained"
-            color="secondary"
-            // sx={{
-            //   my: 2,
-            //   borderRadius: '40px',
-            //   width: '100%',
-            //   minWidth: '10px',
-            //   marginRight: '5px',
-            //   maxWidth: '35px',
-            // }}
+        > */}
+
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
           >
+            {completed ? (
+              <>
+                <DoneOutlineIcon
+                  style={{ color: 'green', marginRight: '10px' }}
+                />
+                {goal.activity}
+              </>
+            ) : (
+              <>{goal.activity}</>
+            )}
+          </AccordionSummary>
+          {/* </Grid> */}
+
+          <AccordionDetails>
+            <Grid
+              item
+              xs={12}
+              // sx={{ fontSize: '1rem' }}
+            >
+              <Typography variant="caption">
+                {duration} {duration == 1 ? 'Day Remaining' : 'Days Remaining'}
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              // sx={{ fontSize: '1rem' }}
+            >
+              <Typography variant="caption">
+                {new Date(goal.start).toLocaleString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}{' '}
+                -{' '}
+                {new Date(goal.end).toLocaleString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              // sx={{ fontSize: '1rem' }}
+            >
+              <Typography
+                variant="caption"
+                onClick={editActivity}
+                className="link"
+              >
+                Edit Goal
+              </Typography>{' '}
+              |{' '}
+              <Typography
+                variant="caption"
+                onClick={deleteItem}
+                className="link"
+              >
+                Delete Goal
+              </Typography>
+            </Grid>
+          </AccordionDetails>
+        </Accordion>
+
+        <Grid item xs={3} sx={{ fontSize: '2rem' }}>
+          <Button onClick={addProgress} variant="contained" color="secondary">
             <AddIcon />
           </Button>
           <Button
             onClick={subtractProgress}
             variant="contained"
             color="secondary"
-            // sx={{
-            //   my: 2,
-            //   borderRadius: '40px',
-            //   width: '100%',
-            //   minWidth: '10px',
-            //   maxWidth: '35px',
-            // }}
           >
             <RemoveIcon />
           </Button>
@@ -340,25 +302,9 @@ export default function Activity({ goal }: any) {
             </div>
           </div>
         </Grid>
-      </Grid>
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-      >
+
         {completed ? (
-          <Grid
-            item
-            xs={12}
-            // sx={{
-            //   fontSize: '1.2rem',
-            //   fontWeight: 'bold',
-            //   padding: '5px',
-            //   borderBottom: '2px solid green',
-            // }}
-          >
+          <Grid item xs={12}>
             {progress} of {goal.target} hour target completed!
           </Grid>
         ) : (

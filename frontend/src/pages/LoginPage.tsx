@@ -21,19 +21,13 @@ export default function LoginForm(): JSX.Element {
   }
 
   return (
-    <Paper
-      elevation={14}
-      // sx={{
-      //   padding: ' 2em',
-      //   borderRadius: '30px',
-      //   backgroundColor: 'rgba(252, 252, 252, 0.8)',
-      // }}
-    >
-      <Typography component="h2" align="center">
+    <Paper elevation={14} className="form-container">
+      <Typography variant="h5" component="h5" align="center">
         Start Somewhere.
       </Typography>
       <Typography
-        component="h3"
+        variant="h6"
+        component="h6"
         align="center"
         // sx={{ marginBottom: '20px' }}
       >
@@ -51,6 +45,7 @@ export default function LoginForm(): JSX.Element {
       >
         <Button
           variant="contained"
+          className="btn"
           // sx={{
           //   mt: 3,
           //   mb: 2,
@@ -70,21 +65,21 @@ export default function LoginForm(): JSX.Element {
         </Button>
       </Link>
 
-      <Grid
-        container
-        justifyContent="center"
-        //  sx={{ marginBottom: '12px' }}
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
+        sx={{ marginTop: '1rem' }}
       >
-        {/* <MUILink href="#" variant="body2">
-              Forgot your password?
-            </MUILink> */}
-      </Grid>
+        Don't feel like creating an account?
+      </Typography>
       <Typography variant="body2" color="text.secondary" align="center">
-        Don't feel like creating and account? Have fun with Finn's account.
+        Have fun with Finn's.
       </Typography>
       <Typography variant="body2" color="text.secondary" align="center">
         Email: finn@imadog.com
       </Typography>
+
       <Typography variant="body2" color="text.secondary" align="center">
         Password: FinnFinn
       </Typography>
