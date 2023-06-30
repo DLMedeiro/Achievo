@@ -25,6 +25,8 @@ import { DateField } from '@mui/x-date-pickers/DateField'
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo'
 import { getGoals, changeGoal } from '../../features/goals/goalSlice'
 import { Link } from 'react-router-dom'
+import Typography from '@mui/material/Typography'
+import { Paper } from '@mui/material'
 
 // const theme = createTheme({
 //   palette: {
@@ -123,145 +125,124 @@ export default function ActivityInputForm() {
   }
 
   return (
-    <>
-      {/* // <ThemeProvider theme={theme}> */}
+    <Paper elevation={14} className="form-container">
+      <Typography variant="h5" component="h5" align="center">
+        Update Goal
+      </Typography>
       {changeBtn ? (
-        <Container component="main">
-          <Box
-          // sx={{
-          //   display: 'flex',
-          //   flexDirection: 'column',
-          //   alignItems: 'center',
-          //   width: ' 100%',
-          // }}
-          >
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit(onSubmit)}
-              // sx={{ mt: 2, marginBottom: '12px' }}
+        <Box
+          component="form"
+          className="form"
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Grid container spacing={0}>
+            <Grid item xs={12} className="dateLabel">
+              <DemoItem label="Start Date">
+                <DatePicker
+                  value={dayjs(startValue)}
+                  onChange={(newValue) => setStartValue(newValue)}
+                />
+              </DemoItem>
+              <div style={{ color: 'red' }}>{errors.start?.message}</div>
+            </Grid>
+            <Grid item xs={12} className="dateLabel">
+              <DemoItem label="Completion Date">
+                <DatePicker
+                  value={dayjs(endValue)}
+                  onChange={(newValue) => setEndValue(newValue)}
+                />
+              </DemoItem>
+              <div style={{ color: 'red' }}>{errors.end?.message}</div>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                variant="filled"
+                margin="normal"
+                id="activity"
+                label="Activity"
+                {...register('activity')}
+              />
+              <div style={{ color: 'red' }}>{errors.activity?.message}</div>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                variant="filled"
+                margin="normal"
+                label="target"
+                type="number"
+                id="target"
+                {...register('target', {
+                  valueAsNumber: true,
+                  onChange: (e) => {
+                    setChangingTarget(e.target)
+                  },
+                })}
+              />
+              <div style={{ color: 'red' }}>{errors.target?.message}</div>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                variant="filled"
+                margin="normal"
+                label="progress"
+                type="number"
+                id="progress"
+                {...register('progress', {
+                  valueAsNumber: true,
+                  onChange: (e) => {
+                    setChangingProgress(e.target)
+                  },
+                })}
+              />
+              <div style={{ color: 'red' }}>{errors.progress?.message}</div>
+            </Grid>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className="btn"
+              // sx={{
+              //   mt: 3,
+              //   mb: 2,
+              //   mx: 'auto',
+              //   borderRadius: '40px',
+              //   display: 'flex',
+              // }}
             >
-              <Grid
-                container
-                spacing={2}
-                // sx={{
-                //   marginBottom: '16px',
-                //   paddingLeft: 0,
-                //   paddingRight: 0,
-                //   minWidth: '250px',
-                // }}
-              >
-                <Grid item xs={6}>
-                  <DemoItem label="Start Date">
-                    <DatePicker
-                      value={dayjs(startValue)}
-                      onChange={(newValue) => setStartValue(newValue)}
-                    />
-                  </DemoItem>
-                  <div style={{ color: 'red' }}>{errors.start?.message}</div>
-                </Grid>
-                <Grid item xs={6}>
-                  <DemoItem label="Completion Date">
-                    <DatePicker
-                      value={dayjs(endValue)}
-                      onChange={(newValue) => setEndValue(newValue)}
-                    />
-                  </DemoItem>
-                  <div style={{ color: 'red' }}>{errors.end?.message}</div>
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="activity"
-                    label="Activity"
-                    {...register('activity')}
-                  />
-                  <div style={{ color: 'red' }}>{errors.activity?.message}</div>
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="target"
-                    type="number"
-                    id="target"
-                    {...register('target', {
-                      valueAsNumber: true,
-                      onChange: (e) => {
-                        setChangingTarget(e.target)
-                      },
-                    })}
-                  />
-                  <div style={{ color: 'red' }}>{errors.target?.message}</div>
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="progress"
-                    type="number"
-                    id="progress"
-                    {...register('progress', {
-                      valueAsNumber: true,
-                      onChange: (e) => {
-                        setChangingProgress(e.target)
-                      },
-                    })}
-                  />
-                  <div style={{ color: 'red' }}>{errors.progress?.message}</div>
-                </Grid>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  // sx={{
-                  //   mt: 3,
-                  //   mb: 2,
-                  //   mx: 'auto',
-                  //   borderRadius: '40px',
-                  //   display: 'flex',
-                  // }}
-                >
-                  Save Changes
-                </Button>
-              </Grid>
-            </Box>
-          </Box>
-        </Container>
+              Save Changes
+            </Button>
+          </Grid>
+        </Box>
       ) : (
-        <Container component="main">
-          <Box
-          // sx={{
-          //   display: 'flex',
-          //   flexDirection: 'column',
-          //   alignItems: 'center',
-          //   width: ' 100%',
-          // }}
+        <Box className="form">
+          <Link
+            to={`/goals/user/${user._id}`}
+            // style={{ textDecoration: 'none', margin: '1rem' }}
           >
-            <Link
-              to={`/goals/user/${user._id}`}
-              // style={{ textDecoration: 'none', margin: '1rem' }}
+            <Button
+              onClick={() => {
+                setChangeBtn(true)
+              }}
+              variant="contained"
+              // sx={{
+              //   mt: 3,
+              //   mb: 2,
+              //   borderRadius: '40px',
+              //   margin: '0 auto',
+              // }}
             >
-              <Button
-                onClick={() => {
-                  setChangeBtn(true)
-                }}
-                variant="contained"
-                // sx={{
-                //   mt: 3,
-                //   mb: 2,
-                //   borderRadius: '40px',
-                //   margin: '0 auto',
-                // }}
-              >
-                Changes saved - Return to Dashboard
-              </Button>
-            </Link>
-          </Box>
-        </Container>
+              Changes saved - Return to Dashboard
+            </Button>
+          </Link>
+        </Box>
       )}
-      {/* </ThemeProvider> */}
-    </>
+    </Paper>
   )
 }

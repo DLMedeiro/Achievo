@@ -120,96 +120,83 @@ export default function ActivityInputForm() {
       </AccordionSummary>
       <AccordionDetails>
         {/* <ThemeProvider theme={theme}> */}
-        <Container component="main">
-          <Box
-          // sx={{
-          //   display: 'flex',
-          //   flexDirection: 'column',
-          //   alignItems: 'center',
-          //   width: ' 100%',
-          // }}
-          >
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit(onSubmit)}
-              // sx={{ marginBottom: '12px' }}
+        <Box
+          component="form"
+          className="form"
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          // sx={{ marginBottom: '12px' }}
+        >
+          <Grid container spacing={0}>
+            <Grid item xs={12}>
+              <DemoItem label="Start Date">
+                <DatePicker
+                  value={startValue}
+                  onChange={(newValue) => setStartValue(newValue)}
+                />
+              </DemoItem>
+              <div style={{ color: 'red' }}>{errors.start?.message}</div>
+            </Grid>
+            <Grid item xs={12}>
+              <DemoItem label="Completion Date">
+                <DatePicker
+                  value={endValue}
+                  onChange={(newValue) => setEndValue(newValue)}
+                />
+              </DemoItem>
+              <div style={{ color: 'red' }}>{errors.end?.message}</div>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                variant="filled"
+                margin="normal"
+                id="activity"
+                label="Activity"
+                {...register('activity')}
+              />
+              <div style={{ color: 'red' }}>{errors.activity?.message}</div>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                label="target"
+                type="text"
+                id="target"
+                variant="filled"
+                margin="normal"
+                {...register('target')}
+              />
+              <div style={{ color: 'red' }}>{errors.target?.message}</div>
+            </Grid>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className="btn"
+              // sx={{
+              //   mt: 3,
+              //   mb: 2,
+              //   mx: 'auto',
+              //   borderRadius: '40px',
+              //   display: 'flex',
+              //   color: '#2f2d13',
+              //   backgroundColor: '#f6cdfe',
+              //   '&:hover': {
+              //     backgroundColor: '#f9f9f9',
+              //     color: '#2f2d13',
+              //     cursor: 'pointer',
+              //   },
+              // }}
             >
-              <Grid
-                container
-                spacing={2}
-                // sx={{
-                //   marginBottom: '16px',
-                //   paddingLeft: 0,
-                //   paddingRight: 0,
-                //   minWidth: '250px',
-                // }}
-              >
-                <Grid item xs={6}>
-                  <DemoItem label="Start Date">
-                    <DatePicker
-                      value={startValue}
-                      onChange={(newValue) => setStartValue(newValue)}
-                    />
-                  </DemoItem>
-                  <div style={{ color: 'red' }}>{errors.start?.message}</div>
-                </Grid>
-                <Grid item xs={6}>
-                  <DemoItem label="Completion Date">
-                    <DatePicker
-                      value={endValue}
-                      onChange={(newValue) => setEndValue(newValue)}
-                    />
-                  </DemoItem>
-                  <div style={{ color: 'red' }}>{errors.end?.message}</div>
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="activity"
-                    label="Activity"
-                    {...register('activity')}
-                  />
-                  <div style={{ color: 'red' }}>{errors.activity?.message}</div>
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="target"
-                    type="text"
-                    id="target"
-                    {...register('target')}
-                  />
-                  <div style={{ color: 'red' }}>{errors.target?.message}</div>
-                </Grid>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  // sx={{
-                  //   mt: 3,
-                  //   mb: 2,
-                  //   mx: 'auto',
-                  //   borderRadius: '40px',
-                  //   display: 'flex',
-                  //   color: '#2f2d13',
-                  //   backgroundColor: '#f6cdfe',
-                  //   '&:hover': {
-                  //     backgroundColor: '#f9f9f9',
-                  //     color: '#2f2d13',
-                  //     cursor: 'pointer',
-                  //   },
-                  // }}
-                >
-                  Create Goal
-                </Button>
-                {/* <p>{loginStatus}</p> */}
-              </Grid>
-            </Box>
-          </Box>
-        </Container>
+              Create Goal
+            </Button>
+            {/* <p>{loginStatus}</p> */}
+          </Grid>
+        </Box>
+
         {/* </ThemeProvider> */}
       </AccordionDetails>
     </Accordion>

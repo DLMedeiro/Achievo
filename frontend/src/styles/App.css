@@ -42,12 +42,17 @@
 .progress {
   background-color: #e1def1;
   border-radius: 30px;
-  height: 30px;
+  /* height: 30px; */
   width: 100%;
   align-items: center;
   justify-content: center;
 }
-.progress-done {
+
+.progress p {
+  margin: 0;
+  margin-left: 20px;
+}
+#progress-done {
   background: linear-gradient(to left,#e8b29e, #cb99d5); 
   border-radius: 30px;
   display:flex;

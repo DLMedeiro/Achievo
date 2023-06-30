@@ -1,6 +1,9 @@
 .top-container{
     margin-top: 2rem;
 }
+#goal-container{
+    margin-top:1rem;
+}
 
 /* Form */
 .form-container{
@@ -32,14 +35,23 @@
    color: #2f2d13;
    background-color: #f6cdfe;
 }
-#btn-pair{
-    min-width: 150px;
-    margin: 0.5rem 1rem 0.5rem 1rem;
-}
-
 .btn:hover{
     background-color: #f9f9f9;
      color: #2f2d13;    
      cursor: pointer; 
    
  }
+#btn-pair{
+    min-width: 150px;
+    margin: 0.5rem 1rem 0.5rem 1rem;
+}
+#btn-math{
+    width: 100%;
+}
+
+.dateLabel div p{
+    text-align: left;
+    margin-bottom: 0;
+    margin-top: 1rem;
+}
+

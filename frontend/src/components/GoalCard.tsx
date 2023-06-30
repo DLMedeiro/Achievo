@@ -193,37 +193,28 @@ export default function Activity({ goal }: any) {
       }}
     >
       <Grid container spacing={0} key={goal.id}>
-        {/* <Grid
-          item
-          xs={11}
-          onClick={editActivity}
-        > */}
-
         <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            {completed ? (
-              <>
-                <DoneOutlineIcon
-                  style={{ color: 'green', marginRight: '10px' }}
-                />
-                {goal.activity}
-              </>
-            ) : (
-              <>{goal.activity}</>
-            )}
-          </AccordionSummary>
-          {/* </Grid> */}
+          <Grid item xs={12}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              {completed ? (
+                <>
+                  <DoneOutlineIcon
+                    style={{ color: 'green', marginRight: '10px' }}
+                  />
+                  {goal.activity}
+                </>
+              ) : (
+                <>{goal.activity}</>
+              )}
+            </AccordionSummary>
+          </Grid>
 
           <AccordionDetails>
-            <Grid
-              item
-              xs={12}
-              // sx={{ fontSize: '1rem' }}
-            >
+            <Grid item xs={12}>
               <Typography variant="caption">
                 {duration} {duration == 1 ? 'Day Remaining' : 'Days Remaining'}
               </Typography>
@@ -247,11 +238,7 @@ export default function Activity({ goal }: any) {
                 })}
               </Typography>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              // sx={{ fontSize: '1rem' }}
-            >
+            <Grid item xs={12}>
               <Typography
                 variant="caption"
                 onClick={editActivity}
@@ -271,36 +258,36 @@ export default function Activity({ goal }: any) {
           </AccordionDetails>
         </Accordion>
 
-        <Grid item xs={3} sx={{ fontSize: '2rem' }}>
-          <Button onClick={addProgress} variant="contained" color="secondary">
-            <AddIcon />
-          </Button>
-          <Button
-            onClick={subtractProgress}
-            variant="contained"
-            color="secondary"
-          >
-            <RemoveIcon />
-          </Button>
-        </Grid>
-
         <Grid
-          item
-          xs={8}
-          // sx={{ fontSize: '1rem' }}
+          container
+          columnSpacing={0}
+          rowSpacing={1}
+          key={goal.id}
+          id="goal-container"
         >
-          <div className="progress">
-            <div
-              className="progress-done"
-              style={{ width: `${percentComplete}%` }}
-            >
-              {percentComplete == 0 ? (
-                <p style={{ marginLeft: '50px' }}>{percentComplete}%</p>
-              ) : (
-                <p>{percentComplete}%</p>
-              )}
+          <Grid item xs={2}>
+            <RemoveIcon onClick={subtractProgress} id="btn-math" />
+          </Grid>
+
+          <Grid
+            item
+            xs={8}
+            // sx={{ fontSize: '1rem' }}
+          >
+            <div className="progress">
+              <div id="progress-done" style={{ width: `${percentComplete}%` }}>
+                {percentComplete == 0 ? (
+                  <p>{percentComplete}%</p>
+                ) : (
+                  <p>{percentComplete}%</p>
+                )}
+              </div>
             </div>
-          </div>
+          </Grid>
+
+          <Grid item xs={2}>
+            <AddIcon onClick={addProgress} id="btn-math" />
+          </Grid>
         </Grid>
 
         {completed ? (
