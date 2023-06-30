@@ -7,7 +7,7 @@ import { getGoals, reset } from '../features/goals/goalSlice'
 import GoalCard from '../components/GoalCard'
 import GoalInputForm from '../components/forms/GoalInputForm'
 import EngineeringIcon from '@mui/icons-material/Engineering'
-import '../styles/Utilities.css'
+// import '../styles/Utilities.css'
 import FinnModal from '../components/FinnModal'
 import { Grid, Paper } from '@mui/material'
 
@@ -77,11 +77,11 @@ function Dashboard() {
       <section className="content">
         <Paper
           elevation={14}
-          sx={{
-            padding: ' 2em',
-            backgroundColor: 'rgba(252, 252, 252, 0.8)',
-            marginTop: '1rem',
-          }}
+          // sx={{
+          //   padding: ' 2em',
+          //   backgroundColor: 'rgba(252, 252, 252, 0.8)',
+          //   marginTop: '1rem',
+          // }}
         >
           {goals && goals.length > 0 ? (
             <div className="goals">

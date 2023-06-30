@@ -9,7 +9,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker'
@@ -27,15 +26,15 @@ import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo'
 import { getGoals, changeGoal } from '../../features/goals/goalSlice'
 import { Link } from 'react-router-dom'
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#114ea1',
-      light: '#6189c2',
-      dark: '#00003c',
-    },
-  },
-})
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '#114ea1',
+//       light: '#6189c2',
+//       dark: '#00003c',
+//     },
+//   },
+// })
 
 export default function ActivityInputForm() {
   interface userState {
@@ -124,33 +123,33 @@ export default function ActivityInputForm() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
+      {/* // <ThemeProvider theme={theme}> */}
       {changeBtn ? (
         <Container component="main">
-          <CssBaseline />
           <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              width: ' 100%',
-            }}
+          // sx={{
+          //   display: 'flex',
+          //   flexDirection: 'column',
+          //   alignItems: 'center',
+          //   width: ' 100%',
+          // }}
           >
             <Box
               component="form"
               noValidate
               onSubmit={handleSubmit(onSubmit)}
-              sx={{ mt: 2, marginBottom: '12px' }}
+              // sx={{ mt: 2, marginBottom: '12px' }}
             >
               <Grid
                 container
                 spacing={2}
-                sx={{
-                  marginBottom: '16px',
-                  paddingLeft: 0,
-                  paddingRight: 0,
-                  minWidth: '250px',
-                }}
+                // sx={{
+                //   marginBottom: '16px',
+                //   paddingLeft: 0,
+                //   paddingRight: 0,
+                //   minWidth: '250px',
+                // }}
               >
                 <Grid item xs={6}>
                   <DemoItem label="Start Date">
@@ -216,13 +215,13 @@ export default function ActivityInputForm() {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  sx={{
-                    mt: 3,
-                    mb: 2,
-                    mx: 'auto',
-                    borderRadius: '40px',
-                    display: 'flex',
-                  }}
+                  // sx={{
+                  //   mt: 3,
+                  //   mb: 2,
+                  //   mx: 'auto',
+                  //   borderRadius: '40px',
+                  //   display: 'flex',
+                  // }}
                 >
                   Save Changes
                 </Button>
@@ -232,30 +231,29 @@ export default function ActivityInputForm() {
         </Container>
       ) : (
         <Container component="main">
-          <CssBaseline />
           <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              width: ' 100%',
-            }}
+          // sx={{
+          //   display: 'flex',
+          //   flexDirection: 'column',
+          //   alignItems: 'center',
+          //   width: ' 100%',
+          // }}
           >
             <Link
               to={`/goals/user/${user._id}`}
-              style={{ textDecoration: 'none', margin: '1rem' }}
+              // style={{ textDecoration: 'none', margin: '1rem' }}
             >
               <Button
                 onClick={() => {
                   setChangeBtn(true)
                 }}
                 variant="contained"
-                sx={{
-                  mt: 3,
-                  mb: 2,
-                  borderRadius: '40px',
-                  margin: '0 auto',
-                }}
+                // sx={{
+                //   mt: 3,
+                //   mb: 2,
+                //   borderRadius: '40px',
+                //   margin: '0 auto',
+                // }}
               >
                 Changes saved - Return to Dashboard
               </Button>
@@ -263,6 +261,7 @@ export default function ActivityInputForm() {
           </Box>
         </Container>
       )}
-    </ThemeProvider>
+      {/* </ThemeProvider> */}
+    </>
   )
 }

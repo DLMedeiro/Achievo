@@ -10,14 +10,25 @@ import Button from '@mui/material/Button'
 
 export default function CreateAccount(): JSX.Element {
   return (
-    <Grid container spacing={3} sx={{ padding: '78px 0' }}>
+    <Grid
+      container
+      spacing={3}
+      // sx={{ padding: '78px 0' }}
+    >
       <Grid item xs={4}></Grid>
-      <Grid item xs={2.5} sx={{ minWidth: '350px' }}>
-        <Paper elevation={14} sx={{ padding: ' 2em', borderRadius: '30px' }}>
+      <Grid
+        item
+        xs={2.5}
+        // sx={{ minWidth: '350px' }}
+      >
+        <Paper
+          elevation={14}
+          // sx={{ padding: ' 2em', borderRadius: '30px' }}
+        >
           <Typography
             component="p"
             align="center"
-            sx={{ marginBottom: '20px' }}
+            // sx={{ marginBottom: '20px' }}
           >
             New Account
           </Typography>
@@ -25,7 +36,7 @@ export default function CreateAccount(): JSX.Element {
           <Grid
             container
             justifyContent="center"
-            sx={{ marginBottom: '12px' }}
+            // sx={{ marginBottom: '12px' }}
           ></Grid>
         </Paper>
       </Grid>

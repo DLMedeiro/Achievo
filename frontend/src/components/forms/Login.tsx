@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
-import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
@@ -28,15 +27,15 @@ import { RootState } from '../../app/store'
 
 // const theme = createTheme()
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#f6e4d9',
-      light: '#6189c2',
-      dark: '#2f2d13',
-    },
-  },
-})
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '#f6e4d9',
+//       light: '#6189c2',
+//       dark: '#2f2d13',
+//     },
+//   },
+// })
 
 export default function Login() {
   type Inputs = {
@@ -87,84 +86,83 @@ export default function Login() {
 
   // Add error handling within the signup form
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+    // <ThemeProvider theme={theme}>
+    <Container component="main" maxWidth="xs">
+      <Box
+        component="form"
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+        // sx={{
+        //   mt: 3,
+        //   marginBottom: '12px',
+        // }}
+      >
+        <Grid
+          container
+          spacing={0}
+          // sx={{
+          //   marginBottom: '16px',
+          //   paddingLeft: 0,
+          //   paddingRight: 0,
+          //   minWidth: '250px',
+          // }}
         >
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit(onSubmit)}
-            sx={{
-              mt: 3,
-              marginBottom: '12px',
-            }}
+          <Grid
+            item
+            xs={12}
+            // sx={{ marginBottom: '26px' }}
           >
-            <Grid
-              container
-              spacing={0}
-              sx={{
-                marginBottom: '16px',
-                paddingLeft: 0,
-                paddingRight: 0,
-                minWidth: '250px',
-              }}
-            >
-              <Grid item xs={12} sx={{ marginBottom: '26px' }}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  autoComplete="email"
-                  {...register('email')}
-                />
-                <div style={{ color: 'red' }}>{errors.email?.message}</div>
-              </Grid>
-              <Grid item xs={12} sx={{ marginBottom: '26px' }}>
-                <TextField
-                  required
-                  fullWidth
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  {...register('password')}
-                />
-                <div style={{ color: 'red' }}>{errors.password?.message}</div>
-              </Grid>
-              <Button
-                variant="contained"
-                type="submit"
-                sx={{
-                  mt: 3,
-                  mb: 2,
-                  width: '100%',
-                  borderRadius: '40px',
-                  margin: '0 auto',
-                  display: 'flex',
-                  color: '#2f2d13',
-                  backgroundColor: '#f6cdfe',
-                  '&:hover': {
-                    backgroundColor: '#f9f9f9',
-                    color: '#2f2d13',
-                    cursor: 'pointer',
-                  },
-                }}
-              >
-                Login
-              </Button>
-              {/* <p>{loginStatus}</p> */}
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+            <TextField
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              autoComplete="email"
+              {...register('email')}
+            />
+            <div style={{ color: 'red' }}>{errors.email?.message}</div>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            //  sx={{ marginBottom: '26px' }}
+          >
+            <TextField
+              required
+              fullWidth
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="new-password"
+              {...register('password')}
+            />
+            <div style={{ color: 'red' }}>{errors.password?.message}</div>
+          </Grid>
+          <Button
+            variant="contained"
+            type="submit"
+            // sx={{
+            //   mt: 3,
+            //   mb: 2,
+            //   width: '100%',
+            //   borderRadius: '40px',
+            //   margin: '0 auto',
+            //   display: 'flex',
+            //   color: '#2f2d13',
+            //   backgroundColor: '#f6cdfe',
+            //   '&:hover': {
+            //     backgroundColor: '#f9f9f9',
+            //     color: '#2f2d13',
+            //     cursor: 'pointer',
+            //   },
+            // }}
+          >
+            Login
+          </Button>
+          {/* <p>{loginStatus}</p> */}
+        </Grid>
+      </Box>
+    </Container>
+    // </ThemeProvider>
   )
 }

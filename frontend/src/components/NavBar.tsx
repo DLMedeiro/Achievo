@@ -44,16 +44,20 @@ export default function NavBar() {
             aria-label="logo"
           >
             <ThumbUpOffAltIcon
-              sx={{
-                padding: '10px',
-                borderRadius: '50%',
-                '&:hover': {
-                  backgroundColor: '#f6cdfe',
-                },
-              }}
+            // sx={{
+            //   padding: '10px',
+            //   borderRadius: '50%',
+            //   '&:hover': {
+            //     backgroundColor: '#f6cdfe',
+            //   },
+            // }}
             />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            // sx={{ flexGrow: 1 }}
+          >
             Start Somewhere
           </Typography>
           {user ? (
@@ -61,24 +65,24 @@ export default function NavBar() {
               <Button
                 onClick={logoutUser}
                 color="inherit"
-                sx={{
-                  borderLeft: '5px solid transparent',
-                  '&:hover': {
-                    borderLeft: '5px solid #f6cdfe',
-                  },
-                }}
+                // sx={{
+                //   borderLeft: '5px solid transparent',
+                //   '&:hover': {
+                //     borderLeft: '5px solid #f6cdfe',
+                //   },
+                // }}
               >
                 Logout
               </Button>
               <Button
                 onClick={() => navigate(`/goals/user/${user._id}`)}
                 color="inherit"
-                sx={{
-                  borderLeft: '5px solid transparent',
-                  '&:hover': {
-                    borderLeft: '5px solid #f6cdfe',
-                  },
-                }}
+                // sx={{
+                //   borderLeft: '5px solid transparent',
+                //   '&:hover': {
+                //     borderLeft: '5px solid #f6cdfe',
+                //   },
+                // }}
               >
                 Goals
               </Button>
@@ -95,12 +99,12 @@ export default function NavBar() {
               <Button
                 onClick={() => navigate('/login')}
                 color="inherit"
-                sx={{
-                  borderLeft: '5px solid transparent',
-                  '&:hover': {
-                    borderLeft: '5px solid #f6cdfe',
-                  },
-                }}
+                // sx={{
+                //   borderLeft: '5px solid transparent',
+                //   '&:hover': {
+                //     borderLeft: '5px solid #f6cdfe',
+                //   },
+                // }}
               >
                 Login
               </Button>

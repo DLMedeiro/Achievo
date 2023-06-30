@@ -178,40 +178,40 @@ export default function Activity({ goal }: any) {
   return (
     <Paper
       elevation={14}
-      sx={{
-        padding: ' 2em',
-        borderRadius: '30px',
-        margin: '1rem',
-        boxShadow: { boxShadow },
-        backgroundColor: 'transparent',
-      }}
+      // sx={{
+      //   padding: ' 2em',
+      //   borderRadius: '30px',
+      //   margin: '1rem',
+      //   boxShadow: { boxShadow },
+      //   backgroundColor: 'transparent',
+      // }}
       key={goal.id}
     >
       <Grid
         container
         spacing={0}
-        sx={{
-          // padding: '78px 0',
-          // height: '90vh',
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+        // sx={{
+        //   // padding: '78px 0',
+        //   // height: '90vh',
+        //   display: 'flex',
+        //   flexDirection: 'row',
+        //   alignItems: 'center',
+        //   justifyContent: 'center',
+        // }}
       >
         <Grid
           item
           xs={11}
-          sx={{
-            fontSize: '2rem',
-            borderBottom: '2px solid black',
-            marginBottom: '5px',
-            '&:hover': {
-              color: '#cb99d5',
-              borderBottom: '2px solid #cb99d5',
-              cursor: 'pointer',
-            },
-          }}
+          // sx={{
+          //   fontSize: '2rem',
+          //   borderBottom: '2px solid black',
+          //   marginBottom: '5px',
+          //   '&:hover': {
+          //     color: '#cb99d5',
+          //     borderBottom: '2px solid #cb99d5',
+          //     cursor: 'pointer',
+          //   },
+          // }}
           onClick={editActivity}
         >
           {completed ? (
@@ -225,18 +225,18 @@ export default function Activity({ goal }: any) {
         <Grid
           item
           xs={1}
-          sx={{
-            fontSize: '2rem',
-            justifyContent: 'flex-start',
-          }}
+          // sx={{
+          //   fontSize: '2rem',
+          //   justifyContent: 'flex-start',
+          // }}
         >
           <DeleteForeverIcon
-            sx={{
-              fontSize: '2rem',
-              marginBottom: '5%',
-              marginLeft: 'auto',
-              width: '100%',
-            }}
+            // sx={{
+            //   fontSize: '2rem',
+            //   marginBottom: '5%',
+            //   marginLeft: 'auto',
+            //   width: '100%',
+            // }}
             onClick={deleteItem}
           />
         </Grid>
@@ -248,12 +248,20 @@ export default function Activity({ goal }: any) {
         alignItems="center"
         justifyContent="center"
       >
-        <Grid item xs={12} sx={{ fontSize: '1rem' }}>
+        <Grid
+          item
+          xs={12}
+          // sx={{ fontSize: '1rem' }}
+        >
           <div>
             {duration} {duration == 1 ? 'Day Remaining' : 'Days Remaining'}
           </div>
         </Grid>
-        <Grid item xs={12} sx={{ fontSize: '1rem' }}>
+        <Grid
+          item
+          xs={12}
+          // sx={{ fontSize: '1rem' }}
+        >
           <div>
             Start:{' '}
             {new Date(goal.start).toLocaleString('en-US', {
@@ -273,28 +281,28 @@ export default function Activity({ goal }: any) {
       <Grid
         container
         spacing={0}
-        sx={{
-          // padding: '78px 0',
-          // height: '90vh',
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+        // sx={{
+        //   // padding: '78px 0',
+        //   // height: '90vh',
+        //   display: 'flex',
+        //   flexDirection: 'row',
+        //   alignItems: 'center',
+        //   justifyContent: 'center',
+        // }}
       >
         <Grid item xs={3} sx={{ fontSize: '2rem' }}>
           <Button
             onClick={addProgress}
             variant="contained"
             color="secondary"
-            sx={{
-              my: 2,
-              borderRadius: '40px',
-              width: '100%',
-              minWidth: '10px',
-              marginRight: '5px',
-              maxWidth: '35px',
-            }}
+            // sx={{
+            //   my: 2,
+            //   borderRadius: '40px',
+            //   width: '100%',
+            //   minWidth: '10px',
+            //   marginRight: '5px',
+            //   maxWidth: '35px',
+            // }}
           >
             <AddIcon />
           </Button>
@@ -302,19 +310,23 @@ export default function Activity({ goal }: any) {
             onClick={subtractProgress}
             variant="contained"
             color="secondary"
-            sx={{
-              my: 2,
-              borderRadius: '40px',
-              width: '100%',
-              minWidth: '10px',
-              maxWidth: '35px',
-            }}
+            // sx={{
+            //   my: 2,
+            //   borderRadius: '40px',
+            //   width: '100%',
+            //   minWidth: '10px',
+            //   maxWidth: '35px',
+            // }}
           >
             <RemoveIcon />
           </Button>
         </Grid>
 
-        <Grid item xs={8} sx={{ fontSize: '1rem' }}>
+        <Grid
+          item
+          xs={8}
+          // sx={{ fontSize: '1rem' }}
+        >
           <div className="progress">
             <div
               className="progress-done"
@@ -340,12 +352,12 @@ export default function Activity({ goal }: any) {
           <Grid
             item
             xs={12}
-            sx={{
-              fontSize: '1.2rem',
-              fontWeight: 'bold',
-              padding: '5px',
-              borderBottom: '2px solid green',
-            }}
+            // sx={{
+            //   fontSize: '1.2rem',
+            //   fontWeight: 'bold',
+            //   padding: '5px',
+            //   borderBottom: '2px solid green',
+            // }}
           >
             {progress} of {goal.target} hour target completed!
           </Grid>

@@ -9,7 +9,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker'
@@ -30,15 +29,15 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#114ea1',
-      light: '#6189c2',
-      dark: '#00003c',
-    },
-  },
-})
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '#114ea1',
+//       light: '#6189c2',
+//       dark: '#00003c',
+//     },
+//   },
+// })
 
 // interface ListFormProps {
 //   onAddItem: (
@@ -112,20 +111,20 @@ export default function ActivityInputForm() {
 
   return (
     <Accordion
-      sx={{
-        backgroundColor: 'rgba(252, 252, 252, 0.8)',
-        marginBottom: '1rem',
-        borderRadius: '30px',
-      }}
+    // sx={{
+    //   backgroundColor: 'rgba(252, 252, 252, 0.8)',
+    //   marginBottom: '1rem',
+    //   borderRadius: '30px',
+    // }}
     >
       <AccordionSummary
         expandIcon={
           <ExpandMoreIcon
-            sx={{
-              // backgroundColor: 'rgba(252, 252, 252, 0.8)',
-              marginBottom: '1rem',
-              borderRadius: '30px',
-            }}
+          // sx={{
+          //   // backgroundColor: 'rgba(252, 252, 252, 0.8)',
+          //   marginBottom: '1rem',
+          //   borderRadius: '30px',
+          // }}
           />
         }
         aria-controls="panel1a-content"
@@ -134,101 +133,98 @@ export default function ActivityInputForm() {
         <Typography>Create a new goal</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <ThemeProvider theme={theme}>
-          <Container component="main">
-            <CssBaseline />
+        {/* <ThemeProvider theme={theme}> */}
+        <Container component="main">
+          <Box
+          // sx={{
+          //   display: 'flex',
+          //   flexDirection: 'column',
+          //   alignItems: 'center',
+          //   width: ' 100%',
+          // }}
+          >
             <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                width: ' 100%',
-              }}
+              component="form"
+              noValidate
+              onSubmit={handleSubmit(onSubmit)}
+              // sx={{ marginBottom: '12px' }}
             >
-              <Box
-                component="form"
-                noValidate
-                onSubmit={handleSubmit(onSubmit)}
-                sx={{ marginBottom: '12px' }}
+              <Grid
+                container
+                spacing={2}
+                // sx={{
+                //   marginBottom: '16px',
+                //   paddingLeft: 0,
+                //   paddingRight: 0,
+                //   minWidth: '250px',
+                // }}
               >
-                <Grid
-                  container
-                  spacing={2}
-                  sx={{
-                    marginBottom: '16px',
-                    paddingLeft: 0,
-                    paddingRight: 0,
-                    minWidth: '250px',
-                  }}
-                >
-                  <Grid item xs={6}>
-                    <DemoItem label="Start Date">
-                      <DatePicker
-                        value={startValue}
-                        onChange={(newValue) => setStartValue(newValue)}
-                      />
-                    </DemoItem>
-                    <div style={{ color: 'red' }}>{errors.start?.message}</div>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <DemoItem label="Completion Date">
-                      <DatePicker
-                        value={endValue}
-                        onChange={(newValue) => setEndValue(newValue)}
-                      />
-                    </DemoItem>
-                    <div style={{ color: 'red' }}>{errors.end?.message}</div>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      required
-                      fullWidth
-                      id="activity"
-                      label="Activity"
-                      {...register('activity')}
+                <Grid item xs={6}>
+                  <DemoItem label="Start Date">
+                    <DatePicker
+                      value={startValue}
+                      onChange={(newValue) => setStartValue(newValue)}
                     />
-                    <div style={{ color: 'red' }}>
-                      {errors.activity?.message}
-                    </div>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      required
-                      fullWidth
-                      label="target"
-                      type="text"
-                      id="target"
-                      {...register('target')}
-                    />
-                    <div style={{ color: 'red' }}>{errors.target?.message}</div>
-                  </Grid>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    sx={{
-                      mt: 3,
-                      mb: 2,
-                      mx: 'auto',
-                      borderRadius: '40px',
-                      display: 'flex',
-                      color: '#2f2d13',
-                      backgroundColor: '#f6cdfe',
-                      '&:hover': {
-                        backgroundColor: '#f9f9f9',
-                        color: '#2f2d13',
-                        cursor: 'pointer',
-                      },
-                    }}
-                  >
-                    Create Goal
-                  </Button>
-                  {/* <p>{loginStatus}</p> */}
+                  </DemoItem>
+                  <div style={{ color: 'red' }}>{errors.start?.message}</div>
                 </Grid>
-              </Box>
+                <Grid item xs={6}>
+                  <DemoItem label="Completion Date">
+                    <DatePicker
+                      value={endValue}
+                      onChange={(newValue) => setEndValue(newValue)}
+                    />
+                  </DemoItem>
+                  <div style={{ color: 'red' }}>{errors.end?.message}</div>
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="activity"
+                    label="Activity"
+                    {...register('activity')}
+                  />
+                  <div style={{ color: 'red' }}>{errors.activity?.message}</div>
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    label="target"
+                    type="text"
+                    id="target"
+                    {...register('target')}
+                  />
+                  <div style={{ color: 'red' }}>{errors.target?.message}</div>
+                </Grid>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  // sx={{
+                  //   mt: 3,
+                  //   mb: 2,
+                  //   mx: 'auto',
+                  //   borderRadius: '40px',
+                  //   display: 'flex',
+                  //   color: '#2f2d13',
+                  //   backgroundColor: '#f6cdfe',
+                  //   '&:hover': {
+                  //     backgroundColor: '#f9f9f9',
+                  //     color: '#2f2d13',
+                  //     cursor: 'pointer',
+                  //   },
+                  // }}
+                >
+                  Create Goal
+                </Button>
+                {/* <p>{loginStatus}</p> */}
+              </Grid>
             </Box>
-          </Container>
-        </ThemeProvider>
+          </Box>
+        </Container>
+        {/* </ThemeProvider> */}
       </AccordionDetails>
     </Accordion>
   )

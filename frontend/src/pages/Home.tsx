@@ -29,24 +29,24 @@ export default function Home() {
     <Grid
       container
       spacing={0}
-      sx={{
-        padding: '78px 0',
-        height: '90vh',
-        display: 'flex',
-        // flexDirection: 'column', -> not needed?
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
+      // sx={{
+      //   padding: '78px 0',
+      //   height: '90vh',
+      //   display: 'flex',
+      //   // flexDirection: 'column', -> not needed?
+      //   alignItems: 'center',
+      //   justifyContent: 'center',
+      // }}
     >
       <Grid
         item
         xs={8}
-        sx={{
-          backgroundColor: 'rgba(252, 252, 252, 0.5)',
-          padding: '1rem',
-          textAlign: 'center',
-          borderRadius: '10px',
-        }}
+        // sx={{
+        //   backgroundColor: 'rgba(252, 252, 252, 0.5)',
+        //   padding: '1rem',
+        //   textAlign: 'center',
+        //   borderRadius: '10px',
+        // }}
       >
         {user ? (
           <>
@@ -58,9 +58,10 @@ export default function Home() {
             <h1> Seeking an extra dose of motivation?</h1>
             <h2>Look no further!</h2>
             <h4>
-              Start Somewhere is the perfect companion, empowering you to
-              allocate your time effectively and track your progress towards
-              achieving success in your goals.
+              Start Somewhere provides a unique approach to goal achievement and
+              is the perfect companion, empowering you to allocate your time
+              effectively and track progress towards achieving success in your
+              goals.
             </h4>
           </>
         )}
@@ -68,31 +69,34 @@ export default function Home() {
         {user ? (
           <Link
             to={`/goals/user/${user._id}`}
-            style={{ textDecoration: 'none', margin: '1rem' }}
+            // style={{ textDecoration: 'none', margin: '1rem' }}
           >
             <Button
               variant="contained"
-              sx={{
-                mt: 3,
-                mb: 2,
-                borderRadius: '40px',
-                margin: '0 auto',
-              }}
+              // sx={{
+              //   mt: 3,
+              //   mb: 2,
+              //   borderRadius: '40px',
+              //   margin: '0 auto',
+              // }}
             >
               Go to my dashboard
             </Button>
           </Link>
         ) : (
           <>
-            <Link to="login" style={{ textDecoration: 'none', margin: '1rem' }}>
+            <Link
+              to="login"
+              // style={{ textDecoration: 'none', margin: '1rem' }}
+            >
               <Button
                 variant="contained"
-                sx={{
-                  mt: 3,
-                  mb: 2,
-                  borderRadius: '40px',
-                  margin: '0 auto',
-                }}
+                // sx={{
+                //   mt: 3,
+                //   mb: 2,
+                //   borderRadius: '40px',
+                //   margin: '0 auto',
+                // }}
               >
                 Log In
               </Button>
@@ -101,12 +105,12 @@ export default function Home() {
             <Button
               onClick={loginDemo}
               variant="contained"
-              sx={{
-                mt: 3,
-                mb: 2,
-                borderRadius: '40px',
-                margin: '0 auto',
-              }}
+              // sx={{
+              //   mt: 3,
+              //   mb: 2,
+              //   borderRadius: '40px',
+              //   margin: '0 auto',
+              // }}
             >
               Try out a demo
             </Button>
