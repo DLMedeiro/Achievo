@@ -13,13 +13,14 @@ const register = async (userData: object) => {
       localStorage.setItem('user', JSON.stringify(response.data))
       // Includes token
     }
+
     return response.data
   }
 }
 // Login user
 const login = async (userData: object) => {
-  console.log(userData)
   const response = await axios.post(USERS_URL + '/login', userData)
+
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))
     // Includes token

@@ -20,7 +20,8 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks'
 // useAppSelector: Select from the state
 // useAppDispatch: Dispatch a function like register, or reset
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { registerUser, reset } from '../../features/auth/authSlice'
 import { RootState } from '../../app/store'
 import Spinner from '../Spinner'
@@ -66,7 +67,10 @@ export default function SignUp() {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      console.log(message)
+      toast.error(
+        'Please select a different email.  The email entered is already connected to an account',
+      )
     }
     if (isSuccess && user) {
       navigate(`/`)
@@ -203,6 +207,7 @@ export default function SignUp() {
         >
           Create Account
         </Button>
+        <ToastContainer />
       </Grid>
     </Box>
   )

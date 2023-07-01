@@ -33,7 +33,7 @@ const registerUser = asyncHandler(async(req:any, res:any) => {
 
     // check if user exists and send error if they do
     const userExists = await User.findOne({email: email})
-    if (userExists) {
+    if (userExists == null) {
         res.status(400)
         throw new Error ('User already exists')
     }
@@ -81,35 +81,24 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
 
         // Check for user email
         const user = await User.findOne({email: email})
-        
+
         // Check the password using bcrypt method to compare password input with hashed password
-        if(user && user.password){
-            
-
-
-            
-     
-    if (user && (await bcrypt.compare(password, user.password))){
-    // JWT malformed due to token input not being accurate
-    // _id: new ObjectId("6494dd2cd06c0a6046e9662a"),
-    // workaround temp solution
-    // let startIndex = String(user._id).indexOf('"') + 1;
-    // let endIndex = String(user._id).lastIndexOf('"');
-    // let extractedString = String(user._id).slice(startIndex, endIndex);
-        return(res.json({
-            _id: user.id,
-            name: user.name,
-            email: user.email,
-            token: generateToken(user._id)
-            // token: generateToken(user._id)
-        })
-        )
+        if(user !== null && user.password){
+            if (user !== null && (await bcrypt.compare(password, user.password))){
+                return(res.json({
+                    _id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    token: generateToken(user._id)
+                    // token: generateToken(user._id)
+                    })
+                )
   
-    } else {
-        res.status(400)
-        throw new Error('Invalid credentials')
-    }
-}
+            }
+        } else if (user == null) {
+            res.status(400)
+            throw new Error('Invalid credentials')
+        }
 })
 
 // Description: Get user data

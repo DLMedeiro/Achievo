@@ -68,7 +68,6 @@ const setGoal = asyncHandler(async(req:any, res:any) => {
 // Access: Private
 const updateGoal = asyncHandler(async(req:any, res:any) => {
     const goal = await Goal.findById(req.params.id)
-    console.log(req.body)
     if(!goal){
         res.status(400)
         throw new Error("Goal not found")

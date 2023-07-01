@@ -1,7 +1,8 @@
 // Modified from Material UI Docs: https://github.com/mui/material-ui/blob/v5.12.1/docs/data/material/getting-started/templates/sign-up/SignUp.tsx
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
@@ -21,7 +22,6 @@ import { z } from 'zod'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 // useAppSelector: Select from the state
 // useAppDispatch: Dispatch a function like register, or reset
-import { toast } from 'react-toastify'
 import { login, reset } from '../../features/auth/authSlice'
 import { RootState } from '../../app/store'
 
@@ -47,8 +47,10 @@ export default function Login() {
     password: '',
   }
   const schema = z.object({
-    email: z.string().min(7, { message: 'Email is required' }),
-    password: z.string().min(4, { message: 'Please Enter a password' }),
+    email: z.string().min(7, { message: 'Please enter a valid email' }),
+    password: z
+      .string()
+      .min(4, { message: 'Passwords must be greater than 4 characters' }),
   })
 
   const navigate = useNavigate()
@@ -59,7 +61,8 @@ export default function Login() {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      console.log(message)
+      toast.error('Incorrect Credentials')
     }
     if (isSuccess && user) {
       navigate(`/goals/user/${user._id}`)
@@ -165,6 +168,7 @@ export default function Login() {
         >
           Login
         </Button>
+        <ToastContainer />
         {/* <p>{loginStatus}</p> */}
       </Grid>
     </Box>

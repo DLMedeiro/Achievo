@@ -46,12 +46,6 @@ export const registerUser = createAsyncThunk(
     try {
       return await authService.register(user)
     } catch (error) {
-      //   const message =
-      //     (error.response &&
-      //       error.response.data &&
-      //       error.response.data.message) ||
-      //     error.message ||
-      //     error.toString()
       let message
       if (error) {
         message = error.toString()
