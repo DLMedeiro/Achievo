@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { RootState } from '../app/store'
-import Spinner from '../components/Spinner'
+import CircularIndeterminate from '../components/Spinner'
 import { getGoals, reset } from '../features/goals/goalSlice'
 import GoalCard from '../components/GoalCard'
 import GoalInputForm from '../components/forms/GoalInputForm'
@@ -10,6 +10,7 @@ import EngineeringIcon from '@mui/icons-material/Engineering'
 // import '../styles/Utilities.css'
 import FinnModal from '../components/FinnModal'
 import { Grid, Paper } from '@mui/material'
+import { TransitionGroup } from 'react-transition-group'
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -62,7 +63,7 @@ function Dashboard() {
   }, [user, navigate, isError, message, dispatch])
 
   if (isLoading) {
-    return <Spinner />
+    return <CircularIndeterminate />
   }
 
   return (
@@ -77,6 +78,7 @@ function Dashboard() {
 
       {goals && goals.length > 0 ? (
         <>
+          <TransitionGroup />
           {goals.map((goal) => (
             <GoalCard key={goal._id} goal={goal} />
           ))}

@@ -24,7 +24,6 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { registerUser, reset } from '../../features/auth/authSlice'
 import { RootState } from '../../app/store'
-import Spinner from '../Spinner'
 
 // const theme = createTheme()
 
@@ -77,6 +76,7 @@ export default function SignUp() {
     }
 
     dispatch(reset())
+    console.log(isError)
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const {
@@ -98,10 +98,6 @@ export default function SignUp() {
       }
       dispatch(registerUser(userData))
     }
-  }
-
-  if (isLoading) {
-    return <Spinner />
   }
 
   return (

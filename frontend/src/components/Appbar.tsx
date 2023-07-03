@@ -249,7 +249,7 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               <MenuItem key="dashboard" onClick={handleCloseUserMenu}>
-                <Button onClick={toDashboard}>DashboardTest</Button>
+                <Button onClick={toDashboard}>Dashboard</Button>
               </MenuItem>
               <MenuItem key="logout" onClick={handleCloseUserMenu}>
                 <Button onClick={logoutUser}>Logout</Button>

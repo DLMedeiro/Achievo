@@ -7,8 +7,19 @@ import { Grid, Paper } from '@mui/material'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+import { RootState } from '../app/store'
+import CircularIndeterminate from '../components/Spinner'
+import { useAppSelector } from '../app/hooks'
 
 export default function CreateAccount(): JSX.Element {
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
+    (state: RootState) => state.auth,
+  )
+
+  if (isLoading) {
+    return <CircularIndeterminate />
+  }
+
   return (
     <Paper
       elevation={14}

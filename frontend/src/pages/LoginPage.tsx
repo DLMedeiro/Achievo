@@ -7,7 +7,7 @@ import { Grid, Paper } from '@mui/material'
 // import MUILink from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import Spinner from '../components/Spinner'
+import CircularIndeterminate from '../components/Spinner'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { RootState } from '../app/store'
 
@@ -17,7 +17,7 @@ export default function LoginForm(): JSX.Element {
   )
 
   if (isLoading) {
-    return <Spinner />
+    return <CircularIndeterminate />
   }
 
   return (

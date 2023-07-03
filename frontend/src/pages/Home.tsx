@@ -9,12 +9,16 @@ import HeroImage from '../images/HeroImage.jpg'
 import axios from 'axios'
 import { login } from '../features/auth/authSlice'
 import FinnModal from '../components/FinnModal'
+import CircularIndeterminate from '../components/Spinner'
+
 export default function Home() {
   interface userState {
     user: any
   }
-  const { user }: userState = useAppSelector((state: RootState) => state.auth)
-
+  // const { user }: userState = useAppSelector((state: RootState) => state.auth)
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
+    (state: RootState) => state.auth,
+  )
   const dispatch = useAppDispatch()
 
   const loginDemo = () => {
@@ -24,6 +28,10 @@ export default function Home() {
         password: 'FinnFinn',
       }),
     )
+  }
+
+  if (isLoading) {
+    return <CircularIndeterminate />
   }
 
   return (

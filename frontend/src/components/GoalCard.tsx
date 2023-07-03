@@ -178,7 +178,7 @@ export default function Activity({ goal }: any) {
       setBoxShadow(
         '0px 7px 9px -4px rgb(0 0 0 / 20%), 0px 14px 21px 2px rgb(0 0 0 / 14%), 0px 5px 26px 4px rgb(0 0 0 / 12%)',
       )
-      setBorderColor('transparent')
+      setBorderColor(' transparent')
     }
   }, [completed])
 
@@ -189,12 +189,12 @@ export default function Activity({ goal }: any) {
       variant="outlined"
       sx={{
         boxShadow: { boxShadow },
-        borderColor: { borderColor },
+        border: `5px solid ${borderColor}`,
       }}
     >
       <Grid container spacing={0} key={goal.id}>
-        <Accordion>
-          <Grid item xs={12}>
+        <Grid item xs={12}>
+          <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
@@ -211,94 +211,100 @@ export default function Activity({ goal }: any) {
                 <>{goal.activity}</>
               )}
             </AccordionSummary>
-          </Grid>
+            {/* </Grid> */}
 
-          <AccordionDetails>
-            <Grid item xs={12}>
-              <Typography variant="caption">
-                {duration} {duration == 1 ? 'Day Remaining' : 'Days Remaining'}
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              // sx={{ fontSize: '1rem' }}
-            >
-              <Typography variant="caption">
-                {new Date(goal.start).toLocaleString('en-US', {
-                  year: 'numeric',
-                  month: 'short',
-                  day: 'numeric',
-                })}{' '}
-                -{' '}
-                {new Date(goal.end).toLocaleString('en-US', {
-                  year: 'numeric',
-                  month: 'short',
-                  day: 'numeric',
-                })}
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography
-                variant="caption"
-                onClick={editActivity}
-                className="link"
-              >
-                Edit Goal
-              </Typography>{' '}
-              |{' '}
-              <Typography
-                variant="caption"
-                onClick={deleteItem}
-                className="link"
-              >
-                Delete Goal
-              </Typography>
-            </Grid>
-          </AccordionDetails>
-        </Accordion>
-
-        <Grid
-          container
-          columnSpacing={0}
-          rowSpacing={1}
-          key={goal.id}
-          id="goal-container"
-        >
-          <Grid item xs={2}>
-            <RemoveIcon onClick={subtractProgress} id="btn-math" />
-          </Grid>
-
-          <Grid
-            item
-            xs={8}
-            // sx={{ fontSize: '1rem' }}
-          >
-            <div className="progress">
-              <div id="progress-done" style={{ width: `${percentComplete}%` }}>
-                {percentComplete == 0 ? (
-                  <p>{percentComplete}%</p>
-                ) : (
-                  <p>{percentComplete}%</p>
-                )}
-              </div>
-            </div>
-          </Grid>
-
-          <Grid item xs={2}>
-            <AddIcon onClick={addProgress} id="btn-math" />
-          </Grid>
+            <AccordionDetails>
+              <Grid item xs={12}>
+                <Typography variant="caption">
+                  {new Date(goal.start).toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  })}{' '}
+                  -{' '}
+                  {new Date(goal.end).toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  })}
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography
+                  variant="caption"
+                  onClick={editActivity}
+                  className="link"
+                >
+                  Edit Goal
+                </Typography>{' '}
+                |{' '}
+                <Typography
+                  variant="caption"
+                  onClick={deleteItem}
+                  className="link"
+                >
+                  Delete Goal
+                </Typography>
+              </Grid>
+            </AccordionDetails>
+          </Accordion>
         </Grid>
 
-        {completed ? (
-          <Grid item xs={12} id="center">
-            <b>
-              {progress} of {goal.target} hour target completed!
-            </b>
+        {!completed ? (
+          <Grid
+            container
+            columnSpacing={0}
+            rowSpacing={1}
+            key={goal.id}
+            id="goal-container"
+          >
+            <Grid item xs={2}>
+              <RemoveIcon onClick={subtractProgress} id="btn-math" />
+            </Grid>
+
+            <Grid item xs={8}>
+              <div className="progress">
+                <div
+                  id="progress-done"
+                  style={{ width: `${percentComplete}%` }}
+                >
+                  <p>{percentComplete}%</p>
+                </div>
+              </div>
+            </Grid>
+
+            <Grid item xs={2}>
+              <AddIcon onClick={addProgress} id="btn-math" />
+            </Grid>
+            <Grid item xs={12} id="center">
+              <Typography variant="caption">
+                {progress} of {goal.target} hours completed with {duration}{' '}
+                {duration == 1 ? 'Day Remaining' : 'Days Remaining'}
+              </Typography>
+            </Grid>
           </Grid>
         ) : (
-          <Grid item xs={12} id="center">
-            {progress} of {goal.target} hour target completed
+          <Grid
+            container
+            columnSpacing={0}
+            rowSpacing={1}
+            key={goal.id}
+            id="goal-container"
+          >
+            <Grid item xs={12}>
+              <div className="progress">
+                <div
+                  id="progress-done"
+                  style={{ width: `${percentComplete}%` }}
+                >
+                  <p>
+                    <b>
+                      {progress} of {goal.target} hour target completed!
+                    </b>
+                  </p>
+                </div>
+              </div>
+            </Grid>
           </Grid>
         )}
       </Grid>
