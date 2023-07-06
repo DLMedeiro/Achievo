@@ -49,7 +49,6 @@ const getGoal = async (id: string, user: any) => {
     },
   }
   const response = await axios.get(GOALS_URL + id, config)
-
   return response.data
 }
 

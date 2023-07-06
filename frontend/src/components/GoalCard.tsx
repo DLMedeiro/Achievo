@@ -23,60 +23,63 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import { Types } from 'mongoose'
+import GoalEditForm from '../components/forms/GoalEditForm'
+
+interface Goal {
+  _id: string
+  user: string
+  name: string
+  start: Date
+  end: Date
+  timeAllotment: Number
+  progress: Number
+  createdAt: string
+  updatedAt: string
+  __v?: number
+}
+
 interface userState {
   user: any
 }
+interface goalState {
+  goals: Goal[] | null
+  isError: boolean
+  isSuccess: boolean
+  isLoading: boolean
+  message: string | undefined
+}
+
 interface Props {
   items: Item
   onRemoveItem: (id: string) => void
 }
 // Refactor
 
-export default function Activity({ goal }: any) {
+export default function Activity({ goal }: { goal: any }) {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   let singleGoal
+  // console.log(key, goalId)
 
   const { user }: userState = useAppSelector((state: RootState) => state.auth)
-  // interface Goal {
-  //   _id: string
-  //   user: string
-  //   name: string
-  //   start: Date
-  //   end: Date
-  //   timeAllotment: Number
-  //   progress: Number
-  //   createdAt: string
-  //   updatedAt: string
-  //   __v?: number
-  // }
-  // interface goalState {
-  //   goals: Goal[] | null
-  //   isError: boolean
-  //   isSuccess: boolean
-  //   isLoading: boolean
-  //   message: string | undefined
-  // }
 
-  // const { goals, isLoading, isError, message }: goalState = useAppSelector(
+  // const { goals, isError, isLoading, message }: goalState = useAppSelector(
   //   (state: RootState) => state.goals,
   // )
 
+  const [progress, setProgress] = useState(goal.progress)
+
+  const [percentComplete, setPercentComplete] = React.useState<number>(
+    Math.round((goal.progress / goal.timeAllotment) * 100),
+  )
   const [edit, setEdit] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [boxShadow, setBoxShadow] = useState(
     '0px 7px 9px -4px rgb(0 0 0 / 20%), 0px 14px 21px 2px rgb(0 0 0 / 14%), 0px 5px 26px 4px rgb(0 0 0 / 12%)',
   )
   const [borderColor, setBorderColor] = useState('transparent')
-  // const [activity, setActivity] = useState(props.items.activity)
-  // const [timeTarget, setTimeTarget] = useState(props.items.target)
-  const [progress, setProgress] = useState(goal.progress)
-  // const [start, setStart] = useState(props.items.start)
-  // const [end, setEnd] = useState(props.items.end)
+
   const [duration, setDuration] = React.useState<number>()
-  const [percentComplete, setPercentComplete] = React.useState<number>(
-    Math.round((goal.progress / goal.target) * 100),
-  )
 
   // const handleRemove = (id: string): void => {
   //   props.onRemoveItem(id)
@@ -159,8 +162,10 @@ export default function Activity({ goal }: any) {
     // }
   }
   const editActivity = () => {
+    dispatch(getOneGoal(goal._id))
     localStorage.setItem('goal', JSON.stringify(goal))
-    navigate('/GoalEditForm')
+
+    navigate(`/goalEditForm`)
   }
   const deleteItem = () => {
     dispatch(deleteGoal(goal._id))
@@ -192,7 +197,7 @@ export default function Activity({ goal }: any) {
         border: `5px solid ${borderColor}`,
       }}
     >
-      <Grid container spacing={0} key={goal.id}>
+      <Grid container spacing={0} key={goal._id}>
         <Grid item xs={12}>
           <Accordion>
             <AccordionSummary

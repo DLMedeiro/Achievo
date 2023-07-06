@@ -36,8 +36,12 @@ function App() {
   interface userState {
     user: any
   }
+  interface goalState {
+    goals: any
+  }
   const [listItems, setListItems] = useState<Item[]>([])
   const { user }: userState = useAppSelector((state: RootState) => state.auth)
+  const { goals }: goalState = useAppSelector((state: RootState) => state.goals)
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -50,7 +54,7 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/createAccount" element={<CreateAccount />} />
             <Route path={`/goals/user/${user._id}`} element={<Dashboard />} />
-            <Route path="/goalEditForm" element={<GoalEditForm />} />
+            <Route path={`/goalEditForm`} element={<GoalEditForm />} />
           </Routes>
         ) : (
           <Routes>

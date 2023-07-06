@@ -55,6 +55,7 @@ function Dashboard() {
     }
 
     dispatch(getGoals(user))
+    console.log(goals)
 
     // clear goals when the component unmounts
     return () => {

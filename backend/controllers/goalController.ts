@@ -21,6 +21,7 @@ const getSingleGoal = asyncHandler(async(req:any, res:any) => {
 
     // not able to find alternative types for req and res, other option found was Express.Request / Response, but that wasn't closing out the error
     res.status(200).json(goal)
+
 })
 // Desc: Get goals
 // Route: GET /api/goals
@@ -88,9 +89,9 @@ if(goal.user.toString() !== req.body.userId){
 }
 
 const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body.goal, {new: true})
-
+const goals = await Goal.find({user: req.body.userId})
 // not able to find alternative types for req and res, other option found was Express.Request / Response, but that wasn't closing out the error
-res.status(200).json(updatedGoal)
+res.status(200).json(goals)
     }
 
    

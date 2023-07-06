@@ -42,20 +42,60 @@ export default function ActivityInputForm() {
   interface userState {
     user: any
   }
-  const goal = JSON.parse(localStorage.getItem('goal') || '')
+  interface goalState {
+    goals: any
+  }
+  // const goal = JSON.parse(localStorage.getItem('goal') || '')
+  const { goals }: goalState = useAppSelector((state: RootState) => state.goals)
   const { user }: userState = useAppSelector((state: RootState) => state.auth)
+  interface Goal {
+    _id: string
+    user: string
+    activity: string
+    start: Date
+    end: Date
+    target: number
+    progress: number
+    createdAt: string
+    updatedAt: string
+    __v?: number
+  }
+
+  const localGoalString = localStorage.getItem('goal')
+  const localGoal: Goal | null = localGoalString
+    ? JSON.parse(localGoalString)
+    : null
+
+  // const [startValue, setStartValue] = React.useState<Dayjs | null>(dayjs())
+  // const [endValue, setEndValue] = React.useState<Dayjs | null>(dayjs())
+  // const [changingTarget, setChangingTarget] = React.useState<number>(0)
+  // const [changingProgress, setChangingProgress] = React.useState<number>(0)
+  const [changeBtn, setChangeBtn] = useState(true)
+  const [initialFormValues, setInitialFormValues] = useState({
+    start: dayjs(),
+    end: dayjs(),
+    // start: dayjs(),
+    // end: dayjs(),
+    activity: '',
+    target: 0,
+    progress: 0,
+  })
 
   const [startValue, setStartValue] = React.useState<Dayjs | null>(
-    dayjs(goal.start),
+    dayjs(initialFormValues.start),
   )
-  const [endValue, setEndValue] = React.useState<Dayjs | null>(dayjs(goal.end))
+  const [endValue, setEndValue] = React.useState<Dayjs | null>(
+    dayjs(initialFormValues.end),
+  )
+  const [activity, setActivity] = React.useState<Dayjs | null>(
+    dayjs(initialFormValues.activity),
+  )
   const [changingTarget, setChangingTarget] = React.useState<number>(
-    goal.target,
+    initialFormValues.target,
   )
   const [changingProgress, setChangingProgress] = React.useState<number>(
-    goal.target,
+    initialFormValues.progress,
   )
-  const [changeBtn, setChangeBtn] = useState(true)
 
   // const [value, setValue] = React.useState<Dayjs | null>(null)
   interface Inputs {
@@ -66,15 +106,20 @@ export default function ActivityInputForm() {
     progress: number
   }
 
-  const InitialFormValues = {
-    start: dayjs(goal.start),
-    end: dayjs(goal.end),
-    // start: dayjs(),
-    // end: dayjs(),
-    activity: goal.activity,
-    target: goal.target,
-    progress: goal.progress,
-  }
+  useEffect(() => {
+    if (localGoal) {
+      console.log(localGoal)
+      setInitialFormValues({
+        start: dayjs(localGoal.start),
+        end: dayjs(localGoal.end),
+        // start: dayjs(),
+        // end: dayjs(),
+        activity: localGoal.activity,
+        target: localGoal.target,
+        progress: localGoal.progress,
+      })
+    }
+  }, [])
 
   const schema = z.object({
     start: z.any(),
@@ -100,7 +145,7 @@ export default function ActivityInputForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({
-    defaultValues: InitialFormValues,
+    defaultValues: initialFormValues,
     resolver: zodResolver(schema),
   })
 
@@ -109,7 +154,7 @@ export default function ActivityInputForm() {
   // }
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const goalData = {
-      id: goal._id,
+      id: goals._id,
       start: startValue,
       end: endValue,
       activity: data.activity,
@@ -119,12 +164,13 @@ export default function ActivityInputForm() {
     dispatch(changeGoal(goalData))
     dispatch(getGoals(user))
     setChangeBtn(false)
-    // localStorage.removeItem('goal')
+    localStorage.removeItem('goal')
+    console.log(goalData)
     // navigate(`/goals/user/${user._id}`)
     // window.location.reload()
   }
 
-  return (
+  return localGoal ? (
     <Paper elevation={14} className="form-container">
       <Typography variant="h5" component="h5" align="center">
         Update Goal
@@ -140,7 +186,7 @@ export default function ActivityInputForm() {
             <Grid item xs={12} className="dateLabel">
               <DemoItem label="Start Date">
                 <DatePicker
-                  value={dayjs(startValue)}
+                  value={dayjs(localGoal.start)}
                   onChange={(newValue) => setStartValue(newValue)}
                 />
               </DemoItem>
@@ -149,59 +195,69 @@ export default function ActivityInputForm() {
             <Grid item xs={12} className="dateLabel">
               <DemoItem label="Completion Date">
                 <DatePicker
-                  value={dayjs(endValue)}
+                  value={dayjs(localGoal.end)}
                   onChange={(newValue) => setEndValue(newValue)}
                 />
               </DemoItem>
               <div style={{ color: 'red' }}>{errors.end?.message}</div>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                variant="filled"
-                margin="normal"
-                id="activity"
-                label="Activity"
-                {...register('activity')}
-              />
-              <div style={{ color: 'red' }}>{errors.activity?.message}</div>
+            <Grid item xs={12} className="dateLabel">
+              <DemoItem label="Activity Name">
+                <TextField
+                  required
+                  fullWidth
+                  variant="filled"
+                  margin="normal"
+                  id="activity"
+                  value={localGoal.activity}
+                  {...register('activity', {
+                    onChange: (e) => {
+                      setActivity(e.target)
+                    },
+                  })}
+                />
+                <div style={{ color: 'red' }}>{errors.activity?.message}</div>
+              </DemoItem>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                variant="filled"
-                margin="normal"
-                label="target"
-                type="number"
-                id="target"
-                {...register('target', {
-                  valueAsNumber: true,
-                  onChange: (e) => {
-                    setChangingTarget(e.target)
-                  },
-                })}
-              />
-              <div style={{ color: 'red' }}>{errors.target?.message}</div>
+            <Grid item xs={12} className="dateLabel">
+              <DemoItem label="Target">
+                <TextField
+                  required
+                  fullWidth
+                  variant="filled"
+                  margin="normal"
+                  type="number"
+                  id="target"
+                  value={localGoal.target}
+                  {...register('target', {
+                    valueAsNumber: true,
+                    onChange: (e) => {
+                      setChangingTarget(e.target)
+                    },
+                  })}
+                />
+                <div style={{ color: 'red' }}>{errors.target?.message}</div>
+              </DemoItem>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                variant="filled"
-                margin="normal"
-                label="progress"
-                type="number"
-                id="progress"
-                {...register('progress', {
-                  valueAsNumber: true,
-                  onChange: (e) => {
-                    setChangingProgress(e.target)
-                  },
-                })}
-              />
-              <div style={{ color: 'red' }}>{errors.progress?.message}</div>
+            <Grid item xs={12} className="dateLabel">
+              <DemoItem label="Progress">
+                <TextField
+                  required
+                  fullWidth
+                  variant="filled"
+                  margin="normal"
+                  type="number"
+                  id="progress"
+                  value={localGoal.progress}
+                  {...register('progress', {
+                    valueAsNumber: true,
+                    onChange: (e) => {
+                      setChangingProgress(e.target)
+                    },
+                  })}
+                />
+                <div style={{ color: 'red' }}>{errors.progress?.message}</div>
+              </DemoItem>
             </Grid>
             <Button
               type="submit"
@@ -244,5 +300,7 @@ export default function ActivityInputForm() {
         </Box>
       )}
     </Paper>
+  ) : (
+    <></>
   )
 }

@@ -241,7 +241,7 @@ export const goalSlice = createSlice({
       })
       .addCase(
         getOneGoal.fulfilled,
-        (state, action: PayloadAction<string | any>) => {
+        (state, action: PayloadAction<object | any>) => {
           state.isLoading = false
           state.isSuccess = true
           if (state.goals) {
