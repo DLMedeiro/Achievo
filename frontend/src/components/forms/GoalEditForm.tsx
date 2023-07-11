@@ -102,42 +102,42 @@ export default function ActivityInputForm() {
       setTargetValue(localGoal.target)
       setProgressValue(localGoal.progress)
     }
-  }, [])
+  }, [goals])
 
   // const [value, setValue] = React.useState<Dayjs | null>(null)
-  interface Inputs {
-    start: Dayjs
-    end: Dayjs
-    activity: string
-    target: number
-    progress: number
-  }
+  // interface Inputs {
+  //   start: Dayjs
+  //   end: Dayjs
+  //   activity: string
+  //   target: number
+  //   progress: number
+  // }
 
   const schema = z.object({
     start: z.any(),
     end: z.any(),
     // refactor to use only portion of date needed, so this can be more specific on the type
-    activity: z.string().min(3, { message: 'Please enter your activity' }),
-    target: z.number().nonnegative().min(progressValue, {
-      message: 'Value can not be less than your current progress',
-    }),
+    activity: z
+      .string()
+      .min(3, { message: 'Please update, minimum length is 3 characters' }),
+    target: z.number().nonnegative(),
     progress: z
       .number()
-      .gte(0, { message: 'Value can not be less than 0' })
-      .lte(progressValue, {
+      .nonnegative()
+      .min(0, { message: 'Value can not be less than 0' })
+      .max(targetValue, {
         message: 'Value can not be larger than your target',
       }),
   })
+
+  type Inputs = z.infer<typeof schema>
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   const {
     register,
-    setValue,
-    control,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>({
     resolver: zodResolver(schema),
@@ -194,7 +194,6 @@ export default function ActivityInputForm() {
                   onChange={(newValue) => setStartValue(newValue)}
                 />
               </DemoItem>
-              <div style={{ color: 'red' }}>{errors.start?.message}</div>
             </Grid>
             <Grid item xs={12} className="dateLabel">
               <DemoItem label="Completion Date">
@@ -203,7 +202,6 @@ export default function ActivityInputForm() {
                   onChange={(newValue) => setEndValue(newValue)}
                 />
               </DemoItem>
-              <div style={{ color: 'red' }}>{errors.end?.message}</div>
             </Grid>
             <Grid item xs={12} className="dateLabel">
               <DemoItem label="Activity Name">
@@ -219,7 +217,7 @@ export default function ActivityInputForm() {
                   defaultValue={goals.activity}
                   {...register('activity', {
                     onChange: (e) => {
-                      setActivityValue(e.target)
+                      setActivityValue(e.target.value)
                     },
                   })}
                 />
@@ -235,11 +233,11 @@ export default function ActivityInputForm() {
                   margin="normal"
                   type="number"
                   id="target"
-                  defaultValue={Number(goals.target)}
+                  defaultValue={Number(localGoal.target)}
                   {...register('target', {
                     valueAsNumber: true,
                     onChange: (e) => {
-                      setTargetValue(e.target)
+                      setTargetValue(e.target.value)
                     },
                   })}
                 />
@@ -255,11 +253,11 @@ export default function ActivityInputForm() {
                   margin="normal"
                   type="number"
                   id="progress"
-                  defaultValue={Number(goals.progress)}
+                  defaultValue={Number(localGoal.progress)}
                   {...register('progress', {
                     valueAsNumber: true,
                     onChange: (e) => {
-                      setProgressValue(e.target)
+                      setProgressValue(e.target.value)
                     },
                   })}
                 />
