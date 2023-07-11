@@ -63,9 +63,9 @@ export default function Activity({ goal }: { goal: any }) {
 
   const { user }: userState = useAppSelector((state: RootState) => state.auth)
 
-  // const { goals, isError, isLoading, message }: goalState = useAppSelector(
-  //   (state: RootState) => state.goals,
-  // )
+  const { goals, isError, isLoading, message }: goalState = useAppSelector(
+    (state: RootState) => state.goals,
+  )
 
   const [progress, setProgress] = useState(goal.progress)
 
@@ -163,10 +163,11 @@ export default function Activity({ goal }: { goal: any }) {
   }
   const editActivity = () => {
     dispatch(getOneGoal(goal._id))
-    localStorage.setItem('goal', JSON.stringify(goal))
+    // localStorage.setItem('goal', JSON.stringify(goal))
 
     navigate(`/goalEditForm`)
   }
+
   const deleteItem = () => {
     dispatch(deleteGoal(goal._id))
     // window.location.reload()

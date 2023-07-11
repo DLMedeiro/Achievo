@@ -22,7 +22,9 @@ If a user who wants to improve their fitness. They can create a goal stating the
 ## Learnings
 ### Further learning with React, Redux, and the incorporation of a NoSQL database
 - https://www.youtube.com/playlist?list=PLillGF-RfqbbQeVSccR9PGKHzPJSWqcsm
-### React-hook-form with Material UI's Date picker
+### React-hook-form with Zod and Material UI's Date picker
+- Purpose: provides validation of data prior to interacting with the database
+- https://dev.to/majiedo/using-zod-with-react-hook-form-using-typescript-1mgk 
 ### Redux
 - https://www.youtube.com/watch?v=9jULHSe41ls
 - https://www.youtube.com/watch?v=udr2rx_B99w
