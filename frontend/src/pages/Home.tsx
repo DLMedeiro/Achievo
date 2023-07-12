@@ -61,15 +61,8 @@ export default function Home() {
         </>
       ) : (
         <>
-          <h1> Seeking an extra dose of motivation?</h1>
-          <h2>Look no further!</h2>
-          <h4>
-            Start Somewhere provides a unique approach to goal achievement.
-          </h4>
-          <h4>
-            Empowering you to allocate your time effectively and track progress
-            towards achieving success in your goals.
-          </h4>
+          <h1>StartSomewhere</h1>
+          <h2>Achieve More, One Step at a Time!</h2>
         </>
       )}
 

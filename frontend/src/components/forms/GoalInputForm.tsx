@@ -57,7 +57,7 @@ export default function ActivityInputForm() {
     start: Dayjs
     end: Dayjs
     activity: string
-    target: string
+    target: number
   }
 
   const InitialFormValues = {
@@ -66,7 +66,7 @@ export default function ActivityInputForm() {
     // start: dayjs(),
     // end: dayjs(),
     activity: '',
-    target: '',
+    target: 0,
   }
 
   const schema = z.object({
@@ -74,7 +74,7 @@ export default function ActivityInputForm() {
     end: z.string(),
     activity: z.string().min(3, { message: 'Please enter your activity' }),
     target: z
-      .string()
+      .number()
       .min(1, { message: 'Please enter your target time commitment goal' }),
   })
 
@@ -153,7 +153,7 @@ export default function ActivityInputForm() {
                 variant="filled"
                 margin="normal"
                 id="activity"
-                label="Activity"
+                label="Name of your Goal"
                 {...register('activity')}
               />
               <div style={{ color: 'red' }}>{errors.activity?.message}</div>
@@ -162,12 +162,14 @@ export default function ActivityInputForm() {
               <TextField
                 required
                 fullWidth
-                label="target"
-                type="text"
+                label="Time commitment (hours)"
+                type="number"
                 id="target"
                 variant="filled"
                 margin="normal"
-                {...register('target')}
+                {...register('target', {
+                  valueAsNumber: true,
+                })}
               />
               <div style={{ color: 'red' }}>{errors.target?.message}</div>
             </Grid>

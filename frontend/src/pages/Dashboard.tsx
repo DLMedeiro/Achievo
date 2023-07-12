@@ -66,7 +66,7 @@ function Dashboard() {
   if (isLoading) {
     return <CircularIndeterminate />
   }
-
+  console.log(goals)
   return (
     <>
       <section>
