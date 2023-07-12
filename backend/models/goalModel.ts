@@ -22,7 +22,7 @@ const goalSchema = new Schema({
     },
     target: {
         type: Number,
-        required: [true, 'please add a text value']
+        required: [true, 'please add a number value']
     },
     progress: {
         type: Number,

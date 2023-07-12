@@ -19,17 +19,17 @@ const user = JSON.parse(localStorage.getItem('user')!)
 export interface Goal {
   _id: string
   user: string
-  name: string
+  activity: string
   start: Date
   end: Date
-  timeAllotment: Number
+  target: Number
   progress: Number
   createdAt: string
   updatedAt: string
   __v?: number
 }
 interface goalState {
-  goals: Goal[] | null
+  goals: Goal[]
   isError: boolean
   isSuccess: boolean
   isLoading: boolean
@@ -245,7 +245,7 @@ export const goalSlice = createSlice({
           state.isLoading = false
           state.isSuccess = true
           if (state.goals) {
-            state.goals = action.payload
+            state.goals = [action.payload]
           }
         },
       )

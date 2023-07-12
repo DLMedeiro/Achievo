@@ -28,10 +28,10 @@ import GoalEditForm from '../components/forms/GoalEditForm'
 interface Goal {
   _id: string
   user: string
-  name: string
+  activity: string
   start: Date
   end: Date
-  timeAllotment: Number
+  target: Number
   progress: Number
   createdAt: string
   updatedAt: string
@@ -42,7 +42,7 @@ interface userState {
   user: any
 }
 interface goalState {
-  goals: Goal[] | null
+  goals: Goal[]
   isError: boolean
   isSuccess: boolean
   isLoading: boolean
@@ -70,7 +70,7 @@ export default function Activity({ goal }: { goal: any }) {
   const [progress, setProgress] = useState(goal.progress)
 
   const [percentComplete, setPercentComplete] = React.useState<number>(
-    Math.round((goal.progress / goal.timeAllotment) * 100),
+    Math.round((goal.progress / goal.target) * 100),
   )
   const [edit, setEdit] = useState(false)
   const [completed, setCompleted] = useState(false)

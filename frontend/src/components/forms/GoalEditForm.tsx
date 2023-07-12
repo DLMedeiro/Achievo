@@ -39,34 +39,57 @@ import { Paper } from '@mui/material'
 // })
 
 export default function ActivityInputForm() {
-  interface userState {
-    user: any
-  }
-  interface goalState {
-    goals: any
-  }
-  // const goal = JSON.parse(localStorage.getItem('goal') || '')
-  const { goals }: goalState = useAppSelector((state: RootState) => state.goals)
-
-  const { user }: userState = useAppSelector((state: RootState) => state.auth)
   interface Goal {
     _id: string
     user: string
     activity: string
     start: Date
     end: Date
-    target: number
-    progress: number
+    target: Number
+    progress: Number
     createdAt: string
     updatedAt: string
     __v?: number
   }
+  interface userState {
+    user: any
+  }
+  interface goalState {
+    goals: Goal[]
+    isError: boolean
+    isSuccess: boolean
+    isLoading: boolean
+    message: string | undefined
+  }
+  // const goal = JSON.parse(localStorage.getItem('goal') || '')
+  const { goals, isLoading, isError, message }: goalState = useAppSelector(
+    (state: RootState) => state.goals,
+  )
 
-  localStorage.setItem('goal', JSON.stringify(goals))
-  const localGoalString = localStorage.getItem('goal')
-  const localGoal: Goal | null = localGoalString
-    ? JSON.parse(localGoalString)
-    : null
+  const { user }: userState = useAppSelector((state: RootState) => state.auth)
+
+  // const [localGoal, setLocalGoal] = useState({
+  //   _id: 0,
+  //   start: dayjs(),
+  //   end: dayjs(),
+  //   activity: '',
+  //   target: 0,
+  //   progress: 0,
+  // })
+
+  // useEffect(() => {
+  //   const localGoalString = localStorage.getItem('goal')
+
+  //   if (!localGoalString || localGoalString.length == 2) {
+  //     localStorage.setItem('goal', JSON.stringify(goals))
+  //   }
+  //   if (localGoalString) {
+  //     setLocalGoal(JSON.parse(localGoalString))
+  //   }
+  // }, [])
+  // const localGoal: Goal | null = localGoalString
+  //   ? JSON.parse(localGoalString)
+  //   : null
 
   // const [startValue, setStartValue] = React.useState<Dayjs | null>(dayjs())
   // const [endValue, setEndValue] = React.useState<Dayjs | null>(dayjs())
@@ -84,8 +107,19 @@ export default function ActivityInputForm() {
   const [startValue, setStartValue] = React.useState<Dayjs | null>(dayjs(0))
   const [endValue, setEndValue] = React.useState<Dayjs | null>(dayjs(0))
   const [activityValue, setActivityValue] = React.useState<string>('')
-  const [targetValue, setTargetValue] = React.useState<number>(0)
-  const [progressValue, setProgressValue] = React.useState<number>(0)
+  const [targetValue, setTargetValue] = React.useState<any>(0)
+  const [progressValue, setProgressValue] = React.useState<Number>(0)
+  const [idValue, setIdValue] = React.useState<string>('')
+  // const [localGoal, setLocalGaol] = React.useState([
+  //   {
+  //     _id: 0,
+  //     start: dayjs(),
+  //     end: dayjs(),
+  //     activity: '',
+  //     target: 0,
+  //     progress: 0,
+  //   },
+  // ])
   // const [initialFormValues, setInitialFormValues] = useState({
   //   start: startValue,
   //   end: endValue,
@@ -94,13 +128,29 @@ export default function ActivityInputForm() {
   //   progress: progressValue,
   // })
 
+  let localGoal: Goal[]
+  let localGoalString: string | null
   useEffect(() => {
+    localGoalString = localStorage.getItem('goal')
+    if (goals && goals.length == 1 && !localGoalString) {
+      localStorage.setItem('goal', JSON.stringify(goals))
+      localGoalString = localStorage.getItem('goal')
+      if (localGoalString) {
+        localGoal = JSON.parse(localGoalString)
+      }
+    } else if (goals && localGoalString)
+      if (localGoalString) {
+        localGoal = JSON.parse(localGoalString)
+        // setLocalGaol(JSON.parse(localGoalString))
+      }
+
     if (localGoal) {
-      setStartValue(dayjs(localGoal.start))
-      setEndValue(dayjs(localGoal.end))
-      setActivityValue(localGoal.activity)
-      setTargetValue(localGoal.target)
-      setProgressValue(localGoal.progress)
+      setIdValue(localGoal[0]._id)
+      setStartValue(dayjs(localGoal[0].start))
+      setEndValue(dayjs(localGoal[0].end))
+      setActivityValue(localGoal[0].activity)
+      setTargetValue(localGoal[0].target)
+      setProgressValue(localGoal[0].progress)
     }
   }, [goals])
 
@@ -158,23 +208,25 @@ export default function ActivityInputForm() {
   // }
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const goalData = {
-      id: goals._id,
-      start: startValue,
-      end: endValue,
-      activity: data.activity,
-      target: data.target,
-      progress: data.progress,
+    if (goals) {
+      const goalData = {
+        id: idValue,
+        start: startValue,
+        end: endValue,
+        activity: data.activity,
+        target: data.target,
+        progress: data.progress,
+      }
+      dispatch(getGoals(user))
+      dispatch(changeGoal(goalData))
+      setChangeBtn(false)
+      localStorage.removeItem('goal')
+      navigate(`/goals/user/${user._id}`)
+      window.location.reload()
     }
-    dispatch(getGoals(user))
-    dispatch(changeGoal(goalData))
-    setChangeBtn(false)
-    localStorage.removeItem('goal')
-    navigate(`/goals/user/${user._id}`)
-    window.location.reload()
   }
 
-  return localGoal && localGoal._id ? (
+  return activityValue.length > 0 ? (
     <Paper elevation={14} className="form-container">
       <Typography variant="h5" component="h5" align="center">
         Update Goal
@@ -190,7 +242,7 @@ export default function ActivityInputForm() {
             <Grid item xs={12} className="dateLabel">
               <DemoItem label="Start Date">
                 <DatePicker
-                  value={dayjs(localGoal.start)}
+                  value={dayjs(startValue)}
                   onChange={(newValue) => setStartValue(newValue)}
                 />
               </DemoItem>
@@ -198,7 +250,7 @@ export default function ActivityInputForm() {
             <Grid item xs={12} className="dateLabel">
               <DemoItem label="Completion Date">
                 <DatePicker
-                  value={dayjs(localGoal.end)}
+                  value={dayjs(endValue)}
                   onChange={(newValue) => setEndValue(newValue)}
                 />
               </DemoItem>
@@ -214,7 +266,7 @@ export default function ActivityInputForm() {
                   // onChange={(newValue) =>
                   //   setActivityValue(newValue.target.value)
                   // }
-                  defaultValue={goals.activity}
+                  defaultValue={activityValue}
                   {...register('activity', {
                     onChange: (e) => {
                       setActivityValue(e.target.value)
@@ -233,7 +285,7 @@ export default function ActivityInputForm() {
                   margin="normal"
                   type="number"
                   id="target"
-                  defaultValue={Number(localGoal.target)}
+                  defaultValue={targetValue}
                   {...register('target', {
                     valueAsNumber: true,
                     onChange: (e) => {
@@ -253,7 +305,7 @@ export default function ActivityInputForm() {
                   margin="normal"
                   type="number"
                   id="progress"
-                  defaultValue={Number(localGoal.progress)}
+                  defaultValue={progressValue}
                   {...register('progress', {
                     valueAsNumber: true,
                     onChange: (e) => {

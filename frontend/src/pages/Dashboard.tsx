@@ -13,6 +13,7 @@ import { Grid, Paper } from '@mui/material'
 import { TransitionGroup } from 'react-transition-group'
 
 function Dashboard() {
+  localStorage.removeItem('goal')
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -22,17 +23,17 @@ function Dashboard() {
   interface Goal {
     _id: string
     user: string
-    name: string
+    activity: string
     start: Date
     end: Date
-    timeAllotment: Number
+    target: Number
     progress: Number
     createdAt: string
     updatedAt: string
     __v?: number
   }
   interface goalState {
-    goals: Goal[] | null
+    goals: Goal[]
     isError: boolean
     isSuccess: boolean
     isLoading: boolean
