@@ -1,8 +1,7 @@
 // Schema and all fields we want a user to have
 // Mongoose = ODM to interact with MongoDB
 import { Schema, model} from 'mongoose';
-// const {Schema, model} = require("mongoose");
-// Adjusted from tutorial code: const { default: mg, Schema } = require("mongoose");
+
 
 const userSchema = new Schema(
   {
@@ -26,5 +25,4 @@ const userSchema = new Schema(
   }
 );
 
-// module.exports = model("User", userSchema)
 export default model("User", userSchema)

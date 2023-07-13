@@ -1,14 +1,11 @@
-import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import ReactDOM from 'react-dom'
-
 import Login from '../components/forms/Login'
-import { Grid, Paper } from '@mui/material'
-// import MUILink from '@mui/material/Link'
+import { Paper } from '@mui/material'
+
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import CircularIndeterminate from '../components/Spinner'
-import { useAppSelector, useAppDispatch } from '../app/hooks'
+import { useAppSelector } from '../app/hooks'
 import { RootState } from '../app/store'
 
 export default function LoginForm(): JSX.Element {
@@ -25,42 +22,12 @@ export default function LoginForm(): JSX.Element {
       <Typography variant="h5" component="h5" align="center">
         Start Somewhere.
       </Typography>
-      <Typography
-        variant="h6"
-        component="h6"
-        align="center"
-        // sx={{ marginBottom: '20px' }}
-      >
+      <Typography variant="h6" component="h6" align="center">
         Start Now.
       </Typography>
       <Login />
-      <Link
-        to="/createAccount"
-        // style={{
-        //   textDecoration: 'none',
-        //   display: 'flex',
-        //   justifyContent: 'center',
-        //   alignItems: 'center',
-        // }}
-      >
-        <Button
-          variant="contained"
-          className="btn"
-          // sx={{
-          //   mt: 3,
-          //   mb: 2,
-          //   width: '100%',
-          //   borderRadius: '40px',
-          //   margin: '0 auto',
-          //   display: 'flex',
-          //   color: '#2f2d13',
-          //   '&:hover': {
-          //     color: '#2f2d13',
-          //     backgroundColor: '#f6cdfe',
-          //     cursor: 'pointer',
-          //   },
-          // }}
-        >
+      <Link to="/createAccount">
+        <Button variant="contained" className="btn">
           Create Account
         </Button>
       </Link>

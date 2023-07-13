@@ -2,19 +2,9 @@
 
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../app/store'
-// import goalService from './goalService'
 import goalService from './goalService'
-import { StringExpression } from 'mongoose'
 
 // Get user from local storage
-const user = JSON.parse(localStorage.getItem('user')!)
-// const user = () => {
-//     if (JSON.parse(localStorage.getItem('user')) === null) {
-//         return null
-//     } else {
-//         return JSON.parse(localStorage.getItem('user'))
-//     }
-// have to use parse, because localStorage only uses strings
 
 export interface Goal {
   _id: string

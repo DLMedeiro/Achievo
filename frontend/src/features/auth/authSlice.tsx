@@ -1,20 +1,11 @@
 // reducers and initial state pertaining to authentication
 
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../../app/store'
 import authService from './authServce'
-// import { boolean } from 'zod'
 
 // Get user from local storage
 
 const user = JSON.parse(localStorage.getItem('user')!)
-// const user = () => {
-//     if (JSON.parse(localStorage.getItem('user')) === null) {
-//         return null
-//     } else {
-//         return JSON.parse(localStorage.getItem('user'))
-//     }
-// have to use parse, because localStorage only uses strings
 
 interface authState {
   user: {
@@ -65,12 +56,6 @@ export const login = createAsyncThunk(
     try {
       return await authService.login(user)
     } catch (error) {
-      //   const message =
-      //     (error.response &&
-      //       error.response.data &&
-      //       error.response.data.message) ||
-      //     error.message ||
-      //     error.toString()
       let message
       if (error) {
         message = error.toString()

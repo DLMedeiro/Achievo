@@ -1,12 +1,6 @@
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
-import { useForm, SubmitHandler } from 'react-hook-form'
-
 import SignUp from '../components/forms/SignUp'
-import { Grid, Paper } from '@mui/material'
-import Link from '@mui/material/Link'
+import { Paper } from '@mui/material'
 import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 import { RootState } from '../app/store'
 import CircularIndeterminate from '../components/Spinner'
 import { useAppSelector } from '../app/hooks'

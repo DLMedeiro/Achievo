@@ -9,7 +9,7 @@ import aM from "../middleware/authMiddleware.ts"
 
 router.post('/', uC.registerUser)
 router.post('/login', uC.loginUser)
-router.get('/me', aM.protect, uC.getMe)
+router.get('/me', aM.protect)
 
 
 // module.exports = router

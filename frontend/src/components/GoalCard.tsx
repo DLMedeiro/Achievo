@@ -1,78 +1,39 @@
 import React, { useState, useEffect } from 'react'
-import Item from '../models/Item'
 import { Grid, Typography } from '@mui/material'
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import Paper from '@mui/material/Paper'
 import '../styles/App.css'
-import Button from '@mui/material/Button'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import {
   getOneGoal,
   deleteGoal,
   updateProgress,
 } from '../features/goals/goalSlice'
-// import AddSubtract from './AddSubtract' -> Bring back after removing local state dependency
 import { useNavigate } from 'react-router-dom'
 import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline'
 import { RootState } from '../app/store'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
-import { Types } from 'mongoose'
-import GoalEditForm from '../components/forms/GoalEditForm'
-
-interface Goal {
-  _id: string
-  user: string
-  activity: string
-  start: Date
-  end: Date
-  target: Number
-  progress: Number
-  createdAt: string
-  updatedAt: string
-  __v?: number
-}
 
 interface userState {
   user: any
 }
-interface goalState {
-  goals: Goal[]
-  isError: boolean
-  isSuccess: boolean
-  isLoading: boolean
-  message: string | undefined
-}
-
-interface Props {
-  items: Item
-  onRemoveItem: (id: string) => void
-}
-// Refactor
 
 export default function Activity({ goal }: { goal: any }) {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  let singleGoal
-  // console.log(key, goalId)
 
   const { user }: userState = useAppSelector((state: RootState) => state.auth)
-
-  const { goals, isError, isLoading, message }: goalState = useAppSelector(
-    (state: RootState) => state.goals,
-  )
 
   const [progress, setProgress] = useState(goal.progress)
 
   const [percentComplete, setPercentComplete] = React.useState<number>(
     Math.round((goal.progress / goal.target) * 100),
   )
-  const [edit, setEdit] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [boxShadow, setBoxShadow] = useState(
     '0px 7px 9px -4px rgb(0 0 0 / 20%), 0px 14px 21px 2px rgb(0 0 0 / 14%), 0px 5px 26px 4px rgb(0 0 0 / 12%)',
@@ -81,20 +42,7 @@ export default function Activity({ goal }: { goal: any }) {
 
   const [duration, setDuration] = React.useState<number>()
 
-  // const handleRemove = (id: string): void => {
-  //   props.onRemoveItem(id)
-  // }
-
-  const setEditFunction = (): void => {
-    if (edit === true) {
-      setEdit(false)
-    } else {
-      setEdit(true)
-    }
-  }
-
   useEffect(() => {
-    // singleGoal = dispatch(getOneGoal(goal._id))
     let today = dayjs().format('LL')
 
     let hours = dayjs(goal.end).diff(today, 'hours')
@@ -110,23 +58,6 @@ export default function Activity({ goal }: { goal: any }) {
       // Rounding not exact but works for current need
     }
   }, [progress, goal.target])
-
-  // Edit local storage
-  // const editLocalStorage = (id: string, action: string): void => {
-  //   let savedTasks = JSON.parse(localStorage.getItem('savedTasks') || '')
-  //   for (let i = 0; i < savedTasks.length; i++) {
-  //     if (savedTasks[i].id == id) {
-  //       // retrieve the task and convert to JS
-  //       // modify the object, convert it to a string and replace the existing item
-  //       if (action == 'add') {
-  //         savedTasks[i].progress += 1
-  //       } else {
-  //         savedTasks[i].progress -= 1
-  //       }
-  //     }
-  //     localStorage.setItem('savedTasks', JSON.stringify(savedTasks))
-  //   }
-  // }
 
   useEffect(() => {
     if (progress >= goal.target) {
@@ -145,9 +76,6 @@ export default function Activity({ goal }: { goal: any }) {
     if (progress + 1 <= goal.target) {
       setProgress(progress + 1)
     }
-    // if (goal.progress + 1 == goal.target) {
-    //   setCompleted(true)
-    // }
   }
 
   const subtractProgress = () => {
@@ -157,21 +85,14 @@ export default function Activity({ goal }: { goal: any }) {
     if (progress > 0) {
       setProgress(progress - 1)
     }
-    // if (progress - 1 < goal.target) {
-    //   setCompleted(false)
-    // }
   }
   const editActivity = () => {
     dispatch(getOneGoal(goal._id))
-    // localStorage.setItem('goal', JSON.stringify(goal))
-
     navigate(`/goalEditForm`)
   }
 
   const deleteItem = () => {
     dispatch(deleteGoal(goal._id))
-    // window.location.reload()
-    // Refactor / solve issue of component no reloading when item is deleted or addedd
   }
 
   useEffect(() => {

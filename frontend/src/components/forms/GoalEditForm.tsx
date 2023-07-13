@@ -1,28 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { RootState } from '../../app/store'
 import { useNavigate } from 'react-router-dom'
-import { createGoal } from '../../features/goals/goalSlice'
-import ReactDOM from 'react-dom'
-import { useForm, Controller, SubmitHandler } from 'react-hook-form'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import Container from '@mui/material/Container'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-// import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import dayjs, { Dayjs } from 'dayjs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-// import DatePicker, { DateObject } from 'react-multi-date-picker'
-import type { Value } from 'react-multi-date-picker'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import { DateField } from '@mui/x-date-pickers/DateField'
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo'
+import { DemoItem } from '@mui/x-date-pickers/internals/demo'
 import { getGoals, changeGoal } from '../../features/goals/goalSlice'
 import { Link } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
@@ -51,48 +40,13 @@ export default function ActivityInputForm() {
     isLoading: boolean
     message: string | undefined
   }
-  // const goal = JSON.parse(localStorage.getItem('goal') || '')
   const { goals, isLoading, isError, message }: goalState = useAppSelector(
     (state: RootState) => state.goals,
   )
 
   const { user }: userState = useAppSelector((state: RootState) => state.auth)
 
-  // const [localGoal, setLocalGoal] = useState({
-  //   _id: 0,
-  //   start: dayjs(),
-  //   end: dayjs(),
-  //   activity: '',
-  //   target: 0,
-  //   progress: 0,
-  // })
-
-  // useEffect(() => {
-  //   const localGoalString = localStorage.getItem('goal')
-
-  //   if (!localGoalString || localGoalString.length == 2) {
-  //     localStorage.setItem('goal', JSON.stringify(goals))
-  //   }
-  //   if (localGoalString) {
-  //     setLocalGoal(JSON.parse(localGoalString))
-  //   }
-  // }, [])
-  // const localGoal: Goal | null = localGoalString
-  //   ? JSON.parse(localGoalString)
-  //   : null
-
-  // const [startValue, setStartValue] = React.useState<Dayjs | null>(dayjs())
-  // const [endValue, setEndValue] = React.useState<Dayjs | null>(dayjs())
-  // const [changingActivity, setChangingActivity] = React.useState<string>('')
-  // const [changingTarget, setChangingTarget] = React.useState<number>(0)
-  // const [changingProgress, setChangingProgress] = React.useState<number>(0)
   const [changeBtn, setChangeBtn] = useState(true)
-
-  // const startInputRef = useRef<HTMLInputElement>(null)
-  // const endInputRef = useRef<HTMLInputElement>(null)
-  // const activityInputRef = useRef<HTMLInputElement>(null)
-  // const targetInputRef = useRef<HTMLInputElement>(null)
-  // const progressInputRef = useRef<HTMLInputElement>(null)
 
   const [startValue, setStartValue] = React.useState<Dayjs | null>(dayjs(0))
   const [endValue, setEndValue] = React.useState<Dayjs | null>(dayjs(0))
@@ -100,23 +54,6 @@ export default function ActivityInputForm() {
   const [targetValue, setTargetValue] = React.useState<any>(0)
   const [progressValue, setProgressValue] = React.useState<Number>(0)
   const [idValue, setIdValue] = React.useState<string>('')
-  // const [localGoal, setLocalGaol] = React.useState([
-  //   {
-  //     _id: 0,
-  //     start: dayjs(),
-  //     end: dayjs(),
-  //     activity: '',
-  //     target: 0,
-  //     progress: 0,
-  //   },
-  // ])
-  // const [initialFormValues, setInitialFormValues] = useState({
-  //   start: startValue,
-  //   end: endValue,
-  //   activity: activityValue,
-  //   target: targetValue,
-  //   progress: progressValue,
-  // })
 
   let localGoal: Goal[]
   let localGoalString: string | null
@@ -131,7 +68,6 @@ export default function ActivityInputForm() {
     } else if (goals && localGoalString)
       if (localGoalString) {
         localGoal = JSON.parse(localGoalString)
-        // setLocalGaol(JSON.parse(localGoalString))
       }
 
     if (localGoal) {
@@ -143,15 +79,6 @@ export default function ActivityInputForm() {
       setProgressValue(localGoal[0].progress)
     }
   }, [goals])
-
-  // const [value, setValue] = React.useState<Dayjs | null>(null)
-  // interface Inputs {
-  //   start: Dayjs
-  //   end: Dayjs
-  //   activity: string
-  //   target: number
-  //   progress: number
-  // }
 
   const schema = z.object({
     start: z.any(),
@@ -182,20 +109,6 @@ export default function ActivityInputForm() {
   } = useForm<Inputs>({
     resolver: zodResolver(schema),
   })
-
-  // useEffect(() => {
-  //   if (goals) {
-  //     setValue('start', dayjs(goals.start)),
-  //       setValue('end', dayjs(goals.end)),
-  //       setValue('activity', goals.activity),
-  //       setValue('target', goals.target),
-  //       setValue('progress', goals.progress)
-  //   }
-  // }, [])
-
-  // const changeEndDate = () => {
-  //   return { ...register('end') }
-  // }
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     if (goals) {
@@ -253,9 +166,6 @@ export default function ActivityInputForm() {
                   variant="filled"
                   margin="normal"
                   id="activity"
-                  // onChange={(newValue) =>
-                  //   setActivityValue(newValue.target.value)
-                  // }
                   defaultValue={activityValue}
                   {...register('activity', {
                     onChange: (e) => {
@@ -311,13 +221,6 @@ export default function ActivityInputForm() {
               variant="contained"
               color="primary"
               className="btn"
-              // sx={{
-              //   mt: 3,
-              //   mb: 2,
-              //   mx: 'auto',
-              //   borderRadius: '40px',
-              //   display: 'flex',
-              // }}
             >
               Save Changes
             </Button>
@@ -325,21 +228,12 @@ export default function ActivityInputForm() {
         </Box>
       ) : (
         <Box className="form">
-          <Link
-            to={`/goals/user/${user._id}`}
-            // style={{ textDecoration: 'none', margin: '1rem' }}
-          >
+          <Link to={`/goals/user/${user._id}`}>
             <Button
               onClick={() => {
                 setChangeBtn(true)
               }}
               variant="contained"
-              // sx={{
-              //   mt: 3,
-              //   mb: 2,
-              //   borderRadius: '40px',
-              //   margin: '0 auto',
-              // }}
             >
               Changes saved - Return to Dashboard
             </Button>

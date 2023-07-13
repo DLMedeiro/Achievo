@@ -2,14 +2,9 @@
 // async / await => use Try / Catch
 // Express Async Handler => skip try/catch and use the error handler instead
 
-// const asyncHandler = require('express-async-handler')
 import asyncHandler from 'express-async-handler'
-
-// const Goal = require('../models/goalModel')
 import Goal from '../models/goalModel.ts'
 // Has the mongoose methods to use in the database
-// const User = require('../models/userModel')
-import User from '../models/userModel.ts'
 
 // Desc: Get goals
 // Route: GET /api/goals/:id
@@ -29,7 +24,7 @@ const getSingleGoal = asyncHandler(async(req:any, res:any) => {
 const getGoals = asyncHandler(async(req:any, res:any) => {
 
     const goals = await Goal.find({user: req.params.id})
-    // const goals = await Goal.find({user: res.locals.user.id})
+
     // Getting all goals for user, find is a built in mongoose method
     // shows in terminal when sending a postman request
 
@@ -80,7 +75,6 @@ const updateGoal = asyncHandler(async(req:any, res:any) => {
         }
     
 // Prevent updating other id's goals
-// user.id comes from the findById using locals
 // goal.user = user attached to goal
 // goal.user = objectID -> must change into a string
 if(goal.user.toString() !== req.body.userId){
@@ -150,7 +144,6 @@ const goal = await Goal.findById(req.params.id)
         throw new Error("Goal not found")
     } 
         // Prevent updating other id's goals
-    // user.id comes from the findById using locals
     // goal.user = user attached to goal
     // goal.user = objectID -> must change into a string
     if(goal.user.toString() !== req.body.user){
@@ -184,7 +177,4 @@ const goal = await Goal.findById(req.params.id)
     }
 })
 
-
-
-// module.exports = {getSingleGoal, getGoals, setGoal, updateGoal, deleteGoal, updateProgress}
 export default {getSingleGoal, getGoals, setGoal, updateGoal, deleteGoal, updateProgress}

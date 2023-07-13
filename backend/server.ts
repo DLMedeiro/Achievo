@@ -2,20 +2,16 @@
 // If changes are made to this file, the server needs to be reset
 
 // backend web framework
-// const express = require("express");
 import express from 'express'
 import goalRoutes from './routes/goalRoutes.ts'
 import userRoutes from './routes/userRoutes.ts'
 import path from 'path'
-// const path = require('path')
 // Bring in environment variables
-// const dotenv = require('dotenv').config()
 import dotenv from 'dotenv'
 dotenv.config()
 // make sure this is called before items requiring this file are used.  ConnectDB will have an error if this requirement is after it.
 
 import connectDB from './config/db.ts'
-// const connectDB = require('./config/db.ts')
 connectDB()
 // initialize express
 const app = express()
@@ -34,9 +30,6 @@ import cors from 'cors'
 
 // Bring in error handler
 import errorHandler from './middleware/errorMiddleware.ts'
-// const errorHandler = require("./middleware/errorMiddleware");
-// changed to export default on middleware to eliminate errors when bringing the function to this file ?
-
 
 
 if(process.env.ORIGIN) {

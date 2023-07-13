@@ -6,7 +6,6 @@ import bcrypt from 'bcrypt'
 import asyncHandler from 'express-async-handler'
 
 import User from '../models/userModel.ts'
-// const User = require('../models/userModel')
 
 // .env file was not being read prior to bringing this in
 import dotenv from 'dotenv'
@@ -29,8 +28,6 @@ const registerUser = asyncHandler(async(req:any, res:any) => {
         throw new Error('Please add all fields')
     }
 
-    
-
     // check if user exists and send error if they do
     const userExists = await User.findOne({email: email})
     if (userExists !== null) {
@@ -48,12 +45,6 @@ const registerUser = asyncHandler(async(req:any, res:any) => {
         name, email, password: hashedPassword
     })
 
-    // JWT malformed due to token input not being accurate
-    // _id: new ObjectId("6494dd2cd06c0a6046e9662a"),
-    // workaround temp solution
-    // let startIndex = String(user._id).indexOf('"') + 1;
-    // let endIndex = String(user._id).lastIndexOf('"');
-    // let extractedString = String(user._id).slice(startIndex, endIndex);
     if (user) {
 
         res.status(201).json({
@@ -90,7 +81,6 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
                     name: user.name,
                     email: user.email,
                     token: generateToken(user._id)
-                    // token: generateToken(user._id)
                     })
                 )
   
@@ -104,19 +94,19 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
 // Description: Get user data
 // Route: GET api/users/me
 // Access: Private -> use middleware to accomplish -> during the request response cycle middleware will check the token
-const getMe =  asyncHandler(async(req:any, res:any) => {
-    const user = await User.findById(res.locals.user.id)
-    // Using res.locals because req.user.id shown in tutorial was not working
-if(user){
+// const getMe =  asyncHandler(async(req:any, res:any) => {
+//     const user = await User.findById(res.locals.user.id)
+//     // Using res.locals because req.user.id was not working
+// if(user){
 
 
-    res.status(200).json({
-        id:user._id,
-        name:user.name, 
-        email: user.email
-    })
-}
-})
+//     res.status(200).json({
+//         id:user._id,
+//         name:user.name, 
+//         email: user.email
+//     })
+// }
+// })
 
 // Generate JWT -> create a JWT_Secret in .env
 const generateToken = (id: object) => {
@@ -126,5 +116,5 @@ const generateToken = (id: object) => {
     }
 }
 
-export default { registerUser, loginUser, getMe}
+export default { registerUser, loginUser}
 // module.exports = { registerUser, loginUser, getMe}

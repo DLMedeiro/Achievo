@@ -11,13 +11,11 @@ import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
-import AdbIcon from '@mui/icons-material/Adb'
 import Logo from '../images/LOGO.png'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { RootState } from '../app/store'
 import { logout } from '../features/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
-import BeenhereIcon from '@mui/icons-material/Beenhere'
 import { login } from '../features/auth/authSlice'
 
 function ResponsiveAppBar() {
@@ -26,9 +24,7 @@ function ResponsiveAppBar() {
   interface userState {
     user: any
   }
-  const { isLoading, isError, isSuccess, message } = useAppSelector(
-    (state: RootState) => state.auth,
-  )
+
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -49,12 +45,6 @@ function ResponsiveAppBar() {
       }),
     )
   }
-
-  const pages = ['Login', 'Create Account', 'Try Demo']
-  const settings = [
-    ['Dashboard', toDashboard],
-    ['Logout', logoutUser],
-  ]
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -82,16 +72,6 @@ function ResponsiveAppBar() {
         {/* Full Window Start */}
         <Toolbar disableGutters>
           <img src={Logo} className="logo" onClick={() => navigate('/')} />
-          {/* <BeenhereIcon
-            sx={{
-              display: {
-                xs: 'none',
-                md: 'flex',
-                '&:hover': { cursor: 'pointer' },
-              },
-              mr: 1,
-            }}
-          /> */}
           <Typography
             variant="h6"
             noWrap
@@ -108,18 +88,7 @@ function ResponsiveAppBar() {
           </Typography>
           {/* Full Window End */}
           {/* Small Window Start */}
-          {/* <img src={Logo} className="logo" onClick={() => navigate('/')} /> */}
-          {/* <BeenhereIcon
-            sx={{
-              display: {
-                xs: 'flex',
-                md: 'none',
-                '&:hover': { cursor: 'pointer' },
-              },
-              mr: 1,
-            }}
-            onClick={() => navigate('/')}
-          /> */}
+
           <Typography
             variant="h6"
             noWrap

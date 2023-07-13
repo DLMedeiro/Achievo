@@ -2,9 +2,6 @@
 // All mongoose methods return a promise to async is required for all functions
 
 import {  connect } from 'mongoose';
-// const {connect} = require("mongoose");
-
-// const mongoose = require ('mongoose')
 
 const connectDB = async() => {
     try {

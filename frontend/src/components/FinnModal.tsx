@@ -10,18 +10,6 @@ export default function FinnModal() {
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
-  // const modalStyle = {
-  //   position: 'absolute' as 'absolute',
-  //   top: '50%',
-  //   left: '50%',
-  //   transform: 'translate(-50%, -50%)',
-  //   width: 400,
-  //   bgcolor: 'background.paper',
-  //   border: '3px solid #1e5b5e',
-  //   boxShadow: 24,
-  //   p: 4,
-  // }
-
   return (
     <div>
       <Avatar
