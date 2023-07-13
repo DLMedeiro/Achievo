@@ -25,18 +25,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import { registerUser, reset } from '../../features/auth/authSlice'
 import { RootState } from '../../app/store'
 
-// const theme = createTheme()
-
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: '#114ea1',
-//       light: '#6189c2',
-//       dark: '#00003c',
-//     },
-//   },
-// })
-
 export default function SignUp() {
   type Inputs = {
     name: string

@@ -40,7 +40,6 @@
 
 /* https://www.youtube.com/watch?v=U-4tg5snUuw&t=0s */
 .progress {
-  background-color: #e1def1;
   border-radius: 30px;
   /* height: 30px; */
   width: 100%;
@@ -53,7 +52,7 @@
   margin-left: 20px;
 }
 #progress-done {
-  background: linear-gradient(to left,#e8b29e, #cb99d5); 
+  background: linear-gradient(to left,#30f5fe, #1e5b5e); 
   border-radius: 30px;
   display:flex;
   align-items: center;

@@ -4,6 +4,18 @@
 #goal-container{
     margin-top:1rem;
 }
+.logo{
+    height: 50px;
+    width: 50px;
+    margin-right: 10px;
+}
+.logo:hover{
+    cursor: pointer;
+}
+#avatar {
+    color: #1e5b5e;
+    background-color: #30f5fe
+}
 
 /* Form */
 .form-container{
@@ -32,12 +44,8 @@
 /* Login */
 .btn{
    width: 100%;
-   color: #2f2d13;
-   background-color: #f6cdfe;
 }
 .btn:hover{
-    background-color: #f9f9f9;
-     color: #2f2d13;    
      cursor: pointer; 
    
  }
@@ -47,6 +55,10 @@
 }
 #btn-math{
     width: 100%;
+    color: #1e5b5e
+}
+#btn-math:hover{
+    color: #30f5fe
 }
 
 .dateLabel div p{
@@ -58,4 +70,30 @@
 
 #center {
     text-align: center;
+}
+
+.modal {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400;
+    background-color: white;
+    border: 2px solid #1e5b5e;
+    box-shadow: 24;
+    padding: 2rem;
+  }
+
+
+
+
+  @media screen and (max-width: 640px){
+    .modal {
+        padding: 1rem;
+        
+      }
+    #modal-modal-title{
+    font-size: 2rem
+    }
 }

@@ -21,15 +21,7 @@ export default function CreateAccount(): JSX.Element {
   }
 
   return (
-    <Paper
-      elevation={14}
-      className="form-container"
-      // sx={{
-      //   padding: ' 2em',
-      //   borderRadius: '30px',
-      //   backgroundColor: 'rgba(252, 252, 252, 0.8)',
-      // }}
-    >
+    <Paper elevation={14} className="form-container">
       <Typography variant="h5" component="h5" align="center">
         New Account
       </Typography>

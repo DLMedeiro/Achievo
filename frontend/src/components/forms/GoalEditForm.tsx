@@ -28,16 +28,6 @@ import { Link } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
 import { Paper } from '@mui/material'
 
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: '#114ea1',
-//       light: '#6189c2',
-//       dark: '#00003c',
-//     },
-//   },
-// })
-
 export default function ActivityInputForm() {
   interface Goal {
     _id: string

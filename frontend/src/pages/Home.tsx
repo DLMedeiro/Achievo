@@ -35,15 +35,7 @@ export default function Home() {
   }
 
   return (
-    <Paper
-      elevation={14}
-      className="form-container"
-      // sx={{
-      //   padding: ' 2em',
-      //   borderRadius: '30px',
-      //   backgroundColor: 'rgba(252, 252, 252, 0.8)',
-      // }}
-    >
+    <Paper elevation={14} className="form-container">
       {user ? (
         <>
           {user._id == '64728b96d38e1251fcc5cc82' ? (

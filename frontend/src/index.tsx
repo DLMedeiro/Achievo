@@ -7,15 +7,31 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './app/store'
 import CssBaseline from '@mui/material/CssBaseline'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: '#1e5b5e',
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: '#30f5fe',
+    },
+  },
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <CssBaseline />
-      <App />
-    </BrowserRouter>
-  </Provider>,
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <CssBaseline />
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </ThemeProvider>,
 )
 
 // If you want to start measuring performance in your app, pass a function

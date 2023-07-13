@@ -25,18 +25,6 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { login, reset } from '../../features/auth/authSlice'
 import { RootState } from '../../app/store'
 
-// const theme = createTheme()
-
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: '#f6e4d9',
-//       light: '#6189c2',
-//       dark: '#2f2d13',
-//     },
-//   },
-// })
-
 export default function Login() {
   type Inputs = {
     email: string

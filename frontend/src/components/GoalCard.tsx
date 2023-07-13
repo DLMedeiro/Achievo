@@ -177,9 +177,9 @@ export default function Activity({ goal }: { goal: any }) {
   useEffect(() => {
     if (completed) {
       setBoxShadow(
-        '0px 7px 9px -4px rgb(3 164 3 / 20%), 0px 14px 21px 2px rgb(3 164 3 / 14%), 0px 5px 26px 4px rgb(3 164 3 / 12%)',
+        '0px 7px 9px -4px rgb(48 245 254 / 20%), 0px 14px 21px 2px rgb(48 245 254 / 14%), 0px 5px 26px 4px rgb(348 245 254 / 12%)',
       )
-      setBorderColor('green')
+      setBorderColor('#1e5b5e')
     } else {
       setBoxShadow(
         '0px 7px 9px -4px rgb(0 0 0 / 20%), 0px 14px 21px 2px rgb(0 0 0 / 14%), 0px 5px 26px 4px rgb(0 0 0 / 12%)',
@@ -209,7 +209,7 @@ export default function Activity({ goal }: { goal: any }) {
               {completed ? (
                 <>
                   <DoneOutlineIcon
-                    style={{ color: 'green', marginRight: '10px' }}
+                    style={{ color: '#1e5b5e', marginRight: '10px' }}
                   />
                   {goal.activity}
                 </>

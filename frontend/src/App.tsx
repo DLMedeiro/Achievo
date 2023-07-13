@@ -21,17 +21,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import GoalEditForm from './components/forms/GoalEditForm'
 
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: 'rgba(252, 252, 252, 0.7)',
-//       light: '#f9f9f9',
-//       dark: '#f6cdfe',
-//       // dark: '#2f2d13',
-//     },
-//   },
-// })
-
 function App() {
   interface userState {
     user: any

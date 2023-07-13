@@ -10,17 +10,17 @@ export default function FinnModal() {
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
-  const modalStyle = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  }
+  // const modalStyle = {
+  //   position: 'absolute' as 'absolute',
+  //   top: '50%',
+  //   left: '50%',
+  //   transform: 'translate(-50%, -50%)',
+  //   width: 400,
+  //   bgcolor: 'background.paper',
+  //   border: '3px solid #1e5b5e',
+  //   boxShadow: 24,
+  //   p: 4,
+  // }
 
   return (
     <div>
@@ -32,7 +32,7 @@ export default function FinnModal() {
           height: 80,
           margin: 'auto',
           border: '2px solid transparent',
-          '&:hover': { cursor: 'pointer', border: '2px solid rgba(0,0,0,.5)' },
+          '&:hover': { cursor: 'pointer', border: '2px solid #1e5b5e' },
         }}
         onClick={handleOpen}
       />
@@ -46,17 +46,14 @@ export default function FinnModal() {
           alignItems: 'center',
           justifyContent: 'center',
         }}
+        className="test"
       >
-        <Box sx={modalStyle}>
-          <Typography id="modal-modal-title" variant="h2" component="h2">
+        <Box className="modal">
+          <Typography id="modal-modal-title" variant="h3" component="h3">
             Hi! I'm Finn.
           </Typography>
-          <Typography id="modal-modal-title" variant="h6" component="h6">
-            Feel free to browse my Dashboard of goals.
-          </Typography>
-          <Typography id="modal-modal-title" variant="h6" component="h6">
-            You can add or edit them too!
-          </Typography>
+          <Typography>Feel free to browse my Dashboard of goals.</Typography>
+          <Typography>You can add or edit them too!</Typography>
           <img
             id="modal-description"
             src={FinnImage}

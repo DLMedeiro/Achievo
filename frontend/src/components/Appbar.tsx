@@ -12,7 +12,7 @@ import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import AdbIcon from '@mui/icons-material/Adb'
-
+import Logo from '../images/LOGO.png'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { RootState } from '../app/store'
 import { logout } from '../features/auth/authSlice'
@@ -78,10 +78,11 @@ function ResponsiveAppBar() {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         {/* Full Window Start */}
         <Toolbar disableGutters>
-          <BeenhereIcon
+          <img src={Logo} className="logo" onClick={() => navigate('/')} />
+          {/* <BeenhereIcon
             sx={{
               display: {
                 xs: 'none',
@@ -90,8 +91,7 @@ function ResponsiveAppBar() {
               },
               mr: 1,
             }}
-            onClick={() => navigate('/')}
-          />
+          /> */}
           <Typography
             variant="h6"
             noWrap
@@ -99,18 +99,17 @@ function ResponsiveAppBar() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            Start Somewhere
+            StartSomewhere
           </Typography>
           {/* Full Window End */}
           {/* Small Window Start */}
-          <BeenhereIcon
+          {/* <img src={Logo} className="logo" onClick={() => navigate('/')} /> */}
+          {/* <BeenhereIcon
             sx={{
               display: {
                 xs: 'flex',
@@ -120,7 +119,7 @@ function ResponsiveAppBar() {
               mr: 1,
             }}
             onClick={() => navigate('/')}
-          />
+          /> */}
           <Typography
             variant="h6"
             noWrap
@@ -183,7 +182,7 @@ function ResponsiveAppBar() {
             {user ? (
               <Tooltip title="Options">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar>{user.name.charAt(0)} </Avatar>
+                  <Avatar id="avatar">{user.name.charAt(0)} </Avatar>
                 </IconButton>
               </Tooltip>
             ) : (

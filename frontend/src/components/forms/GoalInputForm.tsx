@@ -29,25 +29,6 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: '#114ea1',
-//       light: '#6189c2',
-//       dark: '#00003c',
-//     },
-//   },
-// })
-
-// interface ListFormProps {
-//   onAddItem: (
-//     start: string,
-//     end: string,
-//     activity: string,
-//     target: number,
-//     progress: number,
-//   ) => void
-// }
 
 export default function ActivityInputForm() {
   const [startValue, setStartValue] = React.useState<Dayjs | null>(null)
