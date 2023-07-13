@@ -75,7 +75,9 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
 
         // Check the password using bcrypt method to compare password input with hashed password
         if(user !== null && user.password){
-            if (user !== null && (await bcrypt.compare(password, user.password))){
+            let passwordCheck = await bcrypt.compare(password, user.password)
+
+            if (user !== null && (passwordCheck)){
                 return(res.json({
                     _id: user.id,
                     name: user.name,
@@ -84,7 +86,20 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
                     })
                 )
   
+            } else {
+                res.status(400)
+                throw new Error('Invalid credentials')
             }
+            // if (user !== null && (await bcrypt.compare(password, user.password))){
+            //     return(res.json({
+            //         _id: user.id,
+            //         name: user.name,
+            //         email: user.email,
+            //         token: generateToken(user._id)
+            //         })
+            //     )
+  
+            // }
         } else if (user == null) {
             res.status(400)
             throw new Error('Invalid credentials')
