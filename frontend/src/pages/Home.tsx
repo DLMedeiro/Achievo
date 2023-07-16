@@ -13,6 +13,7 @@ export default function Home() {
   const { user, isLoading, isError, isSuccess, message } = useAppSelector(
     (state: RootState) => state.auth,
   )
+
   const dispatch = useAppDispatch()
 
   const loginDemo = () => {
@@ -33,7 +34,7 @@ export default function Home() {
   }
 
   return (
-    <Paper elevation={14} className="form-container">
+    <Paper elevation={14} className="form-container fade-in">
       {user ? (
         <>
           {user._id == '64728b96d38e1251fcc5cc82' ? (
