@@ -5,6 +5,7 @@
 import express from 'express'
 import goalRoutes from './routes/goalRoutes.ts'
 import userRoutes from './routes/userRoutes.ts'
+import dataRoutes from './routes/dataRoutes.ts'
 import path from 'path'
 // Bring in environment variables
 import dotenv from 'dotenv'
@@ -44,6 +45,7 @@ if(process.env.ORIGIN) {
 
 app.use('/api/goals', goalRoutes)
 app.use('/api/users', userRoutes)
+app.use('/', dataRoutes)
 
 // Serve frontend
 // if (process.env.NODE_ENV === 'production') {

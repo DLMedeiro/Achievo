@@ -6,6 +6,8 @@ import { RootState } from '../app/store'
 import { login } from '../features/auth/authSlice'
 import FinnModal from '../components/FinnModal'
 import CircularIndeterminate from '../components/Spinner'
+import { getData } from '../features/data/dataSlice'
+import { useEffect } from 'react'
 
 export default function Home() {
   const { user, isLoading, isError, isSuccess, message } = useAppSelector(
@@ -21,6 +23,10 @@ export default function Home() {
       }),
     )
   }
+
+  useEffect(() => {
+    dispatch(getData())
+  }, [])
 
   if (isLoading) {
     return <CircularIndeterminate />
@@ -45,8 +51,12 @@ export default function Home() {
         </>
       ) : (
         <>
-          <h1>StartSomewhere</h1>
-          <h2>Achieve More, One Step at a Time!</h2>
+          <h1>Achieve More, One Step at a Time!</h1>
+          <h3>
+            Even a small but regular investment of time can yield significant
+            results over time and reinforces the belief that progress is
+            achievable, fostering motivation and perseverance.
+          </h3>
         </>
       )}
 

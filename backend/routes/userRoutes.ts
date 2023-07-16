@@ -7,6 +7,7 @@ import uC from '../controllers/userController.ts'
 // const {protect} = require ("../middleware/authMiddleware")
 import aM from "../middleware/authMiddleware.ts"
 
+
 router.post('/', uC.registerUser)
 router.post('/login', uC.loginUser)
 router.get('/me', aM.protect)

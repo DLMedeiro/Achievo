@@ -55,7 +55,6 @@ export default function SignUp() {
     }
 
     dispatch(reset())
-    console.log(isError)
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const {
