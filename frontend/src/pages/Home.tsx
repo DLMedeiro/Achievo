@@ -39,6 +39,10 @@ export default function Home() {
     }
   }, [])
 
+  if (isSuccess) {
+    setShowComponent(false)
+  }
+
   return (
     <>
       {isLoading ? (
@@ -64,9 +68,8 @@ export default function Home() {
             <>
               <h1>Achieve More, One Step at a Time!</h1>
               <h3>
-                Even a small but regular investment of time can yield
-                significant results over time and reinforces the belief that
-                progress is achievable, fostering motivation and perseverance.
+                Consistently dedicating even a small amount of time can lead to
+                substantial outcomes in the long run.
               </h3>
             </>
           )}
