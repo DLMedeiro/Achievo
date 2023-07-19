@@ -100,18 +100,26 @@ function SnakeGameModal() {
   }, [snake, apple, gameOver])
 
   return (
-    <div role="button" tabIndex={0} onKeyDown={(e) => moveSnake(e)}>
-      <canvas
-        style={{ border: '1px solid black' }}
-        ref={canvasRef}
-        width={`${CANVAS_SIZE[0]}px`}
-        height={`${CANVAS_SIZE[1]}px`}
-      />
-      {gameOver && <div>GAME OVER!</div>}
+    <div className="modal fade-in">
+      <h4>
+        Apologies for the inconvenience. It appears the server is currently
+        spinning back up. This may take up to 5 minutes. In the meantime, please
+        enjoy this throwback.
+      </h4>
 
-      <Button onClick={startGame} variant="contained">
-        Start Game!
-      </Button>
+      <div role="button" tabIndex={0} onKeyDown={(e) => moveSnake(e)}>
+        <canvas
+          style={{ border: '1px solid black' }}
+          ref={canvasRef}
+          width={`${CANVAS_SIZE[0]}px`}
+          height={`${CANVAS_SIZE[1]}px`}
+        />
+        {gameOver && <div>GAME OVER!</div>}
+
+        <Button onClick={startGame} variant="contained">
+          Start Game!
+        </Button>
+      </div>
     </div>
   )
 }
