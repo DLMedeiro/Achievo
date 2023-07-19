@@ -34,7 +34,7 @@ export default function Home() {
   console.log(counterRef)
   let interval: NodeJS.Timeout
   useEffect(() => {
-    if (isLoading) {
+    if (isLoading && counterRef.current == 0) {
       interval = setInterval(() => {
         counterRef.current += 1
       }, 1000)
@@ -50,6 +50,13 @@ export default function Home() {
       counterRef.current = 0 // Reset counterRef to 0 when unmounting
     }
   }, [isLoading, isSuccess])
+
+  if (isLoading && counterRef.current < 70) {
+    return <CircularIndeterminate />
+  }
+  if (isLoading && counterRef.current > 70) {
+    return <SnakeGameModal />
+  }
 
   return (
     <Paper elevation={14} className="form-container fade-in">
