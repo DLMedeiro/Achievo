@@ -7,7 +7,7 @@ import { login } from '../features/auth/authSlice'
 import FinnModal from '../components/FinnModal'
 import CircularIndeterminate from '../components/Spinner'
 import { getData } from '../features/data/dataSlice'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Quote from '../components/Quote'
 import SnakeGameModal from '../components/SnakeGameModal'
 
@@ -15,7 +15,7 @@ export default function Home() {
   const { user, isLoading, isError, isSuccess, message } = useAppSelector(
     (state: RootState) => state.auth,
   )
-
+  const counterRef = useRef(0)
   const dispatch = useAppDispatch()
 
   const loginDemo = () => {
@@ -26,26 +26,30 @@ export default function Home() {
       }),
     )
   }
-  let interval
-  let time = 0
+
   useEffect(() => {
     dispatch(getData())
-    interval = setInterval(updateTimer, 1000)
   }, [])
 
-  const updateTimer = () => {
-    time += 1
-  }
-  console.log(`time = ${time}`)
-  if (isLoading && time < 70) {
-    return <CircularIndeterminate />
-  }
-  if (isLoading && time < 70) {
-    return <SnakeGameModal />
-  }
-  if (isSuccess) {
-    clearInterval(interval)
-  }
+  console.log(counterRef)
+  let interval: NodeJS.Timeout
+  useEffect(() => {
+    if (isLoading) {
+      interval = setInterval(() => {
+        counterRef.current += 1
+      }, 1000)
+    }
+
+    if (isSuccess) {
+      clearInterval(interval)
+      counterRef.current = 0 // Reset counterRef to 0
+    }
+
+    return () => {
+      clearInterval(interval)
+      counterRef.current = 0 // Reset counterRef to 0 when unmounting
+    }
+  }, [isLoading, isSuccess])
 
   return (
     <Paper elevation={14} className="form-container fade-in">
