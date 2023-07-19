@@ -94,7 +94,6 @@ export default function Home() {
           </Button>
         </>
       )}
-      <SnakeGameModal />
     </Paper>
   )
 }
