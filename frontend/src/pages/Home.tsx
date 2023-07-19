@@ -26,35 +26,41 @@ export default function Home() {
       }),
     )
   }
-
+  let interval: NodeJS.Timeout
   useEffect(() => {
     dispatch(getData())
+    interval = setInterval(() => {
+      counterRef.current += 1
+    }, 1000)
   }, [])
 
   console.log(counterRef)
-  let interval: NodeJS.Timeout
-  useEffect(() => {
-    if (isLoading && counterRef.current <= 70) {
-      interval = setInterval(() => {
-        counterRef.current += 1
-      }, 1000)
-    }
+  // let interval: NodeJS.Timeout
+  // useEffect(() => {
+  //   if (isLoading && counterRef.current == 0) {
+  //     interval = setInterval(() => {
+  //       counterRef.current += 1
+  //     }, 2)
+  //   }
 
-    if (isSuccess) {
-      clearInterval(interval)
-      counterRef.current = 0 // Reset counterRef to 0
-    }
+  //   if (isSuccess) {
+  //     clearInterval(interval)
+  //     counterRef.current = 0 // Reset counterRef to 0
+  //   }
 
-    // return () => {
-    //   clearInterval(interval)
-    //   counterRef.current = 0 // Reset counterRef to 0 when unmounting
-    // }
-  }, [isLoading, isSuccess])
+  //   return () => {
+  //     clearInterval(interval)
+  //     counterRef.current = 0 // Reset counterRef to 0 when unmounting
+  //   }
+  // }, [isLoading, isSuccess])
 
-  if (isLoading && counterRef.current <= 70) {
-    return <CircularIndeterminate />
-  }
-  if (isLoading && counterRef.current > 70) {
+  // if (isLoading && counterRef.current <= 10) {
+  //   return <CircularIndeterminate />
+  // }
+  // if (isLoading && counterRef.current > 10) {
+  //   return <SnakeGameModal />
+  // }
+  if (isLoading) {
     return <SnakeGameModal />
   }
 
