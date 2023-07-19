@@ -34,7 +34,7 @@ export default function Home() {
   console.log(counterRef)
   let interval: NodeJS.Timeout
   useEffect(() => {
-    if (isLoading && counterRef.current == 0) {
+    if (isLoading && counterRef.current <= 70) {
       interval = setInterval(() => {
         counterRef.current += 1
       }, 1000)
@@ -45,13 +45,13 @@ export default function Home() {
       counterRef.current = 0 // Reset counterRef to 0
     }
 
-    return () => {
-      clearInterval(interval)
-      counterRef.current = 0 // Reset counterRef to 0 when unmounting
-    }
+    // return () => {
+    //   clearInterval(interval)
+    //   counterRef.current = 0 // Reset counterRef to 0 when unmounting
+    // }
   }, [isLoading, isSuccess])
 
-  if (isLoading && counterRef.current < 70) {
+  if (isLoading && counterRef.current <= 70) {
     return <CircularIndeterminate />
   }
   if (isLoading && counterRef.current > 70) {
