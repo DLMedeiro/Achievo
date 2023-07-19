@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard'
 
 import Item from './models/Item'
 import './styles/Utilities.css'
+import './styles/SnakeGame.css'
 import { useAppSelector } from './app/hooks'
 import { RootState } from './app/store'
 import '@fontsource/roboto/300.css'

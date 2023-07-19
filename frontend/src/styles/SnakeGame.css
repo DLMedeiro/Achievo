@@ -1,0 +1,39 @@
+.snake-game-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: aqua;
+  }
+  
+  .snake-game-board {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 2px solid #000;
+  }
+  
+  .snake-segment,
+  .food {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .snake-segment {
+    background-color: #00ff00;
+  }
+  
+  .food {
+    background-color: #ff0000;
+  }
+  
+  .game-over-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+  }
+  

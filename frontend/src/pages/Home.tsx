@@ -7,9 +7,38 @@ import { login } from '../features/auth/authSlice'
 import FinnModal from '../components/FinnModal'
 import CircularIndeterminate from '../components/Spinner'
 import { getData } from '../features/data/dataSlice'
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import Quote from '../components/Quote'
+import SnakeGameModal from '../components/SnakeGameModal'
 
 export default function Home() {
+  const callout = [
+    {
+      text:
+        'Hello, if you are seeing this, it is likely the server is spinning back up.  This can take up to 5 minutes.  While you wait, please enjoy this throwback',
+      author: 'None',
+    },
+  ]
+
+  const quotes = [
+    {
+      text: 'What you give is what you get.',
+      author: 'Byron Pulsifer',
+    },
+    {
+      text: 'We can only learn to love by loving.',
+      author: 'Iris Murdoch',
+    },
+    {
+      text: 'Life is change. Growth is optional. Choose wisely.',
+      author: 'Karen Clark',
+    },
+    {
+      text: "You'll see it when you believe it.",
+      author: 'Wayne Dyer',
+    },
+  ]
+
   const { user, isLoading, isError, isSuccess, message } = useAppSelector(
     (state: RootState) => state.auth,
   )
@@ -24,13 +53,25 @@ export default function Home() {
       }),
     )
   }
-
+  let interval
+  let time = 0
   useEffect(() => {
     dispatch(getData())
+    interval = setInterval(updateTimer, 1000)
   }, [])
 
-  if (isLoading) {
+  const updateTimer = () => {
+    time += 1
+  }
+  console.log(`time = ${time}`)
+  if (isLoading && time < 70) {
     return <CircularIndeterminate />
+  }
+  if (isLoading && time < 70) {
+    return <SnakeGameModal />
+  }
+  if (isSuccess) {
+    clearInterval(interval)
   }
 
   return (

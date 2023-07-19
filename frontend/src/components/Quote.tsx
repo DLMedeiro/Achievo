@@ -9,7 +9,23 @@ import axios from 'axios'
 
 type Props = { text: string; author: string }
 
-export default function InspirationQuote({ text, author }: Props) {
+function quotes({ text, author }: Props) {
+  const [quote, setQuote] = React.useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetch('https://type.fit/api/quotes')
+        .then(function (response) {
+          console.log(response.json())
+          return response.json()
+        })
+        .then(function (data) {
+          setQuote(Object.values(data[Math.floor(Math.random() * data.length)]))
+        })
+    }
+    fetchData().catch(console.error)
+  }, [])
+
   return (
     <Grid item xs={12} style={{ fontSize: '1.5rem' }}>
       <q>{text}</q>
@@ -27,3 +43,5 @@ export default function InspirationQuote({ text, author }: Props) {
     </Grid>
   )
 }
+
+export default quotes
