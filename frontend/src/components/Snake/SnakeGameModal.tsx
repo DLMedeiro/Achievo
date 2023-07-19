@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { useInterval } from './Snake/useInterval'
+import { useInterval } from './useInterval'
 import {
   CANVAS_SIZE,
   SNAKE_START,
   APPLE_START,
   SCALE,
   SPEED,
-} from './Snake/constants'
+} from './constants'
 import { Button } from '@mui/material'
+import { Paper } from '@mui/material'
 
 function SnakeGameModal() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -100,27 +101,52 @@ function SnakeGameModal() {
   }, [snake, apple, gameOver])
 
   return (
-    <div className="modal fade-in">
+    <Paper elevation={14} className="form-container fade-in">
       <h4>
         Apologies for the inconvenience. It appears the server is currently
         spinning back up. This may take up to 5 minutes. In the meantime, please
         enjoy this throwback.
       </h4>
 
-      <div role="button" tabIndex={0} onKeyDown={(e) => moveSnake(e)}>
-        <canvas
-          style={{ border: '1px solid black' }}
-          ref={canvasRef}
-          width={`${CANVAS_SIZE[0]}px`}
-          height={`${CANVAS_SIZE[1]}px`}
-        />
-        {gameOver && <div>GAME OVER!</div>}
-
-        <Button onClick={startGame} variant="contained">
-          Start Game!
-        </Button>
-      </div>
-    </div>
+      <Paper
+        elevation={14}
+        role="button"
+        className="form-container"
+        style={{ margin: 'auto' }}
+        tabIndex={0}
+        onKeyDown={(e) => moveSnake(e)}
+      >
+        {gameOver ? (
+          <>
+            <div>GAME OVER!</div>
+            <Button id="btn-pair" onClick={startGame} variant="contained">
+              Start Game!
+            </Button>
+          </>
+        ) : (
+          <>
+            <canvas
+              style={{
+                border: '1px solid black',
+                display: 'block',
+                margin: 'auto',
+              }}
+              ref={canvasRef}
+              width={`${CANVAS_SIZE[0]}px`}
+              height={`${CANVAS_SIZE[1]}px`}
+            />
+            <Button
+              id="btn-pair"
+              onClick={startGame}
+              variant="contained"
+              style={{ display: 'block', margin: 'auto', marginTop: '1rem' }}
+            >
+              Start Game!
+            </Button>
+          </>
+        )}
+      </Paper>
+    </Paper>
   )
 }
 

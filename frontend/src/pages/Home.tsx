@@ -9,13 +9,13 @@ import CircularIndeterminate from '../components/Spinner'
 import { getData } from '../features/data/dataSlice'
 import React, { useEffect, useState } from 'react'
 import Quote from '../components/Quote'
-import SnakeGameModal from '../components/SnakeGameModal'
+import SnakeGameModal from '../components/Snake/SnakeGameModal'
 
 export default function Home() {
   const { user, isLoading, isError, isSuccess, message } = useAppSelector(
     (state: RootState) => state.auth,
   )
-  const [showComponent, setShowComponent] = useState(false)
+  const [showComponent, setShowComponent] = useState(true)
 
   const dispatch = useAppDispatch()
 
@@ -33,9 +33,13 @@ export default function Home() {
     const timer = setTimeout(() => {
       setShowComponent(true)
     }, 10000) // 10 seconds in milliseconds
+    const secondTimer = setTimeout(() => {
+      setShowComponent(false)
+    }, 10002) // 10 seconds in milliseconds
 
     return () => {
       clearTimeout(timer)
+      clearTimeout(secondTimer)
       setShowComponent(false)
     }
   }, [])
