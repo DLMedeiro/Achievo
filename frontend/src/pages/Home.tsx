@@ -30,6 +30,10 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getData())
+    setShowComponent(false)
+  }, [])
+  useEffect(() => {
+    dispatch(getData())
     const timer = setTimeout(() => {
       setShowComponent(true)
     }, 10000) // 10 seconds in milliseconds
@@ -37,11 +41,11 @@ export default function Home() {
     return () => {
       clearTimeout(timer)
     }
-  }, [])
+  }, [isLoading])
 
-  if (isSuccess) {
-    setShowComponent(false)
-  }
+  // if (isSuccess) {
+  //   setShowComponent(false)
+  // }
 
   return (
     <>
