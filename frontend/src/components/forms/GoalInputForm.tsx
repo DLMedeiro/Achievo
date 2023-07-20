@@ -50,7 +50,7 @@ export default function ActivityInputForm() {
       .positive()
       .min(1, { message: 'Please enter your target time commitment goal' }),
   })
-  console.log(startValue)
+
   const dispatch = useAppDispatch()
 
   const {
@@ -61,7 +61,7 @@ export default function ActivityInputForm() {
     defaultValues: InitialFormValues,
     resolver: zodResolver(schema),
   })
-  console.log(dayjs(new Date()).format('LL'))
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const goalData = {
       start: startValue,
@@ -70,6 +70,7 @@ export default function ActivityInputForm() {
       target: data.target,
     }
     dispatch(createGoal(goalData))
+    window.location.reload()
   }
 
   useEffect(() => {}, [startValue])
