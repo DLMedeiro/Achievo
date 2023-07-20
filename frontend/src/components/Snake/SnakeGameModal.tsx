@@ -100,6 +100,40 @@ function SnakeGameModal() {
     }
   }, [snake, apple, gameOver])
 
+  const handleTouchStart = (event: any) => {
+    const touch = event.touches[0]
+    const startX = touch.clientX
+    const startY = touch.clientY
+
+    const handleTouchMove = (event: any) => {
+      const touch = event.touches[0]
+      const deltaX = touch.clientX - startX
+      const deltaY = touch.clientY - startY
+
+      document.addEventListener('touchmove', handleTouchMove)
+      // Determine the primary direction of the swipe
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal swipe
+        if (deltaX > 0 && dir[0] !== -1 && dir[1] !== 0) {
+          setDir([1, 0])
+        } else if (deltaX < 0 && dir[0] !== 1 && dir[1] !== 0) {
+          setDir([-1, 0])
+        }
+      } else {
+        // Vertical swipe
+        if (deltaY > 0 && dir[0] !== 0 && dir[1] !== -1) {
+          setDir([0, 1])
+        } else if (deltaY < 0 && dir[0] !== 0 && dir[1] !== 1) {
+          setDir([0, -1])
+        }
+      }
+    }
+
+    document.addEventListener('touchend', () => {
+      document.removeEventListener('touchmove', handleTouchMove)
+    })
+  }
+
   return (
     <Paper elevation={14} className="form-container fade-in">
       <h4>
@@ -115,6 +149,7 @@ function SnakeGameModal() {
         style={{ margin: 'auto' }}
         tabIndex={0}
         onKeyDown={(e) => moveSnake(e)}
+        onTouchStart={(e) => handleTouchStart(e)}
       >
         {gameOver ? (
           <>
