@@ -184,7 +184,7 @@ export default function ActivityInputForm() {
                   variant="filled"
                   margin="normal"
                   type="number"
-                  id="target"
+                  id="Number of hours to complete goal"
                   defaultValue={targetValue}
                   {...register('target', {
                     valueAsNumber: true,

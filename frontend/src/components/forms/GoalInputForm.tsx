@@ -21,8 +21,12 @@ import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 export default function ActivityInputForm() {
-  const [startValue, setStartValue] = React.useState<Dayjs | null>(null)
-  const [endValue, setEndValue] = React.useState<Dayjs | null>(null)
+  const [startValue, setStartValue] = React.useState<Dayjs | null>(
+    dayjs(new Date()),
+  )
+  const [endValue, setEndValue] = React.useState<Dayjs | null>(
+    dayjs(new Date()),
+  )
   interface Inputs {
     start: Dayjs
     end: Dayjs
@@ -31,21 +35,22 @@ export default function ActivityInputForm() {
   }
 
   const InitialFormValues = {
-    start: dayjs().format('LL'),
-    end: dayjs().format('LL'),
+    start: dayjs(new Date()).format('LL'),
+    end: dayjs(new Date()).format('LL'),
     activity: '',
     target: 0,
   }
 
   const schema = z.object({
-    start: z.string(),
-    end: z.string(),
+    start: z.string().min(1, { message: 'Please enter your start date' }),
+    end: z.string().min(1, { message: 'Please enter your completion date' }),
     activity: z.string().min(3, { message: 'Please enter your activity' }),
     target: z
       .number()
+      .positive()
       .min(1, { message: 'Please enter your target time commitment goal' }),
   })
-
+  console.log(startValue)
   const dispatch = useAppDispatch()
 
   const {
@@ -56,7 +61,7 @@ export default function ActivityInputForm() {
     defaultValues: InitialFormValues,
     resolver: zodResolver(schema),
   })
-
+  console.log(dayjs(new Date()).format('LL'))
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const goalData = {
       start: startValue,
@@ -87,7 +92,7 @@ export default function ActivityInputForm() {
         >
           <Grid container spacing={0}>
             <Grid item xs={12}>
-              <DemoItem label="Start Date">
+              <DemoItem label="Start Date*">
                 <DatePicker
                   value={startValue}
                   onChange={(newValue) => setStartValue(newValue)}
@@ -96,7 +101,7 @@ export default function ActivityInputForm() {
               <div style={{ color: 'red' }}>{errors.start?.message}</div>
             </Grid>
             <Grid item xs={12}>
-              <DemoItem label="Completion Date">
+              <DemoItem label="Completion Date*">
                 <DatePicker
                   value={endValue}
                   onChange={(newValue) => setEndValue(newValue)}
@@ -120,7 +125,7 @@ export default function ActivityInputForm() {
               <TextField
                 required
                 fullWidth
-                label="Time commitment (hours)"
+                label="Number of hours to complete goal"
                 type="number"
                 id="target"
                 variant="filled"
