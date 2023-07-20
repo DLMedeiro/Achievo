@@ -139,7 +139,7 @@ function SnakeGameModal() {
       <h4>
         Apologies for the inconvenience. It appears the server is currently
         spinning back up. This may take up to 5 minutes. In the meantime, please
-        enjoy this throwback.
+        enjoy this throwback. (Mobile version still in process)
       </h4>
 
       <Paper
