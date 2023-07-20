@@ -33,20 +33,18 @@ export default function Home() {
     const timer = setTimeout(() => {
       setShowComponent(true)
     }, 10000) // 10 seconds in milliseconds
-    const secondTimer = setTimeout(() => {
-      setShowComponent(false)
-    }, 10002) // 10 seconds in milliseconds
 
     return () => {
       clearTimeout(timer)
-      clearTimeout(secondTimer)
       setShowComponent(false)
     }
   }, [])
 
-  // if (isSuccess) {
-  //   setShowComponent(false)
-  // }
+  useEffect(() => {
+    if (isSuccess) {
+      setShowComponent(false)
+    }
+  }, [isSuccess])
 
   return (
     <>
