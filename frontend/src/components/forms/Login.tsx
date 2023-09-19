@@ -26,7 +26,7 @@ export default function Login() {
     password: '',
   }
   const schema = z.object({
-    email: z.string().min(7, { message: 'Please enter a valid email' }),
+    email: z.string().email().min(7, { message: 'Please enter a valid email' }),
     password: z
       .string()
       .min(4, { message: 'Passwords must be greater than 4 characters' }),

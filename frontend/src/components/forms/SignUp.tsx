@@ -32,7 +32,7 @@ export default function SignUp() {
 
   const schema = z.object({
     name: z.string().min(1, { message: 'Name is required' }),
-    email: z.string().min(7, { message: 'Email is required' }),
+    email: z.string().email().min(7, { message: 'Email is required' }),
     password: z.string().min(4, { message: 'Please Enter a password' }),
     password2: z.string().min(4, { message: 'Please re-enter password' }),
   })
