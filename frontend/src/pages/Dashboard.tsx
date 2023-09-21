@@ -11,6 +11,7 @@ import { TransitionGroup } from 'react-transition-group'
 
 function Dashboard() {
   localStorage.removeItem('goal')
+  // Clean up after goal is edited - local storage used to manage the changes prior to sending put request
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
