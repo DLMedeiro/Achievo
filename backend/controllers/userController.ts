@@ -36,14 +36,17 @@ const registerUser = asyncHandler(async(req:any, res:any) => {
     }
 
     // Hash the password using bcrypt
-    // generate salt to hash the password
+    // generate salt to hash the password (Random data to be added to the password prior to hashing)
     const salt = await bcrypt.genSalt(12)
+    // 12 = cost factor -> # of randomizing generations
     const hashedPassword = await bcrypt.hash(password, salt)
+    // hashedPassword = Irreversible representation of the original password.
 
     // Create user
     const user = await User.create({
         name, email, password: hashedPassword
     })
+    // create is a method provided by Mongoose, used to create a new document in the database
 
     if (user) {
 
@@ -74,6 +77,7 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
         const user = await User.findOne({email: email})
 
         // Check the password using bcrypt method to compare password input with hashed password
+        // The bcrypt.compare function hashes the provided password and then compares it with the hashed password stored in the user.password. If the hashes match, it means the passwords are the same, and passwordCheck will be true.
         if(user !== null && user.password){
             let passwordCheck = await bcrypt.compare(password, user.password)
 
@@ -85,6 +89,7 @@ const loginUser = asyncHandler(async(req:any, res:any) => {
                     token: generateToken(user._id)
                     })
                 )
+                // Token Purpose: Authenticate user after logging in, no need to re-enter password to validate the user.
   
             } else {
                 res.status(400)
@@ -130,6 +135,7 @@ const generateToken = (id: object) => {
         return jwt.sign({id}, SECRET_KEY)
     }
 }
+// Purpose: Authenticate user after logging in, no need to re-enter password to validate the user.
 
 export default { registerUser, loginUser}
 // module.exports = { registerUser, loginUser, getMe}

@@ -6,6 +6,7 @@ import authService from './authServce'
 // Get user from local storage
 
 const user = JSON.parse(localStorage.getItem('user')!)
+// goes into initial state
 
 interface authState {
   user: {
@@ -31,6 +32,8 @@ const initialState: authState = {
 // Register the user
 // User gets passed in from the register page
 // ThunkAPI -> use in try/catch
+// createAsyncThunk: 
+  // Provides the "pending, fulfilled, rejected operations" used within the extraReducers
 export const registerUser = createAsyncThunk(
   'auth/register',
   async (user: object, thunkAPI) => {

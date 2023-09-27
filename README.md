@@ -31,6 +31,13 @@ If a user who wants to improve their fitness. They can create a goal stating the
 ### Troubleshooting issues with authorization functionality
 - https://www.youtube.com/watch?v=Lb9Basl0StM
 - https://github.com/Eazy2Code/react-mysql-connection/tree/master/server
+### Utilized NPM Scripts to streamline the development workflow by defining various automation commands
+- __"start"__ and __"server"__ scripts to launch the server using TypeScript and ESM (ECMAScript Modules) through __ts-node-esm__.
+- __"client"__ script to start the frontend application by delegating to __"npm start"__ within the __"frontend"__ directory.
+- __"dev"__ script utilizing concurrently to concurrently run the server and client using __"npm run server"__ and __"npm run client"__.
+- __"test"__ script to initiate testing of the React application using react-scripts.
+- __"eject"__ script to eject from react-scripts configuration.
+- __"renderStart"__ script for installing dependencies within the "frontend" directory and starting the application.
 ### Typescript
 ### Material UI
 

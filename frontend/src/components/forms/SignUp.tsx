@@ -30,9 +30,10 @@ export default function SignUp() {
     password2: '',
   }
 
+  // Zod: a schema declaration and validation library
   const schema = z.object({
     name: z.string().min(1, { message: 'Name is required' }),
-    email: z.string().min(7, { message: 'Email is required' }),
+    email: z.string().email().min(7, { message: 'Email is required' }),
     password: z.string().min(4, { message: 'Please Enter a password' }),
     password2: z.string().min(4, { message: 'Please re-enter password' }),
   })
@@ -65,7 +66,16 @@ export default function SignUp() {
     defaultValues: InitialFormValues,
     resolver: zodResolver(schema),
   })
+// Destructuring useForm from react-hook-form
+// Register: track values and manage validation rules. Manages state and tracks the value as it changes (see form)
+// handleSubmit: triggers validation and calls submit function
+// Errors = property of fromSate and holds validation errors
+// <Inputs> = for input types
+// resolver: Specifies the resolver function for form validation
+
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+  // Data is populated with the values from the register function
     if (data.password !== data.password2) {
       toast.error('Passwords do not match')
     } else {
@@ -99,6 +109,7 @@ export default function SignUp() {
           />
           <div style={{ color: 'red' }}>{errors.name?.message}</div>
         </Grid>
+        {/* Register: Manages the form state my taking the string element ('name') which corresponds to a key in the form's state then holds/updates the inputted value.   */}
         <Grid item xs={12}>
           <TextField
             required
