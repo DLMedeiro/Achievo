@@ -93,7 +93,7 @@ export default function Activity({ goal }: { goal: any }) {
 
   const deleteItem = () => {
     dispatch(deleteGoal(goal._id))
-    window.location.reload()
+    // window.location.reload()
   }
 
   useEffect(() => {
