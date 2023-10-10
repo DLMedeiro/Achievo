@@ -81,7 +81,8 @@ export default function Home() {
           )}
 
           {user ? (
-            <Link to={`/goals/user/${user._id}`}>
+            <Link to={`/goals/user/${user.name}`}>
+            {/* // <Link to={"Dashboard"}> */}
               <Button variant="contained" id="btn-pair">
                 Go to my dashboard
               </Button>

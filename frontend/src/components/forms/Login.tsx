@@ -44,7 +44,8 @@ export default function Login() {
       toast.error('Incorrect Credentials')
     }
     if (isSuccess && user) {
-      navigate(`/goals/user/${user._id}`)
+      navigate(`/goals/user/${user.name}`)
+      // navigate(`/goals/user/${user._id}`)
     }
 
     dispatch(reset())

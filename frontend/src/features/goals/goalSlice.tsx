@@ -282,17 +282,18 @@ export const goalSlice = createSlice({
         (state, action: PayloadAction<string | any>) => {
           state.isLoading = false
           state.isSuccess = true
-          if (state.goals) {
-            state.goals.map((goal) => {
-              if (goal._id === action.payload.id) {
-                return {
-                  ...goal,
-                  ...action.payload,
-                }
-              }
-              return goal
-            })
-          }
+          state.goals = action.payload
+          // if (state.goals) {
+          //   state.goals.map((goal) => {
+          //     if (goal._id === action.payload.id) {
+          //       return {
+          //         ...goal,
+          //         ...action.payload,
+          //       }
+          //     }
+          //     return goal
+          //   })
+          // }
         },
       )
       .addCase(

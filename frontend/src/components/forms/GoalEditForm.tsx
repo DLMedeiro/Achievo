@@ -120,16 +120,16 @@ export default function ActivityInputForm() {
         target: data.target,
         progress: data.progress,
       }
-      dispatch(getGoals(user))
+      // dispatch(getGoals(user))
       dispatch(changeGoal(goalData))
       setChangeBtn(false)
       localStorage.removeItem('goal')
-      navigate(`/goals/user/${user._id}`)
-      window.location.reload()
+      navigate(`/goals/user/${user.name}`)
+      // window.location.reload()
     }
   }
 
-  return activityValue.length > 0 ? (
+  return activityValue ? (
     <Paper elevation={14} className="form-container">
       <Typography variant="h5" component="h5" align="center">
         Update Goal

@@ -53,7 +53,7 @@ function Dashboard() {
       navigate('/login')
     }
 
-    dispatch(getGoals(user))
+    // dispatch(getGoals(user))
 
     // clear goals when the component unmounts
     return () => {
@@ -61,9 +61,15 @@ function Dashboard() {
     }
   }, [user, navigate, isError, message, dispatch])
 
+  useEffect(()=> {
+    dispatch(getGoals(user))
+  }, [])
+
   if (isLoading) {
     return <CircularIndeterminate />
   }
+
+  console.log(goals)
 
   return (
     <>
