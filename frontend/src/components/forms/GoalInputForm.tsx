@@ -70,7 +70,7 @@ export default function ActivityInputForm() {
       target: data.target,
     }
     dispatch(createGoal(goalData))
-    window.location.reload()
+    // window.location.reload()
   }
 
   useEffect(() => {}, [startValue])
