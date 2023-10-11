@@ -113,6 +113,7 @@ export const changeGoal = createAsyncThunk<
     if (state.auth.user) {
       const user = state.auth.user
       // const token = user.token
+      console.log(goalData)
       return await goalService.updateGoal(goalData, user)
       // getting token from user within goalService
     }
@@ -137,6 +138,7 @@ export const updateProgress = createAsyncThunk<
     if (state.auth.user) {
       const user = state.auth.user
       // const token = user.token
+   
       return await goalService.updateProgress(changeData, user)
       // getting token from user within goalService
     }

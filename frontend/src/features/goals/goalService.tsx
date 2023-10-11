@@ -86,6 +86,7 @@ const updateProgress = async (changeData: any, user: any) => {
     changeData,
     config,
   )
+
   return response.data
 }
 

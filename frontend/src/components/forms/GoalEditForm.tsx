@@ -120,12 +120,12 @@ export default function ActivityInputForm() {
         target: data.target,
         progress: data.progress,
       }
-      // dispatch(getGoals(user))
       dispatch(changeGoal(goalData))
+      dispatch(getGoals(user))
       setChangeBtn(false)
       localStorage.removeItem('goal')
       navigate(`/goals/user/${user.name}`)
-      // window.location.reload()
+      window.location.reload()
     }
   }
 
