@@ -12,16 +12,22 @@ import dayjs, { Dayjs } from 'dayjs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import { DatePicker  } from '@mui/x-date-pickers/DatePicker'
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { DemoItem } from '@mui/x-date-pickers/internals/demo'
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { makeStyles } from '@material-ui/core/styles';
+
+
 
 export default function ActivityInputForm() {
-  const [startValue, setStartValue] = React.useState<Dayjs | null>(
+
+
+  const [startValue, setStartValue] = React.useState<Dayjs | any>(
     dayjs(new Date()),
   )
   const [endValue, setEndValue] = React.useState<Dayjs | null>(
@@ -31,14 +37,14 @@ export default function ActivityInputForm() {
     start: Dayjs
     end: Dayjs
     activity: string
-    target: number
+    target: number | string
   }
 
   const InitialFormValues = {
     start: dayjs(new Date()).format('LL'),
     end: dayjs(new Date()).format('LL'),
     activity: '',
-    target: 0,
+    target: "",
   }
 
   const schema = z.object({
@@ -75,6 +81,7 @@ export default function ActivityInputForm() {
 
   useEffect(() => {}, [startValue])
 
+
   return (
     <Accordion>
       <AccordionSummary
@@ -90,20 +97,96 @@ export default function ActivityInputForm() {
           className="form"
           noValidate
           onSubmit={handleSubmit(onSubmit)}
+          sx={{textAlign:"center"}}
         >
           <Grid container spacing={0}>
+            <Grid item xs={12} sx={{paddingTop: "1rem"}}>
+          <div className="goalText">Beginning </div>
+           <MobileDatePicker 
+  
+                format= 'dddd MMMM DD, YYYY'
+                  value={startValue}
+                  onChange={(newValue) => setStartValue(newValue)}
+                  sx={{
+                    "& fieldset": { border: 'none'}
+                  }}
+            />
+              {errors.start?.message ? (<div style={{ color: 'red' }}>{errors.start?.message}</div>) : ("")}
+
+            <div className="goalText"> through </div>
+            <MobileDatePicker
+                format= 'dddd MMMM DD, YYYY'
+                
+                  value={endValue}
+                  onChange={(newValue) => setEndValue(newValue)}
+                  sx={{
+                    "& fieldset": { border: 'none'}
+                    
+                  }}
+            />
+             {errors.end?.message ? (<div style={{ color: 'red' }}>{errors.end?.message}</div>) : ("")}
+
+            </Grid>
+            <Grid item xs={12} sx={{paddingTop: "1rem"}}>
+            <div className="goalText">
+            I plan to commit </div>
+
+            <TextField
+                required
+                // fullWidth
+                // label="Number"
+                type="number"
+                id="target"
+                variant="standard"
+                {...register('target', {
+                  valueAsNumber: true,
+                })}
+              />
+
+              <div className="goalText">
+               hours achieving my goal of:
+              </div>
+              {errors.target?.message ? (<div style={{ color: 'red' }}>{errors.target?.message}</div>) : ("")}
+            </Grid>
+            <Grid item xs={12} sx={{paddingTop: "1rem"}}>
+            <div className="goalText">
+            <TextField
+                required
+                fullWidth
+                variant="filled"
+                margin="normal"
+                id="activity"
+                label="Enter the goal you would like to achieve."
+                {...register('activity')}
+              />
+              <div style={{ color: 'red' }}>{errors.activity?.message}</div>
+            </div>
+            </Grid>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className="btn"
+            >
+              Create Goal
+            </Button>
+        </Grid>
+            
+          {/* <Grid container spacing={0}>
             <Grid item xs={12}>
               <DemoItem label="Start Date*">
+              </DemoItem>
                 <DatePicker
+                format= 'dddd MMMM DD, YYYY'
                   value={startValue}
                   onChange={(newValue) => setStartValue(newValue)}
                 />
-              </DemoItem>
               <div style={{ color: 'red' }}>{errors.start?.message}</div>
             </Grid>
             <Grid item xs={12}>
               <DemoItem label="Completion Date*">
                 <DatePicker
+                format= 'dddd MMMM DD, YYYY'
                   value={endValue}
                   onChange={(newValue) => setEndValue(newValue)}
                 />
@@ -117,7 +200,7 @@ export default function ActivityInputForm() {
                 variant="filled"
                 margin="normal"
                 id="activity"
-                label="Name of your Goal"
+                label="Enter the goal you would like to achieve"
                 {...register('activity')}
               />
               <div style={{ color: 'red' }}>{errors.activity?.message}</div>
@@ -126,7 +209,7 @@ export default function ActivityInputForm() {
               <TextField
                 required
                 fullWidth
-                label="Number of hours to complete goal"
+                label="Determine your measurement for success"
                 type="number"
                 id="target"
                 variant="filled"
@@ -145,7 +228,7 @@ export default function ActivityInputForm() {
             >
               Create Goal
             </Button>
-          </Grid>
+          </Grid> */}
         </Box>
       </AccordionDetails>
     </Accordion>
