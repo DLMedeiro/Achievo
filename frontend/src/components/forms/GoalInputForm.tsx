@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import './styles/Material.css'
+import '../../styles/Material.css'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { RootState } from '../../app/store'
 import { useNavigate } from 'react-router-dom'
