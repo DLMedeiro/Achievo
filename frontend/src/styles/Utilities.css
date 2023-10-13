@@ -66,6 +66,50 @@
     margin-bottom: 0;
     margin-top: 1rem;
 }
+.goalText {
+    margin-bottom: -16.5px;
+    display: inline;
+    border: 2px transparent;
+    font-size: 1.4em
+
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+    padding: 0!important;
+    padding-left: 15px!important;
+    width: 275px!important;
+    font-size: 1.2em!important;
+}
+.css-cy426b-MuiInputBase-root-MuiOutlinedInput-root{
+    border-bottom: 0.5px #1e5b5e solid;
+    border-radius: 0!important;
+}
+.css-cy426b-MuiInputBase-root-MuiOutlinedInput-root:hover{
+    border-bottom: 2px #1e5b5e solid;
+    border-radius: 0;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+    cursor: pointer;
+}
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 50px;
+   
+    /* vertical-align: bottom!important; */
+    
+}
+.css-1x51dt5-MuiInputBase-input-MuiInput-input {
+    /* border-bottom: transparent!important; */
+    padding-top: 5px;
+    text-align: center;
+    font-size: 1.2em!important
+    
+
+}
+
+
+.css-10botns-MuiInputBase-input-MuiFilledInput-input{
+    text-align: center;
+}
+
 
 
 #center {
