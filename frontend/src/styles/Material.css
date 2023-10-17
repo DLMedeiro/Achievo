@@ -5,36 +5,36 @@
     font-size: 1.2em!important;
     cursor: pointer;
 } */
-.MuiInputBase-input.MuiOutlinedInput-input.Mui-readOnly.MuiInputBase-readOnly.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
-    padding: 0!important;
-    padding-left: 15px!important;
-    width: 275px!important;
-    font-size: 1.2em!important;
-    cursor: pointer;
+.MuiInputBase-input.MuiOutlinedInput-input.Mui-readOnly.MuiInputBase-readOnly.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 0 !important;
+  padding-left: 15px !important;
+  width: 275px !important;
+  font-size: 1.2em !important;
+  cursor: pointer;
 }
 /* .css-cy426b-MuiInputBase-root-MuiOutlinedInput-root{
     border-bottom: 0.5px #1e5b5e solid;
     border-radius: 0!important;
 } */
-.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.Mui-readOnly.MuiInputBase-readOnly.css-cy426b-MuiInputBase-root-MuiOutlinedInput-root{
-    border-bottom: 0.5px #1e5b5e solid;
-    border-radius: 0!important;
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.Mui-readOnly.MuiInputBase-readOnly.css-cy426b-MuiInputBase-root-MuiOutlinedInput-root {
+  border-bottom: 0.5px #1e5b5e solid;
+  border-radius: 0 !important;
 }
 
 /* .css-cy426b-MuiInputBase-root-MuiOutlinedInput-root:hover{
     border-bottom: 2px #1e5b5e solid;
     border-radius: 0;
 } */
-.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.Mui-readOnly.MuiInputBase-readOnly.css-cy426b-MuiInputBase-root-MuiOutlinedInput-root:hover{
-    border-bottom: 2px #1e5b5e solid;
-    border-radius: 0;
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.Mui-readOnly.MuiInputBase-readOnly.css-cy426b-MuiInputBase-root-MuiOutlinedInput-root:hover {
+  border-bottom: 2px #1e5b5e solid;
+  border-radius: 0;
 }
 
 /* .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
     width: 50px;   
 } */
 .MuiFormControl-root.MuiTextField-root.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
-    width: 50px;   
+  width: 50px;
 }
 /* .css-1x51dt5-MuiInputBase-input-MuiInput-input {
     padding-top: 5px;
@@ -42,17 +42,15 @@
     font-size: 1.2em!important
 } */
 .MuiInputBase-input.MuiInput-input.css-1x51dt5-MuiInputBase-input-MuiInput-input {
-    padding-top: 5px;
-    text-align: center;
-    font-size: 1.2em!important
+  padding-top: 5px;
+  text-align: center;
+  font-size: 1.2em !important;
 }
-
 
 /* .css-10botns-MuiInputBase-input-MuiFilledInput-input{
     text-align: center;
 } */
 .MuiInputBase-input.MuiFilledInput-input.css-10botns-MuiInputBase-input-MuiFilledInput-input {
-    text-align: center;
-    font-size: 1.4em;
+  /* text-align: center;
+    font-size: 1.4em; */
 }
-
