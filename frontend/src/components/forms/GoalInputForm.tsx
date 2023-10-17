@@ -20,8 +20,54 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 export default function ActivityInputForm() {
+  const textFieldStyles = {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          // borderBottom: "2px solid transparent",
+          textAlign: "center",
+          fontSize: "1.2em",
+          "& .MuiInputBase-input": {
+            // paddingTop: "25px",
+            textAlign: "center",
+            fontSize: "1.2em",
+          },
+        },
+      },
+    },
+  };
+  const colorScheme = {
+    palette: {
+      primary: {
+        main: "#1e5b5e", // Change this to your desired primary color
+      },
+      secondary: {
+        main: "#61dafb", // Change this to your desired secondary color
+      },
+    },
+  };
+  const theme = createTheme({
+    ...colorScheme, // Include the color scheme
+    components: {
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            // borderBottom: "2px solid transparent",
+            textAlign: "center",
+            fontSize: "1.2em",
+            "& .MuiInputBase-input": {
+              // paddingTop: "25px",
+              textAlign: "center",
+              fontSize: "1.2em",
+            },
+          },
+        },
+      },
+    },
+  });
   const [startValue, setStartValue] = React.useState<Dayjs | any>(
     dayjs(new Date())
   );
@@ -77,158 +123,162 @@ export default function ActivityInputForm() {
   useEffect(() => {}, [startValue]);
 
   return (
-    <Accordion>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
-        <Typography>Create a new goal</Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Box
-          component="form"
-          className="form"
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-          sx={{ textAlign: "center" }}
+    <ThemeProvider theme={theme}>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
         >
-          <Grid container spacing={0}>
-            <Grid item xs={12} sx={{ paddingTop: "1rem" }}>
-              <div className="goalText">Beginning </div>
-              <MobileDatePicker
-                format="dddd MMMM DD, YYYY"
-                value={startValue}
-                onChange={(newValue) => setStartValue(newValue)}
-                sx={{
-                  "& fieldset": { border: "none" },
-                  "& .MuiInputBase-input": {
-                    padding: "0",
-                    paddingLeft: "15px",
-                    width: "275px",
-                    fontSize: "1.2em",
-                    cursor: "pointer",
-                  },
-                  borderBottom: "2px #1e5b5e solid",
-                  borderRadius: "0",
-                  "&:hover": {
-                    borderBottom: "2px #61dafb solid",
-                    borderRadius: "0",
-                  },
-                }}
-              />
-              {errors.start?.message ? (
-                <div style={{ color: "red" }}>{errors.start?.message}</div>
-              ) : (
-                ""
-              )}
-
-              <div className="goalText"> through </div>
-              <MobileDatePicker
-                format="dddd MMMM DD, YYYY"
-                value={endValue}
-                onChange={(newValue) => setEndValue(newValue)}
-                sx={{
-                  "& fieldset": { border: "none" },
-                  "& .MuiInputBase-input": {
-                    padding: "0",
-                    paddingLeft: "15px",
-                    width: "275px",
-                    fontSize: "1.2em",
-                    cursor: "pointer",
-                  },
-                  borderBottom: "2px #1e5b5e solid",
-                  borderRadius: "0",
-                  "&:hover": {
-                    borderBottom: "2px #61dafb solid",
-                    borderRadius: "0",
-                  },
-                }}
-              />
-              {errors.end?.message ? (
-                <div style={{ color: "red" }}>{errors.end?.message}</div>
-              ) : (
-                ""
-              )}
-            </Grid>
-            <Grid item xs={12} sx={{ paddingTop: "1rem" }}>
-              <div className="goalText">I plan to commit </div>
-
-              <TextField
-                required
-                // fullWidth
-                // label="Number"
-                type="number"
-                id="target"
-                variant="standard"
-                {...register("target", {
-                  valueAsNumber: true,
-                })}
-                sx={{
-                  width: "50px",
-                  borderBottom: "2px solid transparent",
-
-                  "&:hover": {
-                    borderBottom: "2px solid #61dafb",
-                  },
-                  "& .MuiInputBase-input.MuiInput-input.css-1x51dt5-MuiInputBase-input-MuiInput-input":
-                    {
-                      paddingTop: "5px",
-                      textAlign: "center",
-                      fontSize: "1.2em",
-                    },
-                }}
-              />
-
-              <div className="goalText">hours achieving my goal of:</div>
-              {errors.target?.message ? (
-                <div style={{ color: "red" }}>{errors.target?.message}</div>
-              ) : (
-                ""
-              )}
-            </Grid>
-            <Grid item xs={12} sx={{ paddingTop: "1rem" }}>
-              <div className="goalText">
-                <TextField
-                  required
-                  fullWidth
-                  variant="filled"
-                  margin="normal"
-                  id="activity"
-                  label="Enter the goal you would like to achieve."
-                  {...register("activity")}
+          <Typography>Create a new goal</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Box
+            component="form"
+            className="form"
+            noValidate
+            onSubmit={handleSubmit(onSubmit)}
+            sx={{ textAlign: "center" }}
+          >
+            <Grid container spacing={0}>
+              <Grid item xs={12} sx={{ paddingTop: "1rem" }}>
+                <div className="goalText">Beginning </div>
+                <MobileDatePicker
+                  format="dddd MMMM DD, YYYY"
+                  value={startValue}
+                  onChange={(newValue) => setStartValue(newValue)}
                   sx={{
-                    borderBottom: "2px solid transparent",
-                    textAlign: "center",
-                    fontSize: "1.2em",
-                    "&:hover": {
-                      borderBottom: "2px solid #61dafb",
+                    "& fieldset": { border: "none" },
+                    "& .MuiInputBase-input": {
+                      padding: "0",
+                      paddingLeft: "15px",
+                      width: "275px",
+                      fontSize: "1.2em",
+                      cursor: "pointer",
                     },
-                    // "& .MuiInputBase-input": {
-                    //   paddingTop: "25px",
-                    //   textAlign: "center",
-                    //   fontSize: "1.2em",
-                    // },
+                    borderBottom: "2px #1e5b5e solid",
+                    borderRadius: "0",
+                    "&:hover": {
+                      borderBottom: "2px #61dafb solid",
+                      borderRadius: "0",
+                    },
                   }}
                 />
-                <div style={{ color: "red" }}>{errors.activity?.message}</div>
-              </div>
-            </Grid>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              className="btn"
-            >
-              Create Goal
-            </Button>
-          </Grid>
+                {errors.start?.message ? (
+                  <div style={{ color: "red" }}>{errors.start?.message}</div>
+                ) : (
+                  ""
+                )}
 
-          {/* <Grid container spacing={0}>
+                <div className="goalText"> through </div>
+                <MobileDatePicker
+                  format="dddd MMMM DD, YYYY"
+                  value={endValue}
+                  onChange={(newValue) => setEndValue(newValue)}
+                  sx={{
+                    "& fieldset": { border: "none" },
+                    "& .MuiInputBase-input": {
+                      padding: "0",
+                      paddingLeft: "15px",
+                      width: "275px",
+                      fontSize: "1.2em",
+                      cursor: "pointer",
+                    },
+                    borderBottom: "2px #1e5b5e solid",
+                    borderRadius: "0",
+                    "&:hover": {
+                      borderBottom: "2px #61dafb solid",
+                      borderRadius: "0",
+                    },
+                  }}
+                />
+                {errors.end?.message ? (
+                  <div style={{ color: "red" }}>{errors.end?.message}</div>
+                ) : (
+                  ""
+                )}
+              </Grid>
+              <Grid item xs={12} sx={{ paddingTop: "1rem" }}>
+                <div className="goalText">I plan to commit </div>
+
+                <TextField
+                  required
+                  // fullWidth
+                  // label="Number"
+                  type="number"
+                  id="target"
+                  variant="standard"
+                  {...register("target", {
+                    valueAsNumber: true,
+                  })}
+                  sx={{
+                    width: "50px",
+                  }}
+                  // sx={{
+                  //   width: "50px",
+                  //   borderBottom: "2px solid transparent",
+
+                  //   "&:hover": {
+                  //     borderBottom: "2px solid #61dafb",
+                  //   },
+                  //   "& .MuiInputBase-input.MuiInput-input.css-1x51dt5-MuiInputBase-input-MuiInput-input":
+                  //     {
+                  //       paddingTop: "5px",
+                  //       textAlign: "center",
+                  //       fontSize: "1.2em",
+                  //     },
+                  // }}
+                />
+
+                <div className="goalText">hours achieving my goal of:</div>
+                {errors.target?.message ? (
+                  <div style={{ color: "red" }}>{errors.target?.message}</div>
+                ) : (
+                  ""
+                )}
+              </Grid>
+              <Grid item xs={12} sx={{ paddingTop: "1rem" }}>
+                <div className="goalText">
+                  <TextField
+                    required
+                    fullWidth
+                    variant="filled"
+                    margin="normal"
+                    id="activity"
+                    label="Enter the goal you would like to achieve."
+                    {...register("activity")}
+                    // sx={{
+                    //   borderBottom: "2px solid transparent",
+                    //   textAlign: "center",
+                    //   fontSize: "1.2em",
+                    //   "&:hover": {
+                    //     borderBottom: "2px solid #61dafb",
+                    //   },
+                    //   "& .MuiInputBase-input": {
+                    //     paddingTop: "25px",
+                    //     textAlign: "center",
+                    //     fontSize: "1.2em",
+                    //   },
+                    // }}
+                  />
+                  <div style={{ color: "red" }}>{errors.activity?.message}</div>
+                </div>
+              </Grid>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className="btn"
+              >
+                Create Goal
+              </Button>
+            </Grid>
+
+            {/* <Grid container spacing={0}>
             <Grid item xs={12}>
-              <DemoItem label="Start Date*">
-              </DemoItem>
-                <DatePicker
+            <DemoItem label="Start Date*">
+            </DemoItem>
+            <DatePicker
                 format= 'dddd MMMM DD, YYYY'
                   value={startValue}
                   onChange={(newValue) => setStartValue(newValue)}
@@ -236,7 +286,7 @@ export default function ActivityInputForm() {
               <div style={{ color: 'red' }}>{errors.start?.message}</div>
             </Grid>
             <Grid item xs={12}>
-              <DemoItem label="Completion Date*">
+            <DemoItem label="Completion Date*">
                 <DatePicker
                 format= 'dddd MMMM DD, YYYY'
                   value={endValue}
@@ -246,7 +296,7 @@ export default function ActivityInputForm() {
               <div style={{ color: 'red' }}>{errors.end?.message}</div>
             </Grid>
             <Grid item xs={12}>
-              <TextField
+            <TextField
                 required
                 fullWidth
                 variant="filled"
@@ -254,11 +304,11 @@ export default function ActivityInputForm() {
                 id="activity"
                 label="Enter the goal you would like to achieve"
                 {...register('activity')}
-              />
-              <div style={{ color: 'red' }}>{errors.activity?.message}</div>
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
+                />
+                <div style={{ color: 'red' }}>{errors.activity?.message}</div>
+                </Grid>
+                <Grid item xs={12}>
+                <TextField
                 required
                 fullWidth
                 label="Determine your measurement for success"
@@ -271,18 +321,19 @@ export default function ActivityInputForm() {
                 })}
               />
               <div style={{ color: 'red' }}>{errors.target?.message}</div>
-            </Grid>
+              </Grid>
             <Button
-              type="submit"
-              variant="contained"
-              color="primary"
+            type="submit"
+            variant="contained"
+            color="primary"
               className="btn"
-            >
+              >
               Create Goal
             </Button>
           </Grid> */}
-        </Box>
-      </AccordionDetails>
-    </Accordion>
+          </Box>
+        </AccordionDetails>
+      </Accordion>
+    </ThemeProvider>
   );
 }
