@@ -214,20 +214,6 @@ export default function ActivityInputForm() {
                   sx={{
                     width: "50px",
                   }}
-                  // sx={{
-                  //   width: "50px",
-                  //   borderBottom: "2px solid transparent",
-
-                  //   "&:hover": {
-                  //     borderBottom: "2px solid #61dafb",
-                  //   },
-                  //   "& .MuiInputBase-input.MuiInput-input.css-1x51dt5-MuiInputBase-input-MuiInput-input":
-                  //     {
-                  //       paddingTop: "5px",
-                  //       textAlign: "center",
-                  //       fontSize: "1.2em",
-                  //     },
-                  // }}
                 />
 
                 <div className="goalText">hours achieving my goal of:</div>
