@@ -20,7 +20,6 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { makeStyles } from "@material-ui/core/styles";
 
 export default function ActivityInputForm() {
   const [startValue, setStartValue] = React.useState<Dayjs | any>(
@@ -171,18 +170,17 @@ export default function ActivityInputForm() {
                   "&:hover": {
                     borderBottom: "2px solid #61dafb",
                   },
-                  "& .MuiInputBase-input.MuiInput-input.css-1x51dt5-MuiInputBase-input-MuiInput-input":
-                    {
-                      paddingTop: "5px",
-                      textAlign: "center",
-                      fontSize: "1.2em",
-                    },
+                  "& .MuiInputBase-input": {
+                    paddingTop: "5px",
+                    textAlign: "center",
+                    fontSize: "1.2em",
+                  },
 
-                  "& .MuiInputBase-input.MuiFilledInput-input.css-10botns-MuiInputBase-input-MuiFilledInput-input":
-                    {
-                      textAlign: "center",
-                      fontSize: "1.4em",
-                    },
+                  // "& .MuiInputBase-input.MuiFilledInput-input.css-10botns-MuiInputBase-input-MuiFilledInput-input":
+                  //   {
+                  //     textAlign: "center",
+                  //     fontSize: "1.4em",
+                  //   },
                 }}
               />
 
@@ -208,21 +206,11 @@ export default function ActivityInputForm() {
                     "&:hover": {
                       borderBottom: "2px solid #61dafb",
                     },
-                    // "& .MuiInputBase-input:hover": {
-                    //   borderBottom: "2px solid #61dafb",
-                    // },
-                    "& .MuiInputBase-input.MuiInput-input.css-1x51dt5-MuiInputBase-input-MuiInput-input":
-                      {
-                        paddingTop: "5px",
-                        textAlign: "center",
-                        fontSize: "1.2em",
-                      },
-
-                    "& .MuiInputBase-input.MuiFilledInput-input.css-10botns-MuiInputBase-input-MuiFilledInput-input":
-                      {
-                        textAlign: "center",
-                        fontSize: "1.4em",
-                      },
+                    "& .MuiInputBase-input": {
+                      paddingTop: "25px",
+                      textAlign: "center",
+                      fontSize: "1.2em",
+                    },
                   }}
                 />
                 <div style={{ color: "red" }}>{errors.activity?.message}</div>
