@@ -103,44 +103,19 @@ export default function ActivityInputForm() {
                 onChange={(newValue) => setStartValue(newValue)}
                 sx={{
                   "& fieldset": { border: "none" },
-                  "&.MuiInputBase-input.MuiOutlinedInput-input.Mui-readOnly.MuiInputBase-readOnly.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input":
-                    {
-                      padding: "0",
-                      paddingLeft: "15px",
-                      width: "275px",
-                      fontSize: "1.2em",
-                      cursor: "pointer",
-                    },
-
-                  "& .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.Mui-readOnly.MuiInputBase-readOnly.css-cy426b-MuiInputBase-root-MuiOutlinedInput-root":
-                    {
-                      borderBottom: " 0.5px #1e5b5e solid",
-                      borderRadius: "0",
-                    },
-
-                  "& .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.Mui-readOnly.MuiInputBase-readOnly.css-cy426b-MuiInputBase-root-MuiOutlinedInput-root:hover":
-                    {
-                      borderbottom: "2px #1e5b5e solid",
-                      borderRadius: "0",
-                    },
-
-                  "& .MuiFormControl-root.MuiTextField-root.css-1u3bzj6-MuiFormControl-root-MuiTextField-root":
-                    {
-                      width: "50px",
-                    },
-
-                  "& .MuiInputBase-input.MuiInput-input.css-1x51dt5-MuiInputBase-input-MuiInput-input":
-                    {
-                      paddingTop: "5px",
-                      textAlign: "center",
-                      fontSize: "1.2em",
-                    },
-
-                  "& .MuiInputBase-input.MuiFilledInput-input.css-10botns-MuiInputBase-input-MuiFilledInput-input":
-                    {
-                      textAlign: "center",
-                      fontSize: "1.4em",
-                    },
+                  "& .MuiInputBase-input": {
+                    padding: "0",
+                    paddingLeft: "15px",
+                    width: "275px",
+                    fontSize: "1.2em",
+                    cursor: "pointer",
+                  },
+                  borderBottom: "2px #1e5b5e solid",
+                  borderRadius: "0",
+                  "&:hover": {
+                    borderBottom: "2px #61dafb solid",
+                    borderRadius: "0",
+                  },
                 }}
               />
               {errors.start?.message ? (
@@ -156,6 +131,19 @@ export default function ActivityInputForm() {
                 onChange={(newValue) => setEndValue(newValue)}
                 sx={{
                   "& fieldset": { border: "none" },
+                  "& .MuiInputBase-input": {
+                    padding: "0",
+                    paddingLeft: "15px",
+                    width: "275px",
+                    fontSize: "1.2em",
+                    cursor: "pointer",
+                  },
+                  borderBottom: "2px #1e5b5e solid",
+                  borderRadius: "0",
+                  "&:hover": {
+                    borderBottom: "2px #61dafb solid",
+                    borderRadius: "0",
+                  },
                 }}
               />
               {errors.end?.message ? (
@@ -179,7 +167,10 @@ export default function ActivityInputForm() {
                 })}
                 sx={{
                   width: "50px",
-
+                  borderBottom: "2px solid transparent",
+                  "&:hover": {
+                    borderBottom: "2px solid #61dafb",
+                  },
                   "& .MuiInputBase-input.MuiInput-input.css-1x51dt5-MuiInputBase-input-MuiInput-input":
                     {
                       paddingTop: "5px",
@@ -212,6 +203,27 @@ export default function ActivityInputForm() {
                   id="activity"
                   label="Enter the goal you would like to achieve."
                   {...register("activity")}
+                  sx={{
+                    borderBottom: "2px solid transparent",
+                    "&:hover": {
+                      borderBottom: "2px solid #61dafb",
+                    },
+                    // "& .MuiInputBase-input:hover": {
+                    //   borderBottom: "2px solid #61dafb",
+                    // },
+                    "& .MuiInputBase-input.MuiInput-input.css-1x51dt5-MuiInputBase-input-MuiInput-input":
+                      {
+                        paddingTop: "5px",
+                        textAlign: "center",
+                        fontSize: "1.2em",
+                      },
+
+                    "& .MuiInputBase-input.MuiFilledInput-input.css-10botns-MuiInputBase-input-MuiFilledInput-input":
+                      {
+                        textAlign: "center",
+                        fontSize: "1.4em",
+                      },
+                  }}
                 />
                 <div style={{ color: "red" }}>{errors.activity?.message}</div>
               </div>
