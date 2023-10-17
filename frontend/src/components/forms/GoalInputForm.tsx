@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "../../styles/Material.css";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { useNavigate } from "react-router-dom";
@@ -104,10 +103,37 @@ export default function ActivityInputForm() {
                 onChange={(newValue) => setStartValue(newValue)}
                 sx={{
                   "& fieldset": { border: "none" },
-                  "& .MuiFilledInput-input": {
-                    textAlign: "center",
-                    fontSize: "1.4em",
+                  "& .MuiInputBase-input": {
+                    padding: "0",
+                    paddingLeft: "15px",
+                    width: "275px",
+                    fontSize: "1.2em",
+                    cursor: "pointer",
                   },
+                  "& .MuiInputBase-input.Mui-readOnly": {
+                    // Additional styles for read-only input if needed
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    borderBottom: "0.5px #1e5b5e solid",
+                    borderRadius: "0",
+                  },
+                  "& .MuiOutlinedInput-root:hover": {
+                    borderBottom: "2px #1e5b5e solid",
+                    borderRadius: "0",
+                  },
+                  "& .MuiTextField-root": {
+                    width: "50px",
+                  },
+                  "& .MuiInput-input": {
+                    paddingTop: "5px",
+                    textAlign: "center",
+                    fontSize: "1.2em",
+                  },
+                  "& .MuiFilledInput-input.MuiFilledInput-input.css-10botns-MuiInputBase-input-MuiFilledInput-input":
+                    {
+                      textAlign: "center",
+                      fontSize: "1.4em",
+                    },
                 }}
               />
               {errors.start?.message ? (
