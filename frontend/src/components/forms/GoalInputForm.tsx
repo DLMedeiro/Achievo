@@ -103,33 +103,40 @@ export default function ActivityInputForm() {
                 onChange={(newValue) => setStartValue(newValue)}
                 sx={{
                   "& fieldset": { border: "none" },
-                  "& .MuiInputBase-input": {
-                    padding: "0",
-                    paddingLeft: "15px",
-                    width: "275px",
-                    fontSize: "1.2em",
-                    cursor: "pointer",
-                  },
-                  "& .MuiInputBase-input.Mui-readOnly": {
-                    // Additional styles for read-only input if needed
-                  },
-                  "& .MuiOutlinedInput-root": {
-                    borderBottom: "0.5px #1e5b5e solid",
-                    borderRadius: "0",
-                  },
-                  "& .MuiOutlinedInput-root:hover": {
-                    borderBottom: "2px #1e5b5e solid",
-                    borderRadius: "0",
-                  },
-                  "& .MuiTextField-root": {
-                    width: "50px",
-                  },
-                  "& .MuiInput-input": {
-                    paddingTop: "5px",
-                    textAlign: "center",
-                    fontSize: "1.2em",
-                  },
-                  "& .MuiFilledInput-input.MuiFilledInput-input.css-10botns-MuiInputBase-input-MuiFilledInput-input":
+                  "&.MuiInputBase-input.MuiOutlinedInput-input.Mui-readOnly.MuiInputBase-readOnly.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input":
+                    {
+                      padding: "0",
+                      paddingLeft: "15px",
+                      width: "275px",
+                      fontSize: "1.2em",
+                      cursor: "pointer",
+                    },
+
+                  "& .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.Mui-readOnly.MuiInputBase-readOnly.css-cy426b-MuiInputBase-root-MuiOutlinedInput-root":
+                    {
+                      borderBottom: " 0.5px #1e5b5e solid",
+                      borderRadius: "0",
+                    },
+
+                  "& .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.Mui-readOnly.MuiInputBase-readOnly.css-cy426b-MuiInputBase-root-MuiOutlinedInput-root:hover":
+                    {
+                      borderbottom: "2px #1e5b5e solid",
+                      borderRadius: "0",
+                    },
+
+                  "& .MuiFormControl-root.MuiTextField-root.css-1u3bzj6-MuiFormControl-root-MuiTextField-root":
+                    {
+                      width: "50px",
+                    },
+
+                  "& .MuiInputBase-input.MuiInput-input.css-1x51dt5-MuiInputBase-input-MuiInput-input":
+                    {
+                      paddingTop: "5px",
+                      textAlign: "center",
+                      fontSize: "1.2em",
+                    },
+
+                  "& .MuiInputBase-input.MuiFilledInput-input.css-10botns-MuiInputBase-input-MuiFilledInput-input":
                     {
                       textAlign: "center",
                       fontSize: "1.4em",
@@ -170,6 +177,22 @@ export default function ActivityInputForm() {
                 {...register("target", {
                   valueAsNumber: true,
                 })}
+                sx={{
+                  width: "50px",
+
+                  "& .MuiInputBase-input.MuiInput-input.css-1x51dt5-MuiInputBase-input-MuiInput-input":
+                    {
+                      paddingTop: "5px",
+                      textAlign: "center",
+                      fontSize: "1.2em",
+                    },
+
+                  "& .MuiInputBase-input.MuiFilledInput-input.css-10botns-MuiInputBase-input-MuiFilledInput-input":
+                    {
+                      textAlign: "center",
+                      fontSize: "1.4em",
+                    },
+                }}
               />
 
               <div className="goalText">hours achieving my goal of:</div>
