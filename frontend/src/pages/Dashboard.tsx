@@ -1,81 +1,99 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAppSelector, useAppDispatch } from '../app/hooks'
-import { RootState } from '../app/store'
-import CircularIndeterminate from '../components/Spinner'
-import { getGoals, reset } from '../features/goals/goalSlice'
-import GoalCard from '../components/GoalCard'
-import GoalInputForm from '../components/forms/GoalInputForm'
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { RootState } from "../app/store";
+import CircularIndeterminate from "../components/Spinner";
+import { getGoals, reset } from "../features/goals/goalSlice";
+import GoalCard from "../components/GoalCard";
+import GoalInputForm from "../components/forms/GoalInputForm";
 
-import { TransitionGroup } from 'react-transition-group'
+import { TransitionGroup } from "react-transition-group";
+
+import Joyride from "react-joyride";
 
 function Dashboard() {
-  localStorage.removeItem('goal')
+  const state = {
+    steps: [
+      {
+        target: ".my-first-step",
+        content: "This is my awesome feature!",
+      },
+      {
+        target: ".my-other-step",
+        content: "This another awesome feature!",
+      },
+    ],
+  };
+
+  const { steps } = state;
+
+  localStorage.removeItem("goal");
   // Clean up after goal is edited - local storage used to manage the changes prior to sending put request
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   interface userState {
-    user: any
+    user: any;
   }
   interface Goal {
-    _id: string
-    user: string
-    activity: string
-    start: Date
-    end: Date
-    target: Number
-    progress: Number
-    createdAt: string
-    updatedAt: string
-    __v?: number
+    _id: string;
+    user: string;
+    activity: string;
+    start: Date;
+    end: Date;
+    target: Number;
+    progress: Number;
+    createdAt: string;
+    updatedAt: string;
+    __v?: number;
   }
   interface goalState {
-    goals: Goal[]
-    isError: boolean
-    isSuccess: boolean
-    isLoading: boolean
-    message: string | undefined
+    goals: Goal[];
+    isError: boolean;
+    isSuccess: boolean;
+    isLoading: boolean;
+    message: string | undefined;
   }
 
-  const { user }: userState = useAppSelector((state: RootState) => state.auth)
+  const { user }: userState = useAppSelector((state: RootState) => state.auth);
   const { goals, isLoading, isError, message }: goalState = useAppSelector(
-    (state: RootState) => state.goals,
-  )
+    (state: RootState) => state.goals
+  );
 
   // Figure out how to have the new change populate after completing the edit
 
   useEffect(() => {
     if (isError) {
-      console.log(message)
+      console.log(message);
     }
     if (!user) {
-      navigate('/login')
+      navigate("/login");
     }
 
     // dispatch(getGoals(user))
 
     // clear goals when the component unmounts
     return () => {
-      dispatch(reset())
-    }
-  }, [user, navigate, isError, message, dispatch])
+      dispatch(reset());
+    };
+  }, [user, navigate, isError, message, dispatch]);
 
-  useEffect(()=> {
-    dispatch(getGoals(user))
-  }, [])
+  useEffect(() => {
+    dispatch(getGoals(user));
+  }, []);
 
   if (isLoading) {
-    return <CircularIndeterminate />
+    return <CircularIndeterminate />;
   }
 
-  console.log(goals)
+  console.log(goals);
 
   return (
     <>
       <section>
         <h1>Welcome Back {user && user.name}!</h1>
       </section>
+      <Joyride steps={steps} />
 
       <GoalInputForm />
 
@@ -94,7 +112,7 @@ function Dashboard() {
         </>
       )}
     </>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;
