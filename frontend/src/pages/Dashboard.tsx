@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { RootState } from "../app/store";
@@ -9,23 +9,20 @@ import GoalInputForm from "../components/forms/GoalInputForm";
 
 import { TransitionGroup } from "react-transition-group";
 
-import Joyride from "react-joyride";
+import Joyride, { STATUS } from "react-joyride";
 
 function Dashboard() {
-  const state = {
+  const [{ run, steps }, setState] = useState({
+    run: true,
     steps: [
       {
-        target: ".my-first-step",
-        content: "This is my awesome feature!",
-      },
-      {
-        target: ".my-other-step",
-        content: "This another awesome feature!",
+        content: <h2>Step 1</h2>,
+        locale: { skip: <strong></strong> },
+        placement: "center",
+        target: "#step1",
       },
     ],
-  };
-
-  const { steps } = state;
+  });
 
   localStorage.removeItem("goal");
   // Clean up after goal is edited - local storage used to manage the changes prior to sending put request
@@ -90,12 +87,14 @@ function Dashboard() {
 
   return (
     <>
+      <Joyride callback={() => {}} run={run} steps={steps} />
       <section>
         <h1>Welcome Back {user && user.name}!</h1>
       </section>
-      <Joyride steps={steps} />
 
-      <GoalInputForm />
+      <div id="step1">
+        <GoalInputForm />
+      </div>
 
       {/* goals */}
 
