@@ -1,5 +1,5 @@
 import React from "react";
-import Typography from "@mui/material/Typography";
+
 import Modal from "@mui/material/Modal";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -7,7 +7,11 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Feedback from "./forms/feedbackForm";
 
-export default function FeedbackModal() {
+interface FeedbackModalProps {
+  style: React.CSSProperties;
+}
+
+export default function FeedbackModal(props: FeedbackModalProps) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -16,7 +20,8 @@ export default function FeedbackModal() {
     <div>
       <Button
         onClick={handleOpen}
-        sx={{ my: 2, color: "white", display: "block" }}
+        sx={props.style}
+        // sx={{ my: 2, color: { color }, display: "block" }}
       >
         Feedback
       </Button>
@@ -30,13 +35,10 @@ export default function FeedbackModal() {
           alignItems: "center",
           justifyContent: "center",
         }}
-        className="test"
+        // className="test"
       >
         <Box className="modal">
-          <Typography id="modal-modal-title" variant="h3" component="h3">
-            Hi! I'm Finn.
-          </Typography>
-          <Feedback />
+          <Feedback onClose={handleClose} />
         </Box>
       </Modal>
     </div>

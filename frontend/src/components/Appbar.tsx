@@ -138,7 +138,15 @@ function ResponsiveAppBar() {
               >
                 Demo
               </Button>
-              <FeedbackModal />
+
+              <FeedbackModal
+                style={{
+                  marginTop: "16px",
+                  marginBottom: "16px",
+                  color: "white",
+                  display: "block",
+                }}
+              />
             </Box>
           ) : (
             <Box
@@ -189,18 +197,28 @@ function ResponsiveAppBar() {
                   }}
                 >
                   <MenuItem key="login" onClick={handleCloseNavMenu}>
-                    <Button onClick={() => navigate("/login")}>Login</Button>
+                    <Button
+                      onClick={() => navigate("/login")}
+                      sx={{ color: "#1e5b5e" }}
+                    >
+                      Login
+                    </Button>
                   </MenuItem>
                   <MenuItem key="createAccount" onClick={handleCloseNavMenu}>
-                    <Button onClick={() => navigate("/createAccount")}>
+                    <Button
+                      onClick={() => navigate("/createAccount")}
+                      sx={{ color: "#1e5b5e" }}
+                    >
                       Create Account
                     </Button>
                   </MenuItem>
                   <MenuItem key="demo" onClick={handleCloseNavMenu}>
-                    <Button onClick={loginDemo}>Demo</Button>
+                    <Button onClick={loginDemo} sx={{ color: "#1e5b5e" }}>
+                      Demo
+                    </Button>
                   </MenuItem>
                   <MenuItem key="feedback" onClick={handleCloseNavMenu}>
-                    <Button>Feedback</Button>
+                    <FeedbackModal style={{ color: "#1e5b5e" }} />
                   </MenuItem>
                 </Menu>
               </Box>
@@ -224,10 +242,17 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               <MenuItem key="dashboard" onClick={handleCloseUserMenu}>
-                <Button onClick={toDashboard}>Dashboard</Button>
+                <Button onClick={toDashboard} sx={{ color: "#1e5b5e" }}>
+                  Dashboard
+                </Button>
               </MenuItem>
               <MenuItem key="logout" onClick={handleCloseUserMenu}>
-                <Button onClick={logoutUser}>Logout</Button>
+                <Button onClick={logoutUser} sx={{ color: "#1e5b5e" }}>
+                  Logout
+                </Button>
+              </MenuItem>
+              <MenuItem key="feedback" onClick={handleCloseUserMenu}>
+                <FeedbackModal style={{ color: "#1e5b5e" }} />
               </MenuItem>
             </Menu>
             {/* Full Window End */}
