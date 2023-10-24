@@ -52,7 +52,7 @@ function Dashboard() {
     } else {
       setPulseTrue(true);
     }
-  }, [open]);
+  }, [open, goals]);
 
   // Figure out how to have the new change populate after completing the edit
 
