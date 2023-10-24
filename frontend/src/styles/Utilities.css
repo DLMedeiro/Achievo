@@ -1,121 +1,131 @@
-.top-container{
-    margin-top: 2rem;
+.top-container {
+  margin-top: 2rem;
 }
-#goal-container{
-    margin-top:1rem;
+#goal-container {
+  margin-top: 1rem;
 }
-.logo{
-    height: 50px;
-    width: 50px;
-    margin-right: 10px;
+.logo {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
 }
-.logo:hover{
-    cursor: pointer;
+.logo:hover {
+  cursor: pointer;
 }
 #avatar {
-    color: #1e5b5e;
-    background-color: #30f5fe
+  color: #1e5b5e;
+  background-color: #30f5fe;
 }
 
 /* Form */
-.form-container{
-    padding:  1em;
-    background-color: rgba(252, 252, 252, 0.8);
-    text-align: center;
-    max-width: 1000px;
-    margin: auto;
+.form-container {
+  padding: 1em;
+  background-color: rgba(252, 252, 252, 0.8);
+  text-align: center;
+  max-width: 1000px;
+  margin: auto;
 }
 
-
-.form{
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+.form {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
-.group{
-    padding: 1rem;
+.group {
+  padding: 1rem;
 }
-.link:hover{
-    cursor: pointer;
-    text-decoration: underline;
+.link:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 /* Buttons */
 
 /* Login */
-.btn{
-   width: 100%;
+.btn {
+  width: 100%;
 }
-.btn:hover{
-     cursor: pointer; 
-   
- }
-#btn-pair{
-    min-width: 150px;
-    margin: 0.5rem 1rem 0.5rem 1rem;
+.btn:hover {
+  cursor: pointer;
 }
-#btn-math{
-    width: 100%;
-    color: #1e5b5e
+#btn-pair {
+  min-width: 150px;
+  margin: 0.5rem 1rem 0.5rem 1rem;
 }
-#btn-math:hover{
-    color: #30f5fe
+#btn-math {
+  width: 100%;
+  color: #1e5b5e;
+}
+#btn-math:hover {
+  color: #30f5fe;
 }
 
-.dateLabel div p{
-    text-align: left;
-    margin-bottom: 0;
-    margin-top: 1rem;
+.dateLabel div p {
+  text-align: left;
+  margin-bottom: 0;
+  margin-top: 1rem;
 }
 .goalText {
-    margin-bottom: -16.5px;
-    display: inline;
-    border: 2px transparent;
-    font-size: 1.4em
-
+  margin-bottom: -16.5px;
+  display: inline;
+  border: 2px transparent;
+  font-size: 1.4em;
 }
 
-
-
 #center {
-    text-align: center;
+  text-align: center;
 }
 
 .modal {
-    position: absolute;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400;
-    background-color: white;
-    border: 2px solid #1e5b5e;
-    box-shadow: 24;
-    padding: 2rem;
-  }
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400;
+  background-color: white;
+  border: 2px solid #1e5b5e;
+  box-shadow: 24;
+  padding: 2rem;
+}
 
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 2s ease-in-out forwards;
+}
 
-  
-  .fade-in {
+@keyframes fadeIn {
+  0% {
     opacity: 0;
-    animation: fadeIn 2s ease-in-out forwards;
   }
-  
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+  100% {
+    opacity: 1;
   }
+}
 
+@media screen and (max-width: 640px) {
+  .modal {
+    padding: 1rem;
+  }
+  #modal-modal-title {
+    font-size: 2rem;
+  }
+}
+/* Apply the pulse animation to the div */
+.pulse {
+  border: 5px solid initial;
+  animation: pulse 2s infinite; /* Adjust the duration (2s) as needed */
+}
 
-  @media screen and (max-width: 640px){
-    .modal {
-        padding: 1rem;
-        
-      }
-    #modal-modal-title{
-    font-size: 2rem
-    }
+/* Define the keyframes for the pulse animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 10px 5px transparent;
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 10px 5px #30f5fe;
+  }
+  100% {
+    box-shadow: 0 0 10px 5px transparent;
+  }
 }
