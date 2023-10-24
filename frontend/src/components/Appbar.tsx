@@ -137,6 +137,13 @@ function ResponsiveAppBar() {
               >
                 Demo
               </Button>
+              <Button
+                key="Feedback"
+                // onClick={loginDemo}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Feedback
+              </Button>
             </Box>
           ) : (
             <Box
@@ -196,6 +203,9 @@ function ResponsiveAppBar() {
                   </MenuItem>
                   <MenuItem key="demo" onClick={handleCloseNavMenu}>
                     <Button onClick={loginDemo}>Demo</Button>
+                  </MenuItem>
+                  <MenuItem key="feedback" onClick={handleCloseNavMenu}>
+                    <Button>Feedback</Button>
                   </MenuItem>
                 </Menu>
               </Box>
