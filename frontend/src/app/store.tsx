@@ -1,17 +1,19 @@
-import { configureStore } from '@reduxjs/toolkit'
-import authReducer from '../features/auth/authSlice'
-import goalReducer from '../features/goals/goalSlice'
-import dataReducer from '../features/data/dataSlice'
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "../features/auth/authSlice";
+import goalReducer from "../features/goals/goalSlice";
+import dataReducer from "../features/data/dataSlice";
+import feedbackReducer from "../features/feedback/feedbackSlice";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     goals: goalReducer,
     data: dataReducer,
+    feedback: feedbackReducer,
   },
-})
+});
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {auth: authState}
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;

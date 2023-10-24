@@ -1,14 +1,14 @@
-import React from 'react'
-import Typography from '@mui/material/Typography'
-import Modal from '@mui/material/Modal'
-import Avatar from '@mui/material/Avatar'
-import Box from '@mui/material/Box'
-import FinnImage from '../images/finn-welcome.jpg'
+import React from "react";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import FinnImage from "../images/finn-welcome.jpg";
 
 export default function FinnModal() {
-  const [open, setOpen] = React.useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <div>
@@ -18,9 +18,9 @@ export default function FinnModal() {
         sx={{
           width: 80,
           height: 80,
-          margin: 'auto',
-          border: '2px solid transparent',
-          '&:hover': { cursor: 'pointer', border: '2px solid #1e5b5e' },
+          margin: "auto",
+          border: "2px solid transparent",
+          "&:hover": { cursor: "pointer", border: "2px solid #1e5b5e" },
         }}
         onClick={handleOpen}
       />
@@ -30,9 +30,9 @@ export default function FinnModal() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
         className="test"
       >
@@ -46,10 +46,10 @@ export default function FinnModal() {
             id="modal-description"
             src={FinnImage}
             alt="Finn"
-            style={{ width: '100%' }}
+            style={{ width: "100%" }}
           />
         </Box>
       </Modal>
     </div>
-  )
+  );
 }
