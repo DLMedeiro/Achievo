@@ -9,20 +9,9 @@ import GoalInputForm from "../components/forms/GoalInputForm";
 
 import { TransitionGroup } from "react-transition-group";
 
-import Joyride, { STATUS } from "react-joyride";
-
 function Dashboard() {
-  const [{ run, steps }, setState] = useState({
-    run: true,
-    steps: [
-      {
-        content: <h2>Step 1</h2>,
-        locale: { skip: <strong></strong> },
-        placement: "center",
-        target: "#step1",
-      },
-    ],
-  });
+  const [pulseTrue, setPulseTrue] = useState(false);
+  const [open, setOpen] = useState(false);
 
   localStorage.removeItem("goal");
   // Clean up after goal is edited - local storage used to manage the changes prior to sending put request
@@ -57,6 +46,14 @@ function Dashboard() {
     (state: RootState) => state.goals
   );
 
+  useEffect(() => {
+    if (goals.length > 0 || open) {
+      setPulseTrue(false);
+    } else {
+      setPulseTrue(true);
+    }
+  }, [open]);
+
   // Figure out how to have the new change populate after completing the edit
 
   useEffect(() => {
@@ -83,16 +80,17 @@ function Dashboard() {
     return <CircularIndeterminate />;
   }
 
-  console.log(goals);
-
   return (
     <>
-      <Joyride callback={() => {}} run={run} steps={steps} />
       <section>
         <h1>Welcome Back {user && user.name}!</h1>
       </section>
 
-      <div id="step1">
+      <div
+        id="step1"
+        className={pulseTrue ? "pulse" : ""}
+        onClick={() => setOpen(true)}
+      >
         <GoalInputForm />
       </div>
 
