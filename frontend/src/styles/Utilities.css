@@ -112,7 +112,7 @@
 }
 /* Apply the pulse animation to the div */
 .pulse {
-  border: 5px solid initial;
+  /* border: 5px solid initial; */
   animation: pulse 2s infinite; /* Adjust the duration (2s) as needed */
 }
 
