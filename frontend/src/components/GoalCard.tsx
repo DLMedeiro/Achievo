@@ -86,6 +86,10 @@ export default function Activity({ goal }: { goal: any }) {
       setProgress(progress - 0.5);
     }
   };
+  const goalDetails = () => {
+    dispatch(getOneGoal(goal._id));
+    navigate(`/goalDetail`);
+  };
   const editActivity = () => {
     dispatch(getOneGoal(goal._id));
     navigate(`/goalEditForm`);
@@ -158,6 +162,14 @@ export default function Activity({ goal }: { goal: any }) {
                 </Typography>
               </Grid>
               <Grid item xs={12}>
+                <Typography
+                  variant="caption"
+                  onClick={goalDetails}
+                  className="link"
+                >
+                  Activity Breakdown
+                </Typography>{" "}
+                |{" "}
                 <Typography
                   variant="caption"
                   onClick={editActivity}

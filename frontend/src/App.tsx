@@ -20,6 +20,7 @@ import CreateAccount from "./pages/CreateAccount";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import GoalEditForm from "./components/forms/GoalEditForm";
+import GoalDetail from "./pages/GoalDetail";
 
 function App() {
   interface userState {
@@ -39,6 +40,7 @@ function App() {
             <Route path="/createAccount" element={<CreateAccount />} />
             <Route path={`/goals/user/${user.name}`} element={<Dashboard />} />
             <Route path={`/goalEditForm`} element={<GoalEditForm />} />
+            <Route path={`/goalDetail`} element={<GoalDetail />} />
           </Routes>
         ) : (
           <Routes>
