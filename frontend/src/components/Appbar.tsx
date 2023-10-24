@@ -17,6 +17,7 @@ import { RootState } from "../app/store";
 import { logout } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { login } from "../features/auth/authSlice";
+import FeedbackModal from "./FeedbackModal";
 
 function ResponsiveAppBar() {
   const { user }: userState = useAppSelector((state: RootState) => state.auth);
@@ -137,13 +138,7 @@ function ResponsiveAppBar() {
               >
                 Demo
               </Button>
-              <Button
-                key="Feedback"
-                // onClick={loginDemo}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                Feedback
-              </Button>
+              <FeedbackModal />
             </Box>
           ) : (
             <Box
