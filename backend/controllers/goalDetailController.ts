@@ -33,15 +33,16 @@ const getGoalDetails = asyncHandler(async (req: any, res: any) => {
 // Route: POST /api/goalDetails/:userId/:goalId
 // Access: Private
 const setGoalDetails = asyncHandler(async (req: any, res: any) => {
-  if (!req.params.userId || !req.body.goalId) {
+  if (!req.params.userId || !req.body) {
     res.status(400);
     throw new Error("Id error");
   }
 
   const detail = await GoalDetail.create({
     user: req.params.userId,
-    goal: req.body.goalId,
-    progressChange: req.body.progressChange,
+    goal: req.body.goalData.goal,
+    progressChange: req.body.goalData.progressChange,
+    date: req.body.goalData.date,
   });
 
   res.status(200).json(detail);

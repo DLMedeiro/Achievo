@@ -9,6 +9,7 @@ import {
   deleteGoal,
   updateProgress,
 } from "../features/goals/goalSlice";
+import { createGoalDetail } from "../features/goalDetails/goalDetailSlice";
 import { useNavigate } from "react-router-dom";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
@@ -29,6 +30,7 @@ export default function Activity({ goal }: { goal: any }) {
 
   const { user }: userState = useAppSelector((state: RootState) => state.auth);
 
+  const [progressChange, setProgressChange] = useState(0);
   const [progress, setProgress] = useState(goal.progress);
 
   const [percentComplete, setPercentComplete] = React.useState<number>(
@@ -70,11 +72,12 @@ export default function Activity({ goal }: { goal: any }) {
   const addProgress = () => {
     // updating the database
     dispatch(updateProgress({ id: goal._id, change: "add", user: user._id }));
-
     // Update the UI
 
     if (progress + 0.5 <= goal.target) {
+      setProgressChange(progressChange + 0.5);
       setProgress(progress + 0.5);
+      goalDetailUpdate(0.5);
     }
   };
 
@@ -83,9 +86,23 @@ export default function Activity({ goal }: { goal: any }) {
       updateProgress({ id: goal._id, change: "subtract", user: user._id })
     );
     if (progress > 0) {
+      setProgressChange(progressChange - 0.5);
       setProgress(progress - 0.5);
+      goalDetailUpdate(-0.5);
     }
   };
+
+  const goalDetailUpdate = (changeValue: number) => {
+    let goalDetails = {
+      goal: goal._id,
+      progressChange: progressChange + changeValue,
+      date: dayjs().format("LL"),
+    };
+    // console.log({ goalData: goalDetails, user: user });
+    dispatch(createGoalDetail({ goalData: goalDetails, user: user }));
+    // console.log({ goalData: goal, user: user });
+  };
+
   const goalDetails = () => {
     dispatch(getOneGoal(goal._id));
     navigate(`/goalDetail`);
@@ -216,6 +233,7 @@ export default function Activity({ goal }: { goal: any }) {
             <Grid item xs={2}>
               <AddIcon onClick={addProgress} id="btn-math" />
             </Grid>
+
             <Grid item xs={12} id="center">
               <Typography variant="caption">
                 {progress} of {goal.target} hours completed with {duration}{" "}

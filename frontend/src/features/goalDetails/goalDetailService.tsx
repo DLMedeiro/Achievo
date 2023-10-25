@@ -12,7 +12,7 @@ const getSingleGoalDetail = async (id: string, user: any) => {
       Authorization: `Bearer ${user.token}`,
     },
   };
-  const response = await axios.get(`${API_URL}/goalDetails/${id}`, config);
+  const response = await axios.get(`${API_URL}/api/goalDetails/${id}`, config);
   return response.data;
 };
 
@@ -34,7 +34,7 @@ const getGoalDetails = async (
   };
   if (API_URL) {
     const response = await axios.get(
-      `${API_URL}/goalDetails/${user._id}/${goalId}`,
+      `${API_URL}/api/goalDetails/${user._id}/${goalId}`,
       config
     );
 
@@ -49,9 +49,11 @@ const createGoalDetails = async (goalData: object, user: any) => {
       Authorization: `Bearer ${user.token}`,
     },
   };
+
+  console.log(goalData);
   if (API_URL) {
     const response = await axios.post(
-      `${API_URL}/goalDetails/${user._id}`,
+      `${API_URL}/api/goalDetails/${user._id}`,
       goalData,
       config
     );
