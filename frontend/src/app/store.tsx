@@ -3,6 +3,7 @@ import authReducer from "../features/auth/authSlice";
 import goalReducer from "../features/goals/goalSlice";
 import dataReducer from "../features/data/dataSlice";
 import feedbackReducer from "../features/feedback/feedbackSlice";
+import goalDetailReducer from "../features/goalDetails/goalDetailSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     goals: goalReducer,
     data: dataReducer,
     feedback: feedbackReducer,
+    goalDetails: goalDetailReducer,
   },
 });
 
