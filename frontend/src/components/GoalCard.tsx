@@ -30,7 +30,6 @@ export default function Activity({ goal }: { goal: any }) {
 
   const { user }: userState = useAppSelector((state: RootState) => state.auth);
 
-  const [progressChange, setProgressChange] = useState(0);
   const [progress, setProgress] = useState(goal.progress);
 
   const [percentComplete, setPercentComplete] = React.useState<number>(
@@ -75,7 +74,6 @@ export default function Activity({ goal }: { goal: any }) {
     // Update the UI
 
     if (progress + 0.5 <= goal.target) {
-      setProgressChange(progressChange + 0.5);
       setProgress(progress + 0.5);
       goalDetailUpdate(0.5);
     }
@@ -86,7 +84,6 @@ export default function Activity({ goal }: { goal: any }) {
       updateProgress({ id: goal._id, change: "subtract", user: user._id })
     );
     if (progress > 0) {
-      setProgressChange(progressChange - 0.5);
       setProgress(progress - 0.5);
       goalDetailUpdate(-0.5);
     }
@@ -95,7 +92,7 @@ export default function Activity({ goal }: { goal: any }) {
   const goalDetailUpdate = (changeValue: number) => {
     let goalDetails = {
       goal: goal._id,
-      progressChange: progressChange + changeValue,
+      progressChange: changeValue,
       date: dayjs().format("LL"),
     };
     // console.log({ goalData: goalDetails, user: user });

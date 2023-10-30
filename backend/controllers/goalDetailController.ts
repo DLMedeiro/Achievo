@@ -21,10 +21,11 @@ const getSingleGoalDetail = asyncHandler(async (req: any, res: any) => {
 // Route: GET /api/goalDetails/:userId/:goalId
 // Access: Private
 const getGoalDetails = asyncHandler(async (req: any, res: any) => {
-  const goalDetails = await GoalDetail.find({
+  const query = {
     user: req.params.userId,
     goal: req.params.goalId,
-  });
+  };
+  const goalDetails = await GoalDetail.find(query);
 
   res.status(200).json(goalDetails);
 });
