@@ -74,6 +74,7 @@ export default function ActivityInputForm() {
     end: Date;
     target: Number;
     progress: Number;
+    details: Object;
     createdAt: string;
     updatedAt: string;
     __v?: number;

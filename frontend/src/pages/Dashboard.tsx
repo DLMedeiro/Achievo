@@ -14,6 +14,7 @@ function Dashboard() {
   const [open, setOpen] = useState(false);
 
   localStorage.removeItem("goal");
+  localStorage.removeItem("details");
   // Clean up after goal is edited - local storage used to manage the changes prior to sending put request
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

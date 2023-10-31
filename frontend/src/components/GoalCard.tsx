@@ -19,6 +19,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
+import { getGoalDetails } from "../features/goalDetails/goalDetailSlice";
 
 interface userState {
   user: any;
@@ -75,7 +76,6 @@ export default function Activity({ goal }: { goal: any }) {
 
     if (progress + 0.5 <= goal.target) {
       setProgress(progress + 0.5);
-      goalDetailUpdate(0.5);
     }
   };
 
@@ -85,23 +85,12 @@ export default function Activity({ goal }: { goal: any }) {
     );
     if (progress > 0) {
       setProgress(progress - 0.5);
-      goalDetailUpdate(-0.5);
     }
-  };
-
-  const goalDetailUpdate = (changeValue: number) => {
-    let goalDetails = {
-      goal: goal._id,
-      progressChange: changeValue,
-      date: dayjs().format("LL"),
-    };
-    // console.log({ goalData: goalDetails, user: user });
-    dispatch(createGoalDetail({ goalData: goalDetails, user: user }));
-    // console.log({ goalData: goal, user: user });
   };
 
   const goalDetails = () => {
     dispatch(getOneGoal(goal._id));
+
     navigate(`/goalDetail`);
   };
   const editActivity = () => {

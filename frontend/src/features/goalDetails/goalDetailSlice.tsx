@@ -4,6 +4,7 @@ import goalDetailService from "./goalDetailService";
 
 export interface GoalDetail {
   _id: string;
+  user: string;
   goal: string;
   progressChange: Number;
   detail: string;

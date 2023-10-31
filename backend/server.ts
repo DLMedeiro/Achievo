@@ -7,7 +7,7 @@ import goalRoutes from "./routes/goalRoutes.ts";
 import userRoutes from "./routes/userRoutes.ts";
 import dataRoutes from "./routes/dataRoutes.ts";
 import feedbackRoutes from "./routes/feedbackRoutes.ts";
-import goalDetailRoutes from "./routes/goalDetailRoutes.ts";
+// import goalDetailRoutes from "./routes/goalDetailRoutes.ts";
 import path from "path";
 // Bring in environment variables
 import dotenv from "dotenv";
@@ -48,7 +48,7 @@ if (process.env.ORIGIN) {
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/goals", goalRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/goalDetails", goalDetailRoutes);
+// app.use("/api/goalDetails", goalDetailRoutes);
 app.use("/", dataRoutes);
 
 // Serve frontend

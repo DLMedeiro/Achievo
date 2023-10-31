@@ -132,6 +132,13 @@ const deleteGoal = asyncHandler(async (req: any, res: any) => {
 // Route: PUT /api/goals/progress/:id
 // Access: Private
 const updateProgress = asyncHandler(async (req: any, res: any) => {
+  let currentDate = new Date();
+  const formattedDate = currentDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   // Check for user
   if (!req.body.user) {
     res.status(401);
@@ -153,7 +160,16 @@ const updateProgress = asyncHandler(async (req: any, res: any) => {
 
   if (goal && !goal.progress && goal.target) {
     if (req.body.change == "add" && 0 < goal.target) {
-      let progressChange = { progress: 0.5 };
+      let newDetail = {
+        progressChange: 0.5,
+        date: formattedDate,
+        detail: "",
+      };
+      goal.details.push(newDetail);
+      let progressChange = {
+        progress: 0.5,
+        details: goal.details,
+      };
       const updatedGoal = await Goal.findByIdAndUpdate(
         req.params.id,
         progressChange
@@ -163,14 +179,32 @@ const updateProgress = asyncHandler(async (req: any, res: any) => {
   }
   if (goal && goal.progress && goal.target) {
     if (req.body.change == "add" && goal.progress < goal.target) {
-      let progressChange = { progress: goal.progress + 0.5 };
+      let newDetail = {
+        progressChange: 0.5,
+        date: formattedDate,
+        detail: "",
+      };
+      goal.details.push(newDetail);
+      let progressChange = {
+        progress: goal.progress + 0.5,
+        details: goal.details,
+      };
       const updatedGoal = await Goal.findByIdAndUpdate(
         req.params.id,
         progressChange
       );
       res.status(200).json(updatedGoal);
     } else if (req.body.change == "subtract" && goal.progress > 0) {
-      let progressChange = { progress: goal.progress - 0.5 };
+      let newDetail = {
+        progressChange: -0.5,
+        date: formattedDate,
+        detail: "",
+      };
+      goal.details.push(newDetail);
+      let progressChange = {
+        progress: goal.progress - 0.5,
+        details: goal.details,
+      };
       const updatedGoal = await Goal.findByIdAndUpdate(
         req.params.id,
         progressChange

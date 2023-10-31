@@ -27,6 +27,20 @@ const goalSchema = new Schema(
     progress: {
       type: Number,
     },
+    details: [
+      {
+        progressChange: {
+          type: Number,
+        },
+        date: {
+          type: String,
+        },
+        detail: {
+          type: String,
+        },
+      },
+      ,
+    ],
   },
   {
     timestamps: true,

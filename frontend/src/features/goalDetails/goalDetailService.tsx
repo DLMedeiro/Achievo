@@ -50,7 +50,6 @@ const createGoalDetails = async (goalData: object, user: any) => {
     },
   };
 
-  console.log(goalData);
   if (API_URL) {
     const response = await axios.post(
       `${API_URL}/api/goalDetails/${user._id}`,
